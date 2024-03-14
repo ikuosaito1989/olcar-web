@@ -1,24 +1,25 @@
-import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
+import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  srcDir: "src/",
   build: {
-    transpile: ['vuetify'],
+    transpile: ["vuetify"],
   },
   modules: [
-    '@nuxtjs/tailwindcss',
+    "@nuxtjs/tailwindcss",
     (_options, nuxt) => {
-      nuxt.hooks.hook('vite:extendConfig', (config) => {
+      nuxt.hooks.hook("vite:extendConfig", (config) => {
         // @ts-expect-error
         config.plugins.push(
           vuetify({
             autoImport: true,
-          }),
-        )
-      })
+          })
+        );
+      });
     },
-    'nuxt-simple-sitemap',
-    'nuxt-gtag',
+    "nuxt-simple-sitemap",
+    "nuxt-gtag",
   ],
   runtimeConfig: {
     public: {
@@ -26,7 +27,9 @@ export default defineNuxtConfig({
     },
   },
   routeRules: {
-    '/api/**': { proxy: 'https://postcode.teraren.com/**' },
+    "/api/**": {
+      proxy: "https://sample-docker-image-z2l33kyvbq-an.a.run.app/**",
+    },
   },
   gtag: {
     id: process.env.GTAG,
@@ -35,9 +38,9 @@ export default defineNuxtConfig({
     urls: [
       {
         url: process.env.HOST,
-        lastmod: '2024-03-06',
+        lastmod: "2024-03-06",
         priority: 1.0,
-        loc: '',
+        loc: "",
       },
     ],
     xsl: false,
@@ -51,9 +54,15 @@ export default defineNuxtConfig({
     },
   },
   imports: {
-    dirs: ['models/*'],
+    dirs: ["models/**", "api/**"],
   },
+  components: [
+    {
+      path: "~/components", // will get any components nested in let's say /components/test too
+      pathPrefix: true,
+    },
+  ],
   tailwindcss: {
     // Options
   },
-})
+});
