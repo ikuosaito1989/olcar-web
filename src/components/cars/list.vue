@@ -1,9 +1,7 @@
 <script setup lang="ts">
-const { data: summary } = await useFetchCars();
+const { data: summary } = await useFetchi<Summary>('/api/v1/cars')
 </script>
 
 <template>
-  <li v-for="detail in summary.details">
-    {{ detail.name }}
-  </li>
+  <CarsCard v-for="detail in summary.details" :key="detail.id" :detail="detail"></CarsCard>
 </template>
