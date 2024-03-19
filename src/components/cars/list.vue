@@ -1,5 +1,10 @@
 <script setup lang="ts">
-const { data: summary } = await useFetchi<Summary>('/api/v1/cars')
+defineProps({
+  summary: {
+    type: Object as () => Summary,
+    required: true,
+  },
+})
 </script>
 
 <template>

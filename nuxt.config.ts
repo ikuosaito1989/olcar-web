@@ -54,7 +54,7 @@ export default defineNuxtConfig({
     },
   },
   imports: {
-    dirs: ['models/**', 'api/**'],
+    dirs: ['models/**', 'config/**'],
   },
   components: [
     {

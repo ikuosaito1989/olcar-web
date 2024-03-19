@@ -9,8 +9,8 @@ defineProps({
 
 <template>
   <v-card>
-    <v-card-subtitle>トヨタ</v-card-subtitle>
-    <v-card-title>クラウン</v-card-title>
+    <v-card-subtitle>{{ detail.makerName }}</v-card-subtitle>
+    <v-card-title>{{ detail.name }}</v-card-title>
 
     <v-img :src="detail.images[0]"></v-img>
     <Price :price="detail.price"></Price>
