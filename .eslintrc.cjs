@@ -22,6 +22,7 @@ module.exports = {
   rules: {
     'no-undef': 'off',
     'no-var': 'error',
+    'no-console': 'warn',
     'prefer-const': 'error',
     'vue/multi-word-component-names': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
