@@ -1,6 +1,5 @@
 <script setup lang="ts">
-const dialog = ref(false)
-defineProps({
+const prop = defineProps({
   items: {
     type: Array as () => Array<Item>,
     required: true,
@@ -14,10 +13,14 @@ defineProps({
     default: '',
   },
 })
-const emit = defineEmits(['emitTest'])
-const test = async (value: any) => {
-  emit('emitTest')
-  console.log(value)
+
+const emit = defineEmits(['click:list'])
+
+const dialog = ref(false)
+
+const onClick = async (value: { id: unknown; value: boolean; path: unknown[] }) => {
+  const item = prop.items.find((v) => v.value === value.id)
+  emit('click:list', item)
 }
 
 const open = async () => {
@@ -41,7 +44,7 @@ defineExpose({
 
           <v-spacer></v-spacer>
         </v-toolbar>
-        <v-list :items="items" @click:open="test" @click:select="test"></v-list>
+        <v-list :items="items" @click:select="onClick"></v-list>
       </v-card>
     </v-dialog>
   </div>

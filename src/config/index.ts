@@ -101,7 +101,7 @@ const SOCIAL_TYPE: {
 /**
  * 価格一覧
  */
-const PRICES = [
+const PRICES: KeyLabel[] = [
   { key: null, label: '指定なし' },
   { key: 50000, label: '5万円' },
   { key: 100000, label: '10万円' },
@@ -154,7 +154,7 @@ const PRICES = [
 /**
  * 走行距離一覧
  */
-const MILEAGES = [
+const MILEAGES: KeyLabel[] = [
   { key: null, label: '指定なし' },
   { key: 50000, label: '5万km' },
   { key: 100000, label: '10万km' },
@@ -171,7 +171,7 @@ const MILEAGES = [
 /**
  * 年号
  */
-const YEAR = [
+const YEAR: KeyLabel[] = [
   { key: 2023, label: '令和5年（2023年）' },
   { key: 2024, label: '令和6年（2024年）' },
   { key: 2025, label: '令和7年（2025年）' },
@@ -183,7 +183,7 @@ const YEAR = [
 /**
  * 月
  */
-const MONTH = [
+const MONTH: KeyLabel[] = [
   { key: 1, label: '1月' },
   { key: 2, label: '2月' },
   { key: 3, label: '3月' },

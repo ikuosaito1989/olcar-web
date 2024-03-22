@@ -10,6 +10,8 @@ const prefectures = computed(() =>
   _prefectures.value.map((v) => ({ value: v.groupCode, title: v.name })),
 )
 const makers = computed(() => _makers.value.map((v) => ({ value: v.id, title: v.name })))
+const from = ref<KeyLabel | null>(null)
+const to = ref<KeyLabel | null>(null)
 </script>
 
 <template>
@@ -17,8 +19,15 @@ const makers = computed(() => _makers.value.map((v) => ({ value: v.id, title: v.
     <List title="メーカー選択" button-name="メーカー・車名" :items="makers"></List>
     <List title="都道府県選択" button-name="都道府県" :items="prefectures"></List>
 
-    <FromTo label="価格" :from-item="['California']" :to-item="['California']"></FromTo>
-    <FromTo label="走行距離" :from-item="['California']" :to-item="['California']"></FromTo>
+    <FromTo
+      v-model:from="from"
+      v-model:to="to"
+      label="価格"
+      :from-item="Constants.PRICES"
+      :to-item="Constants.PRICES"
+    ></FromTo>
+
+    <FromTo label="走行距離" :from-item="Constants.MILEAGES" :to-item="Constants.MILEAGES"></FromTo>
 
     <div>
       <div>走行距離</div>
