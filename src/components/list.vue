@@ -20,10 +20,11 @@ const dialog = ref(false)
 
 const onClick = async (value: { id: unknown; value: boolean; path: unknown[] }) => {
   const item = prop.items.find((v) => v.value === value.id)
+  open()
   emit('click:list', item)
 }
 
-const open = async () => {
+const open = () => {
   dialog.value = !dialog.value
 }
 
