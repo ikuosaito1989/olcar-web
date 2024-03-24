@@ -16,6 +16,10 @@ const errorPage = computed(() => {
   }
   return error500
 })
+
+/**
+ * トップに遷移する
+ */
 const handleError = () => clearError({ redirect: '/' })
 </script>
 

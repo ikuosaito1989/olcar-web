@@ -58,6 +58,7 @@ export const formatUtil = {
       urls: true,
     })
 
+    // eslint-disable-next-line require-jsdoc
     const getUrls = (matche: Match) => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return typeof (matche as any).getUrl === 'function'

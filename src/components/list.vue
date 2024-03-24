@@ -18,12 +18,20 @@ const emit = defineEmits(['click:list'])
 
 const dialog = ref(false)
 
+/**
+ * リストのアイテムを選択する
+ *
+ * @param value
+ */
 const onClick = async (value: { id: unknown; value: boolean; path: unknown[] }) => {
   const item = prop.items.find((v) => v.value === value.id)
   open()
   emit('click:list', item)
 }
 
+/**
+ * ダイアログをopenする
+ */
 const open = () => {
   dialog.value = !dialog.value
 }

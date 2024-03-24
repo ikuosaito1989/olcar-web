@@ -24,6 +24,18 @@ module.exports = {
     'no-var': 'error',
     'no-console': 'warn',
     'prefer-const': 'error',
+    'require-jsdoc': [
+      'error',
+      {
+        require: {
+          FunctionDeclaration: true,
+          MethodDefinition: true,
+          ClassDeclaration: true,
+          ArrowFunctionExpression: true,
+          FunctionExpression: true,
+        },
+      },
+    ],
     'vue/multi-word-component-names': 'off',
     'vue/component-tags-order': [
       'error',

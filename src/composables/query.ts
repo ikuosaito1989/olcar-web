@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import queryString from 'query-string'
 
 /**
@@ -17,8 +18,12 @@ const queryObject = ref<QueryObject>({
  *
  * @param query route.query
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const useSetFromQuery = (query: any) => {
+  /**
+   * keyからKeyLabelを取得する
+   * @param key
+   * @returns adf
+   */
   const getKeyLabel = (key: 'mileageFrom' | 'mileageTo' | 'priceFrom' | 'priceTo') => {
     const data = key.includes('mileage') ? Constants.MILEAGES : Constants.PRICES
     return {

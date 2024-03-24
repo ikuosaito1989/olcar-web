@@ -32,6 +32,11 @@ watch([to, from], () => {
   if (!to.value?.key) toValue.value = undefined
 })
 
+/**
+ * セレクトボックスの値を設定する
+ * @param type
+ * @param label
+ */
 const onSelect = (type: 'from' | 'to', label: string | number | null) => {
   const item = props[`${type}Item`].find((v) => v.label === label)
 
