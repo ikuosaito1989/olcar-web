@@ -59,14 +59,7 @@ const ORDER = {
   DESC: 'desc',
 }
 
-const SOCIAL_TYPE: {
-  TWITTER: Social
-  JMTY: Social
-  YAHOO: Social
-  RAKUMA: Social
-  MERCARI: Social
-  Contact: Social
-} = {
+const SOCIAL_TYPE = {
   /**
    * X（旧Twitter）
    */
@@ -102,7 +95,7 @@ const SOCIAL_TYPE: {
  * 価格一覧
  */
 const PRICES: KeyLabel[] = [
-  { key: null, label: '指定なし' },
+  { key: undefined, label: '指定なし' },
   { key: 50000, label: '5万円' },
   { key: 100000, label: '10万円' },
   { key: 150000, label: '15万円' },
@@ -155,7 +148,7 @@ const PRICES: KeyLabel[] = [
  * 走行距離一覧
  */
 const MILEAGES: KeyLabel[] = [
-  { key: null, label: '指定なし' },
+  { key: undefined, label: '指定なし' },
   { key: 50000, label: '5万km' },
   { key: 100000, label: '10万km' },
   { key: 150000, label: '15万km' },

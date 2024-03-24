@@ -12,7 +12,7 @@ const props = defineProps({
     <div>希望価格</div>
     <div>
       <div>
-        {{ format.toTenThousand(props.price) }}
+        {{ formatUtil.toTenThousand(props.price) }}
       </div>
       <div>万円</div>
     </div>

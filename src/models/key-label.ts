@@ -5,10 +5,10 @@ export interface KeyLabel {
   /**
    *  キー
    */
-  key: number | string | null
+  key?: number | string
 
   /**
    *  ラベル
    */
-  label: string
+  label?: string
 }

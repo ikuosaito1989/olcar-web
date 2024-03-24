@@ -1,35 +1,67 @@
 <script setup lang="ts">
-const text = ref('')
+import type List from '~/components/list.vue'
+type ListType = 'carNames' | 'makers' | 'prefectureNames'
+
+const route = useRoute()
+const refCarNames = ref<InstanceType<typeof List> | null>(null)
+
+useSetFromQuery(route.query)
+
 const [{ data: _prefectures }, { data: _makers }] = await Promise.all([
   useFetchi<Prefecture[]>(`/api/v1/prefecture`),
   useFetchi<MakerBase[]>(`/api/v1/makers`),
 ])
 
-const prefectures = computed(() =>
+const prefectures = computed<Item[]>(() =>
   _prefectures.value.map((v) => ({ value: v.groupCode, title: v.name })),
 )
-const makers = computed(() => _makers.value.map((v) => ({ value: v.id, title: v.name })))
+const makers = computed<Item[]>(() => _makers.value.map((v) => ({ value: v.id, title: v.name })))
+const carNames = ref<Item[]>([])
 
-const onClickMaker = (item: Item) => {
-  if (!queryObject.value.makerIds) {
-    queryObject.value.makerIds = []
-  }
-
-  queryObject.value.makerIds.push(+item.value)
+/**
+ * メーカーIDから車名マスタを取得する
+ *
+ * @param item
+ */
+const _fetchCarsNames = async (item: Item) => {
+  const _carNames = await $fetch<CarName[]>(`/api/v1/cars/names`, {
+    query: { 'makerIds[]': [item.value] },
+  })
+  carNames.value = _carNames.map((v) => ({ value: v.id, title: v.name }))
 }
 
-const onClickPrefectures = (item: Item) => {
-  if (!queryObject.value.prefectureNames) {
-    queryObject.value.prefectureNames = []
+/**
+ * Listコンポーネントから取得した情報をqueryObjectに設定する
+ *
+ * @param key
+ * @param item
+ */
+const onClickList = async (key: ListType, item: Item) => {
+  if (key === 'makers') {
+    await _fetchCarsNames(item)
+    refCarNames.value?.open()
   }
 
-  queryObject.value.prefectureNames.push(item.title)
+  queryObject.value[key].push(item)
+  queryObject.value[key] = [...new Set(queryObject.value[key])]
 }
 
+/**
+ * v-chipを削除する
+ *
+ * @param key
+ * @param item
+ */
+const onClickChipClose = (key: ListType, item: Item) => {
+  const index = queryObject.value[key].indexOf(item)
+  queryObject.value.makers.splice(index, 1)
+}
+
+/**
+ * queryObjectからqueryStringを生成してリダイレクトする
+ */
 const onClickSearch = () => {
-  // eslint-disable-next-line no-irregular-whitespace
-  queryObject.value.keywords = text.value ? text.value.split(/ |　/g) : []
-  console.log(queryObject.value)
+  reloadNuxtApp({ path: `/?${useQueryString()}` })
 }
 </script>
 
@@ -39,14 +71,40 @@ const onClickSearch = () => {
       title="メーカー選択"
       button-name="メーカー・車名"
       :items="makers"
-      @click:list="onClickMaker"
+      @click:list="onClickList('makers', $event)"
     ></List>
+    <List ref="refCarNames" :items="carNames" @click:list="onClickList('carNames', $event)"></List>
+    <v-chip
+      v-for="(maker, i) in queryObject.makers"
+      :key="`maker_${i}`"
+      closable
+      @click:close="onClickChipClose('makers', maker)"
+    >
+      {{ maker.title }}
+    </v-chip>
+    <v-chip
+      v-for="(carName, i) in queryObject.carNames"
+      :key="`carName_${i}`"
+      closable
+      @click:close="onClickChipClose('carNames', carName)"
+    >
+      {{ carName.title }}
+    </v-chip>
     <List
       title="都道府県選択"
       button-name="都道府県"
       :items="prefectures"
-      @click:list="onClickPrefectures"
+      @click:list="onClickList('prefectureNames', $event)"
     ></List>
+
+    <v-chip
+      v-for="(prefectureName, i) in queryObject.prefectureNames"
+      :key="`prefectureNames_${i}`"
+      closable
+      @click:close="onClickChipClose('prefectureNames', prefectureName)"
+    >
+      {{ prefectureName.title }}
+    </v-chip>
 
     <FromTo
       v-model:from="queryObject.priceFrom"
@@ -101,7 +159,7 @@ const onClickSearch = () => {
     <div>
       <div>キーワード検索</div>
       <v-text-field
-        v-model="text"
+        v-model="queryObject.text"
         :counter="10"
         label="MT サンルーフ"
         hide-details

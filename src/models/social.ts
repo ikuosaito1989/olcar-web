@@ -1,11 +1,4 @@
-/*
+/**
  * ソーシャルのENUM
- *
- * 1: X（旧Twitter）
- * 2: ジモティ
- * 3: ヤフオク
- * 3: ラクマ
- * 3: メルカリ
- * 9: 問い合わせユーザー
  */
-export type Social = 1 | 2 | 3 | 4 | 5 | 9
+export type Social = (typeof Constants.SOCIAL_TYPE)[keyof typeof Constants.SOCIAL_TYPE]

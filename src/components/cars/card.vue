@@ -16,12 +16,12 @@ defineProps({
     <Price :price="detail.price"></Price>
 
     <Item label="走行距離">
-      <div>{{ format.toMileage(detail.mileage) }}</div>
+      <div>{{ formatUtil.toMileage(detail.mileage) }}</div>
     </Item>
     <Item label="車検">
       <div>
         {{
-          format.toLocaleVehicleInspection(
+          formatUtil.toLocaleVehicleInspection(
             detail.vehicleInspection,
             detail.unknownVehicleInspection,
           )
@@ -29,7 +29,7 @@ defineProps({
       </div>
     </Item>
     <Item label="地域">
-      <div>{{ format.toArea(detail.prefecture, detail.locality) }}</div>
+      <div>{{ formatUtil.toArea(detail.prefecture, detail.locality) }}</div>
     </Item>
     <Item label="説明">
       <!--eslint-disable-next-line vue/no-v-html-->

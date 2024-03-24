@@ -1,13 +1,13 @@
 import { Autolinker, type Match } from 'autolinker'
 import dayjs from '~/lib/day'
 
-const format = {
-  toMileage: (value: number | null, fixed: number = 1) => {
+export const formatUtil = {
+  toMileage: (value: number | string | null, fixed: number = 1) => {
     if (!value) {
       return '-'
     }
 
-    return parseFloat((value / 10000).toString()).toFixed(fixed) + '万km'
+    return parseFloat((+value / 10000).toString()).toFixed(fixed) + '万km'
   },
 
   toArea: (prefecture: string, locality: string) => {
@@ -86,13 +86,11 @@ const format = {
     }
     return vehicleInspection.isValid() ? vehicleInspection.format('YYYY-MM-01') : ''
   },
-  toTenThousand: (value: number | null, fixed: number = 1) => {
+  toTenThousand: (value: number | string | null, fixed: number = 1) => {
     if (!value && typeof value !== 'number') {
       return ''
     }
 
-    return parseFloat((value / 10000).toString()).toFixed(fixed)
+    return parseFloat((+value / 10000).toString()).toFixed(fixed)
   },
 }
-
-export default format
