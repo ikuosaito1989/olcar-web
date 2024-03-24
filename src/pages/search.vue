@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type List from '~/components/list.vue'
+import type ListDialog from '~/components/list-dialog.vue'
 type ListType = 'carNames' | 'makers' | 'prefectureNames'
 
 const route = useRoute()
-const refCarNames = ref<InstanceType<typeof List> | null>(null)
+const refCarNames = ref<InstanceType<typeof ListDialog> | null>(null)
 
 useSetFromQuery(route.query)
 
@@ -67,13 +67,17 @@ const onClickSearch = () => {
 
 <template>
   <v-form class="tw-w-full tw-max-w-3xl">
-    <List
+    <ListDialog
       title="メーカー選択"
       button-name="メーカー・車名"
       :items="makers"
       @click:list="onClickList('makers', $event)"
-    ></List>
-    <List ref="refCarNames" :items="carNames" @click:list="onClickList('carNames', $event)"></List>
+    ></ListDialog>
+    <ListDialog
+      ref="refCarNames"
+      :items="carNames"
+      @click:list="onClickList('carNames', $event)"
+    ></ListDialog>
     <v-chip
       v-for="(maker, i) in queryObject.makers"
       :key="`maker_${i}`"
@@ -90,12 +94,12 @@ const onClickSearch = () => {
     >
       {{ carName.title }}
     </v-chip>
-    <List
+    <ListDialog
       title="都道府県選択"
       button-name="都道府県"
       :items="prefectures"
       @click:list="onClickList('prefectureNames', $event)"
-    ></List>
+    ></ListDialog>
 
     <v-chip
       v-for="(prefectureName, i) in queryObject.prefectureNames"

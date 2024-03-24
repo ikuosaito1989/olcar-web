@@ -2,12 +2,13 @@
 const route = useRoute()
 useSetFromQuery(route.query)
 
+const makerIds = route.params.makerId ? [route.params.makerId] : []
 const { data: summary } = await useFetchi<Summary>('/api/v1/cars', {
   query: {
     offset: formatUtil.toOffset(route.query.page, Constants.LIMIT),
     limit: Constants.LIMIT,
     'keywords[]': queryUtil.toArrayQuery(route.query['keywords[]']),
-    'makerIds[]': queryUtil.toArrayQuery(route.query['makerIds[]']),
+    'makerIds[]': [...makerIds, ...queryUtil.toArrayQuery(route.query['makerIds[]'])],
     'carNames[]': queryUtil.toArrayQuery(route.query['carNames[]']),
     'prefectures[]': queryUtil.toArrayQuery(route.query['prefectures[]']),
     'socialTypes[]': queryUtil.toArrayQuery(route.query['socialTypes[]']),
@@ -23,6 +24,10 @@ const { data: summary } = await useFetchi<Summary>('/api/v1/cars', {
   },
 })
 
+const _length = Math.ceil(summary.value.total / Constants.LIMIT) || 1
+const length = ref(Math.ceil(_length > 100 ? 99 : _length))
+const makerName = ref(Constants.MAKERS.find((v) => v.key === +route.params.makerId)?.value)
+const searchConditions = ref(useGetSearchConditions())
 queryObject.value.page = route.query.page ? +route.query.page : 1
 
 /**
@@ -38,15 +43,25 @@ const navigate = async (value: number) => {
 
 <template>
   <section class="tw-w-full tw-max-w-3xl">
-    <v-chip v-for="(condition, i) in useGetSearchConditions()" :key="`maker_${i}`">
-      {{ condition }}
-    </v-chip>
+    <div v-if="searchConditions.length">
+      <div>検索条件</div>
+      <v-chip v-for="(condition, i) in searchConditions" :key="`maker_${i}`">
+        {{ condition }}
+      </v-chip>
+    </div>
+
+    <div v-if="makerName"><v-icon>mdi-car</v-icon>{{ makerName }}の中古車</div>
+
+    <div v-if="summary.total === 0">
+      <v-icon>mdi-magnify</v-icon>
+      検索された車は見つかりませんでした。再度検索して下さい
+    </div>
 
     <CarsList :summary="summary" />
 
     <v-pagination
       v-model="queryObject.page"
-      :length="6"
+      :length="length"
       @update:model-value="navigate"
     ></v-pagination>
   </section>

@@ -31,6 +31,18 @@ export default defineNuxtConfig({
       proxy: 'https://sample-docker-image-z2l33kyvbq-an.a.run.app/**',
     },
   },
+  hooks: {
+    /**
+     * 独自のルーティングを設定する
+     */
+    'pages:extend'(pages) {
+      pages.push({
+        name: 'index-makerId',
+        path: '/:makerId',
+        file: '~/pages/index.vue',
+      })
+    },
+  },
   gtag: {
     id: process.env.GTAG,
   },

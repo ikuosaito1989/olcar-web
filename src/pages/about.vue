@@ -1,7 +1,5 @@
-<script setup lang="ts">
-const color = useColor() // Same as useState('color')
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <p>Current color: {{ color }}</p>
+  <p>about</p>
 </template>
