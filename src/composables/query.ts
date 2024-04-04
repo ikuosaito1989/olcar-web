@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import queryString from 'query-string'
 
+const SOCIAL_TYPE = Object.values(Constants.SOCIAL_TYPE)
+  .filter((v) => v !== Constants.SOCIAL_TYPE.Contact)
+  .map((v) => v)
+
 /**
  * queryを管理するオブジェクト
  */
@@ -53,13 +57,23 @@ const useSetFromQuery = (query: any) => {
     mileageTo: getKeyLabel('mileageTo'),
     priceFrom: getKeyLabel('priceFrom'),
     priceTo: getKeyLabel('priceTo'),
-    isVehicleInspection: query.isVehicleInspection === 'true',
+    isVehicleInspection: query.isVehicleInspection,
     priceOrder: query.priceOrder,
     mileageOrder: query.mileageOrder,
     text: queryUtil.toArrayQuery(query['keywords[]']).join(' '),
   }
 }
 
+/**
+ * 検索時のデフォルトのソーシャルタイプ
+ *
+ * * @param query route.query
+ */
+const useSearchSocialType = (query: any) => {
+  if (!query['socialTypes[]']) {
+    queryObject.value.socialTypes = SOCIAL_TYPE
+  }
+}
 /**
  * queryObjectから表示用の検索条件を取得する
  */
@@ -137,7 +151,8 @@ const useQueryString = () => {
   const obj = queryObject.value
   const query: QueryString = {
     page: obj.page,
-    socialTypes: obj.socialTypes,
+    socialTypes:
+      JSON.stringify(obj.socialTypes) === JSON.stringify(SOCIAL_TYPE) ? [] : obj.socialTypes,
     isVehicleInspection: obj.isVehicleInspection,
     // eslint-disable-next-line no-irregular-whitespace
     keywords: obj.text ? obj.text.split(/ |　/g) : [],
@@ -149,8 +164,9 @@ const useQueryString = () => {
     priceFrom: obj.priceFrom?.key,
     priceTo: obj.priceTo?.key,
   }
+  const _queryString = queryString.stringify(query, { arrayFormat: 'bracket' })
   // @todo arrayFormatはどうするか考える
-  return '?' + queryString.stringify(query, { arrayFormat: 'bracket' })
+  return _queryString ? '?' + _queryString : ''
 }
 
 /**
@@ -173,4 +189,11 @@ const useReset = () => {
   }
 }
 
-export { queryObject, useQueryString, useReset, useSetFromQuery, useGetSearchConditions }
+export {
+  queryObject,
+  useQueryString,
+  useReset,
+  useSetFromQuery,
+  useGetSearchConditions,
+  useSearchSocialType,
+}

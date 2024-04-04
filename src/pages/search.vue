@@ -6,6 +6,7 @@ const route = useRoute()
 const refCarNames = ref<InstanceType<typeof ListDialog> | null>(null)
 
 useSetFromQuery(route.query)
+useSearchSocialType(route.query)
 
 const [{ data: _prefectures }, { data: _makers }] = await Promise.all([
   useFetchi<Prefecture[]>(`/api/v1/prefecture`),
@@ -19,18 +20,6 @@ const makers = computed<Item[]>(() => _makers.value.map((v) => ({ value: v.id, t
 const carNames = ref<Item[]>([])
 
 /**
- * メーカーIDから車名マスタを取得する
- *
- * @param item
- */
-const _fetchCarsNames = async (item: Item) => {
-  const _carNames = await $fetch<CarName[]>(`/api/v1/cars/names`, {
-    query: { 'makerIds[]': [item.value] },
-  })
-  carNames.value = _carNames.map((v) => ({ value: v.id, title: v.name }))
-}
-
-/**
  * Listコンポーネントから取得した情報をqueryObjectに設定する
  *
  * @param key
@@ -38,7 +27,10 @@ const _fetchCarsNames = async (item: Item) => {
  */
 const onClickList = async (key: ListType, item: Item) => {
   if (key === 'makers') {
-    await _fetchCarsNames(item)
+    const _carNames = await $fetch<CarName[]>(`/api/v1/cars/names`, {
+      query: { 'makerIds[]': [item.value] },
+    })
+    carNames.value = _carNames.map((v) => ({ value: v.id, title: v.name }))
     refCarNames.value?.open()
   }
 
@@ -61,7 +53,7 @@ const onClickChipClose = (key: ListType, item: Item) => {
  * queryObjectからqueryStringを生成してリダイレクトする
  */
 const onClickSearch = () => {
-  reloadNuxtApp({ path: `/?${useQueryString()}` })
+  reloadNuxtApp({ path: `/${useQueryString()}` })
 }
 </script>
 
