@@ -37,7 +37,7 @@ queryObject.value.page = route.query.page ? +route.query.page : 1
  */
 const navigate = async (value: number) => {
   queryObject.value.page = value
-  reloadNuxtApp({ path: `/?${useQueryString()}` })
+  reloadNuxtApp({ path: `/${useQueryString()}` })
 }
 </script>
 
