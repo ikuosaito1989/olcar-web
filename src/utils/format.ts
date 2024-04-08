@@ -49,6 +49,14 @@ export const formatUtil = {
       .toISOString()
   },
 
+  toLocaleDateString: (value: string | null) => {
+    if (!value) {
+      return value
+    }
+
+    return dayjs.utc(value).local().format('YYYY年MM月DD日')
+  },
+
   toLink: (value: string) => {
     return Autolinker.link(value)
   },
