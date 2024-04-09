@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     transpile: ['vuetify'],
   },
   modules: [
+    'vue-recaptcha/nuxt',
     '@nuxtjs/tailwindcss',
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
@@ -24,6 +25,10 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       baseURL: process.env.BASE_URL,
+      recaptcha: {
+        v2SiteKey: '6LeF3WEdAAAAAElYIkssJ_U8bBPE40OwQEs-U6pZ',
+        v3SiteKey: 'YOUR_V3_SITEKEY_HERE',
+      },
     },
   },
   routeRules: {

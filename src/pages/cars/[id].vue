@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { useRecaptchaProvider } from 'vue-recaptcha'
+
+useRecaptchaProvider()
+const response = ref()
 const route = useRoute()
 
 const { data: car } = await useFetchi<Detail>(`/api/v1/cars/${route.params.id}`)
@@ -14,6 +18,13 @@ onMounted(async () => {
  */
 const onSubmit = () => {
   window.open(car.value.referenceUrls[0], '_blank', 'noreferrer')
+}
+
+/**
+ * aaa
+ */
+const hoge = () => {
+  console.log('hoge', response)
 }
 </script>
 
@@ -70,6 +81,8 @@ const onSubmit = () => {
         </a>
       </div>
       <div>※クリックすると検索できます</div>
+      <RecaptchaCheckbox v-model="response">aaa</RecaptchaCheckbox>
+      <button @click="hoge">aaaaa</button>
     </div>
   </section>
 </template>
