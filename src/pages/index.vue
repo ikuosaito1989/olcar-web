@@ -28,16 +28,25 @@ const _length = Math.ceil(summary.value.total / Constants.LIMIT) || 1
 const length = ref(Math.ceil(_length > 100 ? 99 : _length))
 const makerName = ref(Constants.MAKERS.find((v) => v.key === +route.params.makerId)?.value)
 const searchConditions = ref(useGetSearchConditions())
-queryObject.value.page = route.query.page ? +route.query.page : 1
+queryObject.value.page = route.query.page ? +route.query.page : undefined
 
 /**
  * ページを変更する
  *
  * @param value ページ数
  */
-const navigate = async (value: number) => {
+const navigate = async (path: string = '') => {
+  reloadNuxtApp({ path: `/${path}${useQueryString()}` })
+}
+
+/**
+ * ページを変更する
+ *
+ * @param value ページ数
+ */
+const onChangePage = async (value: number) => {
   queryObject.value.page = value
-  reloadNuxtApp({ path: `/${useQueryString()}` })
+  navigate()
 }
 </script>
 
@@ -57,12 +66,17 @@ const navigate = async (value: number) => {
       検索された車は見つかりませんでした。再度検索して下さい
     </div>
 
+    <div class="tw-flex">
+      <div>{{ summary.total }}台</div>
+      <div @click="navigate('search')">絞り込む</div>
+      <div>並び替え</div>
+    </div>
     <CarsList :summary="summary" />
 
     <v-pagination
       v-model="queryObject.page"
       :length="length"
-      @update:model-value="navigate"
+      @update:model-value="onChangePage"
     ></v-pagination>
   </section>
 </template>
