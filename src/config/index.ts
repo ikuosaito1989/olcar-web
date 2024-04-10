@@ -13,22 +13,10 @@ const NOT_FOUND_TWITTER_IMAGE =
  * 報告ダイアログの識別子
  */
 const REPORT = {
-  /**
-   * 掲載終了
-   */
-  UNPOST: 'UNPOST',
-
-  /**
-   * 公開停止
-   */
-  STOP: 'Stop',
-
-  /**
-   * 異なる
-   */
-  DIFF: 'Diff',
+  UNPOST: '販売終了申請',
+  STOP: '販売終了申請',
+  DIFF: '公開された情報が異なる',
 }
-
 /**
  * ソートタイプ
  */

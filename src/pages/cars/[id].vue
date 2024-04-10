@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { useRecaptchaProvider } from 'vue-recaptcha'
+import type ReportDialog from '~/components/report-dialog.vue'
 
-useRecaptchaProvider()
-const response = ref()
 const route = useRoute()
-
+const refReportDialog = ref<InstanceType<typeof ReportDialog> | null>(null)
 const { data: car } = await useFetchi<Detail>(`/api/v1/cars/${route.params.id}`)
 const keywords = ref<KeywordsText>({ keywords: [] })
+
 onMounted(async () => {
   keywords.value = await $fetch<KeywordsText>(`/api/v1/keywords/text:keywords`, {
     method: 'POST',
     body: { text: car.value.comment },
   })
 })
+
 /**
  * 掲載ページへ遷移する
  */
@@ -21,10 +21,10 @@ const onSubmit = () => {
 }
 
 /**
- * aaa
+ * レポートダイアログを表示する
  */
-const hoge = () => {
-  console.log('hoge', response)
+const onClickReport = () => {
+  refReportDialog.value?.open()
 }
 </script>
 
@@ -71,7 +71,7 @@ const hoge = () => {
     </v-alert>
 
     <v-btn @click="onSubmit">掲載ページへ</v-btn>
-    <v-btn>公開停止、または問題を報告する</v-btn>
+    <v-btn @click="onClickReport">公開停止、または問題を報告する</v-btn>
     <div v-if="keywords.keywords.length > 0">
       <div>この車に含まれるキーワード</div>
 
@@ -81,8 +81,7 @@ const hoge = () => {
         </a>
       </div>
       <div>※クリックすると検索できます</div>
-      <RecaptchaCheckbox v-model="response">aaa</RecaptchaCheckbox>
-      <button @click="hoge">aaaaa</button>
     </div>
+    <ReportDialog ref="refReportDialog" :car-id="car.id"></ReportDialog>
   </section>
 </template>
