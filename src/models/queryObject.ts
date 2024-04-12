@@ -19,5 +19,3 @@ export interface QueryObject {
   priceOrder?: Sort
   mileageOrder?: Sort
 }
-
-type Sort = 'asc' | 'desc'

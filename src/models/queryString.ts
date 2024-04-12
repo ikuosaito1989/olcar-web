@@ -13,4 +13,6 @@ export interface QueryString {
   priceFrom?: number | string | null
   priceTo?: number | string | null
   isVehicleInspection?: boolean
+  priceOrder?: Sort
+  mileageOrder?: Sort
 }

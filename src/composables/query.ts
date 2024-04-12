@@ -163,10 +163,20 @@ const useQueryString = () => {
     mileageTo: obj.mileageTo?.key,
     priceFrom: obj.priceFrom?.key,
     priceTo: obj.priceTo?.key,
+    priceOrder: obj.priceOrder,
+    mileageOrder: obj.mileageOrder,
   }
   const _queryString = queryString.stringify(query, { arrayFormat: 'bracket' })
   // @todo arrayFormatはどうするか考える
-  return _queryString ? `?${  _queryString}` : ''
+  return _queryString ? `?${_queryString}` : ''
+}
+
+/**
+ * ソートをリセットする
+ */
+const useOrderReset = () => {
+  queryObject.value.priceOrder = undefined
+  queryObject.value.mileageFrom = undefined
 }
 
 /**
@@ -186,6 +196,8 @@ const useReset = () => {
     priceFrom: undefined,
     priceTo: undefined,
     isVehicleInspection: undefined,
+    priceOrder: undefined,
+    mileageOrder: undefined,
   }
 }
 
@@ -193,6 +205,7 @@ export {
   queryObject,
   useQueryString,
   useReset,
+  useOrderReset,
   useSetFromQuery,
   useGetSearchConditions,
   useSearchSocialType,

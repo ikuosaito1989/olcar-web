@@ -35,7 +35,19 @@ queryObject.value.page = route.query.page ? +route.query.page : undefined
  *
  * @param value ページ数
  */
-const navigate = async (path: string = '') => {
+const navigate = async ({
+  path = '',
+  sort,
+}: {
+  path?: string
+  sort?: { key: 'priceOrder' | 'mileageOrder'; value: Sort }
+}) => {
+  useOrderReset()
+
+  if (sort) {
+    queryObject.value[sort.key] = sort.value
+  }
+
   reloadNuxtApp({ path: `/${path}${useQueryString()}` })
 }
 
@@ -46,7 +58,7 @@ const navigate = async (path: string = '') => {
  */
 const onChangePage = async (value: number) => {
   queryObject.value.page = value
-  navigate()
+  navigate({})
 }
 </script>
 
@@ -68,8 +80,16 @@ const onChangePage = async (value: number) => {
 
     <div class="tw-flex">
       <div>{{ summary.total }}台</div>
-      <div @click="navigate('search')">絞り込む</div>
+      <div @click="navigate({ path: 'search' })">絞り込む</div>
       <div>並び替え</div>
+    </div>
+    <div>
+      <div>価格</div>
+      <div @click="navigate({ sort: { key: 'priceOrder', value: 'asc' } })">安い順</div>
+      <div @click="navigate({ sort: { key: 'priceOrder', value: 'desc' } })">高い順</div>
+      <div>走行距離</div>
+      <div @click="navigate({ sort: { key: 'mileageOrder', value: 'asc' } })">少ない順</div>
+      <div @click="navigate({ sort: { key: 'mileageOrder', value: 'desc' } })">多い順</div>
     </div>
     <CarsList :summary="summary" />
 
