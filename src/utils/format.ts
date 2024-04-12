@@ -7,7 +7,7 @@ export const formatUtil = {
       return '-'
     }
 
-    return parseFloat((+value / 10000).toString()).toFixed(fixed) + '万km'
+    return `${parseFloat((+value / 10000).toString()).toFixed(fixed)  }万km`
   },
 
   toArea: (prefecture: string, locality: string) => {

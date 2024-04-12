@@ -11,6 +11,7 @@ const prop = defineProps({
 useRecaptchaProvider()
 
 type Report = (typeof Constants.REPORT)[keyof typeof Constants.REPORT]
+
 const response = ref()
 const isVisible = ref(false)
 const isComplete = ref(false)

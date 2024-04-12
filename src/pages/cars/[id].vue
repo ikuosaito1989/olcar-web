@@ -5,12 +5,37 @@ const route = useRoute()
 const refReportDialog = ref<InstanceType<typeof ReportDialog> | null>(null)
 const { data: car } = await useFetchi<Detail>(`/api/v1/cars/${route.params.id}`)
 const keywords = ref<KeywordsText>({ keywords: [] })
+const sameSummary = ref<Summary>({ total: 0, details: [] })
+const makerSummary = ref<Summary>({ total: 0, details: [] })
 
 onMounted(async () => {
-  keywords.value = await $fetch<KeywordsText>(`/api/v1/keywords/text:keywords`, {
+  const query = {
+    offset: 0,
+    limit: 3,
+    isSales: true,
+    isCount: false,
+    'excludeCarIds[]': [car.value.id],
+  }
+  $fetch<KeywordsText>(`/api/v1/keywords/text:keywords`, {
     method: 'POST',
     body: { text: car.value.comment },
+  }).then((keywordsText) => {
+    keywords.value = keywordsText
   })
+
+  $fetch<Summary>('/api/v1/cars', {
+    query: {
+      ...query,
+      'makerIds[]': car.value.makerId,
+    },
+  }).then((summary) => (makerSummary.value = summary))
+
+  $fetch<Summary>('/api/v1/cars', {
+    query: {
+      ...query,
+      'carNames[]': [car.value.name],
+    },
+  }).then((summary) => (sameSummary.value = summary))
 })
 
 /**
@@ -82,6 +107,12 @@ const onClickReport = () => {
       </div>
       <div>※クリックすると検索できます</div>
     </div>
+
+    <div>{{ car.makerName }} {{ car.name }}の中古車を探す</div>
+    <CarsList :summary="sameSummary" />
+    <div>{{ car.makerName }}の中古車を探す</div>
+    <CarsList :summary="makerSummary" />
+
     <ReportDialog ref="refReportDialog" :car-id="car.id"></ReportDialog>
   </section>
 </template>

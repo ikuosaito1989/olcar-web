@@ -46,5 +46,6 @@ module.exports = {
     'vue/define-macros-order': ['error'],
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-explicit-any': 'error',
+    'prefer-template': 'error',
   },
 }
