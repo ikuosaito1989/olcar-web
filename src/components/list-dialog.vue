@@ -8,6 +8,10 @@ const prop = defineProps({
     type: String,
     default: '',
   },
+  label: {
+    type: String,
+    default: '',
+  },
   title: {
     type: String,
     default: '',
@@ -43,6 +47,7 @@ defineExpose({
 
 <template>
   <div>
+    <div v-if="!!label">{{ label }}</div>
     <v-btn v-if="!!buttonName" @click="open">{{ buttonName }}</v-btn>
     <v-dialog v-model="dialog" transition="dialog-bottom-transition" fullscreen>
       <v-card>

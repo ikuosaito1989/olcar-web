@@ -61,6 +61,7 @@ const onClickSearch = () => {
   <v-form class="tw-w-full tw-max-w-3xl">
     <ListDialog
       title="メーカー選択"
+      label="メーカー・車名"
       button-name="メーカー・車名"
       :items="makers"
       @click:list="onClickList('makers', $event)"
@@ -88,6 +89,7 @@ const onClickSearch = () => {
     </v-chip>
     <ListDialog
       title="都道府県選択"
+      label="都道府県"
       button-name="都道府県"
       :items="prefectures"
       @click:list="onClickList('prefectureNames', $event)"
@@ -152,16 +154,13 @@ const onClickSearch = () => {
       ></v-checkbox>
     </div>
 
-    <div>
-      <div>キーワード検索</div>
-      <v-text-field
-        v-model="queryObject.text"
-        :counter="10"
-        label="MT サンルーフ"
-        hide-details
-        required
-      ></v-text-field>
-    </div>
+    <TextField
+      v-model:text="queryObject.text"
+      label="キーワード検索"
+      placeholder="MT サンルーフ"
+      :counter="10"
+      type="text"
+    ></TextField>
 
     <div>
       <v-btn @click="useReset">クリア</v-btn>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const props = defineProps({
+defineProps({
   price: {
     type: [Number, null] as PropType<number | null>,
     required: true,
@@ -12,7 +12,7 @@ const props = defineProps({
     <div>希望価格</div>
     <div>
       <div>
-        {{ formatUtil.toTenThousand(props.price) }}
+        {{ formatUtil.toTenThousand(price) }}
       </div>
       <div>万円</div>
     </div>
