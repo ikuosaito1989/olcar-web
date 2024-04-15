@@ -16,6 +16,10 @@ const prop = defineProps({
     type: String,
     default: '',
   },
+  required: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 const emit = defineEmits(['click:list'])
@@ -48,6 +52,7 @@ defineExpose({
 <template>
   <div>
     <div v-if="!!label">{{ label }}</div>
+    <div v-if="required">必須</div>
     <v-btn v-if="!!buttonName" @click="open">{{ buttonName }}</v-btn>
     <v-dialog v-model="dialog" transition="dialog-bottom-transition" fullscreen>
       <v-card>

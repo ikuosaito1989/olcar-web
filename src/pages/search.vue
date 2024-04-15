@@ -8,15 +8,7 @@ const refCarNames = ref<InstanceType<typeof ListDialog> | null>(null)
 useSetFromQuery(route.query)
 useSearchSocialType(route.query)
 
-const [{ data: _prefectures }, { data: _makers }] = await Promise.all([
-  useFetchi<Prefecture[]>(`/api/v1/prefecture`),
-  useFetchi<MakerBase[]>(`/api/v1/makers`),
-])
-
-const prefectures = computed<Item[]>(() =>
-  _prefectures.value.map((v) => ({ value: v.groupCode, title: v.name })),
-)
-const makers = computed<Item[]>(() => _makers.value.map((v) => ({ value: v.id, title: v.name })))
+const { prefectures, makers } = await useFetchMaster()
 const carNames = ref<Item[]>([])
 
 /**
