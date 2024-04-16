@@ -20,6 +20,10 @@ const props = defineProps({
     type: String,
     default: '指定なし',
   },
+  isFromLabel: {
+    type: String,
+    default: '~',
+  },
 })
 
 const from = defineModel<KeyLabel | null>('from')
@@ -58,7 +62,7 @@ const onSelect = (type: 'from' | 'to', label: string | number | null) => {
         :items="fromItem.map((v) => v.label)"
         @update:model-value="onSelect('from', $event)"
       ></v-select>
-      <div>~</div>
+      <div>{{ isFromLabel }}</div>
       <v-select
         v-model="toValue"
         :label="toRequiredLabel"

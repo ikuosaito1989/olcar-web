@@ -153,6 +153,7 @@ const MILEAGES: KeyLabel[] = [
  * 年号
  */
 const YEAR: KeyLabel[] = [
+  { label: '指定なし' },
   { key: 2023, label: '令和5年（2023年）' },
   { key: 2024, label: '令和6年（2024年）' },
   { key: 2025, label: '令和7年（2025年）' },
@@ -165,6 +166,7 @@ const YEAR: KeyLabel[] = [
  * 月
  */
 const MONTH: KeyLabel[] = [
+  { label: '指定なし' },
   { key: 1, label: '1月' },
   { key: 2, label: '2月' },
   { key: 3, label: '3月' },

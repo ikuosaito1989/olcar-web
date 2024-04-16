@@ -9,7 +9,7 @@ defineProps({
     default: '',
   },
   type: {
-    type: [String, String] as PropType<'text'>,
+    type: [String, String] as PropType<'text' | 'number'>,
     default: 'text',
   },
   counter: {
