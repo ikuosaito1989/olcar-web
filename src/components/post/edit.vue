@@ -30,7 +30,7 @@ const response = ref()
       ></ListDialog>
       <!-- todo chipsに統一する -->
 
-      <!-- todo 商品画像 -->
+      <FileUpload></FileUpload>
 
       <TextArea
         label="商品説明"
