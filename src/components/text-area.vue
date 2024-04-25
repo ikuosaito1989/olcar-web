@@ -24,6 +24,10 @@ defineProps({
     type: Number,
     default: undefined,
   },
+  rules: {
+    type: Array as () => Array<(value: string, message?: string) => string | boolean>,
+    default: () => [],
+  },
 })
 
 const text = defineModel<string>('text')
@@ -39,6 +43,7 @@ const text = defineModel<string>('text')
       :hint="hint"
       :counter="counter"
       :maxlength="counter"
+      :rules="rules"
     ></v-textarea>
   </div>
 </template>

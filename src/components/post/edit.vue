@@ -1,35 +1,66 @@
 <script setup lang="ts">
 const { prefectures, makers } = await useFetchMaster()
 import { useRecaptchaProvider } from 'vue-recaptcha'
+import { useGoTo } from 'vuetify'
+import type { VForm } from 'vuetify/components'
 
 useRecaptchaProvider()
+const goTo = useGoTo()
+
+const form = ref<InstanceType<typeof VForm> | null>(null)
 
 const response = ref()
+const maker = ref([])
+
+/**
+ *
+ * @param e
+ */
+const onSubmit = async () => {
+  const validate = await form.value?.validate()
+  if (!validate?.valid) {
+    goTo(`#${validate?.errors[0].id.toString()}`, {
+      offset: -90,
+    })
+  }
+}
 </script>
 
 <template>
   <div>
     <div>掲載依頼する</div>
 
-    <v-form class="tw-w-full tw-max-w-3xl">
+    <v-form ref="form" class="tw-w-full tw-max-w-3xl">
       <TextField
         label="車種名"
         placeholder="プリウス"
         :counter="10"
+        :rules="[validationUtil.required]"
         required
         clearable
         type="text"
       ></TextField>
 
       <ListDialog
+        v-model:currentItem="maker"
         title="メーカー選択"
         label="メーカー・車名"
         button-name="メーカー・車名"
         :items="makers"
+        :rules="[validationUtil.required]"
         required
       ></ListDialog>
       <!-- todo chipsに統一する -->
+      <v-btn
+        @click="
+          () => {
+            maker = []
+          }
+        "
+        >cl</v-btn
+      >
 
+      {{ maker }}
       <FileUpload></FileUpload>
 
       <TextArea
@@ -84,9 +115,18 @@ const response = ref()
         :items="prefectures"
       ></ListDialog>
 
-      <TextField label="市区町村" placeholder="横浜市" required clearable type="text"></TextField>
+      <TextField
+        :rules="[validationUtil.required]"
+        label="市区町村"
+        placeholder="横浜市"
+        required
+        clearable
+        type="text"
+      ></TextField>
 
       <RecaptchaCheckbox v-model="response"></RecaptchaCheckbox>
+
+      <v-btn @click="onSubmit">OK</v-btn>
     </v-form>
   </div>
 </template>

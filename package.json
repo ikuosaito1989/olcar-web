@@ -21,7 +21,9 @@
     "query-string": "^9.0.0",
     "vue": "^3.4.19",
     "vue-recaptcha": "^3.0.0-alpha.6",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "@types/google-libphonenumber": "^7.4.24",
+    "google-libphonenumber": "^3.2.33"
   },
   "module": "index.ts",
   "devDependencies": {

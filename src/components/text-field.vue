@@ -24,6 +24,10 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  rules: {
+    type: Array as () => Array<(value: string, message?: string) => string | boolean>,
+    default: () => [],
+  },
 })
 
 const text = defineModel<string>('text')
@@ -35,6 +39,7 @@ const text = defineModel<string>('text')
     <div v-if="required">必須</div>
     <v-text-field
       v-model="text"
+      :rules="rules"
       :label="placeholder"
       :type="type"
       :counter="counter"
