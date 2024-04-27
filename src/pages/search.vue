@@ -26,17 +26,6 @@ const onClickMaker = async (key: ListType, item: Item) => {
 }
 
 /**
- * v-chipを削除する
- *
- * @param key
- * @param item
- */
-const onClickChipClose = (key: ListType, item: Item) => {
-  const index = queryObject.value[key].indexOf(item)
-  queryObject.value.makers.splice(index, 1)
-}
-
-/**
  * queryObjectからqueryStringを生成してリダイレクトする
  */
 const onClickSearch = () => {
@@ -59,22 +48,6 @@ const onClickSearch = () => {
       :current-items="queryObject.carNames"
       :items="carNames"
     ></ListDialog>
-    <v-chip
-      v-for="(maker, i) in queryObject.makers"
-      :key="`maker_${i}`"
-      closable
-      @click:close="onClickChipClose('makers', maker)"
-    >
-      {{ maker.title }}
-    </v-chip>
-    <v-chip
-      v-for="(carName, i) in queryObject.carNames"
-      :key="`carName_${i}`"
-      closable
-      @click:close="onClickChipClose('carNames', carName)"
-    >
-      {{ carName.title }}
-    </v-chip>
     <ListDialog
       :current-items="queryObject.prefectureNames"
       title="都道府県選択"
@@ -82,15 +55,6 @@ const onClickSearch = () => {
       button-name="都道府県"
       :items="prefectureItems"
     ></ListDialog>
-
-    <v-chip
-      v-for="(prefectureName, i) in queryObject.prefectureNames"
-      :key="`prefectureNames_${i}`"
-      closable
-      @click:close="onClickChipClose('prefectureNames', prefectureName)"
-    >
-      {{ prefectureName.title }}
-    </v-chip>
 
     <FromTo
       v-model:from="queryObject.priceFrom"
