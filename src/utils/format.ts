@@ -105,9 +105,7 @@ export const formatUtil = {
    * @param value
    * @returns
    */
-  toLink: (value: string) => {
-    return Autolinker.link(value)
-  },
+  toLink: (value: string) => Autolinker.link(value),
 
   /**
    * 文字列からUrlを取得する
@@ -121,13 +119,12 @@ export const formatUtil = {
     })
 
     // eslint-disable-next-line require-jsdoc
-    const getUrls = (matche: Match) => {
+    const getUrls = (matche: Match) =>
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return typeof (matche as any).getUrl === 'function'
+      typeof (matche as any).getUrl === 'function'
         ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (matche as any).getUrl()
         : ''
-    }
 
     return matches.map((v) => getUrls(v)).filter((v) => v !== '')
   },
@@ -140,9 +137,7 @@ export const formatUtil = {
    * @returns
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  toOffset: (current: any, limit: number) => {
-    return current! ? (current - 1) * limit : 0
-  },
+  toOffset: (current: any, limit: number) => (current! ? (current - 1) * limit : 0),
 
   /**
    * 和暦からISO8601形式で日付を取得する

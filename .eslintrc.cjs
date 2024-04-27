@@ -47,5 +47,6 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-explicit-any': 'error',
     'prefer-template': 'error',
+    'arrow-body-style': ['error', 'as-needed'],
   },
 }

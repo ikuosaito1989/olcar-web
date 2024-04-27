@@ -11,9 +11,7 @@ export const validationUtil = {
    * @param message
    * @returns
    */
-  required: (value: string, message: string = '必須入力です') => {
-    return !!value || message
-  },
+  required: (value: string, message: string = '必須入力です') => !!value || message,
   /**
    * 数値を指定してください
    *
@@ -21,9 +19,7 @@ export const validationUtil = {
    * @param message
    * @returns
    */
-  numeric: (value: string, message: string = '数値を指定してください') => {
-    return !isNaN(+value) || message
-  },
+  numeric: (value: string, message: string = '数値を指定してください') => !isNaN(+value) || message,
   /**
    * 以上にしてください
    *
@@ -32,9 +28,7 @@ export const validationUtil = {
    * @param message
    * @returns
    */
-  min: (value: number, max: number, message: string = '以上にしてください') => {
-    return value >= max || `${max}${message}`
-  },
+  min: (value: number, max: number, message: string = '以上にしてください') => value >= max || `${max}${message}`,
   /**
    * 以内にしてください
    *
@@ -43,9 +37,7 @@ export const validationUtil = {
    * @param message
    * @returns
    */
-  max: (value: number, max: number, message: string = '以内にしてください') => {
-    return value <= max || `${max}${message}`
-  },
+  max: (value: number, max: number, message: string = '以内にしてください') => value <= max || `${max}${message}`,
   /**
    * 正しいURLを入力してください
    *
@@ -70,9 +62,7 @@ export const validationUtil = {
    * @param max
    * @returns
    */
-  maxLength: (value: string, message: string = '文字以内にしてください', max: number) => {
-    return value.length <= max || `${max}${message}`
-  },
+  maxLength: (value: string, message: string = '文字以内にしてください', max: number) => value.length <= max || `${max}${message}`,
   /**
    * 正しいメールアドレスを入力してください
    *

@@ -6,9 +6,7 @@ const currentFiles = ref<File[]>([])
  * URLを生成する
  * @param file
  */
-const createObjectURL = (file: File) => {
-  return URL.createObjectURL(file)
-}
+const createObjectURL = (file: File) => URL.createObjectURL(file)
 
 /**
  * ドラッグからファイルを追加する

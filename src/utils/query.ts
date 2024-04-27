@@ -9,7 +9,5 @@ export const queryUtil = {
    * @returns
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  toArrayQuery: (query: any): string[] => {
-    return Array.isArray(query) ? (query as string[]) : query ? [query] : []
-  },
+  toArrayQuery: (query: any): string[] => Array.isArray(query) ? (query as string[]) : query ? [query] : [],
 }

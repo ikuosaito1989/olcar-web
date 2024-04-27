@@ -116,9 +116,7 @@ const useGetSearchConditions = (): string[] => {
       [4, 'ラクマ'],
       [5, 'メルカリ'],
     ])
-    const socials = obj.socialTypes.map((s) => {
-      return socialNames.get(s) as string
-    })
+    const socials = obj.socialTypes.map((s) => socialNames.get(s) as string)
     arrayUtil.push(searchConditions, socials)
   }
 
