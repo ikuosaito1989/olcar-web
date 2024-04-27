@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { prefectures, makers } = await useFetchMaster()
+const { prefectureItems, makerItems } = await useFetchMaster()
 import { useRecaptchaProvider } from 'vue-recaptcha'
 import { useGoTo } from 'vuetify'
 import type { VForm } from 'vuetify/components'
@@ -10,7 +10,8 @@ const goTo = useGoTo()
 const form = ref<InstanceType<typeof VForm> | null>(null)
 
 const response = ref()
-const maker = ref([])
+const makers = ref([])
+const prefectures = ref([])
 
 /**
  *
@@ -42,25 +43,26 @@ const onSubmit = async () => {
       ></TextField>
 
       <ListDialog
-        v-model:currentItem="maker"
+        v-model:currentItems="makers"
         title="メーカー選択"
         label="メーカー・車名"
         button-name="メーカー・車名"
-        :items="makers"
+        :items="makerItems"
         :rules="[validationUtil.required]"
-        required
+        chip-label="必須"
+        validation="required"
       ></ListDialog>
       <!-- todo chipsに統一する -->
       <v-btn
         @click="
           () => {
-            maker = []
+            makers = []
           }
         "
         >cl</v-btn
       >
 
-      {{ maker }}
+      {{ makers }}
       <FileUpload></FileUpload>
 
       <TextArea
@@ -109,10 +111,11 @@ const onSubmit = async () => {
       ></FromTo>
 
       <ListDialog
+        :current-items="prefectures"
         title="都道府県選択"
         label="都道府県"
         button-name="都道府県"
-        :items="prefectures"
+        :items="prefectureItems"
       ></ListDialog>
 
       <TextField

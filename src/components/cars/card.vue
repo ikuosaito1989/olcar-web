@@ -30,7 +30,7 @@ defineProps({
         </div>
       </Item>
       <Item label="地域">
-        <div>{{ formatUtil.toArea(detail.prefecture, detail.locality) }}</div>
+        <div>{{ formatUtil.toJoinString(detail.prefecture, detail.locality) }}</div>
       </Item>
       <Item label="説明">
         <!--eslint-disable-next-line vue/no-v-html-->

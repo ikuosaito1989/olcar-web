@@ -1,18 +1,58 @@
 import { PhoneNumber, PhoneNumberUtil } from 'google-libphonenumber'
 
+/**
+ * Vuetifyのバリデーションに関するユーティリティ
+ */
 export const validationUtil = {
+  /**
+   * 必須入力です
+   *
+   * @param value
+   * @param message
+   * @returns
+   */
   required: (value: string, message: string = '必須入力です') => {
     return !!value || message
   },
+  /**
+   * 数値を指定してください
+   *
+   * @param value
+   * @param message
+   * @returns
+   */
   numeric: (value: string, message: string = '数値を指定してください') => {
     return !isNaN(+value) || message
   },
+  /**
+   * 以上にしてください
+   *
+   * @param value
+   * @param max
+   * @param message
+   * @returns
+   */
   min: (value: number, max: number, message: string = '以上にしてください') => {
     return value >= max || `${max}${message}`
   },
+  /**
+   * 以内にしてください
+   *
+   * @param value
+   * @param max
+   * @param message
+   * @returns
+   */
   max: (value: number, max: number, message: string = '以内にしてください') => {
     return value <= max || `${max}${message}`
   },
+  /**
+   * 正しいURLを入力してください
+   *
+   * @param value
+   * @param message
+   * @returns
+   */
   url: (value: string, message: string = '正しいURLを入力してください') => {
     try {
       // eslint-disable-next-line no-new
@@ -22,9 +62,24 @@ export const validationUtil = {
     }
     return true
   },
+  /**
+   * 文字以内にしてください
+   *
+   * @param value
+   * @param message
+   * @param max
+   * @returns
+   */
   maxLength: (value: string, message: string = '文字以内にしてください', max: number) => {
     return value.length <= max || `${max}${message}`
   },
+  /**
+   * 正しいメールアドレスを入力してください
+   *
+   * @param value
+   * @param message
+   * @returns
+   */
   email: (value: string, message: string = '正しいメールアドレスを入力してください') => {
     const result = String(value)
       .toLowerCase()
@@ -33,6 +88,13 @@ export const validationUtil = {
       )
     return !!result || message
   },
+  /**
+   * 正しい電話番号を入力してください
+   *
+   * @param value
+   * @param message
+   * @returns
+   */
   phone: (value: string, message: string = '正しい電話番号を入力してください') => {
     if (!value) {
       return true

@@ -18,21 +18,40 @@ const prop = defineProps({
     type: String,
     default: '',
   },
-  required: {
+  chipLabel: {
+    type: String,
+    default: '',
+  },
+  validation: {
+    type: [String, String] as PropType<'required'>,
+    default: undefined,
+  },
+  multiple: {
     type: Boolean,
     default: false,
   },
 })
 
-const emit = defineEmits(['click:list'])
-const currentItem = defineModel<Item[]>('currentItem', { required: true })
+const emit = defineEmits(['click:list', 'click:close'])
+const currentItems = defineModel<Item[]>('currentItems', { required: true })
 const errors = ref({ error: false, message: '' })
 const dialog = ref(false)
+const key = ref(crypto.randomUUID())
 
-watch(currentItem, async () => {
-  errors.value.message = !currentItem.value?.length ? '必須入力です' : ''
-  errors.value.error = !!errors.value.message
-})
+watch(
+  currentItems,
+  async () => {
+    if (!prop.validation) {
+      return
+    }
+
+    errors.value.message = !currentItems.value?.length ? '必須入力です' : ''
+    errors.value.error = !!errors.value.message
+  },
+  {
+    deep: true,
+  },
+)
 
 /**
  * リストのアイテムを選択する
@@ -42,9 +61,7 @@ watch(currentItem, async () => {
 const onClick = async (value: { id: unknown; value: boolean; path: unknown[] }) => {
   const item = prop.items.find((v) => v.value === value.id)!
   open()
-  currentItem.value.push(item)
-  currentItem.value = [...new Set(currentItem.value)]
-
+  arrayUtil.push(currentItems.value, [item])
   emit('click:list', item)
 }
 
@@ -53,14 +70,27 @@ const onClick = async (value: { id: unknown; value: boolean; path: unknown[] }) 
  */
 const onClose = async () => {
   dialog.value = false
-  currentItem.value.push(...currentItem.value)
-  currentItem.value = [...new Set(currentItem.value)]
+  // @note watchを動かすためにpushを利用している
+  arrayUtil.push(currentItems.value, currentItems.value)
+}
+
+/**
+ * chipのcloseボタンを押下する
+ */
+const onClickChipClose = async (item: Item) => {
+  key.value = crypto.randomUUID()
+  arrayUtil.splice(currentItems.value, item)
+  emit('click:close', item)
 }
 
 /**
  * ダイアログをopenする
  */
 const open = () => {
+  if (!prop.multiple && currentItems.value.length > 0) {
+    return
+  }
+
   dialog.value = !dialog.value
 }
 
@@ -72,7 +102,7 @@ defineExpose({
 <template>
   <div>
     <div v-if="!!label">{{ label }}</div>
-    <div v-if="required">必須</div>
+    <div v-if="!!chipLabel">{{ chipLabel }}</div>
     <v-text-field
       v-if="!!buttonName"
       :error="errors.error"
@@ -94,5 +124,14 @@ defineExpose({
         <v-list :items="items" @click:select="onClick"></v-list>
       </v-card>
     </v-dialog>
+    {{ currentItems }}
+    <v-chip
+      v-for="(item, i) in currentItems"
+      :key="`${key}_${i}`"
+      closable
+      @click:close="onClickChipClose(item)"
+    >
+      {{ item.title }}
+    </v-chip>
   </div>
 </template>

@@ -30,8 +30,7 @@ const onAdd = (e: any) => {
  * 画像を削除する
  */
 const onDelete = (file: File) => {
-  const index = currentFiles.value.indexOf(file)
-  currentFiles.value.splice(index, 1)
+  arrayUtil.splice(currentFiles.value, file)
 }
 
 /**
@@ -40,8 +39,7 @@ const onDelete = (file: File) => {
 const addImages = (fileList: FileList) => {
   const files = Array.from(fileList).map((file: File) => file)
   const images = files.filter((v) => v.size <= 10000000).map((v) => v)
-  currentFiles.value.push(...images)
-  currentFiles.value.splice(3, currentFiles.value.length - 3)
+  arrayUtil.push(currentFiles.value, images, { maxLength: 3 })
 }
 </script>
 

@@ -8,7 +8,7 @@ const refCarNames = ref<InstanceType<typeof ListDialog> | null>(null)
 useSetFromQuery(route.query)
 useSearchSocialType(route.query)
 
-const { prefectures, makers } = await useFetchMaster()
+const { prefectureItems, makerItems } = await useFetchMaster()
 const carNames = ref<Item[]>([])
 
 /**
@@ -17,17 +17,12 @@ const carNames = ref<Item[]>([])
  * @param key
  * @param item
  */
-const onClickList = async (key: ListType, item: Item) => {
-  if (key === 'makers') {
-    const _carNames = await $fetch<CarName[]>(`/api/v1/cars/names`, {
-      query: { 'makerIds[]': [item.value] },
-    })
-    carNames.value = _carNames.map((v) => ({ value: v.id, title: v.name }))
-    refCarNames.value?.open()
-  }
-
-  queryObject.value[key].push(item)
-  queryObject.value[key] = [...new Set(queryObject.value[key])]
+const onClickMaker = async (key: ListType, item: Item) => {
+  const _carNames = await $fetch<CarName[]>(`/api/v1/cars/names`, {
+    query: { 'makerIds[]': [item.value] },
+  })
+  carNames.value = _carNames.map((v) => ({ value: v.id, title: v.name }))
+  refCarNames.value?.open()
 }
 
 /**
@@ -52,16 +47,17 @@ const onClickSearch = () => {
 <template>
   <v-form class="tw-w-full tw-max-w-3xl">
     <ListDialog
+      :current-items="queryObject.makers"
       title="メーカー選択"
       label="メーカー・車名"
       button-name="メーカー・車名"
-      :items="makers"
-      @click:list="onClickList('makers', $event)"
+      :items="makerItems"
+      @click:list="onClickMaker('makers', $event)"
     ></ListDialog>
     <ListDialog
       ref="refCarNames"
+      :current-items="queryObject.carNames"
       :items="carNames"
-      @click:list="onClickList('carNames', $event)"
     ></ListDialog>
     <v-chip
       v-for="(maker, i) in queryObject.makers"
@@ -80,11 +76,11 @@ const onClickSearch = () => {
       {{ carName.title }}
     </v-chip>
     <ListDialog
+      :current-items="queryObject.prefectureNames"
       title="都道府県選択"
       label="都道府県"
       button-name="都道府県"
-      :items="prefectures"
-      @click:list="onClickList('prefectureNames', $event)"
+      :items="prefectureItems"
     ></ListDialog>
 
     <v-chip

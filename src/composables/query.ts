@@ -81,22 +81,31 @@ const useGetSearchConditions = (): string[] => {
   const searchConditions: string[] = []
   const obj = queryObject.value
   if (obj.keywords.length) {
-    searchConditions.push(...queryObject.value.keywords)
+    arrayUtil.push(searchConditions, queryObject.value.keywords)
   }
 
   if (queryObject.value.makers.length) {
     const makers = Constants.MAKERS.filter(
       (v) => !!queryObject.value.makers.find((item) => item.value == v.key),
     )
-    searchConditions.push(...makers.map((v) => v.value))
+    arrayUtil.push(
+      searchConditions,
+      makers.map((v) => v.value),
+    )
   }
 
   if (obj.carNames.length) {
-    searchConditions.push(...obj.carNames.map((v) => v.title))
+    arrayUtil.push(
+      searchConditions,
+      obj.carNames.map((v) => v.title),
+    )
   }
 
   if (obj.prefectureNames.length) {
-    searchConditions.push(...obj.prefectureNames.map((v) => v.title))
+    arrayUtil.push(
+      searchConditions,
+      obj.prefectureNames.map((v) => v.title),
+    )
   }
 
   if (obj.socialTypes.length) {
@@ -110,35 +119,37 @@ const useGetSearchConditions = (): string[] => {
     const socials = obj.socialTypes.map((s) => {
       return socialNames.get(s) as string
     })
-    searchConditions.push(...socials)
+    arrayUtil.push(searchConditions, socials)
   }
 
   if (obj.mileageFrom?.key) {
-    searchConditions.push(`${formatUtil.toMileage(obj.mileageFrom.key, 0)}以上`)
+    arrayUtil.push(searchConditions, [`${formatUtil.toMileage(obj.mileageFrom.key, 0)}以上`])
   }
 
   if (obj.mileageTo?.key) {
-    searchConditions.push(`${formatUtil.toMileage(+obj.mileageTo.key, 0)}以下`)
+    arrayUtil.push(searchConditions, [`${formatUtil.toMileage(+obj.mileageTo.key, 0)}以下`])
   }
 
   if (obj.priceFrom?.key) {
-    searchConditions.push(`${formatUtil.toTenThousand(obj.priceFrom.key, 0)}万円以上`)
+    arrayUtil.push(searchConditions, [`${formatUtil.toTenThousand(obj.priceFrom.key, 0)}万円以上`])
   }
 
   if (obj.priceTo?.key) {
-    searchConditions.push(`${formatUtil.toTenThousand(obj.priceTo.key, 0)}万円以下`)
+    arrayUtil.push(searchConditions, [`${formatUtil.toTenThousand(obj.priceTo.key, 0)}万円以下`])
   }
 
   if (obj.isVehicleInspection) {
-    searchConditions.push(`車検あり`)
+    arrayUtil.push(searchConditions, ['車検あり'])
   }
 
   if (obj.priceOrder) {
-    searchConditions.push(obj.priceOrder === 'asc' ? '価格が安い順' : '価格が高い順')
+    arrayUtil.push(searchConditions, [obj.priceOrder === 'asc' ? '価格が安い順' : '価格が高い順'])
   }
 
   if (obj.mileageOrder) {
-    searchConditions.push(obj.mileageOrder === 'asc' ? '走行距離が少ない順' : '走行距離が多い順')
+    arrayUtil.push(searchConditions, [
+      obj.mileageOrder === 'asc' ? '走行距離が少ない順' : '走行距離が多い順',
+    ])
   }
 
   return searchConditions

@@ -73,7 +73,7 @@ const onClickReport = () => {
     </Item>
 
     <Item label="地域">
-      <div>{{ formatUtil.toArea(car.prefecture, car.locality) }}</div>
+      <div>{{ formatUtil.toJoinString(car.prefecture, car.locality) }}</div>
     </Item>
     <Item label="公開日">
       <div>{{ formatUtil.toLocaleDateString(car.createAt) }}</div>
