@@ -41,6 +41,7 @@
     "nuxt-gtag": "^2.0.4",
     "nuxt-simple-sitemap": "^4.4.1",
     "prettier": "^3.2.5",
+    "sass": "^1.76.0",
     "vite-plugin-vuetify": "^2.0.2",
     "vue-eslint-parser": "^9.4.2",
     "vuetify": "^3.5.6"

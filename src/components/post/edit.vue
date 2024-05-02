@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { prefectureItems, makerItems } = await useFetchMaster()
+import type { FileUpload, ListDialog } from '#build/components'
 import { useRecaptchaProvider } from 'vue-recaptcha'
 import { useGoTo } from 'vuetify'
 import type { VForm } from 'vuetify/components'
@@ -7,7 +8,9 @@ import type { VForm } from 'vuetify/components'
 useRecaptchaProvider()
 const goTo = useGoTo()
 
-const form = ref<InstanceType<typeof VForm> | null>(null)
+const formRef = ref<InstanceType<typeof VForm> | null>(null)
+const makerRef = ref<InstanceType<typeof ListDialog> | null>(null)
+const uploadRef = ref<InstanceType<typeof FileUpload> | null>(null)
 
 const response = ref()
 const makers = ref([])
@@ -18,11 +21,12 @@ const prefectures = ref([])
  * @param e
  */
 const onSubmit = async () => {
-  const validate = await form.value?.validate()
+  const validate = await formRef.value?.validate()
+  await makerRef.value?.validate()
+  await uploadRef.value?.validate([])
+
   if (!validate?.valid) {
-    goTo(`#${validate?.errors[0].id.toString()}`, {
-      offset: -90,
-    })
+    goTo(`.v-messages__message`)
   }
 }
 </script>
@@ -31,7 +35,7 @@ const onSubmit = async () => {
   <div>
     <div>掲載依頼する</div>
 
-    <v-form ref="form" class="tw-w-full tw-max-w-3xl">
+    <v-form ref="formRef" class="tw-w-full tw-max-w-3xl">
       <TextField
         label="車種名"
         placeholder="プリウス"
@@ -43,27 +47,17 @@ const onSubmit = async () => {
       ></TextField>
 
       <ListDialog
+        ref="makerRef"
         v-model:currentItems="makers"
         title="メーカー選択"
         label="メーカー・車名"
         button-name="メーカー・車名"
         :items="makerItems"
-        :rules="[validationUtil.required]"
         chip-label="必須"
-        validation="required"
+        :rules="[validationUtil.required]"
       ></ListDialog>
-      <!-- todo chipsに統一する -->
-      <v-btn
-        @click="
-          () => {
-            makers = []
-          }
-        "
-        >cl</v-btn
-      >
 
-      {{ makers }}
-      <FileUpload></FileUpload>
+      <FileUpload ref="uploadRef" :rules="[validationUtil.required]"></FileUpload>
 
       <TextArea
         label="商品説明"

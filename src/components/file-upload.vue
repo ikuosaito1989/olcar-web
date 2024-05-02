@@ -1,6 +1,21 @@
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script setup lang="ts">
-const currentFiles = ref<File[]>([])
+import type { VFileInput } from 'vuetify/components'
+
+interface FileUpload extends File {
+  error: boolean
+}
+
+defineProps({
+  rules: {
+    type: Array as () => Array<(value: string, message?: string) => string | boolean>,
+    default: () => [],
+  },
+})
+
+const fileRef = ref<InstanceType<typeof VFileInput> | null>(null)
+const currentFiles = ref<FileUpload[]>([])
+const errors = ref({ error: false, message: '' })
 
 /**
  * URLを生成する
@@ -27,18 +42,51 @@ const onAdd = (e: any) => {
 /**
  * 画像を削除する
  */
-const onDelete = (file: File) => {
-  arrayUtil.splice(currentFiles.value, file)
+const onDelete = async (file: File) => {
+  arrayUtil.splice(currentFiles, file)
+  validate(currentFiles.value)
 }
 
 /**
  * 画像を追加する
  */
-const addImages = (fileList: FileList) => {
-  const files = Array.from(fileList).map((file: File) => file)
-  const images = files.filter((v) => v.size <= 10000000).map((v) => v)
-  arrayUtil.push(currentFiles.value, images, { maxLength: 3 })
+const addImages = async (fileList: FileList) => {
+  fileRef.value?.reset()
+  const _files = Array.from(fileList).map((file: File) => file)
+
+  arrayUtil.pushFile(currentFiles, _files, { maxLength: 3 })
+  validate(_files)
 }
+
+/**
+ *
+ * @param fileList
+ */
+const validate = async (files: File[]) => {
+  let message: string | boolean = ''
+  const rules = [validationUtil.requiredFile, validationUtil.maxFileSize]
+  errors.value.message = ''
+  errors.value.error = false
+
+  for (const rule of rules) {
+    message = rule(files)
+    if (typeof message === 'string') {
+      break
+    }
+  }
+
+  if (typeof message === 'boolean' || !message) {
+    return true
+  }
+
+  errors.value.message = message
+  errors.value.error = !!errors.value.message
+  return false
+}
+
+defineExpose({
+  validate,
+})
 </script>
 
 <template>
@@ -50,9 +98,16 @@ const addImages = (fileList: FileList) => {
     >
       <v-icon> mdi-image-plus </v-icon>
       <div>画像を追加する</div>
-      <input class="tw-hidden" type="file" accept=".png, .jpg, .jpeg" multiple @change="onAdd" />
+      <v-file-input
+        ref="fileRef"
+        accept=".png, .jpg, .jpeg"
+        :clear-icon="false"
+        multiple
+        :error="errors.error"
+        :error-messages="errors.message"
+        @change="onAdd"
+      ></v-file-input>
     </label>
-    <div>必須入力です。</div>
     <div v-for="file in currentFiles" :key="file.name">
       <v-btn @click="onDelete(file)"><v-icon>mdi-close</v-icon></v-btn>
       <v-img contain :src="createObjectURL(file)">
@@ -63,3 +118,11 @@ const addImages = (fileList: FileList) => {
     </div>
   </div>
 </template>
+<style scoped>
+:deep(.v-input__prepend) {
+  display: none;
+}
+:deep(.v-input__control) {
+  display: none;
+}
+</style>

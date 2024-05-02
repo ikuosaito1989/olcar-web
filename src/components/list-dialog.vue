@@ -22,9 +22,9 @@ const prop = defineProps({
     type: String,
     default: '',
   },
-  validation: {
-    type: [String, String] as PropType<'required'>,
-    default: undefined,
+  rules: {
+    type: Array as () => Array<(value: string, message?: string) => string | boolean>,
+    default: () => [],
   },
   multiple: {
     type: Boolean,
@@ -38,21 +38,6 @@ const errors = ref({ error: false, message: '' })
 const dialog = ref(false)
 const key = ref(crypto.randomUUID())
 
-watch(
-  currentItems,
-  async () => {
-    if (!prop.validation) {
-      return
-    }
-
-    errors.value.message = !currentItems.value?.length ? '必須入力です' : ''
-    errors.value.error = !!errors.value.message
-  },
-  {
-    deep: true,
-  },
-)
-
 /**
  * リストのアイテムを選択する
  *
@@ -61,7 +46,14 @@ watch(
 const onClick = async (value: { id: unknown; value: boolean; path: unknown[] }) => {
   const item = prop.items.find((v) => v.value === value.id)!
   open()
-  arrayUtil.push(currentItems.value, [item])
+
+  if (!prop.multiple) {
+    currentItems.value.splice(0, currentItems.value.length)
+  }
+
+  arrayUtil.push<Item>(currentItems, [item])
+  validate()
+
   emit('click:list', item)
 }
 
@@ -71,7 +63,8 @@ const onClick = async (value: { id: unknown; value: boolean; path: unknown[] }) 
 const onClose = async () => {
   dialog.value = false
   // @note watchを動かすためにpushを利用している
-  arrayUtil.push(currentItems.value, currentItems.value)
+  arrayUtil.push<Item>(currentItems, currentItems.value)
+  validate()
 }
 
 /**
@@ -79,7 +72,8 @@ const onClose = async () => {
  */
 const onClickChipClose = async (item: Item) => {
   key.value = crypto.randomUUID()
-  arrayUtil.splice(currentItems.value, item)
+  arrayUtil.splice(currentItems, item)
+  validate()
   emit('click:close', item)
 }
 
@@ -87,15 +81,36 @@ const onClickChipClose = async (item: Item) => {
  * ダイアログをopenする
  */
 const open = () => {
-  if (!prop.multiple && currentItems.value.length > 0) {
+  dialog.value = !dialog.value
+}
+
+/**
+ *
+ */
+const validate = async () => {
+  let message: string | boolean = ''
+  const target = currentItems.value.map((v) => v.value).join('')
+  errors.value.message = ''
+  errors.value.error = false
+
+  for (const rule of prop.rules) {
+    message = rule(target)
+    if (message) {
+      break
+    }
+  }
+
+  if (typeof message === 'boolean' || !message) {
     return
   }
 
-  dialog.value = !dialog.value
+  errors.value.message = message
+  errors.value.error = !!errors.value.message
 }
 
 defineExpose({
   open,
+  validate,
 })
 </script>
 
@@ -124,7 +139,6 @@ defineExpose({
         <v-list :items="items" @click:select="onClick"></v-list>
       </v-card>
     </v-dialog>
-    {{ currentItems }}
     <v-chip
       v-for="(item, i) in currentItems"
       :key="`${key}_${i}`"
