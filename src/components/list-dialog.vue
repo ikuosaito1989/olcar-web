@@ -62,8 +62,6 @@ const onClick = async (value: { id: unknown; value: boolean; path: unknown[] }) 
  */
 const onClose = async () => {
   dialog.value = false
-  // @note watchを動かすためにpushを利用している
-  arrayUtil.push<Item>(currentItems, currentItems.value)
   validate()
 }
 
@@ -85,27 +83,28 @@ const open = () => {
 }
 
 /**
- *
+ * バリデーション
  */
 const validate = async () => {
-  let message: string | boolean = ''
   const target = currentItems.value.map((v) => v.value).join('')
+  let message: string | boolean = ''
   errors.value.message = ''
   errors.value.error = false
 
   for (const rule of prop.rules) {
     message = rule(target)
-    if (message) {
+    if (typeof message === 'string') {
       break
     }
   }
 
   if (typeof message === 'boolean' || !message) {
-    return
+    return true
   }
 
   errors.value.message = message
   errors.value.error = !!errors.value.message
+  return false
 }
 
 defineExpose({

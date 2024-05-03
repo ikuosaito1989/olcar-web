@@ -2,19 +2,18 @@
 <script setup lang="ts">
 import type { VFileInput } from 'vuetify/components'
 
-interface FileUpload extends File {
-  error: boolean
-}
-
-defineProps({
+const prop = defineProps({
   rules: {
-    type: Array as () => Array<(value: string, message?: string) => string | boolean>,
+    type: Array as () => Array<
+      | ((value: File[], message?: string) => string | boolean)
+      | ((value: File[], maxSize?: number, message?: string) => string | boolean)
+    >,
     default: () => [],
   },
 })
 
 const fileRef = ref<InstanceType<typeof VFileInput> | null>(null)
-const currentFiles = ref<FileUpload[]>([])
+const currentItems = defineModel<FileUpload[]>('currentItems', { required: true })
 const errors = ref({ error: false, message: '' })
 
 /**
@@ -43,8 +42,8 @@ const onAdd = (e: any) => {
  * 画像を削除する
  */
 const onDelete = async (file: File) => {
-  arrayUtil.splice(currentFiles, file)
-  validate(currentFiles.value)
+  arrayUtil.splice(currentItems, file)
+  validate()
 }
 
 /**
@@ -53,23 +52,22 @@ const onDelete = async (file: File) => {
 const addImages = async (fileList: FileList) => {
   fileRef.value?.reset()
   const _files = Array.from(fileList).map((file: File) => file)
-
-  arrayUtil.pushFile(currentFiles, _files, { maxLength: 3 })
-  validate(_files)
+  arrayUtil.pushFile(currentItems, _files, { maxLength: 3 })
+  validate()
 }
 
 /**
+ * バリデーション
  *
- * @param fileList
+ * @param files
  */
-const validate = async (files: File[]) => {
+const validate = async () => {
   let message: string | boolean = ''
-  const rules = [validationUtil.requiredFile, validationUtil.maxFileSize]
   errors.value.message = ''
   errors.value.error = false
 
-  for (const rule of rules) {
-    message = rule(files)
+  for (const rule of prop.rules) {
+    message = rule(currentItems.value)
     if (typeof message === 'string') {
       break
     }
@@ -101,14 +99,13 @@ defineExpose({
       <v-file-input
         ref="fileRef"
         accept=".png, .jpg, .jpeg"
-        :clear-icon="false"
         multiple
         :error="errors.error"
         :error-messages="errors.message"
         @change="onAdd"
       ></v-file-input>
     </label>
-    <div v-for="file in currentFiles" :key="file.name">
+    <div v-for="file in currentItems" :key="file.name">
       <v-btn @click="onDelete(file)"><v-icon>mdi-close</v-icon></v-btn>
       <v-img contain :src="createObjectURL(file)">
         <template #placeholder>

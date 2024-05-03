@@ -6,28 +6,43 @@ import { useGoTo } from 'vuetify'
 import type { VForm } from 'vuetify/components'
 
 useRecaptchaProvider()
+
 const goTo = useGoTo()
 
 const formRef = ref<InstanceType<typeof VForm> | null>(null)
 const makerRef = ref<InstanceType<typeof ListDialog> | null>(null)
 const uploadRef = ref<InstanceType<typeof FileUpload> | null>(null)
-
-const response = ref()
-const makers = ref([])
-const prefectures = ref([])
+const formData = ref<PostEdit>({
+  makers: [],
+  prefectures: [],
+  locality: '',
+  files: [],
+  description: '',
+  price: '',
+  userName: '',
+  link: '',
+  email: '',
+  mileage: '',
+  vehicleInspection: {},
+})
 
 /**
- *
- * @param e
+ * OK押下
  */
 const onSubmit = async () => {
-  const validate = await formRef.value?.validate()
-  await makerRef.value?.validate()
-  await uploadRef.value?.validate([])
-
-  if (!validate?.valid) {
-    goTo(`.v-messages__message`)
+  if (!(await validate())) {
+    goTo(`.v-messages__message.v-messages`)
   }
+}
+/**
+ * バリデーション
+ */
+const validate = async () => {
+  const validate = await formRef.value?.validate()
+  const makerResult = await makerRef.value?.validate()
+  const uploadResult = await uploadRef.value?.validate()
+
+  return validate?.valid && !makerResult && !uploadResult
 }
 </script>
 
@@ -39,7 +54,7 @@ const onSubmit = async () => {
       <TextField
         label="車種名"
         placeholder="プリウス"
-        :counter="10"
+        :counter="30"
         :rules="[validationUtil.required]"
         required
         clearable
@@ -48,7 +63,7 @@ const onSubmit = async () => {
 
       <ListDialog
         ref="makerRef"
-        v-model:currentItems="makers"
+        v-model:current-items="formData.makers"
         title="メーカー選択"
         label="メーカー・車名"
         button-name="メーカー・車名"
@@ -57,47 +72,81 @@ const onSubmit = async () => {
         :rules="[validationUtil.required]"
       ></ListDialog>
 
-      <FileUpload ref="uploadRef" :rules="[validationUtil.required]"></FileUpload>
+      <FileUpload
+        ref="uploadRef"
+        v-model:current-items="formData.files"
+        :rules="[validationUtil.requiredFile, validationUtil.maxFileSize]"
+      ></FileUpload>
 
       <TextArea
+        v-model:text="formData.description"
         label="商品説明"
         placeholder="商品説明"
         hint="1000文字以内で入力してください"
-        :counter="10"
+        :counter="1000"
         required
         clearable
+        :rules="[validationUtil.required]"
       ></TextArea>
 
-      <TextField label="価格" placeholder="500,000" required clearable type="number"></TextField>
+      <TextField
+        v-model:text="formData.price"
+        label="価格"
+        placeholder="500,000"
+        required
+        clearable
+        type="number"
+        :rules="[
+          validationUtil.required,
+          (v) => validationUtil.max(+v, 10000000, '円以内にしてください'),
+        ]"
+      ></TextField>
 
       <TextField
+        v-model:text="formData.userName"
         label="ユーザー名"
         placeholder="オルカー"
         required
         clearable
         type="text"
+        :counter="30"
+        :rules="[validationUtil.required]"
       ></TextField>
 
       <TextField
+        v-model:text="formData.link"
         label="掲載ページのリンク"
         placeholder="https://example.com"
         required
         clearable
         type="text"
+        :counter="1000"
+        :rules="[validationUtil.required, validationUtil.url]"
       ></TextField>
 
       <TextField
+        v-model:text="formData.email"
         label="メールアドレス"
         placeholder="support@ol-car.com"
         required
         clearable
         type="text"
+        :counter="256"
+        :rules="[validationUtil.required, validationUtil.email]"
       ></TextField>
 
-      <TextField label="走行距離" placeholder="50,000" clearable type="number"></TextField>
+      <TextField
+        v-model:text="formData.mileage"
+        label="走行距離"
+        placeholder="50,000"
+        clearable
+        type="number"
+        :rules="[(v) => validationUtil.max(+v, 500000, 'km以内にしてください')]"
+      ></TextField>
 
-      <!-- todo 車検満了 -->
       <FromTo
+        v-model:from="formData.vehicleInspection.year"
+        v-model:to="formData.vehicleInspection.month"
         label="車検満了"
         :from-item="Constants.YEAR"
         :to-item="Constants.MONTH"
@@ -105,7 +154,7 @@ const onSubmit = async () => {
       ></FromTo>
 
       <ListDialog
-        :current-items="prefectures"
+        :current-items="formData.prefectures"
         title="都道府県選択"
         label="都道府県"
         button-name="都道府県"
@@ -113,15 +162,16 @@ const onSubmit = async () => {
       ></ListDialog>
 
       <TextField
-        :rules="[validationUtil.required]"
+        v-model:text="formData.locality"
         label="市区町村"
         placeholder="横浜市"
         required
         clearable
         type="text"
+        :counter="30"
       ></TextField>
 
-      <RecaptchaCheckbox v-model="response"></RecaptchaCheckbox>
+      <RecaptchaCheckbox v-model="formData.recaptcha"></RecaptchaCheckbox>
 
       <v-btn @click="onSubmit">OK</v-btn>
     </v-form>
