@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const emit = defineEmits(['click:confirm', 'click:preview'])
 const { prefectureItems, makerItems } = await useFetchMaster()
 import type { FileUpload, ListDialog } from '#build/components'
 import { useRecaptchaProvider } from 'vue-recaptcha'
@@ -12,28 +13,59 @@ const goTo = useGoTo()
 const formRef = ref<InstanceType<typeof VForm> | null>(null)
 const makerRef = ref<InstanceType<typeof ListDialog> | null>(null)
 const uploadRef = ref<InstanceType<typeof FileUpload> | null>(null)
+// const formData = ref<PostEdit>({
+//   carName: '',
+//   makers: [],
+//   prefectures: [],
+//   locality: '',
+//   files: [],
+//   description: '',
+//   price: '',
+//   userName: '',
+//   link: '',
+//   email: '',
+//   mileage: '',
+//   vehicleInspection: {},
+// })
 const formData = ref<PostEdit>({
+  carName: 'プリウス',
   makers: [],
   prefectures: [],
-  locality: '',
+  locality: '横浜市',
   files: [],
-  description: '',
-  price: '',
-  userName: '',
-  link: '',
-  email: '',
-  mileage: '',
+  description: 'hohohooohohohoohoho',
+  price: '1000000',
+  userName: 'hogehog',
+  link: 'https://test.com',
+  email: 'test@gmail.com',
+  mileage: '50000',
   vehicleInspection: {},
 })
 
 /**
  * OK押下
  */
-const onSubmit = async () => {
+const onConfirm = async () => {
   if (!(await validate())) {
     goTo(`.v-messages__message.v-messages`)
+    return
   }
+
+  emit('click:confirm', formData.value)
 }
+
+/**
+ * OK押下
+ */
+const onClickPreview = async () => {
+  if (!(await validate())) {
+    goTo(`.v-messages__message.v-messages`)
+    return
+  }
+
+  emit('click:preview', formData.value)
+}
+
 /**
  * バリデーション
  */
@@ -42,7 +74,7 @@ const validate = async () => {
   const makerResult = await makerRef.value?.validate()
   const uploadResult = await uploadRef.value?.validate()
 
-  return validate?.valid && !makerResult && !uploadResult
+  return validate?.valid && makerResult && uploadResult
 }
 </script>
 
@@ -52,6 +84,7 @@ const validate = async () => {
 
     <v-form ref="formRef" class="tw-w-full tw-max-w-3xl">
       <TextField
+        v-model:text="formData.carName"
         label="車種名"
         placeholder="プリウス"
         :counter="30"
@@ -173,7 +206,8 @@ const validate = async () => {
 
       <RecaptchaCheckbox v-model="formData.recaptcha"></RecaptchaCheckbox>
 
-      <v-btn @click="onSubmit">OK</v-btn>
+      <v-btn @click="onClickPreview">プレビュー</v-btn>
+      <v-btn @click="onConfirm">この内容で掲載依頼する</v-btn>
     </v-form>
   </div>
 </template>

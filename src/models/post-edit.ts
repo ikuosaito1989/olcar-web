@@ -3,6 +3,11 @@
  */
 export interface PostEdit {
   /**
+   * 車名
+   */
+  carName: string
+
+  /**
    * メーカー
    */
   makers: Item[]
