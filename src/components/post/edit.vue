@@ -13,40 +13,28 @@ const goTo = useGoTo()
 const formRef = ref<InstanceType<typeof VForm> | null>(null)
 const makerRef = ref<InstanceType<typeof ListDialog> | null>(null)
 const uploadRef = ref<InstanceType<typeof FileUpload> | null>(null)
-// const formData = ref<PostEdit>({
-//   carName: '',
-//   makers: [],
-//   prefectures: [],
-//   locality: '',
-//   files: [],
-//   description: '',
-//   price: '',
-//   userName: '',
-//   link: '',
-//   email: '',
-//   mileage: '',
-//   vehicleInspection: {},
-// })
-const formData = ref<PostEdit>({
-  carName: 'プリウス',
-  makers: [],
-  prefectures: [],
-  locality: '横浜市',
-  files: [],
-  description: 'hohohooohohohoohoho',
-  price: '1000000',
-  userName: 'hogehog',
-  link: 'https://test.com',
-  email: 'test@gmail.com',
-  mileage: '50000',
-  vehicleInspection: {},
-})
+const formData = defineModel<PostEdit>('formData', { required: true })
+const errorMessage = ref('')
+
+watch(
+  formData,
+  (v) => {
+    errorMessage.value = v.recaptcha ? '' : errorMessage.value
+  },
+  { deep: true },
+)
 
 /**
- * OK押下
+ * この内容で掲載依頼する押下
  */
 const onConfirm = async () => {
   if (!(await validate())) {
+    goTo(`.v-messages__message.v-messages`)
+    return
+  }
+
+  if (!formData.value.recaptcha) {
+    errorMessage.value = 'あなたがロボットでないことを証明してください'
     goTo(`.v-messages__message.v-messages`)
     return
   }
@@ -55,7 +43,7 @@ const onConfirm = async () => {
 }
 
 /**
- * OK押下
+ * プレビュー押下
  */
 const onClickPreview = async () => {
   if (!(await validate())) {
@@ -63,6 +51,7 @@ const onClickPreview = async () => {
     return
   }
 
+  formData.value.recaptcha = undefined
   emit('click:preview', formData.value)
 }
 
@@ -205,7 +194,8 @@ const validate = async () => {
       ></TextField>
 
       <RecaptchaCheckbox v-model="formData.recaptcha"></RecaptchaCheckbox>
-
+      <!-- eslint-disable tailwindcss/no-custom-classname -->
+      <div class="v-messages__message v-messages">{{ errorMessage }}</div>
       <v-btn @click="onClickPreview">プレビュー</v-btn>
       <v-btn @click="onConfirm">この内容で掲載依頼する</v-btn>
     </v-form>

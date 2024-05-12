@@ -1,38 +1,68 @@
 <script setup lang="ts">
+import { useGoTo } from 'vuetify'
+
+const goTo = useGoTo()
 const mode = ref<'edit' | 'preview'>('edit')
+const formData = ref<PostEdit>({
+  carName: '',
+  makers: [],
+  prefectures: [],
+  locality: '',
+  files: [],
+  description: '',
+  price: '',
+  userName: '',
+  link: '',
+  email: '',
+  mileage: '',
+  vehicleInspection: {},
+})
 const car = ref<Detail>({} as Detail)
+const isComplete = ref(false)
 
 /**
  * プレビューモード
  */
-const onClickPreview = async (formData: PostEdit) => {
-  convertCar(formData)
+const onClickPreview = async () => {
+  convertCar(formData.value)
+  goTo(0)
   mode.value = 'preview'
 }
 
 /**
- * dafd
+ * この内容で掲載依頼する
  */
-const onSubmit = async (formData: PostEdit) => {
-  convertCar(formData)
-  const request: Review = {
+const onConfirm = async () => {
+  convertCar(formData.value)
+  const data: Review = {
     name: car.value.name,
     makerId: car.value.makerId,
-    files: formData.files,
+    files: formData.value.files,
     comment: car.value.comment,
     price: car.value.price,
     nickName: car.value.userName,
     referenceUrls: car.value.referenceUrls,
-    email: this.form.email,
-    mileage: this.form.mileages,
-    vehicleInspection: this.form.vehicleInspection.value,
-    prefecture: this.form.prefecture.key ? this.form.prefecture.value : '',
-    locality: this.form.locality,
+    email: formData.value.email,
+    mileage: car.value.mileage,
+    vehicleInspection: car.value.vehicleInspection,
+    prefecture: car.value.prefecture,
+    locality: car.value.locality,
   }
-  await WaitHelper.wait(async () => {
-    if (await CarsRepository.review(request)) {
-      ;(this.$refs.info as any).isVisible = true
+
+  const form = new FormData()
+  for (const [key, value] of Object.entries(data)) {
+    if (Array.isArray(value) && value[0] instanceof File) {
+      value.forEach((v) => form.append(key, v))
+      continue
     }
+    form.append(key, value)
+  }
+
+  await $fetch<Review>(`/api/v1/cars/review`, {
+    method: 'POST',
+    body: form,
+  }).then(() => {
+    isComplete.value = true
   })
 }
 
@@ -72,13 +102,13 @@ const convertCar = (formData: PostEdit) => {
     makerId: formData.makers[0].value as number,
     makerName: formData.makers[0].title,
     images: formData.files.map((v) => URL.createObjectURL(v)),
-    createAt: '2023-01-01T00:00:00.404Z',
+    createAt: '2024-05-01T00:00:00.404Z',
     comment: formData.description,
     prefecture: formData.prefectures.length ? formData.prefectures[0].title : '',
     locality: formData.locality,
     isSponsor: false,
     published: false,
-    userName: '',
+    userName: formData.userName,
     nickName: formData.userName,
     userImageUrl: '/logo_small.jpg',
     socialType: Constants.SOCIAL_TYPE.JMTY,
@@ -91,11 +121,25 @@ const convertCar = (formData: PostEdit) => {
 <template>
   <section class="tw-w-full tw-max-w-3xl">
     <div v-if="mode === 'edit'">
-      <PostEdit @click:preview="onClickPreview"></PostEdit>
+      <PostEdit
+        v-model:form-data="formData"
+        @click:preview="onClickPreview"
+        @click:confirm="onConfirm"
+      ></PostEdit>
     </div>
     <div v-if="mode === 'preview'">
       <v-btn @click="onExitPreview">プレビューを終了する</v-btn>
       <CarsDetail :car="car" @click:goto="onGotoPage"></CarsDetail>
     </div>
+    <v-dialog v-model="isComplete" width="400">
+      <v-card>
+        <v-icon>mdi-check-outline</v-icon>
+        <div>掲載の申し込みを承りました</div>
+        <div>
+          olcar（オルカー）の審査を行います。審査結果については1~3営業日以内に審査結果をメールアドレスにお送りしますので今しばらくお待ち下さい
+        </div>
+        <a @click="isComplete = false">閉じる</a>
+      </v-card>
+    </v-dialog>
   </section>
 </template>
