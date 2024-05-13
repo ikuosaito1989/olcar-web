@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useRecaptchaProvider } from 'vue-recaptcha'
+import type { Recaptcha } from '#build/components'
 
 const prop = defineProps({
   carId: {
@@ -8,27 +8,19 @@ const prop = defineProps({
   },
 })
 
-useRecaptchaProvider()
-
 type Report = (typeof Constants.REPORT)[keyof typeof Constants.REPORT]
 
+const recaptchaRef = ref<InstanceType<typeof Recaptcha> | null>(null)
 const response = ref()
 const isVisible = ref(false)
 const isComplete = ref(false)
-
 const reason = ref('')
-const errorMessage = ref('')
-
-watch(response, () => {
-  errorMessage.value = ''
-})
 
 /**
  * レポートを報告する
  */
 const onClick = async (type: Report) => {
-  if (!response.value) {
-    errorMessage.value = 'あなたがロボットでないことを証明してください'
+  if (!(await recaptchaRef.value?.validate())) {
     return
   }
   await $fetch<KeywordsText>(`/api/v1/reports`, {
@@ -55,8 +47,7 @@ defineExpose({
   <div>
     <v-dialog v-model="isVisible">
       <v-card>
-        <RecaptchaCheckbox v-model="response"></RecaptchaCheckbox>
-        <div>{{ errorMessage }}</div>
+        <Recaptcha ref="recaptchaRef" v-model:recaptcha="response"></Recaptcha>
         <v-textarea v-model="reason" label="理由"></v-textarea>
         <v-btn @click="onClick(Constants.REPORT.UNPOST)">{{ Constants.REPORT.UNPOST }}</v-btn>
         <v-btn @click="onClick(Constants.REPORT.STOP)">{{ Constants.REPORT.STOP }}</v-btn>

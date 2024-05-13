@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const emit = defineEmits(['click:confirm', 'click:preview'])
 const { prefectureItems, makerItems } = await useFetchMaster()
-import type { FileUpload, ListDialog } from '#build/components'
+import type { FileUpload, ListDialog, Recaptcha } from '#build/components'
 import { useRecaptchaProvider } from 'vue-recaptcha'
 import { useGoTo } from 'vuetify'
 import type { VForm } from 'vuetify/components'
@@ -13,16 +13,9 @@ const goTo = useGoTo()
 const formRef = ref<InstanceType<typeof VForm> | null>(null)
 const makerRef = ref<InstanceType<typeof ListDialog> | null>(null)
 const uploadRef = ref<InstanceType<typeof FileUpload> | null>(null)
-const formData = defineModel<PostEdit>('formData', { required: true })
-const errorMessage = ref('')
+const recaptchaRef = ref<InstanceType<typeof Recaptcha> | null>(null)
 
-watch(
-  formData,
-  (v) => {
-    errorMessage.value = v.recaptcha ? '' : errorMessage.value
-  },
-  { deep: true },
-)
+const formData = defineModel<PostEdit>('formData', { required: true })
 
 /**
  * この内容で掲載依頼する押下
@@ -33,8 +26,7 @@ const onConfirm = async () => {
     return
   }
 
-  if (!formData.value.recaptcha) {
-    errorMessage.value = 'あなたがロボットでないことを証明してください'
+  if (!recaptchaRef.value?.validate()) {
     goTo(`.v-messages__message.v-messages`)
     return
   }
@@ -193,9 +185,7 @@ const validate = async () => {
         :counter="30"
       ></TextField>
 
-      <RecaptchaCheckbox v-model="formData.recaptcha"></RecaptchaCheckbox>
-      <!-- eslint-disable tailwindcss/no-custom-classname -->
-      <div class="v-messages__message v-messages">{{ errorMessage }}</div>
+      <Recaptcha ref="recaptchaRef" v-model:recaptcha="formData.recaptcha"></Recaptcha>
       <v-btn @click="onClickPreview">プレビュー</v-btn>
       <v-btn @click="onConfirm">この内容で掲載依頼する</v-btn>
     </v-form>
