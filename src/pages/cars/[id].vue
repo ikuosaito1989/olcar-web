@@ -51,9 +51,9 @@ const onClickReport = () => {
     <CarsDetail :car="car" @click:goto="onGotoPage" @click:report="onClickReport"></CarsDetail>
 
     <div>{{ car.makerName }} {{ car.name }}の中古車を探す</div>
-    <CarsList :summary="sameSummary" />
+    <CarsList :details="sameSummary.details" />
     <div>{{ car.makerName }}の中古車を探す</div>
-    <CarsList :summary="makerSummary" />
+    <CarsList :details="makerSummary.details" />
 
     <ReportDialog ref="refReportDialog" :car-id="car.id"></ReportDialog>
   </section>

@@ -91,7 +91,7 @@ const onChangePage = async (value: number) => {
       <div @click="navigate({ sort: { key: 'mileageOrder', value: 'asc' } })">少ない順</div>
       <div @click="navigate({ sort: { key: 'mileageOrder', value: 'desc' } })">多い順</div>
     </div>
-    <CarsList :summary="summary" />
+    <CarsList :details="summary.details" />
 
     <v-pagination
       v-model="queryObject.page"

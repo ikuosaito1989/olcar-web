@@ -10,6 +10,7 @@ defineProps({
 <template>
   <NuxtLink :to="`/cars/${detail.id}`">
     <v-card>
+      <Favorite :car-id="detail.id"></Favorite>
       <v-card-subtitle>{{ detail.makerName }}</v-card-subtitle>
       <v-card-title>{{ detail.name }}</v-card-title>
 

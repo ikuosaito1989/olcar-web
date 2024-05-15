@@ -1,12 +1,12 @@
 <script setup lang="ts">
 defineProps({
-  summary: {
-    type: Object as () => Summary,
+  details: {
+    type: Array as () => Array<DetailBase>,
     required: true,
   },
 })
 </script>
 
 <template>
-  <CarsCard v-for="detail in summary.details" :key="detail.id" :detail="detail"></CarsCard>
+  <CarsCard v-for="detail in details" :key="detail.id" :detail="detail"></CarsCard>
 </template>
