@@ -29,6 +29,8 @@ onMounted(async () => {
       'carNames[]': [car.value.name],
     },
   }).then((summary) => (sameSummary.value = summary))
+
+  localStorageUtil.push<LocalStorage>(Constants.LOCALSTORAGE.HISTORY, { id: car.value.id })
 })
 
 /**

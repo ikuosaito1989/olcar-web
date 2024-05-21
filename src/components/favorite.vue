@@ -6,14 +6,22 @@ const prop = defineProps({
   },
 })
 
-const items = ref<LocalStorage[]>(localStorageUtil.getItem('favorite'))
+const items = ref<LocalStorage[]>([])
+const mounted = ref<boolean>(false)
+onMounted(async () => {
+  items.value = localStorageUtil.getItem<LocalStorage>(Constants.LOCALSTORAGE.FAVORITE)
+  mounted.value = true
+})
+
+/**
+ * お気に入り済か？
+ */
+const isFavorite = computed(() => !!items.value.find((v) => v.id === prop.carId))
 
 /**
  * ラベル
  */
-const label = computed(() =>
-  items.value.find((v) => v.id === prop.carId) ? 'お気に入り済' : 'お気に入り',
-)
+const label = computed(() => (isFavorite.value ? 'お気に入り済' : 'お気に入り'))
 
 /**
  * お気に入り押下
@@ -21,10 +29,13 @@ const label = computed(() =>
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, require-jsdoc
 const onFavorite = (e: any) => {
   e.preventDefault()
-  items.value = localStorageUtil.setItem('favorite', prop.carId)
+  const func = isFavorite.value
+    ? localStorageUtil.splice<LocalStorage>
+    : localStorageUtil.push<LocalStorage>
+  items.value = func(Constants.LOCALSTORAGE.FAVORITE, { id: prop.carId })
 }
 </script>
 
 <template>
-  <v-btn @click="onFavorite">{{ label }}</v-btn>
+  <v-btn v-if="mounted" @click="onFavorite">{{ label }}</v-btn>
 </template>

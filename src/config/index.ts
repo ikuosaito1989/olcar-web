@@ -251,6 +251,21 @@ const INDEXED_DB = {
  */
 const ISO8601_FORMAT = 'YYYY-MM-DDTHH:mm:ss'
 
+/**
+ * ローカルストレージのキー
+ */
+const LOCALSTORAGE = {
+  /**
+   * お気に入り
+   */
+  FAVORITE: 'favorite',
+
+  /**
+   * 履歴
+   */
+  HISTORY: 'history',
+}
+
 export const Constants = {
   PRICES,
   MILEAGES,
@@ -265,4 +280,5 @@ export const Constants = {
   ISO8601_FORMAT,
   YEAR,
   MONTH,
+  LOCALSTORAGE,
 }
