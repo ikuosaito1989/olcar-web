@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type ReportDialog from '~/components/report-dialog.vue'
+import dayjs from '~/lib/day'
 
 const route = useRoute()
 const refReportDialog = ref<InstanceType<typeof ReportDialog> | null>(null)
@@ -30,7 +31,10 @@ onMounted(async () => {
     },
   }).then((summary) => (sameSummary.value = summary))
 
-  localStorageUtil.push<LocalStorage>(Constants.LOCALSTORAGE.HISTORY, { id: car.value.id })
+  localStorageUtil.push<LocalStorage>(Constants.LOCALSTORAGE.HISTORY, {
+    id: car.value.id,
+    actionAt: dayjs().format(Constants.ISO8601_FORMAT),
+  })
 })
 
 /**

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import dayjs from '~/lib/day'
+
 const prop = defineProps({
   carId: {
     type: Number,
@@ -29,10 +31,18 @@ const label = computed(() => (isFavorite.value ? 'お気に入り済' : 'お気�
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, require-jsdoc
 const onFavorite = (e: any) => {
   e.preventDefault()
-  const func = isFavorite.value
-    ? localStorageUtil.splice<LocalStorage>
-    : localStorageUtil.push<LocalStorage>
-  items.value = func(Constants.LOCALSTORAGE.FAVORITE, { id: prop.carId })
+
+  const storage = localStorageUtil.getItem<LocalStorage>(Constants.LOCALSTORAGE.FAVORITE)
+  const item = storage.find((v) => v.id === prop.carId)
+
+  if (item) {
+    items.value = localStorageUtil.splice<LocalStorage>(Constants.LOCALSTORAGE.FAVORITE, item)
+  } else {
+    items.value = localStorageUtil.push<LocalStorage>(Constants.LOCALSTORAGE.FAVORITE, {
+      id: prop.carId,
+      actionAt: dayjs().format(Constants.ISO8601_FORMAT),
+    })
+  }
 }
 </script>
 
