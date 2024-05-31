@@ -1,12 +1,12 @@
 <script setup lang="ts">
 onMounted(async () => {
-  await useSetStorageInCars(Constants.LOCALSTORAGE.FAVORITE)
+  await useSetStorageInCars(Constants.LOCALSTORAGE.HISTORY)
 })
 </script>
 
 <template>
   <section class="tw-w-full tw-max-w-3xl">
-    <div>お気に入り</div>
+    <div>閲覧履歴</div>
     <CarsList v-if="storageDetails" :details="storageDetails" />
   </section>
 </template>

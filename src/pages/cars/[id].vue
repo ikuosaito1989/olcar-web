@@ -31,10 +31,13 @@ onMounted(async () => {
     },
   }).then((summary) => (sameSummary.value = summary))
 
-  localStorageUtil.push<LocalStorage>(Constants.LOCALSTORAGE.HISTORY, {
+  const storage = localStorageUtil.getItem<LocalStorage>(Constants.LOCALSTORAGE.HISTORY)
+  const item = storage.find((v) => v.id === car.value.id) ?? {
     id: car.value.id,
     actionAt: dayjs().format(Constants.ISO8601_FORMAT),
-  })
+  }
+
+  localStorageUtil.push<LocalStorage>(Constants.LOCALSTORAGE.HISTORY, item)
 })
 
 /**

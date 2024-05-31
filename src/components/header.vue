@@ -9,10 +9,12 @@
     </NuxtLink>
 
     <template #append>
-      <v-btn icon="mdi-heart"></v-btn>
-
-      <v-btn icon="mdi-magnify"></v-btn>
-
+      <NuxtLink to="/favorite">
+        <v-btn icon="mdi-heart"></v-btn>
+      </NuxtLink>
+      <NuxtLink to="/history">
+        <v-btn icon="mdi-history"></v-btn>
+      </NuxtLink>
       <v-btn icon="mdi-dots-vertical"></v-btn>
     </template>
   </v-app-bar>
