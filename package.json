@@ -16,11 +16,14 @@
   "dependencies": {
     "@mdi/font": "^7.4.47",
     "@types/google-libphonenumber": "^7.4.30",
+    "@types/marked": "^6.0.0",
     "autolinker": "^4.0.0",
     "dayjs": "^1.11.11",
     "google-libphonenumber": "^3.2.34",
+    "marked": "^12.0.2",
     "nuxt": "^3.11.2",
     "query-string": "^9.0.0",
+    "vite-plugin-vue-markdown": "^0.23.8",
     "vue": "^3.4.27",
     "vue-recaptcha": "^3.0.0-alpha.6",
     "vue-router": "^4.3.2"
