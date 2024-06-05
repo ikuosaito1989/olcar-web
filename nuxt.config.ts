@@ -1,5 +1,4 @@
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
-import markdown from 'vite-plugin-vue-markdown'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -76,8 +75,6 @@ export default defineNuxtConfig({
         transformAssetUrls,
       },
     },
-    plugins: [markdown()],
-    assetsInclude: ['**/*.md'],
   },
   imports: {
     dirs: ['models/**', 'config/**'],
