@@ -7,5 +7,6 @@
     </div>
 
     <Footer></Footer>
+    <Loader></Loader>
   </v-app>
 </template>
