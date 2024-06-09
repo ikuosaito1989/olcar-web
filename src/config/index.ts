@@ -266,6 +266,23 @@ const LOCALSTORAGE = {
   HISTORY: 'history',
 }
 
+/**
+ * infoのタイトル
+ */
+const INFO_TITLES = {
+  tos: '利用規約',
+  privacy: 'プライバシーポリシー',
+  caution: '個人売買における詐欺について',
+  browser: '推奨環境',
+  exhibit: '掲載する',
+  'transaction-law': '特定商取引法に基づく表示',
+  'purchase-process': '車を個人売買するために必要な手続き',
+  'needs-help': '作者のolcarに掛ける想いとみなさまへのお願い',
+  'omakase-agent': 'おまかせ代行サービス',
+  about: 'olcar（オルカー）について',
+  line: 'LINE公式アカウントを始めました',
+}
+
 export const Constants = {
   PRICES,
   MILEAGES,
@@ -281,4 +298,5 @@ export const Constants = {
   YEAR,
   MONTH,
   LOCALSTORAGE,
+  INFO_TITLES,
 }

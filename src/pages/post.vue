@@ -61,9 +61,9 @@ const onConfirm = async () => {
   await $fetch<Review>(`/api/v1/cars/review`, {
     method: 'POST',
     body: form,
-  }).then(() => {
-    isComplete.value = true
   })
+
+  isComplete.value = true
 }
 
 /**

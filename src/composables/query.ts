@@ -174,7 +174,13 @@ const useQueryString = () => {
     priceTo: obj.priceTo?.key,
     priceOrder: obj.priceOrder,
     mileageOrder: obj.mileageOrder,
+    isSales: obj.isSales,
   }
+
+  if (!query.isSales) {
+    delete query.isSales
+  }
+
   const _queryString = queryString.stringify(query, { arrayFormat: 'bracket' })
   // @todo arrayFormatはどうするか考える
   return _queryString ? `?${_queryString}` : ''
@@ -186,6 +192,13 @@ const useQueryString = () => {
 const useOrderReset = () => {
   queryObject.value.priceOrder = undefined
   queryObject.value.mileageFrom = undefined
+}
+
+/**
+ * isSalesをリセットする
+ */
+const useIsSalesReset = () => {
+  queryObject.value.isSales = undefined
 }
 
 /**
@@ -215,6 +228,7 @@ export {
   useQueryString,
   useReset,
   useOrderReset,
+  useIsSalesReset,
   useSetFromQuery,
   useGetSearchConditions,
   useSearchSocialType,

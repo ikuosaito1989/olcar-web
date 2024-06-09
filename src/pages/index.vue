@@ -35,16 +35,15 @@ queryObject.value.page = route.query.page ? +route.query.page : undefined
  *
  * @param value ページ数
  */
-const navigate = async ({
+const onNavigate = async ({
   path = '',
   sort,
 }: {
   path?: string
   sort?: { key: 'priceOrder' | 'mileageOrder'; value: Sort }
 }) => {
-  useOrderReset()
-
   if (sort) {
+    useOrderReset()
     queryObject.value[sort.key] = sort.value
   }
 
@@ -58,7 +57,7 @@ const navigate = async ({
  */
 const onChangePage = async (value: number) => {
   queryObject.value.page = value
-  navigate({})
+  onNavigate({})
 }
 </script>
 
@@ -78,18 +77,23 @@ const onChangePage = async (value: number) => {
       検索された車は見つかりませんでした。再度検索して下さい
     </div>
 
+    <v-checkbox
+      v-model="queryObject.isSales"
+      label="販売中のみ表示"
+      @change="onNavigate({})"
+    ></v-checkbox>
     <div class="tw-flex">
       <div>{{ summary.total }}台</div>
-      <div @click="navigate({ path: 'search' })">絞り込む</div>
+      <div @click="onNavigate({ path: 'search' })">絞り込む</div>
       <div>並び替え</div>
     </div>
     <div>
       <div>価格</div>
-      <div @click="navigate({ sort: { key: 'priceOrder', value: 'asc' } })">安い順</div>
-      <div @click="navigate({ sort: { key: 'priceOrder', value: 'desc' } })">高い順</div>
+      <div @click="onNavigate({ sort: { key: 'priceOrder', value: 'asc' } })">安い順</div>
+      <div @click="onNavigate({ sort: { key: 'priceOrder', value: 'desc' } })">高い順</div>
       <div>走行距離</div>
-      <div @click="navigate({ sort: { key: 'mileageOrder', value: 'asc' } })">少ない順</div>
-      <div @click="navigate({ sort: { key: 'mileageOrder', value: 'desc' } })">多い順</div>
+      <div @click="onNavigate({ sort: { key: 'mileageOrder', value: 'asc' } })">少ない順</div>
+      <div @click="onNavigate({ sort: { key: 'mileageOrder', value: 'desc' } })">多い順</div>
     </div>
     <CarsList :details="summary.details" />
 

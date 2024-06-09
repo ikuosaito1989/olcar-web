@@ -15,4 +15,5 @@ export interface QueryString {
   isVehicleInspection?: boolean
   priceOrder?: Sort
   mileageOrder?: Sort
+  isSales?: boolean
 }
