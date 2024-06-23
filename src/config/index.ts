@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /**
  * 1ページに表示する最大件数
  */

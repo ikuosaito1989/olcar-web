@@ -8,14 +8,20 @@ export default defineNuxtPlugin((app) => {
   const vuetify = createVuetify({
     ssr: true,
     theme: {
+      defaultTheme: 'light',
       themes: {
         light: {
-          dark: false,
           colors: {
-            primary: '#2196F3',
-            secondary: '#03A9F4',
+            primary: '#f67b01',
+            secondary: '#bc4c00',
           },
         },
+      },
+    },
+    defaults: {
+      VBtn: {
+        color: 'primary',
+        variant: 'outlined',
       },
     },
   })

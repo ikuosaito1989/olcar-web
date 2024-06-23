@@ -1,21 +1,32 @@
 <template>
-  <v-app-bar :elevation="1">
+  <v-app-bar class="!tw-static" theme="light" :elevation="1">
     <template #prepend>
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon color="primary"></v-app-bar-nav-icon>
     </template>
 
-    <NuxtLink to="/">
-      <v-app-bar-title>Application</v-app-bar-title>
-    </NuxtLink>
+    <template #title>
+      <NuxtLink to="/">
+        <v-img max-width="150" src="/logo.png"></v-img>
+      </NuxtLink>
+    </template>
 
     <template #append>
+      <NuxtLink to="/search">
+        <v-btn icon="mdi-magnify"></v-btn>
+      </NuxtLink>
       <NuxtLink to="/favorite">
         <v-btn icon="mdi-heart"></v-btn>
       </NuxtLink>
       <NuxtLink to="/history">
         <v-btn icon="mdi-history"></v-btn>
       </NuxtLink>
-      <v-btn icon="mdi-dots-vertical"></v-btn>
     </template>
   </v-app-bar>
 </template>
+
+<style scoped>
+:deep(.v-toolbar__content) {
+  max-width: 768px;
+  margin: auto;
+}
+</style>

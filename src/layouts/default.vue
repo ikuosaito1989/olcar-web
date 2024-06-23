@@ -1,8 +1,10 @@
 <template>
-  <v-app class="tw-font-mono">
+  <v-app
+    class="tw-m-auto tw-box-border tw-max-w-screen-md tw-break-all tw-font-sans tw-text-sm tw-tracking-tight tw-antialiased"
+  >
     <Header></Header>
 
-    <div class="tw-m-2 tw-flex tw-min-h-svh tw-items-center tw-justify-center tw-pt-16">
+    <div class="">
       <slot />
     </div>
 

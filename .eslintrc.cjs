@@ -48,5 +48,6 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'error',
     'prefer-template': 'error',
     'arrow-body-style': ['error', 'as-needed'],
+    'max-lines': ['error', 250],
   },
 }
