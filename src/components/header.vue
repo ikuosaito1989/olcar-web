@@ -5,11 +5,8 @@
     </template>
 
     <template #title>
-      <NuxtLink to="/">
-        <v-img max-width="150" src="/logo.png"></v-img>
-      </NuxtLink>
+      <NuxtLink to="/"> <v-img width="120" src="/logo.png" /> </NuxtLink>
     </template>
-
     <template #append>
       <NuxtLink to="/search">
         <v-btn icon="mdi-magnify"></v-btn>

@@ -14,6 +14,7 @@ export default defineNuxtPlugin((app) => {
           colors: {
             primary: '#f67b01',
             secondary: '#bc4c00',
+            gray: 'rgba(0, 0, 0, 0.7)',
           },
         },
       },

@@ -24,6 +24,7 @@ const { data: summary } = await useFetchi<Summary>('/api/v1/cars', {
   },
 })
 
+const isVisible = ref(false)
 const _length = Math.ceil(summary.value.total / Constants.LIMIT) || 1
 const length = ref(Math.ceil(_length > 100 ? 99 : _length))
 const makerName = ref(Constants.MAKERS.find((v) => v.key === +route.params.makerId)?.value)
@@ -35,15 +36,16 @@ queryObject.value.page = route.query.page ? +route.query.page : undefined
  *
  * @param value ページ数
  */
-const onNavigate = async ({
+const onNavigate = ({
   path = '',
   sort,
 }: {
   path?: string
   sort?: { key: 'priceOrder' | 'mileageOrder'; value: Sort }
 }) => {
+  useOrderReset()
+
   if (sort) {
-    useOrderReset()
     queryObject.value[sort.key] = sort.value
   }
 
@@ -55,8 +57,19 @@ const onNavigate = async ({
  *
  * @param value ページ数
  */
-const onChangePage = async (value: number) => {
+const onChangePage = (value: number) => {
   queryObject.value.page = value
+  onNavigate({})
+}
+
+/**
+ * 販売中のみ表示
+ */
+const onChangeSales = () => {
+  if (!queryObject.value.isSales) {
+    useIsSalesReset()
+  }
+
   onNavigate({})
 }
 </script>
@@ -84,7 +97,7 @@ const onChangePage = async (value: number) => {
           color="primary"
           class="tw-mx-5"
           label="販売中のみ表示"
-          @change="onNavigate({})"
+          @change="onChangeSales"
         ></v-checkbox>
       </div>
 
@@ -95,21 +108,59 @@ const onChangePage = async (value: number) => {
         <div class="tw-w-full tw-text-[#bc4c00]" @click="onNavigate({ path: 'search' })">
           <v-icon color="primary" icon="mdi-magnify"></v-icon>絞り込む
         </div>
-        <div class="tw-w-full tw-text-[#bc4c00]">
+        <div class="tw-w-full tw-text-[#bc4c00]" @click="() => (isVisible = !isVisible)">
           <v-icon color="primary" icon="mdi-sort"></v-icon>
           並び替え
         </div>
       </div>
 
-      <div>
-        <div>価格</div>
-        <div @click="onNavigate({ sort: { key: 'priceOrder', value: 'asc' } })">安い順</div>
-        <div @click="onNavigate({ sort: { key: 'priceOrder', value: 'desc' } })">高い順</div>
-        <div>走行距離</div>
-        <div @click="onNavigate({ sort: { key: 'mileageOrder', value: 'asc' } })">少ない順</div>
-        <div @click="onNavigate({ sort: { key: 'mileageOrder', value: 'desc' } })">多い順</div>
-      </div>
+      <v-expansion-panels v-model="isVisible">
+        <v-expansion-panel :value="true">
+          <v-expansion-panel-text class="tw-font-bold">
+            <div class="tw-mb-4 tw-flex tw-items-center tw-justify-between">
+              <div class="tw-basis-1/3 tw-font-bold">価格</div>
+              <v-btn
+                size="small"
+                class="tw-mr-1 tw-basis-1/3 tw-font-bold"
+                @click="onNavigate({ sort: { key: 'priceOrder', value: 'asc' } })"
+              >
+                安い順
+              </v-btn>
+              <v-btn
+                size="small"
+                class="tw-basis-1/3 tw-font-bold"
+                @click="onNavigate({ sort: { key: 'priceOrder', value: 'desc' } })"
+              >
+                高い順
+              </v-btn>
+            </div>
+            <div class="tw-mb-4 tw-flex tw-items-center tw-justify-between">
+              <div class="tw-basis-1/3 tw-font-bold">走行距離</div>
+              <v-btn
+                size="small"
+                class="tw-mr-1 tw-basis-1/3 tw-font-bold"
+                @click="onNavigate({ sort: { key: 'mileageOrder', value: 'asc' } })"
+              >
+                少ない順
+              </v-btn>
+              <v-btn
+                size="small"
+                class="tw-basis-1/3 tw-font-bold"
+                @click="onNavigate({ sort: { key: 'mileageOrder', value: 'desc' } })"
+              >
+                多い順
+              </v-btn>
+            </div>
+            <div>
+              <v-btn size="small" color="gray" class="tw-w-full" @click="onNavigate">
+                条件をクリアして表示
+              </v-btn>
+            </div>
+          </v-expansion-panel-text>
+        </v-expansion-panel>
+      </v-expansion-panels>
     </div>
+
     <CarsList :details="summary.details" />
 
     <v-pagination
