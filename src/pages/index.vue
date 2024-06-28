@@ -76,21 +76,28 @@ const onChangeSales = () => {
 
 <template>
   <section class="tw-w-full tw-max-w-3xl">
-    <div class="tw-sticky tw-top-0 tw-z-50">
-      <div v-if="searchConditions.length">
-        <div>検索条件</div>
-        <v-chip v-for="(condition, i) in searchConditions" :key="`maker_${i}`">
-          {{ condition }}
-        </v-chip>
+    <div v-if="searchConditions.length" class="tw-mx-4 tw-mt-4">
+      <div class="tw-mb-2 tw-font-bold">検索条件</div>
+      <div class="tw-flex">
+        <div
+          v-for="(condition, i) in searchConditions"
+          :key="`maker_${i}`"
+          class="tw-pb-2 tw-pr-2 tw-font-bold"
+        >
+          <v-chip variant="elevated">
+            {{ condition }}
+          </v-chip>
+        </div>
       </div>
+    </div>
 
-      <div v-if="makerName"><v-icon>mdi-car</v-icon>{{ makerName }}の中古車</div>
+    <div v-if="makerName"><v-icon>mdi-car</v-icon>{{ makerName }}の中古車</div>
 
-      <div v-if="summary.total === 0">
-        <v-icon>mdi-magnify</v-icon>
-        検索された車は見つかりませんでした。再度検索して下さい
-      </div>
-
+    <div v-if="summary.total === 0">
+      <v-icon>mdi-magnify</v-icon>
+      検索された車は見つかりませんでした。再度検索して下さい
+    </div>
+    <div class="tw-sticky tw-top-0 tw-z-50 tw-bg-white">
       <div class="tw-flex tw-h-12 tw-justify-end">
         <v-checkbox
           v-model="queryObject.isSales"
@@ -102,7 +109,7 @@ const onChangeSales = () => {
       </div>
 
       <div
-        class="tw-flex tw-h-12 tw-w-full tw-items-center tw-border tw-text-center tw-shadow-white [&>div]:tw-border-r [&>div]:tw-py-3 [&>div]:tw-font-bold"
+        class="tw-flex tw-h-12 tw-w-full tw-items-center tw-border tw-text-center tw-shadow-white [&>div:not(:last-child)]:tw-border-r [&>div]:tw-py-3 [&>div]:tw-font-bold"
       >
         <div class="tw-w-full">全{{ summary.total }}台</div>
         <div class="tw-w-full tw-text-[#bc4c00]" @click="onNavigate({ path: 'search' })">

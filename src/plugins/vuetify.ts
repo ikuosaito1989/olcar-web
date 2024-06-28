@@ -24,6 +24,12 @@ export default defineNuxtPlugin((app) => {
         color: 'primary',
         variant: 'outlined',
       },
+      VChip: {
+        color: 'primary',
+        variant: 'outlined',
+        label: true,
+        size: 'small',
+      },
     },
   })
   app.vueApp.use(vuetify)
