@@ -4,15 +4,21 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  isNewline: {
+    type: Boolean,
+    default: false,
+  },
 })
 </script>
 
 <template>
-  <div>
-    <v-chip small outlined label>
-      {{ props.label }}
-    </v-chip>
-    <div>
+  <div class="tw-my-2 tw-flex tw-items-baseline" :class="{ 'tw-flex-col': isNewline }">
+    <div class="">
+      <v-chip size="default" class="tw-mr-1 tw-w-20 tw-justify-center tw-font-bold">
+        {{ props.label }}
+      </v-chip>
+    </div>
+    <div class="tw-line-clamp-2 tw-leading-8">
       <slot></slot>
     </div>
   </div>

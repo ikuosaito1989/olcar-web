@@ -109,7 +109,7 @@ const onChangeSales = () => {
       </div>
 
       <div
-        class="tw-flex tw-h-12 tw-w-full tw-items-center tw-border tw-text-center tw-shadow-white [&>div:not(:last-child)]:tw-border-r [&>div]:tw-py-3 [&>div]:tw-font-bold"
+        class="tw-flex tw-h-12 tw-w-full tw-items-center tw-text-center tw-shadow [&>div:not(:last-child)]:tw-border-r [&>div]:tw-py-3 [&>div]:tw-font-bold"
       >
         <div class="tw-w-full">全{{ summary.total }}台</div>
         <div class="tw-w-full tw-text-[#bc4c00]" @click="onNavigate({ path: 'search' })">
