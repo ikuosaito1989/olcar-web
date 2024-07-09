@@ -5,7 +5,7 @@
     </template>
 
     <template #title>
-      <NuxtLink to="/"> <v-img width="120" src="/logo.png" /> </NuxtLink>
+      <NuxtLink to="/"> <v-img width="130" src="/logo.png" /> </NuxtLink>
     </template>
     <template #append>
       <NuxtLink to="/search">
@@ -25,5 +25,8 @@
 :deep(.v-toolbar__content) {
   max-width: 768px;
   margin: auto;
+}
+:deep(.v-toolbar__content > .v-toolbar-title) {
+  margin-inline-start: 0px;
 }
 </style>

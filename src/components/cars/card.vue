@@ -8,7 +8,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="tw-p-4 tw-shadow">
+  <div class="tw-p-4 tw-shadow-md">
     <NuxtLink :to="`/cars/${detail.id}`">
       <Titles
         :is-sponsor="detail.isSponsor"
@@ -19,7 +19,7 @@ defineProps({
 
       <div class="tw-flex tw-items-center">
         <div class="tw-w-2/4">
-          <v-img class="tw-rounded" max-height="220" :src="detail.images[0]"></v-img>
+          <v-img class="tw-rounded" height="220" :src="detail.images[0]"></v-img>
         </div>
         <div class="tw-ml-2 tw-w-2/4">
           <Price :price="detail.price"></Price>

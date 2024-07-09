@@ -25,8 +25,6 @@ const { data: summary } = await useFetchi<Summary>('/api/v1/cars', {
 })
 
 const isVisible = ref(false)
-const _length = Math.ceil(summary.value.total / Constants.LIMIT) || 1
-const length = ref(Math.ceil(_length > 100 ? 99 : _length))
 const makerName = ref(Constants.MAKERS.find((v) => v.key === +route.params.makerId)?.value)
 const searchConditions = ref(useGetSearchConditions())
 queryObject.value.page = route.query.page ? +route.query.page : undefined
@@ -57,7 +55,7 @@ const onNavigate = ({
  *
  * @param value ページ数
  */
-const onChangePage = (value: number) => {
+const onChangePage = (value?: number) => {
   queryObject.value.page = value
   onNavigate({})
 }
@@ -93,7 +91,7 @@ const onChangeSales = () => {
 
     <div v-if="makerName"><v-icon>mdi-car</v-icon>{{ makerName }}の中古車</div>
 
-    <div v-if="summary.total === 0">
+    <div v-if="summary.details.length === 0">
       <v-icon>mdi-magnify</v-icon>
       検索された車は見つかりませんでした。再度検索して下さい
     </div>
@@ -109,9 +107,8 @@ const onChangeSales = () => {
       </div>
 
       <div
-        class="tw-flex tw-h-12 tw-w-full tw-items-center tw-text-center tw-shadow [&>div:not(:last-child)]:tw-border-r [&>div]:tw-py-3 [&>div]:tw-font-bold"
+        class="tw-flex tw-h-12 tw-w-full tw-items-center tw-border tw-text-center tw-shadow [&>div:not(:last-child)]:tw-border-r [&>div]:tw-py-3 [&>div]:tw-font-bold"
       >
-        <div class="tw-w-full">全{{ summary.total }}台</div>
         <div class="tw-w-full tw-text-[#bc4c00]" @click="onNavigate({ path: 'search' })">
           <v-icon color="primary" icon="mdi-magnify"></v-icon>絞り込む
         </div>
@@ -170,11 +167,21 @@ const onChangeSales = () => {
 
     <CarsList :details="summary.details" />
 
-    <v-pagination
-      v-model="queryObject.page"
-      :length="length"
-      @update:model-value="onChangePage"
-    ></v-pagination>
+    <div class="tw-my-5 tw-flex tw-justify-center">
+      <v-btn
+        class="tw-mr-5"
+        width="40"
+        icon="mdi-chevron-left"
+        :disabled="!queryObject.page || queryObject.page == 1"
+        @click="onChangePage(queryObject.page ? queryObject.page - 1 : 1)"
+      ></v-btn>
+      <v-btn
+        width="40"
+        icon="mdi-chevron-right"
+        :disabled="summary.isEnd"
+        @click="onChangePage(queryObject.page ? queryObject.page + 1 : 2)"
+      ></v-btn>
+    </div>
   </section>
 </template>
 <style scoped>

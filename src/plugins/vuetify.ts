@@ -30,6 +30,9 @@ export default defineNuxtPlugin((app) => {
         label: true,
         size: 'small',
       },
+      VAlert: {
+        variant: 'outlined',
+      },
     },
   })
   app.vueApp.use(vuetify)

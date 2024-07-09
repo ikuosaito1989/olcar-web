@@ -12,7 +12,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="tw-my-2 tw-flex tw-items-baseline" :class="{ 'tw-flex-col': isNewline }">
+  <div class="tw-my-2 tw-flex tw-flex-wrap tw-items-center">
     <div class="">
       <v-chip size="default" class="tw-mr-1 tw-w-20 tw-justify-center tw-font-bold">
         {{ props.label }}

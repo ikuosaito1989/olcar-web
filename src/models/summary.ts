@@ -2,6 +2,6 @@
  * 車情報のサマリ
  */
 export interface Summary {
-  total: number
+  isEnd: boolean
   details: DetailBase[]
 }

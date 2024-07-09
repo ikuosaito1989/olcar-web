@@ -26,6 +26,16 @@ const isFavorite = computed(() => !!items.value.find((v) => v.id === prop.carId)
 const label = computed(() => (isFavorite.value ? 'お気に入り済' : 'お気に入り'))
 
 /**
+ * variant
+ */
+const variant = computed(() => (isFavorite.value ? 'elevated' : 'outlined'))
+
+/**
+ * アイコン
+ */
+const icon = computed(() => (isFavorite.value ? 'mdi-heart' : 'mdi-heart-outline'))
+
+/**
  * お気に入り押下
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, require-jsdoc
@@ -47,5 +57,7 @@ const onFavorite = (e: any) => {
 </script>
 
 <template>
-  <v-btn v-if="mounted" @click="onFavorite">{{ label }}</v-btn>
+  <v-btn v-if="mounted" size="small" :variant="variant" :prepend-icon="icon" @click="onFavorite">{{
+    label
+  }}</v-btn>
 </template>
