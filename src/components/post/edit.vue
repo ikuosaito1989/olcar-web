@@ -63,7 +63,7 @@ const validate = async () => {
   <div>
     <div>掲載依頼する</div>
 
-    <v-form ref="formRef" class="tw-w-full tw-max-w-3xl">
+    <v-form ref="formRef" class="tw-w-full">
       <TextField
         v-model:text="formData.carName"
         label="車種名"

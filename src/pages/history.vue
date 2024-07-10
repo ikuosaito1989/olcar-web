@@ -5,7 +5,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section class="tw-w-full tw-max-w-3xl">
+  <section class="tw-w-full">
     <div>閲覧履歴</div>
     <CarsList v-if="storageDetails" :details="storageDetails" />
   </section>

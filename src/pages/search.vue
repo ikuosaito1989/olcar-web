@@ -34,7 +34,7 @@ const onClickSearch = () => {
 </script>
 
 <template>
-  <v-form class="tw-w-full tw-max-w-3xl">
+  <v-form class="tw-w-full">
     <ListDialog
       :current-items="queryObject.makers"
       title="メーカー選択"

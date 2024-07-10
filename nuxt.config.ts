@@ -3,9 +3,11 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   srcDir: 'src/',
+
   build: {
     transpile: ['vuetify'],
   },
+
   modules: [
     'vue-recaptcha/nuxt',
     '@nuxtjs/tailwindcss',
@@ -22,6 +24,7 @@ export default defineNuxtConfig({
     'nuxt-simple-sitemap',
     'nuxt-gtag',
   ],
+
   runtimeConfig: {
     public: {
       baseURL: process.env.BASE_URL,
@@ -31,11 +34,13 @@ export default defineNuxtConfig({
       },
     },
   },
+
   routeRules: {
     '/api/**': {
       proxy: 'https://sample-docker-image-z2l33kyvbq-an.a.run.app/**',
     },
   },
+
   hooks: {
     /**
      * 独自のルーティングを設定する
@@ -54,9 +59,11 @@ export default defineNuxtConfig({
       })
     },
   },
+
   gtag: {
     id: process.env.GTAG,
   },
+
   sitemap: {
     urls: [
       {
@@ -68,7 +75,9 @@ export default defineNuxtConfig({
     ],
     xsl: false,
   },
+
   devtools: { enabled: true },
+
   vite: {
     vue: {
       template: {
@@ -76,16 +85,21 @@ export default defineNuxtConfig({
       },
     },
   },
+
   imports: {
     dirs: ['models/**', 'config/**'],
   },
+
   components: [
     {
       path: '~/components', // will get any components nested in let's say /components/test too
       pathPrefix: true,
     },
   ],
+
   tailwindcss: {
     // Options
   },
+
+  compatibilityDate: '2024-07-10',
 })

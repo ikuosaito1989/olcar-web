@@ -4,10 +4,6 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  isNewline: {
-    type: Boolean,
-    default: false,
-  },
 })
 </script>
 
@@ -18,8 +14,6 @@ const props = defineProps({
         {{ props.label }}
       </v-chip>
     </div>
-    <div class="tw-line-clamp-2 tw-leading-8">
-      <slot></slot>
-    </div>
+    <div class="tw-line-clamp-2 tw-leading-8"><slot></slot></div>
   </div>
 </template>

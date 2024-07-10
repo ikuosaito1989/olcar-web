@@ -1,24 +1,80 @@
+<script setup lang="ts">
+const drawer = ref(false)
+/**
+ * ダイアログをopenする
+ */
+const open = () => {
+  drawer.value = !drawer.value
+}
+</script>
 <template>
   <v-app-bar class="!tw-static" theme="light" :elevation="1">
     <template #prepend>
-      <v-app-bar-nav-icon color="primary"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon color="primary" @click="open"></v-app-bar-nav-icon>
     </template>
 
     <template #title>
       <NuxtLink to="/"> <v-img width="130" src="/logo.png" /> </NuxtLink>
     </template>
     <template #append>
-      <NuxtLink to="/search">
-        <v-btn icon="mdi-magnify"></v-btn>
-      </NuxtLink>
-      <NuxtLink to="/favorite">
-        <v-btn icon="mdi-heart"></v-btn>
-      </NuxtLink>
-      <NuxtLink to="/history">
-        <v-btn icon="mdi-history"></v-btn>
-      </NuxtLink>
+      <v-btn href="/search" icon="mdi-magnify"></v-btn>
+      <v-btn href="/favorite" icon="mdi-heart"></v-btn>
+      <v-btn href="/history" icon="mdi-history"></v-btn>
     </template>
   </v-app-bar>
+  <v-navigation-drawer
+    v-model="drawer"
+    class="!tw-top-0 !tw-z-[1006] !tw-h-screen tw-p-2"
+    temporary
+  >
+    <div class="[&>a]:tw-w-full [&>a]:!tw-justify-start [&>a]:tw-text-left">
+      <v-btn color="gray" href="/" variant="text" prepend-icon="mdi-home">トップ</v-btn>
+      <v-btn color="gray" href="/search" variant="text" prepend-icon="mdi-magnify">検索</v-btn>
+      <v-btn color="gray" href="/favorite" variant="text" prepend-icon="mdi-heart-outline"
+        >お気に入り</v-btn
+      >
+      <v-btn color="gray" href="/history" variant="text" prepend-icon="mdi-heart-outline"
+        >閲覧履歴</v-btn
+      >
+      <div class="tw-my-2 tw-font-bold tw-text-[#f67b01]">olcarについて</div>
+      <v-btn color="gray" href="/info/about?ref=s" variant="text">olcarについて</v-btn>
+      <v-btn color="gray" href="/info/purchase-process?ref=s" variant="text"
+        >個人売買の車購入ガイド</v-btn
+      >
+      <v-btn color="gray" href="/info/caution" variant="text">個人売買における詐欺について</v-btn>
+      <v-btn color="gray" href="https://forms.gle/Q2hQvMqLP9Jw2bea6" target="_blank" variant="text"
+        >お問い合わせ</v-btn
+      >
+      <v-btn
+        color="gray"
+        href="https://festive-yonath-a04e1e.netlify.app/"
+        target="_blank"
+        variant="text"
+        >運営者情報</v-btn
+      >
+      <div class="tw-my-2 tw-font-bold tw-text-[#f67b01]">olcarのサービス</div>
+      <v-btn color="gray" href="/info/exhibit" variant="text">閲覧数が増える掲載オプション</v-btn>
+      <v-btn color="gray" href="/post" variant="text">無料掲載</v-btn>
+      <v-btn color="gray" href="/info/omakase-agent?ref=s" variant="text"
+        >おまかせ代行サービス</v-btn
+      >
+      <div class="tw-my-2 tw-font-bold tw-text-[#f67b01]">SNS</div>
+      <v-btn color="gray" target="_blank" href="https://lin.ee/80JiY1r" variant="text">LINE</v-btn>
+      <v-btn color="gray" target="_blank" href="https://twitter.com/byebye20201a" variant="text"
+        >Twitter</v-btn
+      >
+      <v-btn
+        color="gray"
+        target="_blank"
+        href="https://www.youtube.com/channel/UCPONUTjMWhfzaDcM3fzUk4Q"
+        variant="text"
+        >Youtube</v-btn
+      >
+      <v-btn color="gray" target="_blank" href="https://www.tiktok.com/@olcar2021" variant="text"
+        >Tiktok</v-btn
+      >
+    </div>
+  </v-navigation-drawer>
 </template>
 
 <style scoped>

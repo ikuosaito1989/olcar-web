@@ -119,7 +119,7 @@ const convertCar = (formData: PostEdit) => {
 </script>
 
 <template>
-  <section class="tw-w-full tw-max-w-3xl">
+  <section class="tw-w-full">
     <div v-if="mode === 'edit'">
       <PostEdit
         v-model:form-data="formData"

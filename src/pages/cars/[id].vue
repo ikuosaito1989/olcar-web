@@ -56,7 +56,7 @@ const onClickReport = () => {
 </script>
 
 <template>
-  <section class="tw-w-full tw-max-w-3xl">
+  <section class="tw-w-full">
     <CarsDetail :car="car" @click:goto="onGotoPage" @click:report="onClickReport"></CarsDetail>
 
     <div

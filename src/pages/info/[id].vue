@@ -8,7 +8,7 @@ const markDown = ref(await marked(raw.value))
 </script>
 
 <template>
-  <section class="tw-w-full tw-max-w-3xl">
+  <section class="tw-w-full">
     {{ title }}
     <!-- eslint-disable-next-line vue/no-v-html -->
     <div v-html="markDown"></div>

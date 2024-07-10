@@ -1,10 +1,14 @@
 <script setup lang="ts">
-defineProps({
+const props = defineProps({
   detail: {
     type: Object as () => DetailBase,
     required: true,
   },
 })
+
+const comment = computed(() =>
+  props.detail.comment.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').substring(0, 50),
+)
 </script>
 
 <template>
@@ -40,9 +44,8 @@ defineProps({
           <Item label="地域">
             <div>{{ formatUtil.toJoinString(detail.prefecture, detail.locality) }}</div>
           </Item>
-          <Item label="説明" :is-newline="true">
-            <!--eslint-disable-next-line vue/no-v-html-->
-            <div v-html="detail.comment"></div>
+          <Item label="説明">
+            <div>{{ comment }}</div>
           </Item>
         </div>
       </div>
