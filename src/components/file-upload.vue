@@ -90,20 +90,22 @@ defineExpose({
 <template>
   <div>
     <label
-      class="tw-block tw-min-h-32 tw-w-full tw-bg-slate-100"
+      class="tw-flex tw-min-h-28 tw-w-full tw-items-center tw-justify-center tw-border tw-border-dotted tw-border-gray-400 tw-bg-gray-100"
       @dragover.prevent
       @drop.prevent="onDrag"
     >
-      <v-icon> mdi-image-plus </v-icon>
-      <div>画像を追加する</div>
-      <v-file-input
-        ref="fileRef"
-        accept=".png, .jpg, .jpeg"
-        multiple
-        :error="errors.error"
-        :error-messages="errors.message"
-        @change="onAdd"
-      ></v-file-input>
+      <div class="tw-mt-3 tw-text-center">
+        <v-icon size="48px"> mdi-image-plus </v-icon>
+        <div class="tw-text-xs">画像を追加する</div>
+        <v-file-input
+          ref="fileRef"
+          accept=".png, .jpg, .jpeg"
+          multiple
+          :error="errors.error"
+          :error-messages="errors.message"
+          @change="onAdd"
+        ></v-file-input>
+      </div>
     </label>
     <div v-for="file in currentItems" :key="file.name">
       <v-btn @click="onDelete(file)"><v-icon>mdi-close</v-icon></v-btn>

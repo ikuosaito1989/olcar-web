@@ -14,7 +14,8 @@ export default defineNuxtPlugin((app) => {
           colors: {
             primary: '#f67b01',
             secondary: '#bc4c00',
-            gray: 'rgba(0, 0, 0, 0.7)',
+            black: 'rgba(0, 0, 0, 0.7)',
+            gray: '#d5d5d5',
           },
         },
       },
@@ -31,6 +32,18 @@ export default defineNuxtPlugin((app) => {
         size: 'small',
       },
       VAlert: {
+        variant: 'outlined',
+      },
+      VTextField: {
+        variant: 'outlined',
+      },
+      VCheckbox: {
+        color: 'primary',
+      },
+      VSelect: {
+        variant: 'outlined',
+      },
+      VTextarea: {
         variant: 'outlined',
       },
     },

@@ -70,9 +70,10 @@ const validate = async () => {
         placeholder="プリウス"
         :counter="30"
         :rules="[validationUtil.required]"
-        required
+        chip-label="必須"
         clearable
         type="text"
+        hint="「プリウス」等の車種名を記入してください"
       ></TextField>
 
       <ListDialog
@@ -98,7 +99,7 @@ const validate = async () => {
         placeholder="商品説明"
         hint="1000文字以内で入力してください"
         :counter="1000"
-        required
+        chip-label="必須"
         clearable
         :rules="[validationUtil.required]"
       ></TextArea>
@@ -107,7 +108,7 @@ const validate = async () => {
         v-model:text="formData.price"
         label="価格"
         placeholder="500,000"
-        required
+        chip-label="必須"
         clearable
         type="number"
         :rules="[
@@ -120,7 +121,7 @@ const validate = async () => {
         v-model:text="formData.userName"
         label="ユーザー名"
         placeholder="オルカー"
-        required
+        chip-label="必須"
         clearable
         type="text"
         :counter="30"
@@ -131,7 +132,7 @@ const validate = async () => {
         v-model:text="formData.link"
         label="掲載ページのリンク"
         placeholder="https://example.com"
-        required
+        chip-label="必須"
         clearable
         type="text"
         :counter="1000"
@@ -142,7 +143,7 @@ const validate = async () => {
         v-model:text="formData.email"
         label="メールアドレス"
         placeholder="support@ol-car.com"
-        required
+        chip-label="必須"
         clearable
         type="text"
         :counter="256"
@@ -179,15 +180,24 @@ const validate = async () => {
         v-model:text="formData.locality"
         label="市区町村"
         placeholder="横浜市"
-        required
+        chip-label="必須"
         clearable
         type="text"
         :counter="30"
       ></TextField>
 
       <Recaptcha ref="recaptchaRef" v-model:recaptcha="formData.recaptcha"></Recaptcha>
-      <v-btn @click="onClickPreview">プレビュー</v-btn>
-      <v-btn @click="onConfirm">この内容で掲載依頼する</v-btn>
+
+      <v-btn
+        size="large"
+        prepend-icon="mdi-eye-outline"
+        class="tw-mb-4 tw-w-full"
+        @click="onClickPreview"
+        >プレビュー</v-btn
+      >
+      <v-btn variant="elevated" size="large" class="tw-w-full" @click="onConfirm"
+        >この内容で掲載依頼する</v-btn
+      >
     </v-form>
   </div>
 </template>

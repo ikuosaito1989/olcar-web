@@ -28,49 +28,49 @@ const open = () => {
     temporary
   >
     <div class="[&>a]:tw-w-full [&>a]:!tw-justify-start [&>a]:tw-text-left">
-      <v-btn color="gray" href="/" variant="text" prepend-icon="mdi-home">トップ</v-btn>
-      <v-btn color="gray" href="/search" variant="text" prepend-icon="mdi-magnify">検索</v-btn>
-      <v-btn color="gray" href="/favorite" variant="text" prepend-icon="mdi-heart-outline"
+      <v-btn color="black" href="/" variant="text" prepend-icon="mdi-home">トップ</v-btn>
+      <v-btn color="black" href="/search" variant="text" prepend-icon="mdi-magnify">検索</v-btn>
+      <v-btn color="black" href="/favorite" variant="text" prepend-icon="mdi-heart-outline"
         >お気に入り</v-btn
       >
-      <v-btn color="gray" href="/history" variant="text" prepend-icon="mdi-heart-outline"
+      <v-btn color="black" href="/history" variant="text" prepend-icon="mdi-heart-outline"
         >閲覧履歴</v-btn
       >
       <div class="tw-my-2 tw-font-bold tw-text-[#f67b01]">olcarについて</div>
-      <v-btn color="gray" href="/info/about?ref=s" variant="text">olcarについて</v-btn>
-      <v-btn color="gray" href="/info/purchase-process?ref=s" variant="text"
+      <v-btn color="black" href="/info/about?ref=s" variant="text">olcarについて</v-btn>
+      <v-btn color="black" href="/info/purchase-process?ref=s" variant="text"
         >個人売買の車購入ガイド</v-btn
       >
-      <v-btn color="gray" href="/info/caution" variant="text">個人売買における詐欺について</v-btn>
-      <v-btn color="gray" href="https://forms.gle/Q2hQvMqLP9Jw2bea6" target="_blank" variant="text"
+      <v-btn color="black" href="/info/caution" variant="text">個人売買における詐欺について</v-btn>
+      <v-btn color="black" href="https://forms.gle/Q2hQvMqLP9Jw2bea6" target="_blank" variant="text"
         >お問い合わせ</v-btn
       >
       <v-btn
-        color="gray"
+        color="black"
         href="https://festive-yonath-a04e1e.netlify.app/"
         target="_blank"
         variant="text"
         >運営者情報</v-btn
       >
       <div class="tw-my-2 tw-font-bold tw-text-[#f67b01]">olcarのサービス</div>
-      <v-btn color="gray" href="/info/exhibit" variant="text">閲覧数が増える掲載オプション</v-btn>
-      <v-btn color="gray" href="/post" variant="text">無料掲載</v-btn>
-      <v-btn color="gray" href="/info/omakase-agent?ref=s" variant="text"
+      <v-btn color="black" href="/info/exhibit" variant="text">閲覧数が増える掲載オプション</v-btn>
+      <v-btn color="black" href="/post" variant="text">無料掲載</v-btn>
+      <v-btn color="black" href="/info/omakase-agent?ref=s" variant="text"
         >おまかせ代行サービス</v-btn
       >
       <div class="tw-my-2 tw-font-bold tw-text-[#f67b01]">SNS</div>
-      <v-btn color="gray" target="_blank" href="https://lin.ee/80JiY1r" variant="text">LINE</v-btn>
-      <v-btn color="gray" target="_blank" href="https://twitter.com/byebye20201a" variant="text"
+      <v-btn color="black" target="_blank" href="https://lin.ee/80JiY1r" variant="text">LINE</v-btn>
+      <v-btn color="black" target="_blank" href="https://twitter.com/byebye20201a" variant="text"
         >Twitter</v-btn
       >
       <v-btn
-        color="gray"
+        color="black"
         target="_blank"
         href="https://www.youtube.com/channel/UCPONUTjMWhfzaDcM3fzUk4Q"
         variant="text"
         >Youtube</v-btn
       >
-      <v-btn color="gray" target="_blank" href="https://www.tiktok.com/@olcar2021" variant="text"
+      <v-btn color="black" target="_blank" href="https://www.tiktok.com/@olcar2021" variant="text"
         >Tiktok</v-btn
       >
     </div>

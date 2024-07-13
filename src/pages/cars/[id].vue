@@ -79,7 +79,7 @@ const onClickReport = () => {
     </div>
     <CarsList :details="makerSummary.details" />
 
-    <NuxtLink class="tw-my-6 tw-flex tw-justify-end" :to="`/${makerSummary.details[0].makerId}`">
+    <NuxtLink class="tw-my-6 tw-flex tw-justify-end" :to="`/${car.makerId}`">
       {{ car.makerName }}の中古車をもっとみる
       <v-icon color="primary">mdi-chevron-right</v-icon>
     </NuxtLink>

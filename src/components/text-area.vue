@@ -16,9 +16,9 @@ defineProps({
     type: String,
     default: '',
   },
-  required: {
-    type: Boolean,
-    default: false,
+  chipLabel: {
+    type: String,
+    default: '',
   },
   counter: {
     type: Number,
@@ -35,11 +35,18 @@ const text = defineModel<string>('text')
 
 <template>
   <div>
-    <div v-if="!!label">{{ label }}</div>
-    <div v-if="required">必須</div>
+    <div class="tw-flex tw-items-center">
+      <div
+        v-if="!!label"
+        class="tw-my-3 tw-mr-2 tw-border-s-4 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
+      >
+        {{ label }}
+      </div>
+      <v-chip v-if="!!chipLabel">{{ chipLabel }}</v-chip>
+    </div>
     <v-textarea
       v-model="text"
-      :label="placeholder"
+      :placeholder="placeholder"
       :hint="hint"
       :counter="counter"
       :maxlength="counter"

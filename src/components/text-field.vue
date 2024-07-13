@@ -16,9 +16,9 @@ defineProps({
     type: Number,
     default: undefined,
   },
-  required: {
-    type: Boolean,
-    default: false,
+  chipLabel: {
+    type: String,
+    default: '',
   },
   clearable: {
     type: Boolean,
@@ -28,6 +28,14 @@ defineProps({
     type: Array as () => Array<(value: string, message?: string) => string | boolean>,
     default: () => [],
   },
+  icon: {
+    type: String,
+    default: undefined,
+  },
+  hint: {
+    type: String,
+    default: undefined,
+  },
 })
 
 const text = defineModel<string>('text')
@@ -35,16 +43,25 @@ const text = defineModel<string>('text')
 
 <template>
   <div>
-    <div v-if="!!label">{{ label }}</div>
-    <div v-if="required">必須</div>
+    <div class="tw-flex tw-items-center">
+      <div
+        v-if="!!label"
+        class="tw-my-3 tw-mr-2 tw-border-s-4 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
+      >
+        {{ label }}
+      </div>
+      <v-chip v-if="!!chipLabel">{{ chipLabel }}</v-chip>
+    </div>
     <v-text-field
       v-model="text"
       :rules="rules"
-      :label="placeholder"
+      :placeholder="placeholder"
       :type="type"
       :counter="counter"
       :maxlength="counter"
       :clearable="clearable"
+      :prepend-inner-icon="icon"
+      :hint="hint"
     ></v-text-field>
   </div>
 </template>

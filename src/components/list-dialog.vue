@@ -115,18 +115,26 @@ defineExpose({
 
 <template>
   <div>
-    <div v-if="!!label">{{ label }}</div>
-    <div v-if="!!chipLabel">{{ chipLabel }}</div>
+    <div class="tw-flex tw-items-center">
+      <div
+        v-if="!!label"
+        class="tw-my-3 tw-mr-2 tw-border-s-4 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
+      >
+        {{ label }}
+      </div>
+      <v-chip v-if="!!chipLabel">{{ chipLabel }}</v-chip>
+    </div>
     <v-text-field
       v-if="!!buttonName"
+      v-ripple
       :error="errors.error"
       :error-messages="errors.message"
-      :label="buttonName"
+      :placeholder="buttonName"
       type="text"
       readonly
       @click="open"
     ></v-text-field>
-    <v-dialog v-model="dialog" transition="dialog-bottom-transition" fullscreen>
+    <v-dialog v-model="dialog" transition="scroll-x-transition" fullscreen>
       <v-card>
         <v-toolbar>
           <v-btn icon="mdi-close" @click="onClose"></v-btn>
@@ -141,6 +149,7 @@ defineExpose({
     <v-chip
       v-for="(item, i) in currentItems"
       :key="`${key}_${i}`"
+      class="tw-m-2"
       closable
       @click:close="onClickChipClose(item)"
     >

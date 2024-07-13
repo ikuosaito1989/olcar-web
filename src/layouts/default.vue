@@ -4,9 +4,11 @@
   >
     <Header></Header>
 
-    <div class="tw-m-auto tw-max-w-screen-md">
-      <slot />
-    </div>
+    <v-container>
+      <div class="tw-m-auto tw-max-w-screen-md">
+        <slot />
+      </div>
+    </v-container>
 
     <Footer></Footer>
     <Loader></Loader>
@@ -16,5 +18,8 @@
 <style scoped>
 :deep(.v-btn) {
   text-transform: none;
+}
+:deep(.v-container) {
+  padding: 0;
 }
 </style>

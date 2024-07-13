@@ -34,19 +34,25 @@ const onClickSearch = () => {
 </script>
 
 <template>
-  <v-form class="tw-w-full">
+  <v-form class="">
+    <div class="tw-my-4 tw-text-center tw-text-xl tw-font-bold">
+      <v-icon color="primary">mdi-magnify</v-icon>
+      検索
+    </div>
     <ListDialog
       :current-items="queryObject.makers"
       title="メーカー選択"
       label="メーカー・車名"
       button-name="メーカー・車名"
       :items="makerItems"
+      multiple
       @click:list="onClickMaker('makers', $event)"
     ></ListDialog>
     <ListDialog
       ref="refCarNames"
       :current-items="queryObject.carNames"
       :items="carNames"
+      multiple
     ></ListDialog>
     <ListDialog
       :current-items="queryObject.prefectureNames"
@@ -73,11 +79,20 @@ const onClickSearch = () => {
     ></FromTo>
 
     <div>
-      <div>走行距離</div>
+      <!-- コンポーネント化するか検討 -->
+      <div
+        class="tw-my-3 tw-border-s-4 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
+      >
+        走行距離
+      </div>
       <v-checkbox v-model="queryObject.isVehicleInspection" label="車検あり"></v-checkbox>
     </div>
 
-    <div>サービス</div>
+    <div
+      class="tw-my-3 tw-border-s-4 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
+    >
+      サービス
+    </div>
     <div class="tw-flex">
       <v-checkbox
         v-model="queryObject.socialTypes"
@@ -112,11 +127,24 @@ const onClickSearch = () => {
       placeholder="MT サンルーフ"
       :counter="10"
       type="text"
+      icon="mdi-magnify"
     ></TextField>
 
-    <div>
-      <v-btn @click="useReset">クリア</v-btn>
-      <v-btn @click="onClickSearch">検索</v-btn>
+    <div class="tw-fixed tw-bottom-0 tw-left-0 tw-w-full tw-bg-gray-100 tw-p-4 tw-opacity-90">
+      <div class="tw-m-auto tw-flex tw-max-w-screen-md tw-text-center">
+        <v-btn color="gray" variant="elevated" size="large" class="tw-w-4/12" @click="useReset"
+          >クリア</v-btn
+        >
+
+        <v-btn
+          variant="elevated"
+          size="large"
+          class="tw-ml-3 tw-w-8/12"
+          append-icon="mdi-magnify"
+          @click="onClickSearch"
+          >検索する</v-btn
+        >
+      </div>
     </div>
   </v-form>
 </template>

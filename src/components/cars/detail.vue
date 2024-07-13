@@ -89,7 +89,7 @@ const onClickReport = () => {
     </v-alert>
 
     <v-btn class="tw-mt-5 tw-w-full" variant="elevated" @click="onGotoPage">掲載ページへ</v-btn>
-    <v-btn color="gray" class="tw-mt-5 tw-w-full" @click="onClickReport"
+    <v-btn color="gray" variant="elevated" class="tw-mt-5 tw-w-full" @click="onClickReport"
       >公開停止、または問題を報告する</v-btn
     >
     <div v-if="keywords.keywords.length > 0">

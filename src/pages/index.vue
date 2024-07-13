@@ -109,10 +109,10 @@ const onChangeSales = () => {
       <div
         class="tw-flex tw-h-12 tw-w-full tw-items-center tw-border tw-text-center tw-shadow [&>div:not(:last-child)]:tw-border-r [&>div]:tw-py-3 [&>div]:tw-font-bold"
       >
-        <div class="tw-w-full tw-text-[#bc4c00]" @click="onNavigate({ path: 'search' })">
+        <div v-ripple class="tw-w-full tw-text-[#bc4c00]" @click="onNavigate({ path: 'search' })">
           <v-icon color="primary" icon="mdi-magnify"></v-icon>絞り込む
         </div>
-        <div class="tw-w-full tw-text-[#bc4c00]" @click="() => (isVisible = !isVisible)">
+        <div v-ripple class="tw-w-full tw-text-[#bc4c00]" @click="() => (isVisible = !isVisible)">
           <v-icon color="primary" icon="mdi-sort"></v-icon>
           並び替え
         </div>

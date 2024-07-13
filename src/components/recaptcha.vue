@@ -28,7 +28,7 @@ defineExpose({
 </script>
 
 <template>
-  <div>
+  <div class="tw-flex tw-flex-col tw-items-center">
     <RecaptchaCheckbox v-model="recaptcha"></RecaptchaCheckbox>
     <!-- eslint-disable tailwindcss/no-custom-classname -->
     <div class="v-messages__message v-messages">{{ errorMessage }}</div>
