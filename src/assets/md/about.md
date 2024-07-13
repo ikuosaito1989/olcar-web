@@ -10,6 +10,6 @@ olcarは「車を身近に」という理念をもとに自転車のように車
 
 お財布と相談しながら必要な人に必要な車が届く、そんなサービスを展開してまいりますのでよろしくお願いします。
 
-<a style="display: block;text-align: center;" href="/info/needs-help?ref=p">
+<a style="display: block;text-align: center;cursor: pointer;color: #1976d2;" href="/info/needs-help?ref=p">
 作者のolcarに掛ける想いとみなさまへのお願い
 </a>

@@ -66,7 +66,7 @@ const onSelect = (type: 'from' | 'to', label: string | number | null) => {
         :items="fromItem.map((v) => v.label)"
         @update:model-value="onSelect('from', $event)"
       ></v-select>
-      <div class="tw-flex tw-items-center tw-mb-5 tw-mx-5">{{ isFromLabel }}</div>
+      <div class="tw-mx-5 tw-mb-5 tw-flex tw-items-center">{{ isFromLabel }}</div>
       <v-select
         v-model="toValue"
         :label="toRequiredLabel"

@@ -2,14 +2,13 @@
 import { marked } from 'marked'
 
 const route = useRoute()
-const title = ref(Constants.INFO_TITLES[route.params.id as keyof typeof Constants.INFO_TITLES])
+// const title = ref(Constants.INFO_TITLES[route.params.id as keyof typeof Constants.INFO_TITLES])
 const { data: raw } = await useFetchi<string>(`/md/${route.params.id}`)
 const markDown = ref(await marked(raw.value))
 </script>
 
 <template>
-  <section class="tw-w-full">
-    {{ title }}
+  <section class="tw-my-4 tw-w-full tw-rounded-2xl tw-bg-[#f5f5f6] tw-p-4 tw-text-base">
     <!-- eslint-disable-next-line vue/no-v-html -->
     <div v-html="markDown"></div>
   </section>
@@ -22,6 +21,7 @@ const markDown = ref(await marked(raw.value))
     text-align: center;
     padding: 2rem 0;
     border-bottom: 1px solid #f67b01;
+    font-weight: bold;
   }
 
   h2,
