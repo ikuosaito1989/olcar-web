@@ -88,9 +88,10 @@ defineExpose({
 </script>
 
 <template>
-  <div>
+  <div v-ripple class="tw-mb-2">
     <label
-      class="tw-flex tw-min-h-28 tw-w-full tw-items-center tw-justify-center tw-border tw-border-dotted tw-border-gray-400 tw-bg-gray-100"
+      class="tw-flex tw-min-h-28 tw-w-full tw-items-center tw-justify-center tw-border tw-border-dotted tw-border-gray-400 tw-bg-gray-100 hover:tw-bg-gray-200"
+      :class="{ 'tw-border-2 tw-border-[#ff5252]': errors.error }"
       @dragover.prevent
       @drop.prevent="onDrag"
     >
@@ -107,13 +108,23 @@ defineExpose({
         ></v-file-input>
       </div>
     </label>
-    <div v-for="file in currentItems" :key="file.name">
-      <v-btn @click="onDelete(file)"><v-icon>mdi-close</v-icon></v-btn>
-      <v-img contain :src="createObjectURL(file)">
-        <template #placeholder>
-          <v-progress-circular indeterminate></v-progress-circular>
-        </template>
-      </v-img>
+    <div class="tw-mt-3 tw-flex tw-flex-wrap">
+      <div v-for="file in currentItems" :key="file.name" class="tw-w-1/3 !tw-max-w-[33.333333%]">
+        <div class="tw-relative">
+          <v-btn
+            icon
+            size="x-small"
+            class="!tw-absolute tw-right-0.5 tw-top-0.5 tw-z-10"
+            @click="onDelete(file)"
+            ><v-icon>mdi-close</v-icon></v-btn
+          >
+        </div>
+        <v-img class="!tw-max-h-28" contain :src="createObjectURL(file)">
+          <template #placeholder>
+            <v-progress-circular indeterminate></v-progress-circular>
+          </template>
+        </v-img>
+      </div>
     </div>
   </div>
 </template>

@@ -2,11 +2,8 @@
 const emit = defineEmits(['click:confirm', 'click:preview'])
 const { prefectureItems, makerItems } = await useFetchMaster()
 import type { FileUpload, ListDialog, Recaptcha } from '#build/components'
-import { useRecaptchaProvider } from 'vue-recaptcha'
 import { useGoTo } from 'vuetify'
 import type { VForm } from 'vuetify/components'
-
-useRecaptchaProvider()
 
 const goTo = useGoTo()
 
@@ -14,7 +11,11 @@ const formRef = ref<InstanceType<typeof VForm> | null>(null)
 const makerRef = ref<InstanceType<typeof ListDialog> | null>(null)
 const uploadRef = ref<InstanceType<typeof FileUpload> | null>(null)
 const recaptchaRef = ref<InstanceType<typeof Recaptcha> | null>(null)
-
+const elementIds = {
+  makerDialog: 'maker-dialog',
+  uploadDialog: 'upload-dialog',
+  recaptchaDialog: 'recaptcha-dialog',
+}
 const formData = defineModel<PostEdit>('formData', { required: true })
 
 /**
@@ -22,12 +23,11 @@ const formData = defineModel<PostEdit>('formData', { required: true })
  */
 const onConfirm = async () => {
   if (!(await validate())) {
-    goTo(`.v-messages__message.v-messages`)
     return
   }
 
   if (!recaptchaRef.value?.validate()) {
-    goTo(`.v-messages__message.v-messages`)
+    goTo(`#${elementIds.recaptchaDialog}`, { offset: -60 })
     return
   }
 
@@ -39,7 +39,6 @@ const onConfirm = async () => {
  */
 const onClickPreview = async () => {
   if (!(await validate())) {
-    goTo(`.v-messages__message.v-messages`)
     return
   }
 
@@ -52,17 +51,42 @@ const onClickPreview = async () => {
  */
 const validate = async () => {
   const validate = await formRef.value?.validate()
-  const makerResult = await makerRef.value?.validate()
+  const makerValid = await makerRef.value?.validate()
   const uploadResult = await uploadRef.value?.validate()
 
-  return validate?.valid && makerResult && uploadResult
+  let ids: (HTMLElement | null)[] = []
+
+  if (!validate?.valid) {
+    ids = validate?.errors.map((v) =>
+      document.getElementById(v.id as string),
+    ) as (HTMLElement | null)[]
+  }
+
+  if (!makerValid) {
+    ids.push(document.getElementById(elementIds.makerDialog))
+  }
+
+  if (!uploadResult) {
+    ids.push(document.getElementById(elementIds.uploadDialog))
+  }
+
+  if (ids.length === 0) {
+    return true
+  }
+
+  const rect = ids.map((v) => ({ id: v?.id, rect: v?.getBoundingClientRect() }))
+  const sortRect = rect.sort((a, b) => ((a.rect?.top as number) > (b.rect?.top as number) ? 1 : -1))
+
+  goTo(`#${sortRect[0].id}`, { offset: -30 })
+  return false
 }
 </script>
 
 <template>
   <div>
-    <div>掲載依頼する</div>
-
+    <div class="tw-my-4 tw-border-b tw-pb-3 tw-text-center tw-text-xl tw-font-bold">
+      掲載依頼する
+    </div>
     <v-form ref="formRef" class="tw-w-full">
       <TextField
         v-model:text="formData.carName"
@@ -77,6 +101,7 @@ const validate = async () => {
       ></TextField>
 
       <ListDialog
+        :id="elementIds.makerDialog"
         ref="makerRef"
         v-model:current-items="formData.makers"
         title="メーカー選択"
@@ -88,6 +113,7 @@ const validate = async () => {
       ></ListDialog>
 
       <FileUpload
+        :id="elementIds.uploadDialog"
         ref="uploadRef"
         v-model:current-items="formData.files"
         :rules="[validationUtil.requiredFile, validationUtil.maxFileSize]"
@@ -166,6 +192,8 @@ const validate = async () => {
         :from-item="Constants.YEAR"
         :to-item="Constants.MONTH"
         is-from-label=""
+        placeholder-from="年"
+        placeholder-to="月"
       ></FromTo>
 
       <ListDialog
@@ -186,7 +214,11 @@ const validate = async () => {
         :counter="30"
       ></TextField>
 
-      <Recaptcha ref="recaptchaRef" v-model:recaptcha="formData.recaptcha"></Recaptcha>
+      <Recaptcha
+        :id="elementIds.recaptchaDialog"
+        ref="recaptchaRef"
+        v-model:recaptcha="formData.recaptcha"
+      ></Recaptcha>
 
       <v-btn
         size="large"

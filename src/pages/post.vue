@@ -77,6 +77,7 @@ const onGotoPage = () => {
  * プレビューモードを終了する
  */
 const onExitPreview = async () => {
+  goTo(0)
   mode.value = 'edit'
 }
 
@@ -119,7 +120,7 @@ const convertCar = (formData: PostEdit) => {
 </script>
 
 <template>
-  <section class="tw-w-full">
+  <section class="tw-m-2">
     <div v-if="mode === 'edit'">
       <PostEdit
         v-model:form-data="formData"
@@ -128,7 +129,11 @@ const convertCar = (formData: PostEdit) => {
       ></PostEdit>
     </div>
     <div v-if="mode === 'preview'">
-      <v-btn @click="onExitPreview">プレビューを終了する</v-btn>
+      <div class="tw-sticky tw-top-4 tw-z-50">
+        <v-btn size="large" class="tw-mx-2 tw-w-full !tw-bg-white" @click="onExitPreview"
+          >プレビューを終了する</v-btn
+        >
+      </div>
       <CarsDetail :car="car" @click:goto="onGotoPage"></CarsDetail>
     </div>
     <v-dialog v-model="isComplete" width="400">

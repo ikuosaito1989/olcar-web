@@ -24,7 +24,7 @@ const open = () => {
   </v-app-bar>
   <v-navigation-drawer
     v-model="drawer"
-    class="!tw-top-0 !tw-z-[1006] !tw-h-screen tw-p-2"
+    class="!tw-top-0 !tw-z-[9999] !tw-h-screen tw-p-2"
     temporary
   >
     <div class="[&>a]:tw-w-full [&>a]:!tw-justify-start [&>a]:tw-text-left">

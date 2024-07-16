@@ -121,10 +121,10 @@ const onClickAction = async (action: boolean) => {
 </script>
 
 <template>
-  <section class="tw-w-full">
+  <section>
     <CarsDetail :car="car"></CarsDetail>
 
-    <v-form ref="formRef" class="tw-w-full">
+    <v-form ref="formRef">
       <TextField
         v-model:text="formData.carName"
         label="車種名"

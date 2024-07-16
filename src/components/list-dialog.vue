@@ -114,7 +114,7 @@ defineExpose({
 </script>
 
 <template>
-  <div>
+  <div class="tw-mb-2">
     <div class="tw-flex tw-items-center">
       <div
         v-if="!!label"

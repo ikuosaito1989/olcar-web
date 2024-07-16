@@ -19,7 +19,8 @@
 * {
   text-transform: none !important;
 }
-
+</style>
+<style scoped>
 :deep(.v-container) {
   padding: 0;
 }

@@ -12,14 +12,6 @@ const props = defineProps({
     type: Array as () => Array<KeyLabel>,
     required: true,
   },
-  fromRequiredLabel: {
-    type: String,
-    default: '指定なし',
-  },
-  toRequiredLabel: {
-    type: String,
-    default: '指定なし',
-  },
   isFromLabel: {
     type: String,
     default: '~',
@@ -62,14 +54,12 @@ const onSelect = (type: 'from' | 'to', label: string | number | null) => {
     <div class="tw-flex">
       <v-select
         v-model="fromValue"
-        :label="fromRequiredLabel"
         :items="fromItem.map((v) => v.label)"
         @update:model-value="onSelect('from', $event)"
       ></v-select>
       <div class="tw-mx-5 tw-mb-5 tw-flex tw-items-center">{{ isFromLabel }}</div>
       <v-select
         v-model="toValue"
-        :label="toRequiredLabel"
         :items="toItem.map((v) => v.label)"
         @update:model-value="onSelect('to', $event)"
       ></v-select>

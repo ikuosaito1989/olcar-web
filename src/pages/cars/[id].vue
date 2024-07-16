@@ -56,7 +56,7 @@ const onClickReport = () => {
 </script>
 
 <template>
-  <section class="tw-w-full">
+  <section>
     <CarsDetail :car="car" @click:goto="onGotoPage" @click:report="onClickReport"></CarsDetail>
 
     <div
@@ -84,6 +84,7 @@ const onClickReport = () => {
       <v-icon color="primary">mdi-chevron-right</v-icon>
     </NuxtLink>
 
+    <Fav></Fav>
     <ReportDialog ref="refReportDialog" :car-id="car.id"></ReportDialog>
   </section>
 </template>

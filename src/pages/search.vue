@@ -34,8 +34,8 @@ const onClickSearch = () => {
 </script>
 
 <template>
-  <v-form class="">
-    <div class="tw-my-4 tw-text-center tw-text-xl tw-font-bold">
+  <v-form class="tw-m-2">
+    <div class="tw-my-4 tw-border-b tw-pb-3 tw-text-center tw-text-xl tw-font-bold">
       <v-icon color="primary">mdi-magnify</v-icon>
       検索
     </div>
