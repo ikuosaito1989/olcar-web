@@ -10,6 +10,7 @@
       </div>
     </v-container>
 
+    <Concept></Concept>
     <Footer></Footer>
     <Loader></Loader>
   </v-app>
