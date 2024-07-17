@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import { useRecaptchaProvider } from 'vue-recaptcha'
-
-useRecaptchaProvider()
-
 const recaptcha = defineModel<string>('recaptcha')
 const errorMessage = ref('')
 
@@ -30,7 +26,6 @@ defineExpose({
 <template>
   <div class="tw-flex tw-flex-col tw-items-center">
     <RecaptchaCheckbox v-model="recaptcha"></RecaptchaCheckbox>
-    <!-- eslint-disable tailwindcss/no-custom-classname -->
-    <div class="v-messages__message v-messages">{{ errorMessage }}</div>
+    <div class="tw-m-1 tw-text-xs tw-text-[#ff5252]">{{ errorMessage }}</div>
   </div>
 </template>
