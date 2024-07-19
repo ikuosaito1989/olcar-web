@@ -8,7 +8,9 @@ const markDown = ref(await marked(raw.value))
 </script>
 
 <template>
-  <section class="tw-my-4 tw-w-full tw-rounded-2xl tw-bg-[#f5f5f6] tw-p-4 tw-text-base">
+  <section
+    class="tw-my-4 tw-w-full tw-whitespace-normal tw-rounded-2xl tw-bg-[#f5f5f6] tw-p-4 tw-text-base"
+  >
     <!-- eslint-disable-next-line vue/no-v-html -->
     <div v-html="markDown"></div>
   </section>
@@ -16,6 +18,12 @@ const markDown = ref(await marked(raw.value))
 
 <style lang="scss" scoped>
 :deep() {
+  ul {
+    margin-bottom: 12px;
+  }
+  p {
+    margin-bottom: 16px;
+  }
   h2 {
     font-size: 20px;
     text-align: center;
@@ -24,6 +32,25 @@ const markDown = ref(await marked(raw.value))
     font-weight: bold;
   }
 
+  h3 {
+    font-weight: bold;
+    font-size: 1.17em;
+  }
+
+  h4 {
+    font-weight: bold;
+  }
+
+  a {
+    color: #1976d2;
+  }
+
+  ol,
+  ul,
+  menu {
+    list-style: disc;
+    padding-left: 24px;
+  }
   h2,
   h3,
   h4,
@@ -56,10 +83,10 @@ const markDown = ref(await marked(raw.value))
   }
 
   .border {
-    border: 3px solid #00bcd4;
-    padding: 1.2em 1em;
-    border-radius: 4px;
-    margin-bottom: 20px;
+    border: 3px solid #00bcd4 !important;
+    padding: 0.5em !important;
+    border-radius: 4px !important;
+    margin-bottom: 20px !important;
 
     h3 {
       text-align: center;

@@ -12,7 +12,7 @@ defineProps({
 </script>
 
 <template>
-  <NuxtLink class="" :to="href">
+  <a class="" :href="href">
     <v-img max-height="300" contain :lazy-src="src" :src="src" />
-  </NuxtLink>
+  </a>
 </template>

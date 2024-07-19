@@ -136,8 +136,8 @@ defineExpose({
     ></v-text-field>
     <v-dialog v-model="dialog" transition="scroll-x-transition" fullscreen>
       <v-card>
-        <v-toolbar>
-          <v-btn icon="mdi-close" @click="onClose"></v-btn>
+        <v-toolbar color="primary">
+          <v-btn color="white" icon="mdi-close" @click="onClose"></v-btn>
 
           <v-toolbar-title>{{ title }}</v-toolbar-title>
 

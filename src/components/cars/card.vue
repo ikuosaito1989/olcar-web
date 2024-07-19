@@ -50,7 +50,7 @@ const comment = computed(() =>
           <Item label="地域">
             <div>{{ formatUtil.toJoinString(detail.prefecture, detail.locality) }}</div>
           </Item>
-          <Item label="説明">
+          <Item label="説明" :is-new-line="true">
             <div class="tw-line-clamp-2">{{ comment }}</div>
           </Item>
         </div>

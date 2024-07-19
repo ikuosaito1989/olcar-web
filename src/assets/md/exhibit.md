@@ -53,13 +53,13 @@ olcar（オルカー）では業界最安値（600円）で**ページの先頭�
 まずは無料で試してみたいという方は下記フォームにて車の情報を入力し、申請してください。
 こちらは olcar の審査によって掲載可否を決定致します。
 
-<a href="/post" rel="noreferrer" style="text-align: center; display: block;">審査ありの無料掲載はこちら</a>
+<a href="/post" rel="noreferrer" style="text-align: center; display: block;">無料掲載はこちら</a>
 
 <small>・決済は<a href="https://stripe.com/jp" rel="noreferrer" target="_blank">stripe社</a>を利用しますのでご安心ください</small><br>
 
 <small>・olcarはダイナミック・プライシングを導入しておりますので価格が変動する可能性があります。その際には周知致しますのでご安心ください</small>
 
-<a href="https://forms.gle/Q2hQvMqLP9Jw2bea6" rel="noreferrer" target="_blank" class="search__action__content__primary v-btn v-btn--is-elevated v-btn--has-bg theme--light elevation-1 v-size--large" style="background-color:#f67b01;border-color:#f67b01;color: white;font-weight: bold;position: sticky;bottom: 2rem;left: 0;width: 100%;padding: 30px;font-size: 16px;margin: 12px 0 20px;z-index: 100;">
+<a href="https://forms.gle/Q2hQvMqLP9Jw2bea6" rel="noreferrer" target="_blank" class="search__action__content__primary v-btn v-btn--is-elevated v-btn--has-bg theme--light elevation-1 v-size--large" style="background-color:#f67b01;border-color:#f67b01;color: white;font-weight: bold;position: sticky;bottom: 2rem;left: 0;width: 100%;padding: 8px;font-size: 16px;margin: 12px 0 20px;z-index: 100;">
 <i class="mdi mdi-email-outline" style="font-size:32px;"></i>
 まずはお試し（無料）から！
 </a>

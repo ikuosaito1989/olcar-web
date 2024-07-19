@@ -101,7 +101,7 @@
 </div>
 </div>
 
-<a href="https://coconala.com/services/3063162" rel="noreferrer" target="_blank" class="search__action__content__primary v-btn v-btn--is-elevated v-btn--has-bg theme--light elevation-1 v-size--large" style="background-color:#f67b01;border-color:#f67b01;color: white;font-weight: bold;position: sticky;bottom: 2rem;left: 0;width: 100%;padding: 30px;font-size: 16px;margin: 12px 0 20px;z-index: 100;" onclick="gtag('event','omakase')"　>
+<a href="https://coconala.com/services/3063162" rel="noreferrer" target="_blank" class="search__action__content__primary v-btn v-btn--is-elevated v-btn--has-bg theme--light elevation-1 v-size--large" style="background-color:#f67b01;border-color:#f67b01;color: white;font-weight: bold;position: sticky;bottom: 2rem;left: 0;width: 100%;padding: 8px;font-size: 16px;margin: 12px 0 20px;z-index: 100;" onclick="gtag('event','omakase')"　>
 <i class="mdi mdi-car-estate" style="font-size:34px;"></i>
 おまかせ代行サービスはこちら
 </a>

@@ -26,7 +26,7 @@ defineProps({
       <div class="tw-text-xl tw-font-bold">{{ name }}</div>
     </div>
     <div>
-      <div v-if="isSponsor">
+      <div v-if="isSponsor" class="tw-mb-1">
         <v-chip variant="elevated"> オススメ </v-chip>
       </div>
       <Favorite :car-id="carId"></Favorite>
