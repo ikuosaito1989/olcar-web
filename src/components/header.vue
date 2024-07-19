@@ -14,7 +14,7 @@ const open = () => {
     </template>
 
     <template #title>
-      <NuxtLink to="/"> <v-img width="130" src="/logo.png" lazy-src="/logo.png" /> </NuxtLink>
+      <a href="/"> <v-img width="130" src="/logo.png" lazy-src="/logo.png" /> </a>
     </template>
     <template #append>
       <v-btn href="/search" icon="mdi-magnify"></v-btn>

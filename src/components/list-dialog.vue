@@ -51,7 +51,10 @@ const onClick = async (value: { id: unknown; value: boolean; path: unknown[] }) 
     currentItems.value.splice(0, currentItems.value.length)
   }
 
-  arrayUtil.push<Item>(currentItems, [item])
+  if (!currentItems.value.find((v) => v.value === item.value)) {
+    arrayUtil.push<Item>(currentItems, [item])
+  }
+
   validate()
 
   emit('click:list', item)
