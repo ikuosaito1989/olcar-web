@@ -8,6 +8,10 @@ const { data: car } = await useFetchi<Detail>(`/api/v1/cars/${route.params.id}`)
 const sameSummary = ref<Summary>({ isEnd: false, details: [] })
 const makerSummary = ref<Summary>({ isEnd: false, details: [] })
 
+if (!car.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })
+}
+
 onMounted(async () => {
   const query = {
     offset: 0,
@@ -59,6 +63,23 @@ const onClickReport = () => {
   <section>
     <CarsDetail :car="car" @click:goto="onGotoPage" @click:report="onClickReport"></CarsDetail>
 
+    <div class="tw-my-2 tw-rounded-3xl tw-bg-[#f5f5f6] tw-p-4">
+      <NuxtLink to="/info/omakase-agent?ref=b">
+        <div class="tw-my-2 tw-flex tw-items-center">
+          <v-icon color="#f67b01" class="" size="40">mdi-handshake-outline</v-icon>
+          <div class="">
+            個人売買のお取引が不安の方のために行政書士が購入から納車までサポートするおまかせ代行サービスを始めました！不安な手続きを完全サポート！
+          </div>
+        </div>
+        <Banner
+          src="https://homepage.gsss.pro/wp-content/uploads/2023/08/1a7321fd5c87b44161456ab0d5bcbbaf-1.png"
+          href="/info/omakase-agent?ref=b"
+        ></Banner>
+      </NuxtLink>
+    </div>
+
+    <Banner href="/info/exhibit" src="/banner/exhibit.png"></Banner>
+
     <div
       class="tw-mx-2 tw-my-3 tw-border-s-8 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
     >
@@ -83,6 +104,8 @@ const onClickReport = () => {
       {{ car.makerName }}の中古車をもっとみる
       <v-icon color="primary">mdi-chevron-right</v-icon>
     </NuxtLink>
+
+    <Banner href="/info/purchase-process" src="/banner/purchase-process.png"></Banner>
 
     <Fav></Fav>
     <ReportDialog ref="refReportDialog" :car-id="car.id"></ReportDialog>

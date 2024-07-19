@@ -10,6 +10,23 @@ const emit = defineEmits(['click:goto', 'click:report'])
 
 const keywords = ref<KeywordsText>({ keywords: [] })
 
+const comment = computed(() => {
+  if (!prop.car.comment) {
+    return ''
+  }
+
+  const urls = formatUtil.getUrls(prop.car.comment)
+  // eslint-disable-next-line no-irregular-whitespace
+  let comment = prop.car.comment.replace(/　/g, '<br>')
+  urls
+    .filter((url) => url.includes('https://t.co'))
+    .forEach((url) => {
+      comment = comment.replace(new RegExp(url, 'g'), '')
+    })
+
+  return formatUtil.toLink(comment)
+})
+
 onMounted(async () => {
   $fetch<KeywordsText>(`/api/v1/keywords/text:keywords`, {
     method: 'POST',
@@ -49,11 +66,8 @@ const onClickReport = () => {
 
     <Price :is-omakase="true" class="tw-my-3" :price="car.price"></Price>
     <div class="tw-text-xs">
-      おまかせ代行サービスは購入から納車までおまかせできるサービスです。詳しくは<a
-        href="/info/omakase-agent"
-        data-v-15e9aab1=""
-        >こちら</a
-      >
+      おまかせ代行サービスは購入から納車までおまかせできるサービスです。詳しくは
+      <NuxtLink to="/info/omakase-agent">こちら</NuxtLink>
     </div>
     <Item label="走行距離">
       <div>{{ formatUtil.toMileage(car.mileage) }}</div>
@@ -72,16 +86,16 @@ const onClickReport = () => {
     <Item label="公開日">
       <div>{{ formatUtil.toLocaleDateString(car.createAt) }}</div>
     </Item>
-    <Item label="販売元" :is-newline="true">
-      <div class="tw-m-2 tw-flex">
+    <Item label="販売元">
+      <div class="tw-flex">
         <v-img class="tw-w-7 tw-rounded-full" :src="car.userImageUrl"></v-img>
 
         <div>{{ car.nickName }}</div>
       </div>
     </Item>
-    <Item label="説明" :is-newline="true">
+    <Item label="説明" :is-new-line="true">
       <!--eslint-disable-next-line vue/no-v-html-->
-      <div v-html="car.comment"></div>
+      <div v-html="comment"></div>
     </Item>
 
     <v-alert prominent border="top" type="warning">

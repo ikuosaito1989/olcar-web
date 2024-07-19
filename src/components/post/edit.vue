@@ -87,6 +87,12 @@ const validate = async () => {
     <div class="tw-my-4 tw-border-b tw-pb-3 tw-text-center tw-text-xl tw-font-bold">
       掲載依頼する
     </div>
+    <div class="tw-rounded tw-bg-[#f5f5f6] tw-p-4">
+      <Banner href="/info/exhibit" src="/banner/exhibit.png"></Banner>
+      <br />olcar（オルカー）に掲載するための情報を入力してください。
+      掲載依頼後、1~3営業日以内に審査を行い、内容に問題がなければそのまま掲載が開始されます。
+      審査不要、複数台掲載可、宣伝効果の高い掲載オプションもご用意しておりますのでこちらもご利用ください
+    </div>
     <v-form ref="formRef" class="tw-w-full">
       <TextField
         v-model:text="formData.carName"

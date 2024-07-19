@@ -78,7 +78,7 @@ defineExpose({
           いただいた情報は、olcar（オルカー）運営より対応をさせて頂きます。
           公開停止申請の場合は、確認後、公開を停止させて頂きますのでしばらくお待ちください。
         </div>
-        <a class="tw-mt-3 tw-text-center tw-text-sm" @click="isComplete = false">閉じる</a>
+        <div class="tw-mt-3 tw-text-center tw-text-sm" @click="isComplete = false">閉じる</div>
       </v-card>
     </v-dialog>
   </div>

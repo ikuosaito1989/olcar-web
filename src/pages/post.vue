@@ -143,7 +143,7 @@ const convertCar = (formData: PostEdit) => {
         <div>
           olcar（オルカー）の審査を行います。審査結果については1~3営業日以内に審査結果をメールアドレスにお送りしますので今しばらくお待ち下さい
         </div>
-        <a @click="isComplete = false">閉じる</a>
+        <div @click="isComplete = false">閉じる</div>
       </v-card>
     </v-dialog>
   </section>

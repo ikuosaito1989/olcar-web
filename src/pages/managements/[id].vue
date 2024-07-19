@@ -237,7 +237,7 @@ const onClickAction = async (action: boolean) => {
           <div>
             {{ message }}
           </div>
-          <a @click="isComplete = false">閉じる</a>
+          <div @click="isComplete = false">閉じる</div>
         </v-card>
       </v-dialog>
     </v-form>

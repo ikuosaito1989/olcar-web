@@ -29,6 +29,10 @@ const makerName = ref(Constants.MAKERS.find((v) => v.key === +route.params.maker
 const searchConditions = ref(useGetSearchConditions())
 queryObject.value.page = route.query.page ? +route.query.page : undefined
 
+if (route.params.makerId && !makerName.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })
+}
+
 /**
  * ページを変更する
  *
@@ -95,6 +99,7 @@ const onChangeSales = () => {
       <v-icon>mdi-magnify</v-icon>
       検索された車は見つかりませんでした。再度検索して下さい
     </div>
+
     <div class="tw-sticky tw-top-0 tw-z-50 tw-bg-white">
       <div class="tw-flex tw-h-12 tw-justify-end">
         <v-checkbox
@@ -165,6 +170,8 @@ const onChangeSales = () => {
       </v-expansion-panels>
     </div>
 
+    <Banner src="/banner/line.png" href="/info/line?ref=b"></Banner>
+
     <CarsList :details="summary.details" />
 
     <div class="tw-my-5 tw-flex tw-justify-center">
@@ -183,6 +190,8 @@ const onChangeSales = () => {
       ></v-btn>
     </div>
 
+    <Banner href="/info/purchase-process" src="/banner/purchase-process.png"></Banner>
+    <Banner href="/?isSponsor=true" src="/banner/recommendation.png"></Banner>
     <Fav></Fav>
   </section>
 </template>

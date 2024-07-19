@@ -16,16 +16,15 @@ const errorPage = computed(() => {
   }
   return error500
 })
-
-/**
- * トップに遷移する
- */
-const handleError = () => clearError({ redirect: '/' })
 </script>
 
 <template>
-  <div class="tw-flex tw-h-svh tw-flex-col tw-items-center tw-justify-center">
-    <component :is="errorPage" />
-    <v-btn color="primary" prepend-icon="$vuetify" @click="handleError">トップ</v-btn>
+  <div class="tw-flex tw-min-h-screen tw-items-center tw-justify-center">
+    <div class="tw-max-w-screen-md">
+      <component :is="errorPage" />
+      <div class="tw-text-center">
+        <v-btn color="primary" to="/">トップ</v-btn>
+      </div>
+    </div>
   </div>
 </template>
