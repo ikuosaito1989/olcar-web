@@ -67,7 +67,7 @@ const onClickReport = () => {
     <Price :is-omakase="true" class="tw-my-3" :price="car.price"></Price>
     <div class="tw-text-xs">
       おまかせ代行サービスは購入から納車までおまかせできるサービスです。詳しくは
-      <NuxtLink to="/info/omakase-agent">こちら</NuxtLink>
+      <NuxtLink class="tw-font-bold tw-text-[#1976d2]" to="/info/omakase-agent">こちら</NuxtLink>
     </div>
     <Item label="走行距離">
       <div>{{ formatUtil.toMileage(car.mileage) }}</div>
