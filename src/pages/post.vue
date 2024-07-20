@@ -117,6 +117,7 @@ const convertCar = (formData: PostEdit) => {
     referenceUrls: [formData.link],
   }
 }
+useHead(headUtil.seo('掲載依頼する'))
 </script>
 
 <template>

@@ -31,6 +31,8 @@ const onClickMaker = async (key: ListType, item: Item) => {
 const onClickSearch = () => {
   reloadNuxtApp({ path: `/${useQueryString()}` })
 }
+
+useHead(headUtil.seo('検索'))
 </script>
 
 <template>

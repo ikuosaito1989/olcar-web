@@ -2,6 +2,7 @@
 onMounted(async () => {
   await useSetStorageInCars(Constants.LOCALSTORAGE.FAVORITE)
 })
+useHead(headUtil.seo('お気に入り'))
 </script>
 
 <template>

@@ -2,6 +2,8 @@
 onMounted(async () => {
   await useSetStorageInCars(Constants.LOCALSTORAGE.HISTORY)
 })
+
+useHead(headUtil.seo('閲覧履歴'))
 </script>
 
 <template>

@@ -57,6 +57,32 @@ const onGotoPage = () => {
 const onClickReport = () => {
   refReportDialog.value?.open()
 }
+
+/**
+ * 検索条件によってSEO Metaを設定する
+ */
+const getHeader = () => {
+  const title = `${car.value.makerName} ${car.value.name} ${formatUtil.toTenThousand(
+    car.value.price,
+  )}万円 車検:${formatUtil.toLocaleVehicleInspection(
+    car.value.vehicleInspection,
+    car.value.unknownVehicleInspection,
+  )} 走行距離:${formatUtil.toMileage(car.value.mileage)}`
+
+  // @note 10桁を超えるパラメータはシークレットキーのため、インデックスしないn
+  const isNoIndex = route.params.id.length > 10
+
+  return headUtil.seo(
+    title,
+    car.value.comment,
+    car.value.images[0],
+    'article',
+    'summary',
+    isNoIndex,
+  )
+}
+
+useHead(getHeader())
 </script>
 
 <template>

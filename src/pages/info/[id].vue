@@ -2,9 +2,13 @@
 import { marked } from 'marked'
 
 const route = useRoute()
-// const title = ref(Constants.INFO_TITLES[route.params.id as keyof typeof Constants.INFO_TITLES])
 const { data: raw } = await useFetchi<string>(`/md/${route.params.id}`)
+if (!raw.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })
+}
+const title = ref(Constants.INFO_TITLES[route.params.id as keyof typeof Constants.INFO_TITLES])
 const markDown = ref(await marked(raw.value))
+useHead(headUtil.seo(title.value))
 </script>
 
 <template>

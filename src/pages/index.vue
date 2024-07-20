@@ -74,6 +74,30 @@ const onChangeSales = () => {
 
   onNavigate({})
 }
+
+/**
+ * 検索条件によってSEO Metaを設定する
+ */
+const getHeader = () => {
+  const conditions = searchConditions.value.join(' ')
+  if (makerName.value) {
+    return headUtil.seo(
+      `${makerName.value}の中古車`,
+      `${makerName.value}の中古車を格安で掲載しています！個人売買を中心とした中古車情報を集め、従来の中古車情報サイトの価格より安い値段の車が勢揃いしています！`,
+    )
+  }
+
+  if (searchConditions.value.length > 0) {
+    return headUtil.seo(
+      `${conditions}`,
+      `${conditions}の個人売買などの格安中古車を掲載！${conditions}ならolcar（オルカー）で検索！`,
+    )
+  }
+
+  return { meta: [] }
+}
+
+useHead(getHeader())
 </script>
 
 <template>
