@@ -1,4 +1,6 @@
+/* eslint-disable max-lines */
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
+import { ofetch } from 'ofetch'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -110,7 +112,7 @@ export default defineNuxtConfig({
         )
       })
     },
-    'nuxt-simple-sitemap',
+    '@nuxtjs/sitemap',
     'nuxt-gtag',
   ],
 
@@ -153,16 +155,90 @@ export default defineNuxtConfig({
     id: process.env.GTAG,
   },
 
+  site: {
+    url: 'https://ol-car.com',
+  },
+
   sitemap: {
-    urls: [
-      {
-        url: process.env.HOST,
-        lastmod: '2024-03-06',
-        priority: 1.0,
-        loc: '',
-      },
-    ],
-    xsl: false,
+    cacheMaxAgeSeconds: 1000 * 60 * 1440, // @note 1日一回
+    autoLastmod: true,
+    exclude: ['/managements', '/maintenance'],
+    experimentalWarmUp: true,
+    experimentalCompression: true,
+    urls: async () => {
+      const result = {
+        cars: [],
+        makers: [],
+      } as Sitemap
+      const func: Promise<globalThis.Sitemap>[] = []
+
+      for (let i = 0; i < 6; i++) {
+        const fetch = ofetch<Sitemap>(`${process.env.API_URL}v1/sitemap`, {
+          query: {
+            offset: i * 40000 + 1,
+            limit: 40000,
+          },
+        })
+        func.push(fetch)
+      }
+
+      const _sitemaps = Promise.all(func.map((v) => v))
+
+      const makerIds = [...Array(50).keys()].map((i) => ++i)
+
+      // @note 都道府県の車名
+      // @note メーカー毎の車名
+      const [_prefectures, _names] = await Promise.all([
+        ofetch<Prefecture[]>(`${process.env.API_URL}v1/prefecture`),
+        ofetch<CarName[]>(`${process.env.API_URL}v1/cars/names`, {
+          query: {
+            'makerIds[]': makerIds,
+          },
+        }),
+      ])
+
+      const sitemaps = await _sitemaps
+      sitemaps.forEach((v) => {
+        result.cars.push(...v.cars)
+        result.makers.push(...v.makers)
+      })
+
+      const names = [..._names.map((v) => `/?makerIds[]=${v.makerId}&carNames[]=${v.name}`)]
+      const prefectures = [..._prefectures.map((v) => `/?prefectures[]=${v.name}`)]
+
+      // @note メーカー
+      const makers = result.makers.map((v) => `/${v}`)
+
+      // @note 登録済みの車
+      const cars = result.cars.map((v) => `/cars/${v}`)
+
+      // @note 利用規約
+      const terms = ['/terms/tos', '/terms/privacy', '/terms/transaction-law']
+
+      // @note 記事
+      const info = [
+        '/info/caution',
+        '/info/browser',
+        '/info/exhibit',
+        '/info/exhibit-free',
+        '/info/purchase-process',
+        '/info/contract-drafting',
+        '/info/omakase-agent',
+        '/info/line',
+        '/info/needs-help',
+        '/info/about',
+      ]
+
+      // 掲載
+      const post = ['/post']
+
+      // 掲載
+      const features = ['/history', '/favorite']
+
+      return [...makers, ...terms, ...names, ...prefectures, ...cars, ...info, ...features, ...post]
+    },
+    sitemaps: true,
+    defaultSitemapsChunkSize: 10000,
   },
 
   devtools: { enabled: true },
