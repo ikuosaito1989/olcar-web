@@ -117,7 +117,7 @@ const onClickReport = () => {
         <NuxtLink
           v-for="(keyword, i) in keywords.keywords"
           :key="i"
-          :active-class="`/?keywords[]=${keyword}`"
+          :to="{ path: '/', query: { 'keywords[]': keyword } }"
         >
           <v-chip class="tw-mb-2 tw-mr-2" color="#f67b01" small label dark>{{ keyword }}</v-chip>
         </NuxtLink>
