@@ -6,6 +6,7 @@ WORKDIR /src
 # 環境変数を設定し、ポートとホストを指定
 ENV PORT 8080
 ENV HOST 0.0.0.0
+ENV API_URL https://ol-car.com/api
 
 # package.jsonをコピーして、パッケージのインストール
 COPY package.json ./
