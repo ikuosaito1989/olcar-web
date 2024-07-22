@@ -65,6 +65,6 @@
 
 これらの手続きが不安な方は「**中古車個人売買のための契約書作成サービス＋車庫証明取得（¥20,000〜）**」にて行政書士がサポートいたします。ぜひお気軽にご相談ください！
 
-<a href="/info/omakase-agent?ref=p">
+<a href="/info/omakase-agent">
 <img src="https://homepage.gsss.pro/wp-content/uploads/2023/08/1a7321fd5c87b44161456ab0d5bcbbaf-1.png">
 </a>

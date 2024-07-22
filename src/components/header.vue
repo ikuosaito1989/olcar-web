@@ -37,8 +37,8 @@ const open = () => {
         >閲覧履歴</v-btn
       >
       <div class="tw-my-2 tw-font-bold tw-text-[#f67b01]">olcarについて</div>
-      <v-btn color="black" href="/info/about?ref=s" variant="text">olcarについて</v-btn>
-      <v-btn color="black" href="/info/purchase-process?ref=s" variant="text"
+      <v-btn color="black" href="/info/about" variant="text">olcarについて</v-btn>
+      <v-btn color="black" href="/info/purchase-process" variant="text"
         >個人売買の車購入ガイド</v-btn
       >
       <v-btn color="black" href="/info/caution" variant="text">個人売買における詐欺について</v-btn>
@@ -55,9 +55,7 @@ const open = () => {
       <div class="tw-my-2 tw-font-bold tw-text-[#f67b01]">olcarのサービス</div>
       <v-btn color="black" href="/info/exhibit" variant="text">閲覧数が増える掲載オプション</v-btn>
       <v-btn color="black" href="/post" variant="text">無料掲載</v-btn>
-      <v-btn color="black" href="/info/omakase-agent?ref=s" variant="text"
-        >おまかせ代行サービス</v-btn
-      >
+      <v-btn color="black" href="/info/omakase-agent" variant="text">おまかせ代行サービス</v-btn>
       <div class="tw-my-2 tw-font-bold tw-text-[#f67b01]">SNS</div>
       <v-btn color="black" target="_blank" href="https://lin.ee/80JiY1r" variant="text">LINE</v-btn>
       <v-btn color="black" target="_blank" href="https://twitter.com/byebye20201a" variant="text"

@@ -194,7 +194,7 @@ useHead(getHeader())
       </v-expansion-panels>
     </div>
 
-    <Banner src="/banner/line.png" href="/info/line?ref=b"></Banner>
+    <Banner src="/banner/line.png" href="/info/line"></Banner>
 
     <CarsList :details="summary.details" />
 

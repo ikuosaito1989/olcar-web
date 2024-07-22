@@ -38,12 +38,12 @@ export default defineNuxtConfig({
         {
           hid: 'og:url',
           property: 'og:url',
-          content: 'https://ol-car.com',
+          content: process.env.SITE_URL,
         },
         {
           hid: 'og:image',
           property: 'og:image',
-          content: 'https://ol-car.com/ogp.jpg',
+          content: `${process.env.SITE_URL}/ogp.jpg`,
         },
         {
           hid: 'og:site_name',
@@ -68,7 +68,7 @@ export default defineNuxtConfig({
         {
           hid: 'twitter:image',
           name: 'twitter:image',
-          content: 'https://ol-car.com/ogp.jpg',
+          content: `${process.env.SITE_URL}/ogp.jpg`,
         },
         {
           hid: 'twitter:card',
@@ -78,7 +78,7 @@ export default defineNuxtConfig({
         {
           hid: 'twitter:url',
           name: 'twitter:url',
-          content: 'https://ol-car.com',
+          content: process.env.SITE_URL,
         },
         {
           hid: 'robots',
@@ -118,9 +118,8 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      baseURL: process.env.BASE_URL,
       recaptcha: {
-        v2SiteKey: '6LeF3WEdAAAAAElYIkssJ_U8bBPE40OwQEs-U6pZ',
+        v2SiteKey: process.env.RECAPTCHA_SITE_KEY,
         v3SiteKey: 'YOUR_V3_SITEKEY_HERE',
       },
     },
@@ -128,7 +127,7 @@ export default defineNuxtConfig({
 
   routeRules: {
     '/api/**': {
-      proxy: 'https://sample-docker-image-z2l33kyvbq-an.a.run.app/**',
+      proxy: `${process.env.PROXY_URL}/**`,
     },
   },
 
@@ -156,7 +155,7 @@ export default defineNuxtConfig({
   },
 
   site: {
-    url: 'https://ol-car.com',
+    url: process.env.SITE_URL,
   },
 
   sitemap: {
@@ -166,6 +165,7 @@ export default defineNuxtConfig({
     experimentalWarmUp: true,
     experimentalCompression: true,
     urls: async () => {
+      const apiFetch = ofetch.create({ baseURL: process.env.API_URL })
       const result = {
         cars: [],
         makers: [],
@@ -173,7 +173,7 @@ export default defineNuxtConfig({
       const func: Promise<globalThis.Sitemap>[] = []
 
       for (let i = 0; i < 6; i++) {
-        const fetch = ofetch<Sitemap>(`${process.env.API_URL}v1/sitemap`, {
+        const fetch = apiFetch<Sitemap>('/v1/sitemap', {
           query: {
             offset: i * 40000 + 1,
             limit: 40000,
@@ -189,8 +189,8 @@ export default defineNuxtConfig({
       // @note 都道府県の車名
       // @note メーカー毎の車名
       const [_prefectures, _names] = await Promise.all([
-        ofetch<Prefecture[]>(`${process.env.API_URL}v1/prefecture`),
-        ofetch<CarName[]>(`${process.env.API_URL}v1/cars/names`, {
+        apiFetch<Prefecture[]>('/v1/prefecture'),
+        apiFetch<CarName[]>('/v1/cars/names', {
           query: {
             'makerIds[]': makerIds,
           },

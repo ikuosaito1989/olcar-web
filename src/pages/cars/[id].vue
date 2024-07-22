@@ -90,7 +90,7 @@ useHead(getHeader())
     <CarsDetail :car="car" @click:goto="onGotoPage" @click:report="onClickReport"></CarsDetail>
 
     <div class="tw-my-2 tw-rounded-3xl tw-bg-[#f5f5f6] tw-p-4">
-      <NuxtLink to="/info/omakase-agent?ref=b">
+      <NuxtLink to="/info/omakase-agent">
         <div class="tw-my-2 tw-flex tw-items-center">
           <v-icon color="#f67b01" class="" size="40">mdi-handshake-outline</v-icon>
           <div class="">
@@ -99,7 +99,7 @@ useHead(getHeader())
         </div>
         <Banner
           src="https://homepage.gsss.pro/wp-content/uploads/2023/08/1a7321fd5c87b44161456ab0d5bcbbaf-1.png"
-          href="/info/omakase-agent?ref=b"
+          href="/info/omakase-agent"
         ></Banner>
       </NuxtLink>
     </div>

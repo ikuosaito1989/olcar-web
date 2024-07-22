@@ -15,5 +15,5 @@ export default defineEventHandler(async (event) => {
     return null
   }
 
-  return await fs.readFileSync(filePath)
+  return await fs.readFileSync(filePath, { encoding: 'utf8' })
 })

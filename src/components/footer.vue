@@ -5,13 +5,13 @@
     <div class="">
       <div class="tw-border-b tw-pb-3 tw-text-base tw-font-bold">olcarについて</div>
       <ul class="[&>li]:tw-mt-3">
-        <li><NuxtLink to="/info/about?ref=f">olcarについて</NuxtLink></li>
+        <li><NuxtLink to="/info/about">olcarについて</NuxtLink></li>
         <li>
-          <NuxtLink to="/info/needs-help?ref=f"
+          <NuxtLink to="/info/needs-help"
             >作者のolcarに掛ける想いとみなさまへのお願い</NuxtLink
           >
         </li>
-        <li><NuxtLink to="/info/purchase-process?ref=f">個人売買の車購入ガイド</NuxtLink></li>
+        <li><NuxtLink to="/info/purchase-process">個人売買の車購入ガイド</NuxtLink></li>
         <li><NuxtLink to="/info/caution">個人売買における詐欺について</NuxtLink></li>
         <li><NuxtLink to="/info/browser">推奨環境</NuxtLink></li>
         <li><NuxtLink to="/terms/tos">利用規約</NuxtLink></li>
@@ -30,7 +30,7 @@
     <div>
       <div class="tw-border-b-2 tw-pb-3 tw-text-base tw-font-bold">サービス</div>
       <ul class="[&>li]:tw-mt-3">
-        <li><NuxtLink to="/info/omakase-agent?ref=f">おまかせ代行サービス</NuxtLink></li>
+        <li><NuxtLink to="/info/omakase-agent">おまかせ代行サービス</NuxtLink></li>
         <li><NuxtLink to="/post">無料掲載</NuxtLink></li>
         <li><NuxtLink to="/info/exhibit">閲覧数が増える掲載オプション</NuxtLink></li>
       </ul>
