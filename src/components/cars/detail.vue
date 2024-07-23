@@ -9,6 +9,7 @@ const prop = defineProps({
 const emit = defineEmits(['click:goto', 'click:report'])
 
 const keywords = ref<KeywordsText>({ keywords: [] })
+const isVisible = ref(false)
 
 const comment = computed(() => {
   if (!prop.car.comment) {
@@ -60,8 +61,38 @@ const onClickReport = () => {
       :is-sponsor="car.isSponsor"
     ></Titles>
 
-    <v-carousel height="300">
-      <v-carousel-item v-for="(image, i) in car.images" :key="i" :src="image"></v-carousel-item>
+    <v-dialog
+      v-model="isVisible"
+      class="tw-bg-slate-800"
+      max-width="768"
+      @click:outside="isVisible = !isVisible"
+    >
+      <v-carousel height="auto" hide-delimiters>
+        <v-btn
+          icon="mdi-close"
+          size="small"
+          variant="elevated"
+          class="!tw-absolute tw-right-0 tw-top-0 tw-z-10 tw-m-2"
+          @click="isVisible = !isVisible"
+        ></v-btn>
+        <v-carousel-item
+          v-for="(item, i) in car.images"
+          :key="i"
+          reverse-transition="scroll-x-transition"
+          transition="scroll-x-transition"
+        >
+          <v-img max-height="100vh" contain height="auto" :src="item" />
+        </v-carousel-item>
+      </v-carousel>
+    </v-dialog>
+    <v-carousel height="300" hide-delimiters>
+      <v-carousel-item
+        v-for="(image, i) in car.images"
+        :key="i"
+        class=""
+        :src="image"
+        @click="isVisible = !isVisible"
+      ></v-carousel-item>
     </v-carousel>
 
     <Price :is-omakase="true" class="tw-my-3" :price="car.price"></Price>
@@ -129,7 +160,7 @@ const onClickReport = () => {
 
 <style scoped>
 :deep(.v-overlay__content) {
-  width: 100%;
-  max-width: 100%;
+  width: 100% !important;
+  margin: 0 !important;
 }
 </style>
