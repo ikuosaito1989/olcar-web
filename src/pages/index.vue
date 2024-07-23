@@ -117,7 +117,9 @@ useHead(getHeader())
       </div>
     </div>
 
-    <div v-if="makerName"><v-icon>mdi-car</v-icon>{{ makerName }}の中古車</div>
+    <div v-if="makerName" class="tw-px-4 tw-pt-4 tw-text-xl tw-font-bold">
+      <v-icon class="tw-mb-1" color="primary">mdi-car</v-icon>{{ makerName }}の中古車
+    </div>
 
     <div v-if="summary.details.length === 0">
       <v-icon>mdi-magnify</v-icon>
