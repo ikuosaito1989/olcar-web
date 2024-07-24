@@ -19,7 +19,7 @@ const errorPage = computed(() => {
 </script>
 
 <template>
-  <div class="tw-flex tw-min-h-screen tw-items-center tw-justify-center">
+  <div class="tw-m-2 tw-flex tw-min-h-screen tw-items-center tw-justify-center">
     <div class="tw-max-w-screen-md">
       <component :is="errorPage" />
       <div class="tw-text-center">
