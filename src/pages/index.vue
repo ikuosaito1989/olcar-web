@@ -104,7 +104,7 @@ useHead(getHeader())
   <section>
     <div v-if="searchConditions.length" class="tw-mx-4 tw-mt-4">
       <div class="tw-mb-2 tw-font-bold">検索条件</div>
-      <div class="tw-flex">
+      <div class="tw-flex tw-flex-wrap">
         <div
           v-for="(condition, i) in searchConditions"
           :key="`maker_${i}`"
