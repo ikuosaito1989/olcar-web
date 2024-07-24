@@ -12,7 +12,7 @@ const comment = computed(() =>
 </script>
 
 <template>
-  <div class="tw-p-4 tw-shadow-md">
+  <div v-ripple class="tw-p-4 tw-shadow-md">
     <Anchor :to="`/cars/${detail.id}`">
       <Titles
         :is-sponsor="detail.isSponsor"
