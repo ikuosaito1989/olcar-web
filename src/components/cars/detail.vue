@@ -98,7 +98,7 @@ const onClickReport = () => {
     <Price :is-omakase="true" class="tw-my-3" :price="car.price"></Price>
     <div class="tw-text-xs">
       おまかせ代行サービスは購入から納車までおまかせできるサービスです。詳しくは
-      <NuxtLink class="tw-font-bold tw-text-[#1976d2]" to="/info/omakase-agent">こちら</NuxtLink>
+      <Anchor class="tw-font-bold tw-text-[#1976d2]" to="/info/omakase-agent">こちら</Anchor>
     </div>
     <Item label="走行距離">
       <div>{{ formatUtil.toMileage(car.mileage) }}</div>
@@ -145,13 +145,9 @@ const onClickReport = () => {
       </div>
 
       <div>
-        <NuxtLink
-          v-for="(keyword, i) in keywords.keywords"
-          :key="i"
-          :to="{ path: '/', query: { 'keywords[]': keyword } }"
-        >
+        <Anchor v-for="(keyword, i) in keywords.keywords" :key="i" :to="`/?keywords[]=${keyword}`">
           <v-chip class="tw-mb-2 tw-mr-2" color="#f67b01" small label dark>{{ keyword }}</v-chip>
-        </NuxtLink>
+        </Anchor>
       </div>
       <div class="tw-text-xs">※クリックすると検索できます</div>
     </div>

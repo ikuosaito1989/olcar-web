@@ -90,7 +90,7 @@ useHead(getHeader())
     <CarsDetail :car="car" @click:goto="onGotoPage" @click:report="onClickReport"></CarsDetail>
 
     <div class="tw-my-2 tw-rounded-3xl tw-bg-[#f5f5f6] tw-p-4">
-      <NuxtLink to="/info/omakase-agent">
+      <Anchor to="/info/omakase-agent">
         <div class="tw-my-2 tw-flex tw-items-center">
           <v-icon color="#f67b01" class="" size="40">mdi-handshake-outline</v-icon>
           <div class="">
@@ -101,7 +101,7 @@ useHead(getHeader())
           src="https://homepage.gsss.pro/wp-content/uploads/2023/08/1a7321fd5c87b44161456ab0d5bcbbaf-1.png"
           href="/info/omakase-agent"
         ></Banner>
-      </NuxtLink>
+      </Anchor>
     </div>
 
     <Banner href="/info/exhibit" src="/banner/exhibit.png"></Banner>
@@ -112,13 +112,13 @@ useHead(getHeader())
       {{ car.makerName }} {{ car.name }}の中古車を探す
     </div>
     <CarsList :details="sameSummary.details" />
-    <NuxtLink
+    <Anchor
       class="tw-my-6 tw-flex tw-justify-end"
       :to="`/?makerIds[]=${car.makerId}&carNames[]=${car.name}`"
     >
       {{ car.name }}の中古車をもっとみる
       <v-icon color="primary">mdi-chevron-right</v-icon>
-    </NuxtLink>
+    </Anchor>
     <div
       class="tw-mx-2 tw-my-3 tw-border-s-8 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
     >
@@ -126,10 +126,10 @@ useHead(getHeader())
     </div>
     <CarsList :details="makerSummary.details" />
 
-    <NuxtLink class="tw-my-6 tw-flex tw-justify-end" :to="`/${car.makerId}`">
+    <Anchor class="tw-my-6 tw-flex tw-justify-end" :to="`/${car.makerId}`">
       {{ car.makerName }}の中古車をもっとみる
       <v-icon color="primary">mdi-chevron-right</v-icon>
-    </NuxtLink>
+    </Anchor>
 
     <Banner href="/info/purchase-process" src="/banner/purchase-process.png"></Banner>
 

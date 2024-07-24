@@ -10,9 +10,9 @@
           olcarのコンセプトの
           <strong>「車を身近に」</strong>するために考えていることです。<br />
           短いのでぜひご覧ください。
-          <NuxtLink class="tw-mt-4 tw-block tw-font-bold tw-text-[#1976d2]" to="/info/about">
+          <Anchor class="tw-mt-4 tw-block tw-font-bold tw-text-[#1976d2]" to="/info/about">
             olcarについて
-          </NuxtLink>
+          </Anchor>
         </div>
       </div>
     </div>

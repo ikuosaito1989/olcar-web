@@ -13,7 +13,7 @@ const comment = computed(() =>
 
 <template>
   <div class="tw-p-4 tw-shadow-md">
-    <NuxtLink :to="`/cars/${detail.id}`">
+    <Anchor :to="`/cars/${detail.id}`">
       <Titles
         :is-sponsor="detail.isSponsor"
         :car-id="detail.id"
@@ -55,7 +55,7 @@ const comment = computed(() =>
           </Item>
         </div>
       </div>
-    </NuxtLink>
+    </Anchor>
   </div>
 </template>
 
