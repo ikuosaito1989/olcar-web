@@ -28,6 +28,7 @@ const onClick = async (type: Report) => {
     body: { problem: type, reason: reason.value, carId: prop.carId },
   })
   isComplete.value = true
+  reason.value = ''
   open()
 }
 
@@ -51,15 +52,23 @@ defineExpose({
           報告する
         </div>
         <Recaptcha ref="recaptchaRef" v-model:recaptcha="response"></Recaptcha>
-        <v-textarea v-model="reason" class="tw-p-3" label="理由"></v-textarea>
+        <TextArea
+          v-model:text="reason"
+          class="tw-p-3"
+          placeholder="理由"
+          hint="報告する内容を入力してください"
+          :counter="100"
+          clearable
+          :rules="[validationUtil.required]"
+        ></TextArea>
         <div class="tw-mb-2 [&>button]:tw-w-full">
-          <v-btn variant="text" @click="onClick(Constants.REPORT.UNPOST)">{{
+          <v-btn variant="text" size="large" @click="onClick(Constants.REPORT.UNPOST)">{{
             Constants.REPORT.UNPOST
           }}</v-btn>
-          <v-btn variant="text" @click="onClick(Constants.REPORT.STOP)">{{
+          <v-btn variant="text" size="large" @click="onClick(Constants.REPORT.STOP)">{{
             Constants.REPORT.STOP
           }}</v-btn>
-          <v-btn variant="text" @click="onClick(Constants.REPORT.DIFF)">{{
+          <v-btn variant="text" size="large" @click="onClick(Constants.REPORT.DIFF)">{{
             Constants.REPORT.DIFF
           }}</v-btn>
         </div>
