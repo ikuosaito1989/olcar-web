@@ -27,7 +27,7 @@ const open = () => {
     class="!tw-top-0 !tw-z-[9999] !tw-h-screen tw-p-2"
     temporary
   >
-    <div class="[&>a]:tw-w-full [&>a]:!tw-justify-start [&>a]:tw-text-left">
+    <div class="tw-mb-16 [&>a]:tw-w-full [&>a]:!tw-justify-start [&>a]:tw-text-left">
       <v-btn color="black" href="/" variant="text" prepend-icon="mdi-home">トップ</v-btn>
       <v-btn color="black" href="/search" variant="text" prepend-icon="mdi-magnify">検索</v-btn>
       <v-btn color="black" href="/favorite" variant="text" prepend-icon="mdi-heart-outline"
