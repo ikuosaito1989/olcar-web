@@ -89,10 +89,10 @@ useHead(getHeader())
   <section>
     <CarsDetail :car="car" @click:goto="onGotoPage" @click:report="onClickReport"></CarsDetail>
 
-    <div class="tw-my-2 tw-rounded-3xl tw-bg-[#f5f5f6] tw-p-4">
+    <div class="tw-m-2 tw-rounded-3xl tw-bg-[#f5f5f6] tw-p-4">
       <Anchor to="/info/omakase-agent">
-        <div class="tw-my-2 tw-flex tw-items-center">
-          <v-icon color="#f67b01" class="" size="40">mdi-handshake-outline</v-icon>
+        <div class="tw-mb-4 tw-flex tw-items-center">
+          <v-icon color="#f67b01" class="tw-mr-2" size="40">mdi-handshake-outline</v-icon>
           <div class="">
             個人売買のお取引が不安の方のために行政書士が購入から納車までサポートするおまかせ代行サービスを始めました！不安な手続きを完全サポート！
           </div>
