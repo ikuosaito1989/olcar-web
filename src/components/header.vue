@@ -58,7 +58,7 @@ const open = () => {
       <v-btn color="black" href="/info/omakase-agent" variant="text">おまかせ代行サービス</v-btn>
       <div class="tw-my-2 tw-font-bold tw-text-[#f67b01]">SNS</div>
       <v-btn color="black" target="_blank" href="https://lin.ee/80JiY1r" variant="text">LINE</v-btn>
-      <v-btn color="black" target="_blank" href="https://twitter.com/byebye20201a" variant="text"
+      <v-btn color="black" target="_blank" href="https://twitter.com/byebye20201" variant="text"
         >Twitter</v-btn
       >
       <v-btn
