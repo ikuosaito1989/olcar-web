@@ -214,7 +214,6 @@ const validate = async () => {
         v-model:text="formData.locality"
         label="市区町村"
         placeholder="横浜市"
-        chip-label="必須"
         clearable
         type="text"
         :counter="30"
