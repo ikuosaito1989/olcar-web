@@ -2,7 +2,7 @@
 
 <img src="https://homepage.gsss.pro/wp-content/uploads/2023/08/1a7321fd5c87b44161456ab0d5bcbbaf-1.png">
 
-中古車の個人売買を利用する人の不安は、主に **「取引トラブル」** と **「車の手続き」**です。個人売買で車を安く購入できるメリットを生かしつつ安心に取引ができるようにサポートいたします。
+中古車の個人売買を利用する人の不安は、主に **「取引トラブル」** と **「車の手続き」** です。個人売買で車を安く購入できるメリットを生かしつつ安心に取引ができるようにサポートいたします。
 
 <div class="border">
 <img style="max-width: 300px;" src="https://homepage.gsss.pro/wp-content/uploads/2023/08/image-768x474.png">
