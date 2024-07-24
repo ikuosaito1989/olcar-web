@@ -131,7 +131,7 @@ useHead(headUtil.seo('掲載依頼する'))
     </div>
     <div v-if="mode === 'preview'">
       <div class="tw-sticky tw-top-4 tw-z-50">
-        <v-btn size="large" class="tw-mx-2 tw-w-full !tw-bg-white" @click="onExitPreview"
+        <v-btn size="large" class="tw-w-full !tw-bg-white" @click="onExitPreview"
           >プレビューを終了する</v-btn
         >
       </div>
