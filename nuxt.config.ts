@@ -13,6 +13,8 @@ export default defineNuxtConfig({
         lang: 'ja',
       },
       meta: [
+        // @todo 絶対外す
+        { name: 'robots', content: 'noindex' },
         { hid: 'charset', charset: 'utf-8' },
         { hid: 'viewport', name: 'viewport', content: 'width=device-width, initial-scale=1' },
         {
