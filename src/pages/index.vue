@@ -187,7 +187,7 @@ useHead(getHeader())
               </v-btn>
             </div>
             <div>
-              <v-btn size="small" color="gray" class="tw-w-full" @click="onNavigate">
+              <v-btn size="small" class="tw-w-full" @click="onNavigate">
                 条件をクリアして表示
               </v-btn>
             </div>
