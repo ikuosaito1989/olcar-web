@@ -95,7 +95,7 @@ useHead(headUtil.seo('検索'))
     >
       サービス
     </div>
-    <div class="tw-flex">
+    <div class="tw-flex tw-flex-wrap">
       <v-checkbox
         v-model="queryObject.socialTypes"
         label="X（旧Twitter）"
