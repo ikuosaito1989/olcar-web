@@ -26,7 +26,7 @@ const onConfirm = async () => {
     return
   }
 
-  if (!recaptchaRef.value?.validate()) {
+  if (!(await recaptchaRef.value?.validate())) {
     goTo(`#${elementIds.recaptchaDialog}`, { offset: -60 })
     return
   }
@@ -129,7 +129,7 @@ const validate = async () => {
         v-model:text="formData.description"
         label="商品説明"
         placeholder="商品説明"
-        hint="1000文字以内で入力してください"
+        hint="商品の説明を入力してください"
         :counter="1000"
         chip-label="必須"
         clearable
@@ -154,6 +154,7 @@ const validate = async () => {
         label="ユーザー名"
         placeholder="オルカー"
         chip-label="必須"
+        hint="お名前、社名、ニックネームなど表示したいユーザー名を入力してください"
         clearable
         type="text"
         :counter="30"
@@ -167,6 +168,7 @@ const validate = async () => {
         chip-label="必須"
         clearable
         type="text"
+        hint="車を販売する会社のHPやX（旧Twitter）、ヤフオク等のURLを入力してください"
         :counter="1000"
         :rules="[validationUtil.required, validationUtil.url]"
       ></TextField>
@@ -178,6 +180,7 @@ const validate = async () => {
         chip-label="必須"
         clearable
         type="email"
+        hint="審査通知を受け取るためのメールアドレスを入力してください"
         :counter="256"
         :rules="[validationUtil.required, validationUtil.email]"
       ></TextField>
