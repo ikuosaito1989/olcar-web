@@ -46,10 +46,13 @@ const useSetFromQuery = (query: any) => {
       title: v,
       value: '',
     })),
-    makers: queryUtil.toArrayQuery(query['makerIds[]']).map((v) => ({
-      title: Constants.MAKERS.filter((v) => v.key === v.key)[0].value,
-      value: v,
-    })),
+    makers: queryUtil
+      .toArrayQuery(query['makerIds[]'])
+      .map((q) => ({
+        title: Constants.MAKERS.find((m) => +q === m.key)?.value as string,
+        value: q,
+      }))
+      .filter((v) => !!v.title),
     socialTypes: queryUtil.toArrayQuery(query['socialTypes[]']).map((v) => +v as Social),
     isSponsor: !!query.isSponsor,
     isSales: !!query.isSales,

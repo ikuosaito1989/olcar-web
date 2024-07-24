@@ -108,7 +108,7 @@ useHead(getHeader())
         <div
           v-for="(condition, i) in searchConditions"
           :key="`maker_${i}`"
-          class="tw-pb-2 tw-pr-2 tw-font-bold"
+          class="tw-pb-3 tw-pr-3 tw-font-bold"
         >
           <v-chip variant="elevated">
             {{ condition }}
