@@ -118,10 +118,10 @@ const onClickReport = () => {
       <div>{{ formatUtil.toLocaleDateString(car.createAt) }}</div>
     </Item>
     <Item label="販売元">
-      <div class="tw-flex">
+      <div class="tw-flex tw-items-center">
         <v-img class="tw-w-7 tw-rounded-full" :src="car.userImageUrl"></v-img>
 
-        <div>{{ car.nickName }}</div>
+        <div class="tw-mr-1">{{ car.nickName }}</div>
       </div>
     </Item>
     <Item label="説明" :is-new-line="true">
