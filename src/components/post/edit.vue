@@ -142,7 +142,7 @@ const validate = async () => {
         placeholder="500,000"
         chip-label="必須"
         clearable
-        type="number"
+        type="tel"
         :rules="[
           validationUtil.required,
           (v) => validationUtil.max(+v, 10000000, '円以内にしてください'),
@@ -177,7 +177,7 @@ const validate = async () => {
         placeholder="support@ol-car.com"
         chip-label="必須"
         clearable
-        type="text"
+        type="email"
         :counter="256"
         :rules="[validationUtil.required, validationUtil.email]"
       ></TextField>
@@ -187,7 +187,7 @@ const validate = async () => {
         label="走行距離"
         placeholder="50,000"
         clearable
-        type="number"
+        type="tel"
         :rules="[(v) => validationUtil.max(+v, 500000, 'km以内にしてください')]"
       ></TextField>
 

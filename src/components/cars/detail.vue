@@ -89,6 +89,7 @@ const onClickReport = () => {
       <v-carousel-item
         v-for="(image, i) in car.images"
         :key="i"
+        class="tw-bg-slate-800"
         :src="image"
         @click="isVisible = !isVisible"
       ></v-carousel-item>

@@ -45,7 +45,7 @@ const onFavorite = (e: any) => {
   const storage = localStorageUtil.getItem<LocalStorage>(Constants.LOCALSTORAGE.FAVORITE)
   const item = storage.find((v) => v.id === prop.carId)
 
-  if (!item || item.id === 0) {
+  if (prop.carId === 0) {
     return
   }
 

@@ -89,6 +89,14 @@ defineExpose({
 
 <template>
   <div v-ripple class="tw-mb-2">
+    <div class="tw-flex tw-items-center">
+      <div
+        class="tw-my-3 tw-mr-2 tw-border-s-4 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
+      >
+        画像
+      </div>
+      <v-chip>必須</v-chip>
+    </div>
     <label
       class="tw-flex tw-min-h-28 tw-w-full tw-items-center tw-justify-center tw-border tw-border-dotted tw-border-gray-400 tw-bg-gray-100 hover:tw-bg-gray-200"
       :class="{ 'tw-border-2 tw-border-[#ff5252]': errors.error }"
@@ -97,7 +105,10 @@ defineExpose({
     >
       <div class="tw-mt-3 tw-text-center">
         <v-icon size="48px"> mdi-image-plus </v-icon>
-        <div class="tw-text-xs">画像を追加する</div>
+        <div class="tw-mt-2 tw-flex tw-text-xs"
+          ><v-icon size="16px">mdi-plus</v-icon>画像を追加する</div
+        >
+
         <v-file-input
           ref="fileRef"
           accept=".png, .jpg, .jpeg"
@@ -108,6 +119,7 @@ defineExpose({
         ></v-file-input>
       </div>
     </label>
+    <div class="tw-mt-2 tw-text-[10px]">ドラッグ＆ドロップで画像を追加することが出来ます</div>
     <div class="tw-mt-3 tw-flex tw-flex-wrap">
       <div v-for="file in currentItems" :key="file.name" class="tw-w-1/3 !tw-max-w-[33.333333%]">
         <div class="tw-relative">
