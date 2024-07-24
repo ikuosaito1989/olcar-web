@@ -20,7 +20,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="tw-flex tw-items-center tw-justify-between">
+  <div class="tw-mb-1 tw-flex tw-items-center tw-justify-between">
     <div>
       <div class="tw-text-xs tw-opacity-65">{{ makerName }}</div>
       <div class="tw-text-xl tw-font-bold">{{ name }}</div>
