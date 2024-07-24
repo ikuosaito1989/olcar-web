@@ -45,6 +45,10 @@ const onFavorite = (e: any) => {
   const storage = localStorageUtil.getItem<LocalStorage>(Constants.LOCALSTORAGE.FAVORITE)
   const item = storage.find((v) => v.id === prop.carId)
 
+  if (!item || item.id === 0) {
+    return
+  }
+
   if (item) {
     items.value = localStorageUtil.splice<LocalStorage>(Constants.LOCALSTORAGE.FAVORITE, item)
   } else {
