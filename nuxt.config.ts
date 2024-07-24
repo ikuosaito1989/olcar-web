@@ -120,7 +120,6 @@ export default defineNuxtConfig({
     public: {
       recaptcha: {
         v2SiteKey: process.env.RECAPTCHA_SITE_KEY,
-        v3SiteKey: 'YOUR_V3_SITEKEY_HERE',
       },
     },
   },
