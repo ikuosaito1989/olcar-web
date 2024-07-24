@@ -2,7 +2,7 @@
   <div
     class="tw-m-auto tw-mb-8 tw-flex tw-max-w-screen-md tw-flex-wrap [&>div]:tw-w-64 [&>div]:tw-p-3"
   >
-    <div class="">
+    <div>
       <div class="tw-border-b tw-pb-3 tw-text-base tw-font-bold">olcarについて</div>
       <ul class="[&>li]:tw-mt-3">
         <li><Anchor to="/info/about">olcarについて</Anchor></li>

@@ -12,7 +12,7 @@ defineProps({
 </script>
 
 <template>
-  <a class="" :href="href">
+  <Anchor :to="href">
     <v-img max-height="300" contain :lazy-src="src" :src="src" />
-  </a>
+  </Anchor>
 </template>

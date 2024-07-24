@@ -15,7 +15,7 @@ const omakasePrice = computed(() => (props.price ? props.price + 30000 : 0))
 
 <template>
   <div class="tw-flex tw-text-xs">
-    <div class="">
+    <div>
       <div class="tw-font-bold">希望価格</div>
       <div class="tw-flex tw-items-baseline">
         <div class="tw-mr-1 tw-text-3xl tw-font-bold tw-text-[#bc4c00]">
