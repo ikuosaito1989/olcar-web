@@ -51,7 +51,7 @@ const onClick = async (value: { id: unknown; value: boolean; path: unknown[] }) 
     currentItems.value.splice(0, currentItems.value.length)
   }
 
-  if (!currentItems.value.find((v) => v.value === item.value)) {
+  if (!currentItems.value.find((v) => +v.value === +item.value)) {
     arrayUtil.push<Item>(currentItems, [item])
   }
 
