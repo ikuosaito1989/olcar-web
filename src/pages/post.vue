@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { useGoTo } from 'vuetify'
+import type PostEdit from '~/components/post/edit.vue'
 
 const goTo = useGoTo()
 const mode = ref<'edit' | 'preview'>('edit')
-const formData = ref<PostEdit>({
+const editRef = ref<InstanceType<typeof PostEdit> | null>(null)
+
+const formData = ref<PostFrom>({
   carName: '',
   makers: [],
   prefectures: [],
@@ -71,6 +74,14 @@ const onConfirm = async () => {
 /**
  * 掲載ページへ遷移する
  */
+const onComplete = () => {
+  isComplete.value = false
+  goTo(0)
+  editRef.value?.reset()
+}
+/**
+ * 掲載ページへ遷移する
+ */
 const onGotoPage = () => {
   window.open(car.value.referenceUrls[0], '_blank', 'noreferrer')
 }
@@ -87,7 +98,7 @@ const onExitPreview = async () => {
  *
  * @param formData
  */
-const convertCar = (formData: PostEdit) => {
+const convertCar = (formData: PostFrom) => {
   const vehicleInspection =
     formData.vehicleInspection.year?.key && formData.vehicleInspection.month?.key
       ? formatUtil.toFirstDate(
@@ -128,6 +139,7 @@ useHead(headUtil.seo('掲載依頼する'))
   <section class="tw-m-2">
     <div v-if="mode === 'edit'">
       <PostEdit
+        ref="editRef"
         v-model:form-data="formData"
         @click:preview="onClickPreview"
         @click:confirm="isConfirm = true"
@@ -171,7 +183,7 @@ useHead(headUtil.seo('掲載依頼する'))
         <div class="tw-text-sm"
           >olcar（オルカー）の審査を行います。審査結果については1~3営業日以内に審査結果をメールアドレスにお送りしますので今しばらくお待ち下さい
         </div>
-        <div class="tw-mt-3 tw-text-center tw-text-sm" @click="isComplete = false">閉じる</div>
+        <div class="tw-mt-3 tw-text-center tw-text-sm" @click="onComplete">閉じる</div>
       </v-card>
     </v-dialog>
   </section>

@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 import { ofetch } from 'ofetch'
 

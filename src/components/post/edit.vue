@@ -16,7 +16,7 @@ const elementIds = {
   uploadDialog: 'upload-dialog',
   recaptchaDialog: 'recaptcha-dialog',
 }
-const formData = defineModel<PostEdit>('formData', { required: true })
+const formData = defineModel<PostFrom>('formData', { required: true })
 
 /**
  * この内容で掲載依頼する押下
@@ -80,6 +80,18 @@ const validate = async () => {
   goTo(`#${sortRect[0].id}`, { offset: -30 })
   return false
 }
+
+/**
+ *
+ */
+const reset = () => {
+  formRef.value?.reset()
+}
+
+// eslint-disable-next-line vue/no-expose-after-await
+defineExpose({
+  reset,
+})
 </script>
 
 <template>
