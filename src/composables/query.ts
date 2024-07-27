@@ -195,7 +195,7 @@ const useQueryString = () => {
  */
 const useOrderReset = () => {
   queryObject.value.priceOrder = undefined
-  queryObject.value.mileageFrom = undefined
+  queryObject.value.mileageOrder = undefined
 }
 
 /**
