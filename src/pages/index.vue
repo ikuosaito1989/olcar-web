@@ -121,7 +121,7 @@ useHead(getHeader())
       <v-icon class="tw-mb-1" color="primary">mdi-car</v-icon>{{ makerName }}の中古車
     </div>
 
-    <div v-if="summary.details.length === 0">
+    <div v-if="summary.details.length === 0" class="tw-mx-4 tw-text-center tw-font-bold">
       <v-icon>mdi-magnify</v-icon>
       検索された車は見つかりませんでした。再度検索して下さい
     </div>
@@ -205,13 +205,13 @@ useHead(getHeader())
         class="tw-mr-5"
         width="40"
         icon="mdi-chevron-left"
-        :disabled="!queryObject.page || queryObject.page == 1"
+        :disabled="!queryObject.page || queryObject.page == 1 || summary.details.length === 0"
         @click="onChangePage(queryObject.page ? queryObject.page - 1 : 1)"
       ></v-btn>
       <v-btn
         width="40"
         icon="mdi-chevron-right"
-        :disabled="summary.isEnd"
+        :disabled="summary.isEnd || summary.details.length === 0"
         @click="onChangePage(queryObject.page ? queryObject.page + 1 : 2)"
       ></v-btn>
     </div>
