@@ -67,7 +67,7 @@ const onClickReport = () => {
       max-width="768"
       @click:outside="isVisible = !isVisible"
     >
-      <v-carousel height="auto" hide-delimiters>
+      <v-carousel height="auto" hide-delimiters :show-arrows="car.images.length > 1">
         <v-btn
           icon="mdi-close"
           size="small"
@@ -85,7 +85,7 @@ const onClickReport = () => {
         </v-carousel-item>
       </v-carousel>
     </v-dialog>
-    <v-carousel height="300" hide-delimiters>
+    <v-carousel height="300" hide-delimiters :show-arrows="car.images.length > 1">
       <v-carousel-item
         v-for="(image, i) in car.images"
         :key="i"
