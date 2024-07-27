@@ -6,7 +6,7 @@ export interface QueryString {
   keywords?: string[]
   makerIds?: number[]
   carNames?: string[]
-  prefectureNames?: string[]
+  prefectures?: string[]
   socialTypes?: Social[]
   mileageFrom?: number | string | null
   mileageTo?: number | string | null

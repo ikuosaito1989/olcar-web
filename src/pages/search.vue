@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type ListDialog from '~/components/list-dialog.vue'
-type ListType = 'carNames' | 'makers' | 'prefectureNames'
 
 const route = useRoute()
 const refCarNames = ref<InstanceType<typeof ListDialog> | null>(null)
@@ -17,7 +16,7 @@ const carNames = ref<Item[]>([])
  * @param key
  * @param item
  */
-const onClickMaker = async (key: ListType, item: Item) => {
+const onClickMaker = async (item: Item) => {
   const _carNames = await $fetch<CarName[]>(`/api/v1/cars/names`, {
     query: { 'makerIds[]': [item.value] },
   })
@@ -48,7 +47,7 @@ useHead(headUtil.seo('検索'))
       button-name="メーカー・車名"
       :items="makerItems"
       multiple
-      @click:list="onClickMaker('makers', $event)"
+      @click:list="onClickMaker"
     ></ListDialog>
     <ListDialog
       ref="refCarNames"
@@ -57,7 +56,7 @@ useHead(headUtil.seo('検索'))
       multiple
     ></ListDialog>
     <ListDialog
-      :current-items="queryObject.prefectureNames"
+      :current-items="queryObject.prefectures"
       title="都道府県選択"
       label="都道府県"
       button-name="都道府県"

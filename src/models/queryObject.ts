@@ -7,7 +7,7 @@ export interface QueryObject {
   keywords: string[]
   makers: Item[]
   carNames: Item[]
-  prefectureNames: Item[]
+  prefectures: Item[]
   socialTypes: Social[]
   mileageFrom?: KeyLabel
   mileageTo?: KeyLabel

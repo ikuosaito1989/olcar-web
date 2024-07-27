@@ -13,7 +13,7 @@ const queryObject = ref<QueryObject>({
   keywords: [],
   carNames: [],
   makers: [],
-  prefectureNames: [],
+  prefectures: [],
   socialTypes: [],
 })
 
@@ -42,7 +42,7 @@ const useSetFromQuery = (query: any) => {
       title: v,
       value: '',
     })),
-    prefectureNames: queryUtil.toArrayQuery(query['prefectures[]']).map((v) => ({
+    prefectures: queryUtil.toArrayQuery(query['prefectures[]']).map((v) => ({
       title: v,
       value: '',
     })),
@@ -104,10 +104,10 @@ const useGetSearchConditions = (): string[] => {
     )
   }
 
-  if (obj.prefectureNames.length) {
+  if (obj.prefectures.length) {
     arrayUtil.push(
       searchConditions,
-      obj.prefectureNames.map((v) => v.title),
+      obj.prefectures.map((v) => v.title),
     )
   }
 
@@ -170,7 +170,7 @@ const useQueryString = () => {
     keywords: obj.text ? obj.text.split(/ |　/g) : [],
     carNames: obj.carNames.map((v) => v.title),
     makerIds: obj.makers.map((v) => +v.value),
-    prefectureNames: obj.prefectureNames.map((v) => v.title.toString()),
+    prefectures: obj.prefectures.map((v) => v.title.toString()),
     mileageFrom: obj.mileageFrom?.key,
     mileageTo: obj.mileageTo?.key,
     priceFrom: obj.priceFrom?.key,
@@ -185,6 +185,7 @@ const useQueryString = () => {
   }
 
   const _queryString = queryString.stringify(query, { arrayFormat: 'bracket' })
+  console.log(_queryString, query)
   // @todo arrayFormatはどうするか考える
   return _queryString ? `?${_queryString}` : ''
 }
@@ -213,7 +214,7 @@ const useReset = () => {
     keywords: [],
     carNames: [],
     makers: [],
-    prefectureNames: [],
+    prefectures: [],
     socialTypes: [],
     page: undefined,
     mileageFrom: undefined,
