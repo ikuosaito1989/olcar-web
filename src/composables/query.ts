@@ -60,7 +60,7 @@ const useSetFromQuery = (query: any) => {
     mileageTo: getKeyLabel('mileageTo'),
     priceFrom: getKeyLabel('priceFrom'),
     priceTo: getKeyLabel('priceTo'),
-    isVehicleInspection: query.isVehicleInspection,
+    isVehicleInspection: query.isVehicleInspection === 'true',
     priceOrder: query.priceOrder,
     mileageOrder: query.mileageOrder,
     text: queryUtil.toArrayQuery(query['keywords[]']).join(' '),
