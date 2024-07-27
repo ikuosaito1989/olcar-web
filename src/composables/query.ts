@@ -163,8 +163,7 @@ const useQueryString = () => {
   const obj = queryObject.value
   const query: QueryString = {
     page: obj.page,
-    socialTypes:
-      JSON.stringify(obj.socialTypes) === JSON.stringify(SOCIAL_TYPE) ? [] : obj.socialTypes,
+    socialTypes: obj.socialTypes.length === SOCIAL_TYPE.length ? [] : obj.socialTypes,
     isVehicleInspection: obj.isVehicleInspection,
     // eslint-disable-next-line no-irregular-whitespace
     keywords: obj.text ? obj.text.split(/ |　/g) : [],
@@ -185,7 +184,6 @@ const useQueryString = () => {
   }
 
   const _queryString = queryString.stringify(query, { arrayFormat: 'bracket' })
-  console.log(_queryString, query)
   // @todo arrayFormatはどうするか考える
   return _queryString ? `?${_queryString}` : ''
 }
