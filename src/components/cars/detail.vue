@@ -140,9 +140,9 @@ const onError = () => {
     </Item>
     <Item label="販売元">
       <div class="tw-flex tw-items-center">
-        <v-img class="tw-w-7 tw-rounded-full" :src="car.userImageUrl"></v-img>
+        <v-img class="tw-w-7" :src="car.userImageUrl"></v-img>
 
-        <div class="tw-mr-1">{{ car.nickName }}</div>
+        <div class="tw-mx-1">{{ car.nickName }}</div>
       </div>
     </Item>
     <Item label="説明" :is-new-line="true">
