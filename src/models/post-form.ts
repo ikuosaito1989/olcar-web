@@ -1,7 +1,7 @@
 /**
  *  掲載依頼するページのフォームデータ
  */
-export interface PostEdit {
+export interface PostFrom {
   /**
    * 車名
    */

@@ -1,3 +1,4 @@
+<!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script setup lang="ts">
 const props = defineProps({
   detail: {
@@ -6,9 +7,21 @@ const props = defineProps({
   },
 })
 
+const imageLoaded = ref(false)
+
 const comment = computed(() =>
   props.detail.comment.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').substring(0, 50),
 )
+
+const isPost = computed(() => !props.detail.posted || imageLoaded.value)
+
+/**
+ * Emitted if the image fails to load.
+ * {@link https://vuetifyjs.com/en/api/v-img/#events}
+ */
+const onError = () => {
+  imageLoaded.value = true
+}
 </script>
 
 <template>
@@ -28,7 +41,17 @@ const comment = computed(() =>
             height="220"
             :src="detail.images[0]"
             :lazy-src="detail.images[0]"
+            @error="onError"
           >
+            <v-overlay
+              class="tw-items-center tw-justify-center tw-text-center"
+              contained
+              persistent
+              :disabled="false"
+              :model-value="isPost"
+            >
+              <div class="tw-text-lg tw-font-bold tw-text-white">販売終了しました</div>
+            </v-overlay>
           </v-img>
         </div>
         <div class="tw-ml-2 tw-w-2/4">

@@ -10,6 +10,7 @@ const emit = defineEmits(['click:goto', 'click:report'])
 
 const keywords = ref<KeywordsText>({ keywords: [] })
 const isVisible = ref(false)
+const imageLoaded = ref(false)
 
 const comment = computed(() => {
   if (!prop.car.comment) {
@@ -27,6 +28,8 @@ const comment = computed(() => {
 
   return formatUtil.toLink(comment)
 })
+
+const isPost = computed(() => !prop.car.posted || imageLoaded.value)
 
 onMounted(async () => {
   $fetch<KeywordsText>(`/api/v1/keywords/text:keywords`, {
@@ -49,6 +52,14 @@ const onGotoPage = () => {
  */
 const onClickReport = () => {
   emit('click:report')
+}
+
+/**
+ * Emitted if the image fails to load.
+ * {@link https://vuetifyjs.com/en/api/v-img/#events}
+ */
+const onError = () => {
+  imageLoaded.value = true
 }
 </script>
 
@@ -85,14 +96,24 @@ const onClickReport = () => {
         </v-carousel-item>
       </v-carousel>
     </v-dialog>
-    <v-carousel height="300" hide-delimiters :show-arrows="car.images.length > 1">
+    <v-carousel height="300" hide-delimiters :show-arrows="car.images.length > 1 && !isPost">
       <v-carousel-item
         v-for="(image, i) in car.images"
         :key="i"
         class="tw-bg-slate-800"
         :src="image"
         @click="isVisible = !isVisible"
+        @error="onError"
       ></v-carousel-item>
+      <v-overlay
+        class="tw-items-center tw-justify-center tw-text-center"
+        contained
+        persistent
+        :disabled="false"
+        :model-value="isPost"
+      >
+        <div class="tw-text-lg tw-font-bold tw-text-white">販売終了しました</div>
+      </v-overlay>
     </v-carousel>
 
     <Price :is-omakase="true" class="tw-my-3" :price="car.price"></Price>
