@@ -86,6 +86,10 @@ const validate = async () => {
  */
 const reset = () => {
   formRef.value?.reset()
+  formData.value.files = []
+  formData.value.makers = []
+  formData.value.prefectures = []
+  formData.value.recaptcha = undefined
 }
 
 // eslint-disable-next-line vue/no-expose-after-await
