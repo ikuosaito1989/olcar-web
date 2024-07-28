@@ -86,12 +86,7 @@ const onError = () => {
           class="!tw-absolute tw-right-0 tw-top-0 tw-z-10 tw-m-2"
           @click="isVisible = !isVisible"
         ></v-btn>
-        <v-carousel-item
-          v-for="(item, i) in car.images"
-          :key="i"
-          reverse-transition="scroll-x-transition"
-          transition="scroll-x-transition"
-        >
+        <v-carousel-item v-for="(item, i) in car.images" :key="i">
           <v-img max-height="100vh" contain height="auto" :src="item" />
         </v-carousel-item>
       </v-carousel>
