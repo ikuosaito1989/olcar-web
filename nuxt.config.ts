@@ -164,6 +164,7 @@ export default defineNuxtConfig({
     exclude: ['/managements', '/maintenance'],
     experimentalWarmUp: true,
     experimentalCompression: true,
+    xsl: false,
     urls: async () => {
       const apiFetch = ofetch.create({ baseURL: process.env.API_URL })
       const result = {
