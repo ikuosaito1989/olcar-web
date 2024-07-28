@@ -149,6 +149,10 @@ useHead(getHeader())
           <v-icon color="primary" icon="mdi-sort"></v-icon>
           並び替え
         </div>
+        <div v-ripple class="tw-w-full tw-text-[#bc4c00]" @click="onNavigate({ path: 'favorite' })">
+          <v-icon color="primary">mdi-heart-outline</v-icon>
+          お気に入り
+        </div>
       </div>
 
       <v-expansion-panels v-model="isVisible">

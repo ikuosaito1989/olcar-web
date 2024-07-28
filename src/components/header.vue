@@ -18,7 +18,7 @@ const open = () => {
     </template>
     <template #append>
       <v-btn href="/search" icon="mdi-magnify"></v-btn>
-      <v-btn href="/favorite" icon="mdi-heart"></v-btn>
+      <v-btn href="/favorite" icon="mdi-heart-outline"></v-btn>
       <v-btn href="/history" icon="mdi-history"></v-btn>
     </template>
   </v-app-bar>
@@ -33,7 +33,7 @@ const open = () => {
       <v-btn color="black" href="/favorite" variant="text" prepend-icon="mdi-heart-outline">
         お気に入り
       </v-btn>
-      <v-btn color="black" href="/history" variant="text" prepend-icon="mdi-heart-outline">
+      <v-btn color="black" href="/history" variant="text" prepend-icon="mdi-history">
         閲覧履歴
       </v-btn>
       <div class="tw-my-2 tw-font-bold tw-text-[#f67b01]">olcarについて</div>
