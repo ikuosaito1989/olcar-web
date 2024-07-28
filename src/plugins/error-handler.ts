@@ -1,11 +1,24 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 export default defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.vueApp.config.errorHandler = (error, instance, info) => {
-    console.error('nuxtApp.vueApp.config.errorHandler')
+  nuxtApp.vueApp.config.errorHandler = async (error) => {
+    await report(error as Error)
   }
-
-  // Also possible
-  nuxtApp.hook('vue:error', (error, instance, info) => {
-    console.error(error, instance, info, 'nuxtApp.hook')
+  nuxtApp.hook('vue:error', async (error) => {
+    await report(error as Error)
   })
 })
+
+/**
+ * slackに通知する
+ *
+ * @param error
+ */
+const report = async (error: Error) => {
+  const runtimeConfig = useRuntimeConfig()
+  await $fetch(runtimeConfig.slackHookUrl, {
+    method: 'POST',
+    body: {
+      text: `${error.message}
+        ${error.stack}`,
+    },
+  })
+}
