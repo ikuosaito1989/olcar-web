@@ -101,7 +101,8 @@ defineExpose({
     </div>
     <div class="tw-rounded tw-bg-[#f5f5f6] tw-p-4">
       <Banner href="/info/exhibit" src="/banner/exhibit.png"></Banner>
-      <br />olcar（オルカー）に掲載するための情報を入力してください。
+      <br />
+      olcar（オルカー）に掲載するための情報を入力してください。
       掲載依頼後、1~3営業日以内に審査を行い、内容に問題がなければそのまま掲載が開始されます。
       審査不要、複数台掲載可、宣伝効果の高い掲載オプションもご用意しておりますのでこちらもご利用ください
     </div>
@@ -245,11 +246,12 @@ defineExpose({
         prepend-icon="mdi-eye-outline"
         class="tw-mb-4 tw-w-full"
         @click="onClickPreview"
-        >プレビュー</v-btn
       >
-      <v-btn variant="elevated" size="large" class="tw-w-full" @click="onConfirm"
-        >この内容で掲載依頼する</v-btn
-      >
+        プレビュー
+      </v-btn>
+      <v-btn variant="elevated" size="large" class="tw-w-full" @click="onConfirm">
+        この内容で掲載依頼する
+      </v-btn>
     </v-form>
   </div>
 </template>

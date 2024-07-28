@@ -62,15 +62,15 @@ defineExpose({
           :rules="[validationUtil.required]"
         ></TextArea>
         <div class="tw-mb-2 [&>button]:tw-w-full">
-          <v-btn variant="text" size="large" @click="onClick(Constants.REPORT.UNPOST)">{{
-            Constants.REPORT.UNPOST
-          }}</v-btn>
-          <v-btn variant="text" size="large" @click="onClick(Constants.REPORT.STOP)">{{
-            Constants.REPORT.STOP
-          }}</v-btn>
-          <v-btn variant="text" size="large" @click="onClick(Constants.REPORT.DIFF)">{{
-            Constants.REPORT.DIFF
-          }}</v-btn>
+          <v-btn variant="text" size="large" @click="onClick(Constants.REPORT.UNPOST)">
+            {{ Constants.REPORT.UNPOST }}
+          </v-btn>
+          <v-btn variant="text" size="large" @click="onClick(Constants.REPORT.STOP)">
+            {{ Constants.REPORT.STOP }}
+          </v-btn>
+          <v-btn variant="text" size="large" @click="onClick(Constants.REPORT.DIFF)">
+            {{ Constants.REPORT.DIFF }}
+          </v-btn>
         </div>
       </v-card>
     </v-dialog>

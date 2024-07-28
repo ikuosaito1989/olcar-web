@@ -118,7 +118,8 @@ useHead(getHeader())
     </div>
 
     <div v-if="makerName" class="tw-px-4 tw-pt-4 tw-text-xl tw-font-bold">
-      <v-icon class="tw-mb-1" color="primary">mdi-car</v-icon>{{ makerName }}の中古車
+      <v-icon class="tw-mb-1" color="primary">mdi-car</v-icon>
+      {{ makerName }}の中古車
     </div>
 
     <div v-if="summary.details.length === 0" class="tw-mx-4 tw-text-center tw-font-bold">
@@ -141,7 +142,8 @@ useHead(getHeader())
         class="tw-flex tw-h-12 tw-w-full tw-items-center tw-border tw-text-center tw-shadow [&>div:not(:last-child)]:tw-border-r [&>div]:tw-py-3 [&>div]:tw-font-bold"
       >
         <div v-ripple class="tw-w-full tw-text-[#bc4c00]" @click="onNavigate({ path: 'search' })">
-          <v-icon color="primary" icon="mdi-magnify"></v-icon>絞り込む
+          <v-icon color="primary" icon="mdi-magnify"></v-icon>
+          絞り込む
         </div>
         <div v-ripple class="tw-w-full tw-text-[#bc4c00]" @click="() => (isVisible = !isVisible)">
           <v-icon color="primary" icon="mdi-sort"></v-icon>
@@ -187,9 +189,7 @@ useHead(getHeader())
               </v-btn>
             </div>
             <div>
-              <v-btn size="small" class="tw-w-full" @click="onNavigate">
-                条件をクリアして表示
-              </v-btn>
+              <v-btn size="small" class="tw-w-full" @click="onNavigate">条件をクリアして表示</v-btn>
             </div>
           </v-expansion-panel-text>
         </v-expansion-panel>

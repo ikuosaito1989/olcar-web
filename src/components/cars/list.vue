@@ -9,7 +9,7 @@ defineProps({
 
 <template>
   <div v-for="(detail, index) in details" :key="detail.id">
-    <CarsCard :detail="detail"> </CarsCard>
+    <CarsCard :detail="detail"></CarsCard>
 
     <div v-if="index + 1 === 5 || index + 1 === 15">
       <Banner src="/banner/line.png" href="/info/line"></Banner>

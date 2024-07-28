@@ -52,8 +52,9 @@
         <li>
           <Anchor
             to="/?makerIds%5B%5D=1&makerIds%5B%5D=2&makerIds%5B%5D=3&makerIds%5B%5D=4&carNames%5B%5D=AE86&carNames%5B%5D=%E3%83%81%E3%82%A7%E3%82%A4%E3%82%B5%E3%83%BC&carNames%5B%5D=%E3%83%9E%E3%83%BC%E3%82%AF%E2%85%A1&carNames%5B%5D=%E3%82%B7%E3%83%93%E3%83%83%E3%82%AF&carNames%5B%5D=%E3%82%B7%E3%83%A3%E3%83%88%E3%83%AB&carNames%5B%5D=%E3%82%B7%E3%83%93%E3%83%83%E3%82%AF%E3%82%AF%E3%83%BC%E3%83%9A&carNames%5B%5D=180sx&carNames%5B%5D=%E3%82%B7%E3%83%AB%E3%83%93%E3%82%A2&carNames%5B%5D=%E3%82%B7%E3%83%AB%E3%83%93%E3%82%A2%E3%83%B4%E3%82%A1%E3%83%AA%E3%82%A8%E3%83%83%E3%82%BF&carNames%5B%5D=RX-7"
-            >希少車特集</Anchor
           >
+            希少車特集
+          </Anchor>
         </li>
         <li><Anchor to="/?isSponsor=true">olcarオススメ車</Anchor></li>
       </ul>
@@ -66,9 +67,9 @@
           <Anchor target="_blank" to="https://twitter.com/byebye20201">X（旧Twitter）</Anchor>
         </li>
         <li>
-          <Anchor target="_blank" to="https://www.youtube.com/channel/UCPONUTjMWhfzaDcM3fzUk4Q"
-            >Youtube</Anchor
-          >
+          <Anchor target="_blank" to="https://www.youtube.com/channel/UCPONUTjMWhfzaDcM3fzUk4Q">
+            Youtube
+          </Anchor>
         </li>
         <li><Anchor target="_blank" to="https://www.tiktok.com/@olcar2021">Tiktok</Anchor></li>
       </ul>

@@ -117,8 +117,8 @@ const onError = () => {
     </v-carousel>
 
     <Price :is-omakase="true" class="tw-my-3" :price="car.price"></Price>
-    <div class="tw-text-xs"
-      >おまかせ代行サービスは購入から納車までおまかせできるサービスです。詳しくは
+    <div class="tw-text-xs">
+      おまかせ代行サービスは購入から納車までおまかせできるサービスです。詳しくは
       <Anchor class="tw-font-bold tw-text-[#1976d2]" to="/info/omakase-agent">こちら</Anchor>
     </div>
     <Item label="走行距離">
@@ -147,17 +147,17 @@ const onError = () => {
     </Item>
     <Item label="説明" :is-new-line="true">
       <!--eslint-disable-next-line vue/no-v-html-->
-      <div v-html="comment"></div>
+      <div class="tw-whitespace-pre-wrap" v-html="comment"></div>
     </Item>
 
-    <v-alert prominent border="top" type="warning"
-      >掲載されている情報は正確でない場合や情報が更新されている可能性があります。正しい情報は掲載元ページをご確認ください
+    <v-alert prominent border="top" type="warning">
+      掲載されている情報は正確でない場合や情報が更新されている可能性があります。正しい情報は掲載元ページをご確認ください
     </v-alert>
 
     <v-btn class="tw-mt-5 tw-w-full" variant="flat" @click="onGotoPage">掲載ページへ</v-btn>
-    <v-btn color="black" class="tw-mb-1 tw-mt-5 tw-w-full" @click="onClickReport"
-      >公開停止、または問題を報告する</v-btn
-    >
+    <v-btn color="black" class="tw-mb-1 tw-mt-5 tw-w-full" @click="onClickReport">
+      公開停止、または問題を報告する
+    </v-btn>
     <div v-if="keywords.keywords.length > 0">
       <div
         class="tw-my-3 tw-border-s-8 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"

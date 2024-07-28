@@ -147,9 +147,9 @@ useHead(headUtil.seo('掲載依頼する'))
     </div>
     <div v-if="mode === 'preview'">
       <div class="tw-sticky tw-top-4 tw-z-50">
-        <v-btn size="large" class="tw-w-full !tw-bg-white" @click="onExitPreview"
-          >プレビューを終了する</v-btn
-        >
+        <v-btn size="large" class="tw-w-full !tw-bg-white" @click="onExitPreview">
+          プレビューを終了する
+        </v-btn>
       </div>
       <CarsDetail :car="car" @click:goto="onGotoPage"></CarsDetail>
     </div>
@@ -162,8 +162,8 @@ useHead(headUtil.seo('掲載依頼する'))
           </div>
           <div class="tw-m-2 tw-font-bold">この内容で掲載依頼しますか？</div>
         </div>
-        <div class="tw-my-2 tw-text-sm"
-          >入力した内容を変更できませんが、この内容でよろしいですか？また、審査により入力内容が変更されることがあります。
+        <div class="tw-my-2 tw-text-sm">
+          入力した内容を変更できませんが、この内容でよろしいですか？また、審査により入力内容が変更されることがあります。
         </div>
         <div class="tw-mt-2 tw-text-center">
           <v-btn class="tw-mr-2" @click="isConfirm = false">キャンセル</v-btn>
@@ -180,8 +180,8 @@ useHead(headUtil.seo('掲載依頼する'))
           </div>
           <div class="tw-m-2 tw-font-bold">掲載の申し込みを承りました</div>
         </div>
-        <div class="tw-text-sm"
-          >olcar（オルカー）の審査を行います。審査結果については1~3営業日以内に審査結果をメールアドレスにお送りしますので今しばらくお待ち下さい
+        <div class="tw-text-sm">
+          olcar（オルカー）の審査を行います。審査結果については1~3営業日以内に審査結果をメールアドレスにお送りしますので今しばらくお待ち下さい
         </div>
         <div class="tw-mt-3 tw-text-center tw-text-sm" @click="onComplete">閉じる</div>
       </v-card>

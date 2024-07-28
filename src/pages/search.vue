@@ -133,9 +133,9 @@ useHead(headUtil.seo('検索'))
 
     <div class="tw-fixed tw-bottom-0 tw-left-0 tw-w-full tw-bg-gray-100 tw-p-4 tw-opacity-90">
       <div class="tw-m-auto tw-flex tw-max-w-screen-md tw-text-center">
-        <v-btn color="gray" variant="elevated" size="large" class="tw-w-4/12" @click="useReset"
-          >クリア</v-btn
-        >
+        <v-btn color="gray" variant="elevated" size="large" class="tw-w-4/12" @click="useReset">
+          クリア
+        </v-btn>
 
         <v-btn
           variant="elevated"
@@ -143,8 +143,9 @@ useHead(headUtil.seo('検索'))
           class="tw-ml-3 tw-w-8/12"
           append-icon="mdi-magnify"
           @click="onClickSearch"
-          >検索する</v-btn
         >
+          検索する
+        </v-btn>
       </div>
     </div>
   </v-form>

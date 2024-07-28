@@ -61,7 +61,7 @@ const onFavorite = (e: any) => {
 </script>
 
 <template>
-  <v-btn v-if="mounted" :variant="variant" :prepend-icon="icon" @click="onFavorite">{{
-    label
-  }}</v-btn>
+  <v-btn v-if="mounted" :variant="variant" :prepend-icon="icon" @click="onFavorite">
+    {{ label }}
+  </v-btn>
 </template>
