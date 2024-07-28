@@ -184,7 +184,6 @@ const useQueryString = () => {
   }
 
   const _queryString = queryString.stringify(query, { arrayFormat: 'bracket' })
-  // @todo arrayFormatはどうするか考える
   return _queryString ? `?${_queryString}` : ''
 }
 

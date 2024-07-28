@@ -12,7 +12,6 @@ export default defineNuxtPlugin((_nuxtApp) => {
       loader.value = false
     },
     async onRequestError() {
-      // @todo
       loader.value = false
     },
     async onResponseError() {
