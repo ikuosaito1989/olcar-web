@@ -18,8 +18,7 @@ const comment = computed(() => {
   }
 
   const urls = formatUtil.getUrls(prop.car.comment)
-  // eslint-disable-next-line no-irregular-whitespace
-  let comment = prop.car.comment.replace(/　/g, '<br>')
+  let comment = prop.car.comment
   urls
     .filter((url) => url.includes('https://t.co'))
     .forEach((url) => {

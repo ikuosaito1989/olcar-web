@@ -9,9 +9,7 @@ const props = defineProps({
 
 const imageLoaded = ref(false)
 
-const comment = computed(() =>
-  props.detail.comment.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').substring(0, 50),
-)
+const comment = computed(() => props.detail.comment.substring(0, 50))
 
 const isPost = computed(() => !props.detail.posted || imageLoaded.value)
 
@@ -74,7 +72,8 @@ const onError = () => {
             <div>{{ formatUtil.toJoinString(detail.prefecture, detail.locality) }}</div>
           </Item>
           <Item label="説明" :is-new-line="true">
-            <div class="tw-line-clamp-2">{{ comment }}</div>
+            <!--eslint-disable-next-line vue/no-v-html-->
+            <div class="tw-line-clamp-2" v-html="comment"></div>
           </Item>
         </div>
       </div>
