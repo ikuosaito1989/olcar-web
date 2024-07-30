@@ -113,6 +113,7 @@ export default defineNuxtConfig({
     },
     '@nuxtjs/sitemap',
     'nuxt-gtag',
+    '@kgierke/nuxt-basic-auth',
   ],
 
   runtimeConfig: {
@@ -268,4 +269,14 @@ export default defineNuxtConfig({
   },
 
   compatibilityDate: '2024-07-10',
+  basicAuth: {
+    enabled: true,
+    users: [
+      {
+        username: process.env.BASIC_USER!,
+        password: process.env.BASIC_PASS!,
+      },
+    ],
+    allowedRoutes: ['^(?!.*managements).*$'],
+  },
 })

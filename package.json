@@ -15,6 +15,7 @@
     "prettier:fix": "prettier --write --list-different ."
   },
   "dependencies": {
+    "@kgierke/nuxt-basic-auth": "^1.6.0",
     "@mdi/font": "^7.4.47",
     "@types/google-libphonenumber": "^7.4.30",
     "@types/marked": "^6.0.0",
