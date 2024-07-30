@@ -13,16 +13,6 @@ export interface ManagementsEdit {
   makers: Item[]
 
   /**
-   * 都道府県
-   */
-  prefectures: Item[]
-
-  /**
-   * 市区町村
-   */
-  locality: string
-
-  /**
    * 商品説明
    */
   description: string

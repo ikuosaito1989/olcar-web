@@ -12,7 +12,7 @@ const MODAL = {
   unPost: { title: '掲載停止しますか？', message: '掲載停止しました。' },
 }
 
-const { prefectureItems, makerItems } = await useFetchMaster()
+const { makerItems } = await useFetchMaster()
 const route = useRoute()
 const { data: car } = await useFetchi<Detail>(`/api/v1/cars/${route.params.id}`, {
   query: {
@@ -24,8 +24,6 @@ const { data: car } = await useFetchi<Detail>(`/api/v1/cars/${route.params.id}`,
 const formData = ref<ManagementsEdit>({
   carName: car.value.name,
   makers: [{ title: car.value.makerName, value: car.value.makerId }],
-  prefectures: [{ title: car.value.prefecture, value: '' }],
-  locality: car.value.locality,
   description: car.value.comment,
   price: car.value.price?.toString() as string,
   link: car.value.referenceUrls[0],
@@ -51,7 +49,7 @@ const onClickUpdate = async () => {
     unknownVehicleInspection: car.value.unknownVehicleInspection,
     comment: formData.value.description,
     makerName: formData.value.makers[0].title,
-    published: true,
+    published: car.value.published,
     isSponsor: formData.value.isSponsor,
   }
 
@@ -70,7 +68,7 @@ const onClickStatus = async (key: keyof typeof MODAL) => {
 }
 
 /**
- *
+ * 許可する
  */
 const onClickAction = async (action: boolean) => {
   isVisible.value = false
@@ -189,24 +187,6 @@ const onClickAction = async (action: boolean) => {
         clearable
         type="number"
         :rules="[(v) => validationUtil.max(+v, 500000, 'km以内にしてください')]"
-      ></TextField>
-
-      <ListDialog
-        :current-items="formData.prefectures"
-        title="都道府県選択"
-        label="都道府県"
-        button-name="都道府県"
-        :items="prefectureItems"
-      ></ListDialog>
-
-      <TextField
-        v-model:text="formData.locality"
-        label="市区町村"
-        placeholder="横浜市"
-        required
-        clearable
-        type="text"
-        :counter="30"
       ></TextField>
 
       <v-checkbox v-model="formData.isSponsor" label="オススメ"></v-checkbox>
