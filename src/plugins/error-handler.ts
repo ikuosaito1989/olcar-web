@@ -1,3 +1,5 @@
+import type { NuxtError } from '#app'
+
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.config.errorHandler = async (error) => {
     await report(error as Error)
@@ -13,6 +15,9 @@ export default defineNuxtPlugin((nuxtApp) => {
  * @param error
  */
 const report = async (error: Error) => {
+  if ((error as NuxtError).statusCode === 404) {
+    return
+  }
   const runtimeConfig = useRuntimeConfig()
   await $fetch(runtimeConfig.slackHookUrl, {
     method: 'POST',
