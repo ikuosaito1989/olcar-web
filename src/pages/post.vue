@@ -79,12 +79,6 @@ const onComplete = () => {
   goTo(0)
   editRef.value?.reset()
 }
-/**
- * 掲載ページへ遷移する
- */
-const onGotoPage = () => {
-  window.open(car.value.referenceUrls[0], '_blank', 'noreferrer')
-}
 
 /**
  * プレビューモードを終了する
@@ -151,7 +145,7 @@ useHead(headUtil.seo('掲載依頼する'))
           プレビューを終了する
         </v-btn>
       </div>
-      <CarsDetail :car="car" @click:goto="onGotoPage"></CarsDetail>
+      <CarsDetail :car="car"></CarsDetail>
     </div>
 
     <v-dialog v-model="isConfirm" width="400">

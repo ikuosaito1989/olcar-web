@@ -53,7 +53,7 @@ const onClickUpdate = async () => {
     isSponsor: formData.value.isSponsor,
   }
 
-  await $fetch<Update>(`/api/v1/cars`, {
+  await $fetchByApiKey<Update>(`/api/v1/cars`, {
     method: 'PUT',
     body: data,
   })
@@ -79,7 +79,7 @@ const onClickAction = async (action: boolean) => {
   switch (label.value) {
     case MODAL.pass.title: {
       const data: Passed = { accessKey: route.params.id as string }
-      await $fetch<Passed>(`/api/v1/cars/passed`, {
+      await $fetchByApiKey<Passed>(`/api/v1/cars/passed`, {
         method: 'POST',
         body: data,
       })
@@ -88,7 +88,7 @@ const onClickAction = async (action: boolean) => {
     }
     case MODAL.reject.title: {
       const data: Reject = { accessKey: route.params.id as string }
-      await $fetch<Reject>(`/api/v1/cars/reject`, {
+      await $fetchByApiKey<Reject>(`/api/v1/cars/reject`, {
         method: 'POST',
         body: data,
       })
@@ -97,7 +97,7 @@ const onClickAction = async (action: boolean) => {
     }
     case MODAL.unPublish.title: {
       const data: UnPublish = { carId: +route.params.id }
-      await $fetch<UnPublish>(`/api/v1/cars/unpublish`, {
+      await $fetchByApiKey<UnPublish>(`/api/v1/cars/unpublish`, {
         method: 'POST',
         body: data,
       })
@@ -106,7 +106,7 @@ const onClickAction = async (action: boolean) => {
     }
     case MODAL.unPost.title: {
       const data: UnPost = { carId: +route.params.id }
-      await $fetch<UnPost>(`/api/v1/cars/unpost`, {
+      await $fetchByApiKey<UnPost>(`/api/v1/cars/unpost`, {
         method: 'POST',
         body: data,
       })

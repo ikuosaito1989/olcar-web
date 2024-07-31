@@ -120,6 +120,7 @@ export default defineNuxtConfig({
     siteUrl: process.env.SITE_URL,
     slackHookUrl: process.env.SLACK_HOOK_URL,
     public: {
+      apiKey: process.env.API_KEY,
       recaptcha: {
         v2SiteKey: process.env.RECAPTCHA_SITE_KEY,
       },

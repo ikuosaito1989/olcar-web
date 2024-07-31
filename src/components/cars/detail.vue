@@ -6,7 +6,7 @@ const prop = defineProps({
   },
 })
 
-const emit = defineEmits(['click:goto', 'click:report'])
+const emit = defineEmits(['click:report'])
 
 const keywords = ref<KeywordsText>({ keywords: [] })
 const isVisible = ref(false)
@@ -38,13 +38,6 @@ onMounted(async () => {
     keywords.value = keywordsText
   })
 })
-
-/**
- * 掲載ページへ遷移する
- */
-const onGotoPage = () => {
-  emit('click:goto')
-}
 
 /**
  * レポートダイアログを表示する
@@ -148,7 +141,14 @@ const onError = () => {
       掲載されている情報は正確でない場合や情報が更新されている可能性があります。正しい情報は掲載元ページをご確認ください
     </v-alert>
 
-    <v-btn class="tw-mt-5 tw-w-full" variant="flat" @click="onGotoPage">掲載ページへ</v-btn>
+    <v-btn
+      class="tw-mt-5 tw-w-full"
+      variant="elevated"
+      target="_blank"
+      :href="car.referenceUrls[0]"
+    >
+      掲載ページへ
+    </v-btn>
     <v-btn color="black" class="tw-mb-1 tw-mt-5 tw-w-full" @click="onClickReport">
       公開停止、または問題を報告する
     </v-btn>

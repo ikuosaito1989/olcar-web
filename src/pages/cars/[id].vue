@@ -45,13 +45,6 @@ onMounted(async () => {
 })
 
 /**
- * 掲載ページへ遷移する
- */
-const onGotoPage = () => {
-  window.open(car.value.referenceUrls[0], '_blank', 'noreferrer')
-}
-
-/**
  * レポートダイアログを表示する
  */
 const onClickReport = () => {
@@ -87,7 +80,7 @@ useHead(getHeader())
 
 <template>
   <section>
-    <CarsDetail :car="car" @click:goto="onGotoPage" @click:report="onClickReport"></CarsDetail>
+    <CarsDetail :car="car" @click:report="onClickReport"></CarsDetail>
 
     <div class="tw-m-2 tw-rounded-3xl tw-bg-[#f5f5f6] tw-p-4">
       <Anchor to="/info/omakase-agent">
