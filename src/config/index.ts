@@ -15,7 +15,7 @@ const NOT_FOUND_TWITTER_IMAGE =
  */
 const REPORT = {
   UNPOST: '販売終了申請',
-  STOP: '販売終了申請',
+  STOP: '公開停止申請',
   DIFF: '公開された情報が異なる',
 }
 /**
