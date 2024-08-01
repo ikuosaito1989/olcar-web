@@ -20,7 +20,7 @@ const changed = computed(() => route.path === hrefObj.url)
 </script>
 
 <template>
-  <NuxtLink :to="to" :external="changed" :target="target">
+  <NuxtLink class="hover:tw-underline" :to="to" :external="changed" :target="target">
     <slot></slot>
   </NuxtLink>
 </template>

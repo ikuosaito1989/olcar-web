@@ -45,6 +45,10 @@ useHead(headUtil.seo(title.value))
 
   a {
     color: #1976d2;
+
+    &:hover {
+      text-decoration-line: underline;
+    }
   }
 
   ol,
