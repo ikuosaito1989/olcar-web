@@ -10,6 +10,10 @@ const props = defineProps({
     type: String as PropType<'_self' | '_blank' | '_parent' | '_top'>,
     default: undefined,
   },
+  isUnderLine: {
+    type: Boolean,
+    default: true,
+  },
 })
 
 const route = useRoute()
@@ -20,7 +24,12 @@ const changed = computed(() => route.path === hrefObj.url)
 </script>
 
 <template>
-  <NuxtLink class="hover:tw-underline" :to="to" :external="changed" :target="target">
+  <NuxtLink
+    :class="{ 'hover:tw-underline': isUnderLine }"
+    :to="to"
+    :external="changed"
+    :target="target"
+  >
     <slot></slot>
   </NuxtLink>
 </template>

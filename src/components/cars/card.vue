@@ -24,7 +24,7 @@ const onError = () => {
 
 <template>
   <div v-ripple class="tw-p-4 tw-shadow-md">
-    <Anchor :to="`/cars/${detail.id}`">
+    <Anchor :is-under-line="false" :to="`/cars/${detail.id}`">
       <Titles
         :is-sponsor="detail.isSponsor"
         :car-id="detail.id"

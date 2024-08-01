@@ -83,7 +83,7 @@ useHead(getHeader())
     <CarsDetail :car="car" @click:report="onClickReport"></CarsDetail>
 
     <div class="tw-m-2 tw-rounded-3xl tw-bg-[#f5f5f6] tw-p-4">
-      <Anchor to="/info/omakase-agent">
+      <Anchor :is-under-line="false" to="/info/omakase-agent">
         <div class="tw-mb-4 tw-flex tw-items-center">
           <v-icon color="#f67b01" class="tw-mr-2" size="40">mdi-handshake-outline</v-icon>
           <div>

@@ -161,7 +161,9 @@ const onError = () => {
 
       <div>
         <Anchor v-for="(keyword, i) in keywords.keywords" :key="i" :to="`/?keywords[]=${keyword}`">
-          <v-chip class="tw-mb-2 tw-mr-2" color="#f67b01" small label dark>{{ keyword }}</v-chip>
+          <v-chip v-ripple class="tw-mb-2 tw-mr-2" color="#f67b01" small label dark>
+            {{ keyword }}
+          </v-chip>
         </Anchor>
       </div>
       <div class="tw-text-xs">※クリックすると検索できます</div>
