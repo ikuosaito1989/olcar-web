@@ -38,7 +38,7 @@ if (route.params.makerId && !makerName.value) {
  *
  * @param value ページ数
  */
-const onNavigate = ({
+const onNavigate = async ({
   path = '',
   sort,
 }: {
@@ -51,7 +51,7 @@ const onNavigate = ({
     queryObject.value[sort.key] = sort.value
   }
 
-  reloadNuxtApp({ path: `/${path}${useQueryString()}` })
+  await navigateTo(`/${path}${useQueryString()}`, { external: !path })
 }
 
 /**

@@ -27,8 +27,8 @@ const onClickMaker = async (item: Item) => {
 /**
  * queryObjectからqueryStringを生成してリダイレクトする
  */
-const onClickSearch = () => {
-  reloadNuxtApp({ path: `/${useQueryString()}` })
+const onClickSearch = async () => {
+  await navigateTo(`/${useQueryString()}`)
 }
 
 useHead(headUtil.seo('検索'))
@@ -126,7 +126,7 @@ useHead(headUtil.seo('検索'))
       v-model:text="queryObject.text"
       label="キーワード検索"
       placeholder="MT サンルーフ"
-      :counter="10"
+      :counter="30"
       type="text"
       icon="mdi-magnify"
     ></TextField>
