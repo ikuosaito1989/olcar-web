@@ -18,7 +18,7 @@
 
 上記以外にも個人売買による手続きが不安な方は「**おまかせ代行サービス（¥3,000〜）**」にて行政書士がサポートいたします。ぜひお気軽にご相談ください！
 
-<a href="/info/info/omakase-agent?ref=p">
+<a href="/info/omakase-agent?ref=p">
 <img src="https://homepage.gsss.pro/wp-content/uploads/2023/08/1a7321fd5c87b44161456ab0d5bcbbaf-1.png">
 </a>
 
