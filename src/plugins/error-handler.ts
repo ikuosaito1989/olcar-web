@@ -14,7 +14,7 @@ export default defineNuxtPlugin((nuxtApp) => {
  *
  * @param error
  */
-const report = async (error: Error) => {
+export const report = async (error: Error) => {
   if ((error as NuxtError).statusCode === 404) {
     return
   }

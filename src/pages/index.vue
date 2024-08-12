@@ -102,6 +102,7 @@ useHead(getHeader())
 
 <template>
   <section>
+    <v-img lazy-src="/top.png" src="/top.png"></v-img>
     <div v-if="searchConditions.length" class="tw-mx-4 tw-mt-4">
       <div class="tw-mb-2 tw-font-bold">検索条件</div>
       <div class="tw-flex tw-flex-wrap">
@@ -199,8 +200,6 @@ useHead(getHeader())
         </v-expansion-panel>
       </v-expansion-panels>
     </div>
-
-    <Banner src="/banner/line.png" href="/info/line"></Banner>
 
     <CarsList :details="summary.details" />
 
