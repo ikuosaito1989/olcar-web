@@ -53,6 +53,7 @@ const onNavigate = async ({
 
   if (sort) {
     queryObject.value[sort.key] = sort.value
+    queryObject.value.page = undefined
   }
 
   await navigateTo(`/${path}${useQueryString()}`, { external: !path })
