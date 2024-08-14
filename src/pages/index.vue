@@ -41,11 +41,15 @@ if (route.params.makerId && !makerName.value) {
 const onNavigate = async ({
   path = '',
   sort,
+  isOrderReset = true,
 }: {
   path?: string
   sort?: { key: 'priceOrder' | 'mileageOrder'; value: Sort }
+  isOrderReset?: boolean
 }) => {
-  useOrderReset()
+  if (isOrderReset) {
+    useOrderReset()
+  }
 
   if (sort) {
     queryObject.value[sort.key] = sort.value
@@ -72,7 +76,7 @@ const onChangeSales = () => {
     useIsSalesReset()
   }
 
-  onNavigate({})
+  onNavigate({ isOrderReset: false })
 }
 
 /**
