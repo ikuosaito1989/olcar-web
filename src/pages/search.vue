@@ -61,6 +61,7 @@ useHead(headUtil.seo('検索'))
       label="都道府県"
       button-name="都道府県"
       :items="prefectureItems"
+      multiple
     ></ListDialog>
 
     <FromTo
