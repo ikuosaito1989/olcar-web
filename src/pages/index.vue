@@ -66,7 +66,7 @@ const onNavigate = async ({
  */
 const onChangePage = (value?: number) => {
   queryObject.value.page = value
-  onNavigate({})
+  onNavigate({ isOrderReset: false })
 }
 
 /**

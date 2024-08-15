@@ -168,6 +168,10 @@ export default defineNuxtConfig({
     experimentalCompression: true,
     xsl: false,
     urls: async () => {
+      if (process.env.NODE_ENV === 'development') {
+        return []
+      }
+
       const apiFetch = ofetch.create({ baseURL: process.env.API_URL })
       const result = {
         cars: [],
