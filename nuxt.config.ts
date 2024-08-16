@@ -184,7 +184,7 @@ export default defineNuxtConfig({
           const fetch = apiFetch<Sitemap>('/v1/sitemap', {
             query: {
               offset: i * 40000 + 1,
-              limit: 40000,
+              limit: i * 40000 + 1 + 40000,
             },
           })
           func.push(fetch)
