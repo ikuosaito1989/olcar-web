@@ -17,9 +17,15 @@ const open = () => {
       <Anchor to="/"><v-img width="130" src="/logo.png" lazy-src="/logo.png" /></Anchor>
     </template>
     <template #append>
-      <v-btn href="/search" icon="mdi-magnify"></v-btn>
-      <v-btn href="/favorite" icon="mdi-heart-outline"></v-btn>
-      <v-btn href="/history" icon="mdi-history"></v-btn>
+      <Anchor to="/search">
+        <v-btn icon="mdi-magnify"></v-btn>
+      </Anchor>
+      <Anchor to="/favorite">
+        <v-btn icon="mdi-heart-outline"></v-btn>
+      </Anchor>
+      <Anchor to="/history">
+        <v-btn icon="mdi-history"></v-btn>
+      </Anchor>
     </template>
   </v-app-bar>
   <v-navigation-drawer
