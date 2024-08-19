@@ -198,8 +198,11 @@ useHead(getHeader())
                 多い順
               </v-btn>
             </div>
-            <div>
-              <v-btn size="small" class="tw-w-full" @click="onNavigate">条件をクリアして表示</v-btn>
+            <div class="tw-mb-4 tw-flex tw-items-center tw-justify-between">
+              <div class="tw-basis-1/3 tw-font-bold">掲載日</div>
+              <v-btn size="small" class="tw-basis-[67.3%] tw-font-bold" @click="onNavigate">
+                新着順
+              </v-btn>
             </div>
           </v-expansion-panel-text>
         </v-expansion-panel>
