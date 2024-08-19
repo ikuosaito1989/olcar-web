@@ -1,4 +1,5 @@
 <script setup lang="ts">
+type Variant = 'elevated' | 'outlined'
 const route = useRoute()
 useSetFromQuery(route.query)
 
@@ -32,6 +33,33 @@ queryObject.value.page = route.query.page ? +route.query.page : undefined
 if (route.params.makerId && !makerName.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })
 }
+
+const sortButtonType: globalThis.ComputedRef<{
+  mileageAsc: Variant
+  mileageDesc: Variant
+  priceAsc: Variant
+  priceDesc: Variant
+  createAtAsc: Variant
+}> = computed(() => {
+  /**
+   * ソートの状態によってVariantを取得する
+   */
+  const getVariant = (order: Sort | undefined, targetOrder: Sort) =>
+    order === targetOrder ? 'elevated' : 'outlined'
+  const mileageAsc: Variant = getVariant(queryObject.value.mileageOrder, 'asc')
+  const mileageDesc: Variant = getVariant(queryObject.value.mileageOrder, 'desc')
+  const priceAsc: Variant = getVariant(queryObject.value.priceOrder, 'asc')
+  const priceDesc: Variant = getVariant(queryObject.value.priceOrder, 'desc')
+  const createAtAsc: Variant =
+    !queryObject.value.mileageOrder && !queryObject.value.priceOrder ? 'elevated' : 'outlined'
+  return {
+    mileageAsc,
+    mileageDesc,
+    priceAsc,
+    priceDesc,
+    createAtAsc,
+  }
+})
 
 /**
  * ページを変更する
@@ -167,6 +195,7 @@ useHead(getHeader())
             <div class="tw-mb-4 tw-flex tw-items-center tw-justify-between">
               <div class="tw-basis-1/3 tw-font-bold">価格</div>
               <v-btn
+                :variant="sortButtonType.priceAsc"
                 size="small"
                 class="tw-mr-1 tw-basis-1/3 tw-font-bold"
                 @click="onNavigate({ sort: { key: 'priceOrder', value: 'asc' } })"
@@ -174,6 +203,7 @@ useHead(getHeader())
                 安い順
               </v-btn>
               <v-btn
+                :variant="sortButtonType.priceDesc"
                 size="small"
                 class="tw-basis-1/3 tw-font-bold"
                 @click="onNavigate({ sort: { key: 'priceOrder', value: 'desc' } })"
@@ -184,6 +214,7 @@ useHead(getHeader())
             <div class="tw-mb-4 tw-flex tw-items-center tw-justify-between">
               <div class="tw-basis-1/3 tw-font-bold">走行距離</div>
               <v-btn
+                :variant="sortButtonType.mileageAsc"
                 size="small"
                 class="tw-mr-1 tw-basis-1/3 tw-font-bold"
                 @click="onNavigate({ sort: { key: 'mileageOrder', value: 'asc' } })"
@@ -191,6 +222,7 @@ useHead(getHeader())
                 少ない順
               </v-btn>
               <v-btn
+                :variant="sortButtonType.mileageDesc"
                 size="small"
                 class="tw-basis-1/3 tw-font-bold"
                 @click="onNavigate({ sort: { key: 'mileageOrder', value: 'desc' } })"
@@ -200,7 +232,12 @@ useHead(getHeader())
             </div>
             <div class="tw-mb-4 tw-flex tw-items-center tw-justify-between">
               <div class="tw-basis-1/3 tw-font-bold">掲載日</div>
-              <v-btn size="small" class="tw-basis-[67.3%] tw-font-bold" @click="onNavigate">
+              <v-btn
+                :variant="sortButtonType.createAtAsc"
+                size="small"
+                class="tw-basis-[67.3%] tw-font-bold"
+                @click="onNavigate"
+              >
                 新着順
               </v-btn>
             </div>
