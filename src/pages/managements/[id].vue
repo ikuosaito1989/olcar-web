@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import dayjs from '~/lib/day'
+
 /**
  * Modalのメッセージ
  */
@@ -45,7 +47,9 @@ const onClickUpdate = async () => {
     name: formData.value.carName,
     price: formData.value.price,
     mileage: formData.value.mileage,
-    vehicleInspection: car.value.vehicleInspection,
+    vehicleInspection: car.value.vehicleInspection
+      ? dayjs(car.value.vehicleInspection).format(Constants.ISO8601_FORMAT)
+      : car.value.vehicleInspection,
     unknownVehicleInspection: car.value.unknownVehicleInspection,
     comment: formData.value.description,
     makerName: formData.value.makers[0].title,
