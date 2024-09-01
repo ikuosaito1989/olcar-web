@@ -57,7 +57,7 @@ defineExpose({
           class="tw-p-3"
           placeholder="理由"
           hint="報告する内容を入力してください"
-          :counter="100"
+          :counter="30"
           clearable
           :rules="[validationUtil.required]"
         ></TextArea>
