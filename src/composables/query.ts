@@ -166,7 +166,7 @@ const useQueryString = () => {
     socialTypes: obj.socialTypes.length === SOCIAL_TYPE.length ? [] : obj.socialTypes,
     isVehicleInspection: obj.isVehicleInspection || undefined,
     // eslint-disable-next-line no-irregular-whitespace
-    keywords: obj.text ? obj.text.split(/ |　/g) : [],
+    keywords: obj.text ? obj.text.split(/ |　/g).filter((v) => v) : [],
     carNames: obj.carNames.map((v) => v.title),
     makerIds: obj.makers.map((v) => +v.value),
     prefectures: obj.prefectures.map((v) => v.title.toString()),
