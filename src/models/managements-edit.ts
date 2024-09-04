@@ -36,4 +36,9 @@ export interface ManagementsEdit {
    * スポンサー
    */
   isSponsor: boolean
+
+  /**
+   * 車検
+   */
+  vehicleInspection: string | null
 }

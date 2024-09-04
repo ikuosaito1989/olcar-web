@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import dayjs from '~/lib/day'
-
 /**
  * Modalのメッセージ
  */
@@ -31,6 +29,7 @@ const formData = ref<ManagementsEdit>({
   link: car.value.referenceUrls[0],
   mileage: car.value.mileage?.toString() as string,
   isSponsor: car.value.isSponsor,
+  vehicleInspection: car.value.vehicleInspection,
 })
 
 const isVisible = ref<boolean>(false)
@@ -47,9 +46,7 @@ const onClickUpdate = async () => {
     name: formData.value.carName,
     price: formData.value.price,
     mileage: formData.value.mileage,
-    vehicleInspection: car.value.vehicleInspection
-      ? dayjs(car.value.vehicleInspection).format(Constants.ISO8601_FORMAT)
-      : car.value.vehicleInspection,
+    vehicleInspection: formatUtil.toIso8601(formData.value.vehicleInspection),
     unknownVehicleInspection: car.value.unknownVehicleInspection,
     comment: formData.value.description,
     makerName: formData.value.makers[0].title,
@@ -160,6 +157,14 @@ const onClickAction = async (action: boolean) => {
         :rules="[validationUtil.required]"
       ></TextArea>
 
+      <TextField
+        v-model:text="formData.vehicleInspection"
+        label="車検"
+        placeholder="2024/09/04"
+        clearable
+      ></TextField>
+
+      {{ formData.vehicleInspection }}
       <TextField
         v-model:text="formData.price"
         label="価格"
