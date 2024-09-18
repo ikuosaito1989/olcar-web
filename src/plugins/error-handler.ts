@@ -15,7 +15,7 @@ export default defineNuxtPlugin((nuxtApp) => {
  * @param error
  */
 export const report = async (error: Error) => {
-  if ((error as NuxtError).statusCode === 404) {
+  if ((error as NuxtError)?.statusCode === 404) {
     return
   }
   const runtimeConfig = useRuntimeConfig()
