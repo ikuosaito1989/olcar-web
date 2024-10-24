@@ -17,6 +17,7 @@
   "dependencies": {
     "@kgierke/nuxt-basic-auth": "^1.7.0",
     "@mdi/font": "^7.4.47",
+    "@nuxt/kit": "latest",
     "@types/google-libphonenumber": "^7.4.30",
     "@types/marked": "^6.0.0",
     "autolinker": "^4.0.0",
