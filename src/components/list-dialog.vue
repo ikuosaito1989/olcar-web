@@ -43,7 +43,7 @@ const _items = ref(prop.items)
 watch(
   () => prop.items,
   () => {
-    _items.value = prop.items
+    resetItems()
   },
 )
 
@@ -65,7 +65,7 @@ const onClick = async (value: { id: unknown; value: boolean; path: unknown[] }) 
   }
 
   validate()
-
+  resetItems()
   emit('click:list', item)
 }
 
@@ -74,6 +74,7 @@ const onClick = async (value: { id: unknown; value: boolean; path: unknown[] }) 
  */
 const onClose = async () => {
   dialog.value = false
+  resetItems()
   validate()
 }
 
@@ -98,6 +99,11 @@ const open = () => {
  * 検索テキストを更新する
  */
 const update = (value: string) => {
+  if (!value) {
+    resetItems()
+    return
+  }
+
   _items.value = prop.items.filter(
     (v) =>
       v.title.startsWith(toHiragana(value)) ||
@@ -130,6 +136,13 @@ const validate = async () => {
   errors.value.message = message
   errors.value.error = !!errors.value.message
   return false
+}
+
+/**
+ * itemsをリセットする
+ */
+const resetItems = () => {
+  _items.value = prop.items
 }
 
 defineExpose({
