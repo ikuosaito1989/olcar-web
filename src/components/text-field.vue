@@ -36,9 +36,21 @@ defineProps({
     type: String,
     default: undefined,
   },
+  persistentHint: {
+    type: Boolean,
+    default: false,
+  },
 })
 
+const emit = defineEmits(['update'])
 const text = defineModel<string>('text')
+
+/**
+ * 変更イベント
+ */
+const update = (value: string) => {
+  emit('update', value)
+}
 </script>
 
 <template>
@@ -62,6 +74,8 @@ const text = defineModel<string>('text')
       :clearable="clearable"
       :prepend-inner-icon="icon"
       :hint="hint"
+      :persistent-hint="persistentHint"
+      @update:model-value="update"
     ></v-text-field>
   </div>
 </template>

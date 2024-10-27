@@ -51,6 +51,7 @@ useHead(headUtil.seo('検索'))
     ></ListDialog>
     <ListDialog
       ref="refCarNames"
+      title="車名選択"
       :current-items="queryObject.carNames"
       :items="carNames"
       multiple

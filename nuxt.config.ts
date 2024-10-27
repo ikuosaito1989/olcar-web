@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 import { ofetch } from 'ofetch'
 
@@ -267,6 +268,15 @@ export default defineNuxtConfig({
     vue: {
       template: {
         transformAssetUrls,
+      },
+    },
+    css: {
+      preprocessorOptions: {
+        // Deprecation Warning: The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+        // のwarningを非表示にするためのオプション
+        scss: {
+          api: 'modern-compiler',
+        },
       },
     },
   },

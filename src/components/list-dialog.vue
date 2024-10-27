@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { VTextField } from 'vuetify/components'
+import { toHiragana, toKatakana, toRomaji } from 'wanakana'
 
 const prop = defineProps({
   items: {
@@ -37,6 +38,14 @@ const currentItems = defineModel<Item[]>('currentItems', { required: true })
 const errors = ref({ error: false, message: '' })
 const dialog = ref(false)
 const key = ref(crypto.randomUUID())
+const _items = ref(prop.items)
+
+watch(
+  () => prop.items,
+  () => {
+    _items.value = prop.items
+  },
+)
 
 /**
  * リストのアイテムを選択する
@@ -83,6 +92,19 @@ const onClickChipClose = async (item: Item) => {
  */
 const open = () => {
   dialog.value = !dialog.value
+}
+
+/**
+ * 検索テキストを更新する
+ */
+const update = (value: string) => {
+  _items.value = prop.items.filter(
+    (v) =>
+      v.title.startsWith(toHiragana(value)) ||
+      v.title.startsWith(toKatakana(value)) ||
+      v.title.toUpperCase().startsWith(toRomaji(value).toUpperCase()) ||
+      v.title.toUpperCase().startsWith(value.toUpperCase()),
+  )
 }
 
 /**
@@ -146,7 +168,16 @@ defineExpose({
 
           <v-spacer></v-spacer>
         </v-toolbar>
-        <v-list :items="items" @click:select="onClick"></v-list>
+        <TextField
+          icon="mdi-magnify"
+          hint="検索したいメーカー、車名を入力してください"
+          :persistent-hint="true"
+          required
+          clearable
+          type="text"
+          @update="update"
+        ></TextField>
+        <v-list :items="_items" @click:select="onClick"></v-list>
       </v-card>
     </v-dialog>
     <v-chip
