@@ -172,7 +172,7 @@ defineExpose({
       readonly
       @click="open"
     ></v-text-field>
-    <v-dialog v-model="dialog" transition="scroll-x-transition" fullscreen>
+    <v-dialog v-model="dialog" transition="slide-x-reverse-transition" fullscreen>
       <v-card>
         <v-toolbar color="primary">
           <v-btn color="white" icon="mdi-close" @click="onClose"></v-btn>
