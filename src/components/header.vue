@@ -1,11 +1,16 @@
 <script setup lang="ts">
 const drawer = ref(false)
+const isRender = ref(false)
 /**
  * ダイアログをopenする
  */
 const open = () => {
   drawer.value = !drawer.value
 }
+onMounted(async () => {
+  await nextTick() // ページがマウントされてからレンダリング完了を待つ
+  isRender.value = true
+})
 </script>
 <template>
   <v-app-bar class="!tw-static" theme="light" :elevation="1">
@@ -14,7 +19,9 @@ const open = () => {
     </template>
 
     <template #title>
-      <Anchor to="/"><v-img width="130" src="/logo.png" lazy-src="/logo.png" /></Anchor>
+      <Anchor to="/">
+        <v-img width="130" min-height="33" src="/logo.png" lazy-src="/logo.png" />
+      </Anchor>
     </template>
     <template #append>
       <Anchor to="/search">
@@ -29,6 +36,7 @@ const open = () => {
     </template>
   </v-app-bar>
   <v-navigation-drawer
+    v-if="isRender"
     v-model="drawer"
     class="!tw-top-0 !tw-z-[9999] !tw-h-screen tw-p-2"
     temporary
