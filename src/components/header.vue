@@ -20,7 +20,9 @@ onMounted(async () => {
 
     <template #title>
       <Anchor to="/">
-        <v-img width="130" min-height="33" src="/logo.png" lazy-src="/logo.png" />
+        <div v-ripple>
+          <v-img width="130" min-height="33" src="/logo.png" lazy-src="/logo.png" />
+        </div>
       </Anchor>
     </template>
     <template #append>

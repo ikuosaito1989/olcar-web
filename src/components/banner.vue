@@ -13,6 +13,8 @@ defineProps({
 
 <template>
   <Anchor :to="href">
-    <v-img max-height="300" contain :lazy-src="src" :src="src" />
+    <div v-ripple>
+      <v-img max-height="300" contain :lazy-src="src" :src="src" />
+    </div>
   </Anchor>
 </template>
