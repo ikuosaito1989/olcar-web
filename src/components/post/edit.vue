@@ -162,7 +162,7 @@ defineExpose({
         type="tel"
         :rules="[
           validationUtil.required,
-          (v) => validationUtil.max(+v, 10000000, '円以内にしてください'),
+          (v: string | number) => validationUtil.max(+v, 10000000, '円以内にしてください'),
         ]"
       ></TextField>
 
@@ -208,7 +208,7 @@ defineExpose({
         placeholder="50,000"
         clearable
         type="tel"
-        :rules="[(v) => validationUtil.max(+v, 500000, 'km以内にしてください')]"
+        :rules="[(v: string | number) => validationUtil.max(+v, 500000, 'km以内にしてください')]"
       ></TextField>
 
       <FromTo

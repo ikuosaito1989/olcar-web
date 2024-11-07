@@ -31,6 +31,10 @@ const prop = defineProps({
     type: Boolean,
     default: false,
   },
+  hint: {
+    type: String,
+    default: '',
+  },
 })
 
 const emit = defineEmits(['click:list', 'click:close'])
@@ -104,13 +108,23 @@ const update = (value: string) => {
     return
   }
 
-  _items.value = prop.items.filter(
-    (v) =>
+  const prefectures =
+    prop.label === '都道府県'
+      ? Array.from(Constants.PREFECTURES.entries())
+          .filter(([, hiragana]) => hiragana.startsWith(value))
+          .map(([kanji]) => kanji)
+      : []
+
+  _items.value = prop.items.filter((v) => {
+    const isPrefectureFound = prefectures.length ? !!prefectures.find((p) => p == v.title) : false
+    return (
       v.title.startsWith(toHiragana(value)) ||
       v.title.startsWith(toKatakana(value)) ||
       v.title.toUpperCase().startsWith(toRomaji(value).toUpperCase()) ||
-      v.title.toUpperCase().startsWith(value.toUpperCase()),
-  )
+      v.title.toUpperCase().startsWith(value.toUpperCase()) ||
+      isPrefectureFound
+    )
+  })
 }
 
 /**
@@ -183,7 +197,7 @@ defineExpose({
         </v-toolbar>
         <TextField
           icon="mdi-magnify"
-          hint="検索したいメーカー、車名を入力してください"
+          :hint="hint"
           :persistent-hint="true"
           required
           clearable

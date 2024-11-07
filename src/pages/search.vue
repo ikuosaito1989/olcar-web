@@ -45,6 +45,7 @@ useHead(headUtil.seo('検索'))
       title="メーカー選択"
       label="メーカー・車名"
       button-name="メーカー・車名"
+      hint="メーカー名を入力してください（ひらがなでも検索できます）"
       :items="makerItems"
       multiple
       @click:list="onClickMaker"
@@ -54,6 +55,7 @@ useHead(headUtil.seo('検索'))
       title="車名選択"
       :current-items="queryObject.carNames"
       :items="carNames"
+      hint="車名を入力してください（ひらがなでも検索できます）"
       multiple
     ></ListDialog>
     <ListDialog
@@ -61,6 +63,7 @@ useHead(headUtil.seo('検索'))
       title="都道府県選択"
       label="都道府県"
       button-name="都道府県"
+      hint="都道府県を入力してください（ひらがなでも検索できます）"
       :items="prefectureItems"
       multiple
     ></ListDialog>

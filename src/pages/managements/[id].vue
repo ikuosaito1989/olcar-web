@@ -174,7 +174,7 @@ const onClickAction = async (action: boolean) => {
         type="number"
         :rules="[
           validationUtil.required,
-          (v) => validationUtil.max(+v, 10000000, '円以内にしてください'),
+          (v: string | number) => validationUtil.max(+v, 10000000, '円以内にしてください'),
         ]"
       ></TextField>
 
@@ -195,7 +195,7 @@ const onClickAction = async (action: boolean) => {
         placeholder="50,000"
         clearable
         type="number"
-        :rules="[(v) => validationUtil.max(+v, 500000, 'km以内にしてください')]"
+        :rules="[(v: string | number) => validationUtil.max(+v, 500000, 'km以内にしてください')]"
       ></TextField>
 
       <v-checkbox v-model="formData.isSponsor" label="オススメ"></v-checkbox>
