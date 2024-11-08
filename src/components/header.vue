@@ -26,7 +26,7 @@ onMounted(async () => {
       </Anchor>
     </template>
     <template #append>
-      <Anchor to="/search">
+      <Anchor :to="'/search' + useQueryString()">
         <v-btn icon="mdi-magnify"></v-btn>
       </Anchor>
       <Anchor to="/favorite">
@@ -45,7 +45,14 @@ onMounted(async () => {
   >
     <div class="tw-mb-16 [&>a]:tw-w-full [&>a]:!tw-justify-start [&>a]:tw-text-left">
       <v-btn color="black" href="/" variant="text" prepend-icon="mdi-home">トップ</v-btn>
-      <v-btn color="black" href="/search" variant="text" prepend-icon="mdi-magnify">検索</v-btn>
+      <v-btn
+        color="black"
+        :href="'/search' + useQueryString()"
+        variant="text"
+        prepend-icon="mdi-magnify"
+      >
+        検索
+      </v-btn>
       <v-btn color="black" href="/favorite" variant="text" prepend-icon="mdi-heart-outline">
         お気に入り
       </v-btn>

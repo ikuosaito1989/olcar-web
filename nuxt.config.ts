@@ -97,6 +97,7 @@ export default defineNuxtConfig({
 
   build: {
     transpile: ['vuetify'],
+    extractCSS: true,
   },
 
   modules: [

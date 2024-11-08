@@ -126,7 +126,7 @@ useHead(getHeader())
 
     <Banner href="/info/purchase-process" src="/banner/purchase-process.png"></Banner>
 
-    <Fav icon="mdi-magnify" label="検索する" to="/search"></Fav>
+    <Fav icon="mdi-magnify" label="検索する" :to="'/search' + useQueryString()"></Fav>
     <ReportDialog ref="refReportDialog" :car-id="car.id"></ReportDialog>
   </section>
 </template>

@@ -35,6 +35,10 @@ const prop = defineProps({
     type: String,
     default: '',
   },
+  isTwoWayBindingEnabled: {
+    type: Boolean,
+    default: true,
+  },
 })
 
 const emit = defineEmits(['click:list', 'click:close'])
@@ -64,7 +68,7 @@ const onClick = async (value: { id: unknown; value: boolean; path: unknown[] }) 
     currentItems.value.splice(0, currentItems.value.length)
   }
 
-  if (!currentItems.value.find((v) => +v.value === +item.value)) {
+  if (prop.isTwoWayBindingEnabled && !currentItems.value.find((v) => +v.value === +item.value)) {
     arrayUtil.push<Item>(currentItems, [item])
   }
 
@@ -80,6 +84,7 @@ const onClose = async () => {
   dialog.value = false
   resetItems()
   validate()
+  emit('click:close')
 }
 
 /**
@@ -89,7 +94,6 @@ const onClickChipClose = async (item: Item) => {
   key.value = crypto.randomUUID()
   arrayUtil.splice(currentItems, item)
   validate()
-  emit('click:close', item)
 }
 
 /**

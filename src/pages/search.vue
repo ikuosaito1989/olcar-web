@@ -8,6 +8,9 @@ useSetFromQuery(route.query)
 useSearchSocialType(route.query)
 
 const { prefectureItems, makerItems } = await useFetchMaster()
+const { data: _carNames } = await useFetchi<CarName[]>(`/api/v1/cars/names`, {
+  query: { 'makerIds[]': [] },
+})
 const carNames = ref<Item[]>([])
 
 /**
@@ -17,10 +20,7 @@ const carNames = ref<Item[]>([])
  * @param item
  */
 const onClickMaker = async (item: Item) => {
-  const _carNames = await $fetch<CarName[]>(`/api/v1/cars/names`, {
-    query: { 'makerIds[]': [item.value] },
-  })
-  carNames.value = _carNames.map((v) => ({ value: v.id, title: v.name }))
+  setCarNames(item.value)
   refCarNames.value?.open()
 }
 
@@ -31,7 +31,20 @@ const onClickSearch = async () => {
   await navigateTo(`/${useQueryString()}`)
 }
 
+/**
+ * CarNamesをセットする
+ */
+const setCarNames = async (id?: number | string) => {
+  carNames.value = _carNames.value
+    .filter((v) => !id || v.makerId === id)
+    .map((v) => ({
+      value: v.id,
+      title: v.name,
+    }))
+}
+
 useHead(headUtil.seo('検索'))
+setCarNames()
 </script>
 
 <template>
@@ -46,17 +59,23 @@ useHead(headUtil.seo('検索'))
       label="メーカー・車名"
       button-name="メーカー・車名"
       hint="メーカー名を入力してください（ひらがなでも検索できます）"
+      :is-two-way-binding-enabled="false"
       :items="makerItems"
       multiple
       @click:list="onClickMaker"
+      @click:close="setCarNames()"
     ></ListDialog>
     <ListDialog
       ref="refCarNames"
       title="車名選択"
+      label="車名"
+      button-name="車名"
       :current-items="queryObject.carNames"
       :items="carNames"
       hint="車名を入力してください（ひらがなでも検索できます）"
       multiple
+      @click:list="setCarNames()"
+      @click:close="setCarNames()"
     ></ListDialog>
     <ListDialog
       :current-items="queryObject.prefectures"
