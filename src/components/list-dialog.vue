@@ -100,6 +100,7 @@ const onClickChipClose = async (item: Item) => {
  * ダイアログをopenする
  */
 const open = () => {
+  resetItems()
   dialog.value = !dialog.value
 }
 
