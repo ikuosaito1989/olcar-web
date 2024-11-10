@@ -168,6 +168,8 @@ const onError = () => {
       </div>
       <div class="tw-text-xs">※クリックすると検索できます</div>
     </div>
+
+    <GoogleAd></GoogleAd>
   </div>
 </template>
 

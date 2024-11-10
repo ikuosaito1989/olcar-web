@@ -172,5 +172,7 @@ setCarNames()
         </v-btn>
       </div>
     </div>
+
+    <GoogleAd></GoogleAd>
   </v-form>
 </template>

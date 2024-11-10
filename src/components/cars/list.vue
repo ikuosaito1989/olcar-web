@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import GoogleAd from '../google-ad.vue'
+
 defineProps({
   details: {
     type: Array as () => Array<DetailBase>,
@@ -11,6 +13,10 @@ defineProps({
   <div v-for="(detail, index) in details" :key="detail.id">
     <CarsCard :detail="detail"></CarsCard>
 
+    <div v-if="(index + 1) % 5 === 0">
+      <GoogleAd></GoogleAd>
+    </div>
+
     <div v-if="index + 1 === 5 || index + 1 === 15">
       <Banner src="/banner/line.png" href="/info/line"></Banner>
       <Banner
@@ -18,6 +24,7 @@ defineProps({
         href="/info/omakase-agent"
       ></Banner>
     </div>
+
     <div v-if="index + 1 === 10 || index + 1 === 20">
       <Banner href="/post" src="/banner/exhibit-free.png"></Banner>
     </div>
