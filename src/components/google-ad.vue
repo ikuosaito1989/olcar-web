@@ -26,8 +26,6 @@ onMounted(() => {
 </script>
 
 <template>
-  <ClientOnly>
-    <div class="adsbygoogle" ref="adins"></div>
-    <div ref="adpush"></div>
-  </ClientOnly>
+  <div class="adsbygoogle" ref="adins"></div>
+  <div ref="adpush"></div>
 </template>
