@@ -12,6 +12,14 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'ja',
       },
+      script: [
+        {
+          async: true,
+          src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6167866428318160',
+          crossorigin: 'anonymous',
+          tagPosition: 'bodyClose',
+        },
+      ],
       meta: [
         { hid: 'charset', charset: 'utf-8' },
         { hid: 'viewport', name: 'viewport', content: 'width=device-width, initial-scale=1' },

@@ -15,6 +15,8 @@ useRecaptchaProvider()
       </div>
     </v-container>
 
+    <GoogleAd></GoogleAd>
+
     <Concept></Concept>
     <Footer></Footer>
     <Loader></Loader>

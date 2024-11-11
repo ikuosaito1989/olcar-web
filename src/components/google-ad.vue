@@ -1,39 +1,33 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 
-const isVisible = ref(false)
 const excludePaths = ['/managements', '/info', '/terms']
+const adins = ref()
+const adpush = ref()
 
 onMounted(() => {
-  isVisible.value = !excludePaths.some((path) => window.location.pathname.includes(path))
-  // @ts-ignore
-  ;(window.adsbygoogle = window.adsbygoogle || []).push({})
-})
+  if (excludePaths.some((path) => window.location.pathname.includes(path))) {
+    return
+  }
 
-useHead({
-  script: [
-    {
-      async: true,
-      src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6167866428318160',
-      crossorigin: 'anonymous',
-      tagPosition: 'bodyClose',
-    },
-  ],
+  const ins = document.createElement('ins') as HTMLElement
+  ins.classList.value = 'adsbygoogle'
+  ins.style.display = 'block'
+  ins.setAttribute('data-ad-client', 'ca-pub-6167866428318160')
+  ins.setAttribute('data-ad-slot', '2308227504')
+  ins.setAttribute('data-ad-format', 'auto')
+  ins.setAttribute('data-full-width-responsive', 'true')
+  adins.value.appendChild(ins)
+
+  const src = document.createElement('script') as HTMLScriptElement
+  src.text = '(adsbygoogle = window.adsbygoogle || []).push({});'
+  adpush.value.appendChild(src)
 })
 </script>
 
 <template>
-  <div v-if="isVisible">
-    <ClientOnly>
-      <!-- eslint-disable tailwindcss/no-custom-classname -->
-      <ins
-        class="adsbygoogle"
-        style="display: block"
-        data-ad-client="ca-pub-6167866428318160"
-        data-ad-slot="2308227504"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-      ></ins>
-    </ClientOnly>
-  </div>
+  <ClientOnly>
+    <div class="adsbygoogle" ref="adins"></div>
+    <div ref="adpush"></div>
+  </ClientOnly>
 </template>
