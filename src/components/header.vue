@@ -19,7 +19,7 @@ onMounted(async () => {
     </template>
 
     <template #title>
-      <Anchor to="/">
+      <Anchor to="/" :external="true">
         <div v-ripple>
           <v-img width="130" min-height="33" src="/logo.png" lazy-src="/logo.png" />
         </div>
