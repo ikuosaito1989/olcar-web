@@ -107,7 +107,8 @@ useHead(getHeader())
     <CarsList :details="sameSummary.details" />
     <Anchor
       class="tw-my-6 tw-flex tw-justify-end"
-      :to="`/?makerIds[]=${car.makerId}&carNames[]=${car.name}`"
+      :to="`/?carNames[]=${car.name}`"
+      :external="true"
     >
       {{ car.name }}の中古車をもっとみる
       <v-icon color="primary">mdi-chevron-right</v-icon>
@@ -119,7 +120,7 @@ useHead(getHeader())
     </div>
     <CarsList :details="makerSummary.details" />
 
-    <Anchor class="tw-my-6 tw-flex tw-justify-end" :to="`/${car.makerId}`">
+    <Anchor class="tw-my-6 tw-flex tw-justify-end" :to="`/${car.makerId}`" :external="true">
       {{ car.makerName }}の中古車をもっとみる
       <v-icon color="primary">mdi-chevron-right</v-icon>
     </Anchor>

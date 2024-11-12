@@ -1,5 +1,5 @@
 <script setup lang="ts">
-onMounted(async () => {
+onActivated(async () => {
   await useSetStorageInCars(Constants.LOCALSTORAGE.FAVORITE)
 })
 useHead(headUtil.seo('お気に入り'))

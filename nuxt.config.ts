@@ -7,6 +7,7 @@ export default defineNuxtConfig({
   srcDir: 'src/',
 
   app: {
+    keepalive: true,
     head: {
       title: '格安な中古車、車の個人売買なら【olcar（オルカー）】',
       htmlAttrs: {
@@ -105,7 +106,6 @@ export default defineNuxtConfig({
 
   build: {
     transpile: ['vuetify'],
-    extractCSS: true,
   },
 
   modules: [
@@ -188,6 +188,7 @@ export default defineNuxtConfig({
           cars: [],
           makers: [],
         } as Sitemap
+
         const func: Promise<globalThis.Sitemap>[] = []
 
         for (let i = 0; i < 6; i++) {

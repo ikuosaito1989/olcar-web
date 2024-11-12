@@ -14,20 +14,24 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  external: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 const route = useRoute()
 const hrefObj = queryString.parseUrl(props.to)
 
 // @note pathが同一の場合はexternalをつけるためのフラグ
-const changed = computed(() => route.path === hrefObj.url)
+const external = computed(() => props.external || route.path === hrefObj.url)
 </script>
 
 <template>
   <NuxtLink
     :class="{ 'hover:tw-underline': isUnderLine }"
     :to="to"
-    :external="changed"
+    :external="external"
     :target="target"
   >
     <slot></slot>

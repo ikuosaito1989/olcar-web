@@ -28,7 +28,7 @@ const onClickMaker = async (item: Item) => {
  * queryObjectからqueryStringを生成してリダイレクトする
  */
 const onClickSearch = async () => {
-  await navigateTo(`/${useQueryString()}`)
+  await navigateTo(`/${useQueryString()}`, { external: true })
 }
 
 /**
