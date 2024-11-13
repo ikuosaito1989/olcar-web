@@ -97,7 +97,7 @@ useHead(getHeader())
       </Anchor>
     </div>
 
-    <Banner href="/info/exhibit" src="/banner/exhibit.png"></Banner>
+    <Banner href="/info/exhibit" src="/banner/exhibit.webp"></Banner>
 
     <div
       class="tw-mx-2 tw-my-3 tw-border-s-8 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
@@ -125,7 +125,7 @@ useHead(getHeader())
       <v-icon color="primary">mdi-chevron-right</v-icon>
     </Anchor>
 
-    <Banner href="/info/purchase-process" src="/banner/purchase-process.png"></Banner>
+    <Banner href="/info/purchase-process" src="/banner/purchase-process.webp"></Banner>
 
     <Fav icon="mdi-magnify" label="検索する" :to="'/search' + useQueryString()"></Fav>
     <ReportDialog ref="refReportDialog" :car-id="car.id"></ReportDialog>

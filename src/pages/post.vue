@@ -120,7 +120,7 @@ const convertCar = (formData: PostFrom) => {
     published: false,
     userName: formData.userName,
     nickName: formData.userName,
-    userImageUrl: '/logo_small.jpg',
+    userImageUrl: '/logo_small.webp',
     socialType: Constants.SOCIAL_TYPE.JMTY,
     socialId: '9999999999',
     referenceUrls: [formData.link],

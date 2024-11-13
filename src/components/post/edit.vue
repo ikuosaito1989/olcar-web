@@ -104,7 +104,7 @@ defineExpose({
       掲載依頼する
     </div>
     <div class="tw-rounded tw-bg-[#f5f5f6] tw-p-4">
-      <Banner href="/info/exhibit" src="/banner/exhibit.png"></Banner>
+      <Banner href="/info/exhibit" src="/banner/exhibit.webp"></Banner>
       <br />
       olcar（オルカー）に掲載するための情報を入力してください。
       掲載依頼後、1~3営業日以内に審査を行い、内容に問題がなければそのまま掲載が開始されます。

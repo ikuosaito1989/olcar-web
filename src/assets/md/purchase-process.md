@@ -1,6 +1,6 @@
 ## <i class="mdi mdi-car" style="font-size:32px;color:#f67b01;position: relative;top: 4px;"></i>個人売買の車購入ガイド
 
-<img src="/banner/purchase-process.png">
+<img src="/banner/purchase-process.webp">
 
 車の個人売買のフローに明確なルールはありませんが、以下のようなフローをご提案しています。
 

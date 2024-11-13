@@ -135,7 +135,7 @@ useHead(getHeader())
 
 <template>
   <section>
-    <v-img class="tw-aspect-video" lazy-src="/top.png" src="/top.png"></v-img>
+    <v-img class="tw-aspect-video" lazy-src="/datachef_unicolor16_9.webp" src="/top.webp"></v-img>
     <div v-if="searchConditions.length" class="tw-mx-4 tw-mt-4">
       <div class="tw-mb-2 tw-font-bold">検索条件</div>
       <div class="tw-flex tw-flex-wrap">
@@ -264,8 +264,8 @@ useHead(getHeader())
       ></v-btn>
     </div>
 
-    <Banner href="/info/purchase-process" src="/banner/purchase-process.png"></Banner>
-    <Banner href="/?isSponsor=true" src="/banner/recommendation.png"></Banner>
+    <Banner href="/info/purchase-process" src="/banner/purchase-process.webp"></Banner>
+    <Banner href="/?isSponsor=true" src="/banner/recommendation.webp"></Banner>
     <Fav></Fav>
   </section>
 </template>

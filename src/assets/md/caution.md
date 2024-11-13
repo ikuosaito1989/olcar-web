@@ -1,6 +1,6 @@
 ## <i class="mdi mdi-alert-outline" style="font-size:32px;color:#f67b01;position: relative;top: 4px;"></i>個人売買における詐欺について
 
-<img src="/ogp.jpg">
+<img src="/ogp.webp">
 
 個人売買において詐欺被害が多発しております。詐欺グループは非常に巧妙な手口で騙し、お金を奪っていきます。被害に遭わないためにも、以下の点にご注意ください。
 

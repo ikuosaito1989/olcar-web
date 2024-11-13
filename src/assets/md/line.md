@@ -1,6 +1,6 @@
 ## <i class="mdi mdi-car" style="font-size:32px;color:#f67b01;position: relative;top: 4px;"></i>LINEはじめました！
 
-<img src="/banner/line.png"/>
+<img src="/banner/line.webp"/>
 
 olcar（オルカー）でLINE公式アカウントをはじめました！LINE公式アカウントでは個人売買に関するお悩みなど気軽にご相談できます
 

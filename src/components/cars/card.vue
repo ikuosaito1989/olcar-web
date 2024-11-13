@@ -38,7 +38,7 @@ const onError = () => {
             class="tw-rounded"
             height="220"
             :src="detail.images[0]"
-            :lazy-src="detail.images[0]"
+            lazy-src="/datachef_unicolor.webp"
             @error="onError"
           >
             <v-overlay

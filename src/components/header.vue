@@ -21,7 +21,12 @@ onMounted(async () => {
     <template #title>
       <Anchor to="/" :external="true">
         <div v-ripple>
-          <v-img width="130" min-height="33" src="/logo.png" lazy-src="/logo.png" />
+          <v-img
+            width="130"
+            min-height="33"
+            src="/logo.webp"
+            lazy-src="/datachef_unicolor16_9.webp"
+          />
         </div>
       </Anchor>
     </template>

@@ -52,7 +52,7 @@ export default defineNuxtConfig({
         {
           hid: 'og:image',
           property: 'og:image',
-          content: `${process.env.SITE_URL}/ogp.jpg`,
+          content: `${process.env.SITE_URL}/ogp.webp`,
         },
         {
           hid: 'og:site_name',
@@ -77,7 +77,7 @@ export default defineNuxtConfig({
         {
           hid: 'twitter:image',
           name: 'twitter:image',
-          content: `${process.env.SITE_URL}/ogp.jpg`,
+          content: `${process.env.SITE_URL}/ogp.webp`,
         },
         {
           hid: 'twitter:card',

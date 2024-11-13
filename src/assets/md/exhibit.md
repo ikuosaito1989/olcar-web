@@ -1,6 +1,6 @@
 ## <i class="mdi mdi-car" style="font-size:32px;color:#f67b01;position: relative;top: 4px;"></i>閲覧数が増える掲載オプション
 
-<img src="/banner/exhibit.png"/>
+<img src="/banner/exhibit.webp"/>
 
 olcar（オルカー）では業界最安値（600円）で**ページの先頭に掲載**することができます！
 
@@ -29,15 +29,15 @@ olcar（オルカー）では業界最安値（600円）で**ページの先頭�
 下記のように「オススメ」タグが付きます。<br>
 
 <div style="text-align: center;font-weight: bold;">トップページ</div>
-<img style="width: 300px;height: auto;" src="/img/bronze_list.png">
+<img style="width: 300px;height: auto;" src="/img/bronze_list.webp">
 
 <div style="text-align: center;font-weight: bold;">詳細ページ</div>
-<img style="width: 300px;height: auto;" src="/img/bronze_detail.png">
+<img style="width: 300px;height: auto;" src="/img/bronze_detail.webp">
 
 さらに特集ページに掲載されます！
 
 <a href="/?isSponsor=true">
-    <img src="/banner/recommendation.png">
+    <img src="/banner/recommendation.webp">
 </a>
 
 ### 掲載までの簡単な流れ

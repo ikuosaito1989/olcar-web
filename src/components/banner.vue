@@ -14,7 +14,7 @@ defineProps({
 <template>
   <Anchor :to="href">
     <div v-ripple>
-      <v-img max-height="300" contain :lazy-src="src" :src="src" />
+      <v-img max-height="300" contain lazy-src="/datachef_unicolor16_9.webp" :src="src" />
     </div>
   </Anchor>
 </template>

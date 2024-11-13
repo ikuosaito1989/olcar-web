@@ -76,7 +76,7 @@
 ## お客様の声
 
 <div style="display: flex;align-items: center;margin-bottom: 24px;">
-<img style="width: 100px;border-radius: 50px;" src="/img/user1.jpeg" />
+<img style="width: 100px;border-radius: 50px;" src="/img/user1.webp" />
 <div style="
     margin-left: 12px;
     font-size: 14px;
