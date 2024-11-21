@@ -42,6 +42,9 @@ const prop = defineProps({
 })
 
 const emit = defineEmits(['click:list', 'click:close'])
+
+const { t } = useI18n()
+
 const currentItems = defineModel<Item[]>('currentItems', { required: true })
 const errors = ref({ error: false, message: '' })
 const dialog = ref(false)
@@ -114,7 +117,7 @@ const update = (value: string) => {
   }
 
   const prefectures =
-    prop.label === '都道府県'
+    prop.label === t('prefecture')
       ? Array.from(Constants.PREFECTURES.entries())
           .filter(([, hiragana]) => hiragana.startsWith(value))
           .map(([kanji]) => kanji)

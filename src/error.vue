@@ -23,7 +23,7 @@ const errorPage = computed(() => {
     <div class="tw-max-w-screen-md">
       <component :is="errorPage" />
       <div class="tw-text-center">
-        <v-btn color="primary" to="/">トップ</v-btn>
+        <v-btn color="primary" to="/">{{ $t('top') }}</v-btn>
       </div>
     </div>
   </div>

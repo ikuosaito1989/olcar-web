@@ -8,6 +8,8 @@ const prop = defineProps({
   },
 })
 
+const { t } = useI18n()
+
 const items = ref<LocalStorage[]>([])
 const mounted = ref<boolean>(false)
 onMounted(async () => {
@@ -23,7 +25,7 @@ const isFavorite = computed(() => !!items.value.find((v) => v.id === prop.carId)
 /**
  * ラベル
  */
-const label = computed(() => (isFavorite.value ? 'お気に入り済' : 'お気に入り'))
+const label = computed(() => (isFavorite.value ? t('favorite_added') : t('favorites')))
 
 /**
  * variant

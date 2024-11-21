@@ -40,5 +40,5 @@ export interface ManagementsEdit {
   /**
    * 車検
    */
-  vehicleInspection: string | null
+  vehicleInspection: string
 }

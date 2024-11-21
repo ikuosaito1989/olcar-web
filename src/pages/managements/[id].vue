@@ -29,7 +29,7 @@ const formData = ref<ManagementsEdit>({
   link: car.value.referenceUrls[0],
   mileage: car.value.mileage?.toString() as string,
   isSponsor: car.value.isSponsor,
-  vehicleInspection: car.value.vehicleInspection,
+  vehicleInspection: car.value.vehicleInspection as string,
 })
 
 const isVisible = ref<boolean>(false)
@@ -129,7 +129,7 @@ const onClickAction = async (action: boolean) => {
         label="車種名"
         placeholder="プリウス"
         :counter="30"
-        :rules="[validationUtil.required]"
+        :rules="[(v) => validationUtil.required(v, $t('required_field'))]"
         required
         clearable
         type="text"
@@ -143,7 +143,7 @@ const onClickAction = async (action: boolean) => {
         button-name="メーカー・車名"
         :items="makerItems"
         chip-label="必須"
-        :rules="[validationUtil.required]"
+        :rules="[(v) => validationUtil.required(v, $t('required_field'))]"
       ></ListDialog>
 
       <TextArea
@@ -154,7 +154,7 @@ const onClickAction = async (action: boolean) => {
         :counter="1000"
         required
         clearable
-        :rules="[validationUtil.required]"
+        :rules="[(v) => validationUtil.required(v, $t('required_field'))]"
       ></TextArea>
 
       <TextField
@@ -173,7 +173,7 @@ const onClickAction = async (action: boolean) => {
         clearable
         type="number"
         :rules="[
-          validationUtil.required,
+          (v) => validationUtil.required(v, $t('required_field')),
           (v: string | number) => validationUtil.max(+v, 10000000, '円以内にしてください'),
         ]"
       ></TextField>
@@ -186,7 +186,10 @@ const onClickAction = async (action: boolean) => {
         clearable
         type="text"
         :counter="1000"
-        :rules="[validationUtil.required, validationUtil.url]"
+        :rules="[
+          (v) => validationUtil.required(v, $t('required_field')),
+          (v) => validationUtil.url(v, $t('enter_valid_url')),
+        ]"
       ></TextField>
 
       <TextField
@@ -195,7 +198,9 @@ const onClickAction = async (action: boolean) => {
         placeholder="50,000"
         clearable
         type="number"
-        :rules="[(v: string | number) => validationUtil.max(+v, 500000, 'km以内にしてください')]"
+        :rules="[
+          (v: string | number) => validationUtil.max(+v, 10000000, $t('within_currency_limit')),
+        ]"
       ></TextField>
 
       <v-checkbox v-model="formData.isSponsor" label="オススメ"></v-checkbox>

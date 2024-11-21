@@ -48,30 +48,32 @@ const onError = () => {
               :disabled="false"
               :model-value="isPost"
             >
-              <div class="tw-text-lg tw-font-bold tw-text-white">販売終了しました</div>
+              <div class="tw-text-lg tw-font-bold tw-text-white">{{ $t('soldOut') }}</div>
             </v-overlay>
           </v-img>
         </div>
         <div class="tw-ml-2 tw-w-2/4">
           <Price :price="detail.price"></Price>
 
-          <Item label="走行距離">
-            <div>{{ formatUtil.toMileage(detail.mileage) }}</div>
+          <Item :label="$t('mileage')">
+            <div>{{ formatUtil.toMileage(detail.mileage, 1, $t('ten_thousand_km')) }}</div>
           </Item>
-          <Item label="車検">
+          <Item :label="$t('vehicleInspection')">
             <div>
               {{
                 formatUtil.toLocaleVehicleInspection(
                   detail.vehicleInspection,
                   detail.unknownVehicleInspection,
+                  $t('date_format_year_month'),
+                  $t('valid'),
                 )
               }}
             </div>
           </Item>
-          <Item label="地域">
+          <Item :label="$t('region')">
             <div>{{ formatUtil.toJoinString(detail.prefecture, detail.locality) }}</div>
           </Item>
-          <Item label="説明" :is-new-line="true">
+          <Item :label="$t('description')" :is-new-line="true">
             <!--eslint-disable-next-line vue/no-v-html-->
             <div class="tw-line-clamp-2" v-html="comment"></div>
           </Item>

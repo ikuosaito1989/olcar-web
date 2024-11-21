@@ -2,6 +2,7 @@
 type Variant = 'elevated' | 'outlined'
 const route = useRoute()
 useSetFromQuery(route.query)
+const { t } = useI18n()
 
 const makerIds = route.params.makerId ? [route.params.makerId] : []
 const { data: summary } = await useFetchi<Summary>('/api/v1/cars', {
@@ -114,20 +115,17 @@ const onChangeSales = () => {
 const getHeader = () => {
   const conditions = searchConditions.value.join(' ')
   if (makerName.value) {
-    return headUtil.seo(
-      `${makerName.value}の中古車`,
-      `${makerName.value}の中古車を格安で掲載しています！個人売買を中心とした中古車情報を集め、従来の中古車情報サイトの価格より安い値段の車が勢揃いしています！`,
+    return useSeo(
+      formatUtil.replace(t('used_car_of_maker'), makerName.value),
+      formatUtil.replace(t('used_car_description_of_maker'), makerName.value),
     )
   }
 
   if (searchConditions.value.length > 0) {
-    return headUtil.seo(
-      `${conditions}`,
-      `${conditions}の個人売買などの格安中古車を掲載！${conditions}ならolcar（オルカー）で検索！`,
-    )
+    return useSeo(`${conditions}`, formatUtil.replace(t('cheap_used_car_conditions'), conditions))
   }
 
-  return { meta: [] }
+  return useSeo()
 }
 
 useHead(getHeader())
@@ -137,7 +135,7 @@ useHead(getHeader())
   <section>
     <v-img class="tw-aspect-video" lazy-src="/datachef_unicolor16_9.webp" src="/top.webp"></v-img>
     <div v-if="searchConditions.length" class="tw-mx-4 tw-mt-4">
-      <div class="tw-mb-2 tw-font-bold">検索条件</div>
+      <div class="tw-mb-2 tw-font-bold">{{ $t('searchCriteria') }}</div>
       <div class="tw-flex tw-flex-wrap">
         <div
           v-for="(condition, i) in searchConditions"
@@ -153,12 +151,13 @@ useHead(getHeader())
 
     <div v-if="makerName" class="tw-px-4 tw-pt-4 tw-text-xl tw-font-bold">
       <v-icon class="tw-mb-1" color="primary">mdi-car</v-icon>
-      {{ makerName }}の中古車
+
+      {{ makerName }}
     </div>
 
     <div v-if="summary.details.length === 0" class="tw-mx-4 tw-text-center tw-font-bold">
       <v-icon>mdi-magnify</v-icon>
-      検索された車は見つかりませんでした。再度検索して下さい
+      {{ $t('noCarsFound') }}
     </div>
 
     <div class="tw-sticky tw-top-0 tw-z-50 tw-bg-white">
@@ -167,7 +166,7 @@ useHead(getHeader())
           v-model="queryObject.isSales"
           color="primary"
           class="tw-mx-5"
-          label="販売中のみ表示"
+          :label="$t('showOnlyAvailable')"
           @change="onChangeSales"
         ></v-checkbox>
       </div>
@@ -177,15 +176,15 @@ useHead(getHeader())
       >
         <div v-ripple class="tw-w-full tw-text-[#bc4c00]" @click="onNavigate({ path: 'search' })">
           <v-icon color="primary" icon="mdi-magnify"></v-icon>
-          絞り込む
+          {{ $t('filter') }}
         </div>
         <div v-ripple class="tw-w-full tw-text-[#bc4c00]" @click="() => (isVisible = !isVisible)">
           <v-icon color="primary" icon="mdi-sort"></v-icon>
-          並び替え
+          {{ $t('sort') }}
         </div>
         <div v-ripple class="tw-w-full tw-text-[#bc4c00]" @click="onNavigate({ path: 'favorite' })">
           <v-icon color="primary">mdi-heart-outline</v-icon>
-          お気に入り
+          {{ $t('favorites') }}
         </div>
       </div>
 
@@ -193,14 +192,16 @@ useHead(getHeader())
         <v-expansion-panel :value="true">
           <v-expansion-panel-text class="tw-font-bold">
             <div class="tw-mb-4 tw-flex tw-items-center tw-justify-between">
-              <div class="tw-basis-1/3 tw-font-bold">価格</div>
+              <div class="tw-basis-1/3 tw-font-bold">
+                {{ $t('price') }}
+              </div>
               <v-btn
                 :variant="sortButtonType.priceAsc"
                 size="small"
                 class="tw-mr-1 tw-basis-1/3 tw-font-bold"
                 @click="onNavigate({ sort: { key: 'priceOrder', value: 'asc' } })"
               >
-                安い順
+                {{ $t('priceLowToHigh') }}
               </v-btn>
               <v-btn
                 :variant="sortButtonType.priceDesc"
@@ -208,18 +209,18 @@ useHead(getHeader())
                 class="tw-basis-1/3 tw-font-bold"
                 @click="onNavigate({ sort: { key: 'priceOrder', value: 'desc' } })"
               >
-                高い順
+                {{ $t('priceHighToLow') }}
               </v-btn>
             </div>
             <div class="tw-mb-4 tw-flex tw-items-center tw-justify-between">
-              <div class="tw-basis-1/3 tw-font-bold">走行距離</div>
+              <div class="tw-basis-1/3 tw-font-bold">{{ $t('mileage') }}</div>
               <v-btn
                 :variant="sortButtonType.mileageAsc"
                 size="small"
                 class="tw-mr-1 tw-basis-1/3 tw-font-bold"
                 @click="onNavigate({ sort: { key: 'mileageOrder', value: 'asc' } })"
               >
-                少ない順
+                {{ $t('mileageLowToHigh') }}
               </v-btn>
               <v-btn
                 :variant="sortButtonType.mileageDesc"
@@ -227,18 +228,18 @@ useHead(getHeader())
                 class="tw-basis-1/3 tw-font-bold"
                 @click="onNavigate({ sort: { key: 'mileageOrder', value: 'desc' } })"
               >
-                多い順
+                {{ $t('mileageHighToLow') }}
               </v-btn>
             </div>
             <div class="tw-mb-4 tw-flex tw-items-center tw-justify-between">
-              <div class="tw-basis-1/3 tw-font-bold">掲載日</div>
+              <div class="tw-basis-1/3 tw-font-bold">{{ $t('publishDate') }}</div>
               <v-btn
                 :variant="sortButtonType.createAtAsc"
                 size="small"
                 class="tw-basis-[67.3%] tw-font-bold"
                 @click="onNavigate"
               >
-                新着順
+                {{ $t('newestFirst') }}
               </v-btn>
             </div>
           </v-expansion-panel-text>
@@ -251,22 +252,24 @@ useHead(getHeader())
     <div class="tw-my-5 tw-flex tw-justify-center">
       <v-btn
         class="tw-mr-5"
-        width="40"
-        icon="mdi-chevron-left"
+        width="120"
         :disabled="!queryObject.page || queryObject.page == 1 || summary.details.length === 0"
         @click="onChangePage(queryObject.page ? queryObject.page - 1 : 1)"
-      ></v-btn>
+      >
+        {{ $t('previousPage') }}
+      </v-btn>
       <v-btn
-        width="40"
-        icon="mdi-chevron-right"
+        width="120"
         :disabled="summary.isEnd || summary.details.length === 0"
         @click="onChangePage(queryObject.page ? queryObject.page + 1 : 2)"
-      ></v-btn>
+      >
+        {{ $t('nextPage') }}
+      </v-btn>
     </div>
 
     <Banner href="/info/purchase-process" src="/banner/purchase-process.webp"></Banner>
     <Banner href="/?isSponsor=true" src="/banner/recommendation.webp"></Banner>
-    <Fav></Fav>
+    <Fav :label="$t('freeListing')"></Fav>
   </section>
 </template>
 <style scoped>

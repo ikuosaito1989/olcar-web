@@ -27,7 +27,7 @@ defineProps({
     </div>
     <div>
       <div v-if="isSponsor" class="tw-mb-1">
-        <v-chip variant="elevated">オススメ</v-chip>
+        <v-chip variant="elevated">{{ $t('recommended') }}</v-chip>
       </div>
       <Favorite :car-id="carId"></Favorite>
     </div>

@@ -2,11 +2,10 @@
   <div class="tw-my-3">
     <div class="tw-text-center">
       <v-img height="80" contain src="/logo.webp" lazy-src="/datachef_unicolor.webp" />
-      <div class="tw-my-3 tw-text-3xl tw-font-bold">お探しのページは見つかりません</div>
+      <div class="tw-my-3 tw-text-3xl tw-font-bold">{{ $t('pageNotFound') }}</div>
     </div>
     <div>
-      お探しのページは一時的にアクセスができない状況にあるか、移動もしくは削除された可能性があります。
-      また、URL、ファイル名にタイプミスがないか再度ご確認ください。
+      {{ $t('pageNotFoundDescription') }}
     </div>
   </div>
 </template>

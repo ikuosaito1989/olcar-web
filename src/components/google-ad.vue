@@ -26,6 +26,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="adsbygoogle" ref="adins"></div>
+  <!-- eslint-disable-next-line tailwindcss/no-custom-classname -->
+  <div ref="adins" class="adsbygoogle"></div>
   <div ref="adpush"></div>
 </template>

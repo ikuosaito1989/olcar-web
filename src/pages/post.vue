@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useGoTo } from 'vuetify'
 import type PostEdit from '~/components/post/edit.vue'
-
+const { t } = useI18n()
 const goTo = useGoTo()
 const mode = ref<'edit' | 'preview'>('edit')
 const editRef = ref<InstanceType<typeof PostEdit> | null>(null)
@@ -126,7 +126,8 @@ const convertCar = (formData: PostFrom) => {
     referenceUrls: [formData.link],
   }
 }
-useHead(headUtil.seo('掲載依頼する'))
+
+useHead(useSeo(t('submitRequest')))
 </script>
 
 <template>
@@ -142,7 +143,7 @@ useHead(headUtil.seo('掲載依頼する'))
     <div v-if="mode === 'preview'">
       <div class="tw-sticky tw-top-4 tw-z-50">
         <v-btn size="large" class="tw-w-full !tw-bg-white" @click="onExitPreview">
-          プレビューを終了する
+          {{ $t('exitPreview') }}
         </v-btn>
       </div>
       <CarsDetail :car="car"></CarsDetail>
@@ -154,14 +155,14 @@ useHead(headUtil.seo('掲載依頼する'))
           <div class="tw-m-4">
             <v-icon size="x-large" color="success">mdi-check-outline</v-icon>
           </div>
-          <div class="tw-m-2 tw-font-bold">この内容で掲載依頼しますか？</div>
+          <div class="tw-m-2 tw-font-bold">{{ $t('confirmTitle') }}</div>
         </div>
         <div class="tw-my-2 tw-text-sm">
-          入力した内容を変更できませんが、この内容でよろしいですか？また、審査により入力内容が変更されることがあります。
+          {{ $t('confirmMessage') }}
         </div>
         <div class="tw-mt-2 tw-text-center">
-          <v-btn class="tw-mr-2" @click="isConfirm = false">キャンセル</v-btn>
-          <v-btn variant="elevated" @click="onConfirm">掲載依頼する</v-btn>
+          <v-btn class="tw-mr-2" @click="isConfirm = false">{{ $t('cancel') }}</v-btn>
+          <v-btn variant="elevated" @click="onConfirm">{{ $t('confirm') }}</v-btn>
         </div>
       </v-card>
     </v-dialog>
@@ -172,12 +173,12 @@ useHead(headUtil.seo('掲載依頼する'))
           <div class="tw-m-4">
             <v-icon size="x-large" color="success">mdi-check-outline</v-icon>
           </div>
-          <div class="tw-m-2 tw-font-bold">掲載の申し込みを承りました</div>
+          <div class="tw-m-2 tw-font-bold">{{ $t('completeTitle') }}</div>
         </div>
         <div class="tw-text-sm">
-          olcar（オルカー）の審査を行います。審査結果については1~3営業日以内に審査結果をメールアドレスにお送りしますので今しばらくお待ち下さい
+          {{ $t('completeMessage') }}
         </div>
-        <div class="tw-mt-3 tw-text-center tw-text-sm" @click="onComplete">閉じる</div>
+        <div class="tw-mt-3 tw-text-center tw-text-sm" @click="onComplete">{{ $t('close') }}</div>
       </v-card>
     </v-dialog>
   </section>
