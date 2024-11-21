@@ -5,13 +5,13 @@
     >
       <v-img class="!tw-flex-[0_0_200px]" height="80" contain position="left" src="/logo.webp" />
       <div class="!tw-flex-[1_1_300px]">
-        <div class="tw-border-b tw-border-[#f67b01] tw-text-xl">olcar（オルカー）について</div>
+        <div class="tw-border-b tw-border-[#f67b01] tw-text-xl">{{ $t('aboutOlcar') }}</div>
         <div class="tw-my-3 tw-text-sm">
-          olcarのコンセプトの
-          <strong>「車を身近に」</strong>
-          するために考えていることです。短いのでぜひご覧ください。
+          {{ $t('concept') }}
+          <strong>{{ $t('closeToCars') }}</strong>
+          {{ $t('shortDescription') }}
           <Anchor class="tw-mt-4 tw-block tw-font-bold tw-text-[#1976d2]" to="/info/about">
-            olcarについて
+            {{ $t('learnMore') }}
           </Anchor>
         </div>
       </div>

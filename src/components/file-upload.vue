@@ -93,9 +93,9 @@ defineExpose({
       <div
         class="tw-my-3 tw-mr-2 tw-border-s-4 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
       >
-        画像
+        {{ $t('image') }}
       </div>
-      <v-chip>必須</v-chip>
+      <v-chip>{{ $t('required') }}</v-chip>
     </div>
     <label
       class="tw-flex tw-min-h-28 tw-w-full tw-items-center tw-justify-center tw-border tw-border-dotted tw-border-gray-400 tw-bg-gray-100 hover:tw-bg-gray-200"
@@ -107,7 +107,7 @@ defineExpose({
         <v-icon size="48px">mdi-image-plus</v-icon>
         <div class="tw-mt-2 tw-flex tw-text-xs">
           <v-icon size="16px">mdi-plus</v-icon>
-          画像を追加する
+          {{ $t('addImage') }}
         </div>
 
         <v-file-input
@@ -120,7 +120,7 @@ defineExpose({
         ></v-file-input>
       </div>
     </label>
-    <div class="tw-mt-2 tw-text-[10px]">ドラッグ＆ドロップで画像を追加することが出来ます</div>
+    <div class="tw-mt-2 tw-text-[10px]">{{ $t('dragAndDrop') }}</div>
     <div class="tw-mt-3 tw-flex tw-flex-wrap">
       <div v-for="file in currentItems" :key="file.name" class="tw-w-1/3 !tw-max-w-[33.333333%]">
         <div class="tw-relative">
@@ -142,6 +142,7 @@ defineExpose({
     </div>
   </div>
 </template>
+
 <style scoped>
 :deep(.v-input__prepend) {
   display: none;

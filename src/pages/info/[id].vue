@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { marked } from 'marked'
 
+const { t } = useI18n()
 const route = useRoute()
 const { data: raw } = await useFetchi<string>(`/md/${route.params.id}`)
 if (!raw.value) {
@@ -8,7 +9,7 @@ if (!raw.value) {
 }
 const title = ref(Constants.INFO_TITLES[route.params.id as keyof typeof Constants.INFO_TITLES])
 const markDown = ref(await marked(raw.value))
-useHead(headUtil.seo(title.value))
+useHead(useSeo(t(title.value)))
 </script>
 
 <template>

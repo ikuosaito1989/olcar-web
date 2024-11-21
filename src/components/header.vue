@@ -8,10 +8,11 @@ const open = () => {
   drawer.value = !drawer.value
 }
 onMounted(async () => {
-  await nextTick() // ページがマウントされてからレンダリング完了を待つ
+  await nextTick()
   isRender.value = true
 })
 </script>
+
 <template>
   <v-app-bar class="!tw-static" theme="light" :elevation="1">
     <template #prepend>
@@ -50,34 +51,34 @@ onMounted(async () => {
     touchless
   >
     <div class="tw-mb-16 [&>a]:tw-w-full [&>a]:!tw-justify-start [&>a]:tw-text-left">
-      <v-btn color="black" href="/" variant="text" prepend-icon="mdi-home">トップ</v-btn>
+      <v-btn color="black" href="/" variant="text" prepend-icon="mdi-home">{{ $t('home') }}</v-btn>
       <v-btn
         color="black"
         :href="'/search' + useQueryString()"
         variant="text"
         prepend-icon="mdi-magnify"
       >
-        検索
+        {{ $t('search') }}
       </v-btn>
       <v-btn color="black" href="/favorite" variant="text" prepend-icon="mdi-heart-outline">
-        お気に入り
+        {{ $t('favorites') }}
       </v-btn>
       <v-btn color="black" href="/history" variant="text" prepend-icon="mdi-history">
-        閲覧履歴
+        {{ $t('history') }}
       </v-btn>
-      <div class="tw-my-2 tw-font-bold tw-text-[#f67b01]">olcarについて</div>
-      <v-btn color="black" href="/info/about" variant="text">olcarについて</v-btn>
+      <div class="tw-my-2 tw-font-bold tw-text-[#f67b01]">{{ $t('aboutOlcar') }}</div>
+      <v-btn color="black" href="/info/about" variant="text">{{ $t('aboutOlcarLink') }}</v-btn>
       <v-btn color="black" href="/info/purchase-process" variant="text">
-        個人売買の車購入ガイド
+        {{ $t('purchaseGuide') }}
       </v-btn>
-      <v-btn color="black" href="/info/caution" variant="text">個人売買における詐欺について</v-btn>
+      <v-btn color="black" href="/info/caution" variant="text">{{ $t('fraudWarning') }}</v-btn>
       <v-btn
         color="black"
         href="https://forms.gle/Q2hQvMqLP9Jw2bea6"
         target="_blank"
         variant="text"
       >
-        お問い合わせ
+        {{ $t('contactUs') }}
       </v-btn>
       <v-btn
         color="black"
@@ -85,16 +86,20 @@ onMounted(async () => {
         target="_blank"
         variant="text"
       >
-        運営者情報
+        {{ $t('aboutUs') }}
       </v-btn>
-      <div class="tw-my-2 tw-font-bold tw-text-[#f67b01]">olcarのサービス</div>
-      <v-btn color="black" href="/info/exhibit" variant="text">閲覧数が増える掲載オプション</v-btn>
-      <v-btn color="black" href="/post" variant="text">無料掲載</v-btn>
-      <v-btn color="black" href="/info/omakase-agent" variant="text">おまかせ代行サービス</v-btn>
-      <div class="tw-my-2 tw-font-bold tw-text-[#f67b01]">SNS</div>
-      <v-btn color="black" target="_blank" href="https://lin.ee/80JiY1r" variant="text">LINE</v-btn>
+      <div class="tw-my-2 tw-font-bold tw-text-[#f67b01]">{{ $t('olcarServices') }}</div>
+      <v-btn color="black" href="/info/exhibit" variant="text">{{ $t('exhibitOption') }}</v-btn>
+      <v-btn color="black" href="/post" variant="text">{{ $t('freeListing') }}</v-btn>
+      <v-btn color="black" href="/info/omakase-agent" variant="text">
+        {{ $t('omakaseService') }}
+      </v-btn>
+      <div class="tw-my-2 tw-font-bold tw-text-[#f67b01]">{{ $t('socialMedia') }}</div>
+      <v-btn color="black" target="_blank" href="https://lin.ee/80JiY1r" variant="text">
+        {{ $t('line') }}
+      </v-btn>
       <v-btn color="black" target="_blank" href="https://twitter.com/byebye20201" variant="text">
-        Twitter
+        {{ $t('twitter') }}
       </v-btn>
       <v-btn
         color="black"
@@ -102,10 +107,10 @@ onMounted(async () => {
         href="https://www.youtube.com/channel/UCPONUTjMWhfzaDcM3fzUk4Q"
         variant="text"
       >
-        Youtube
+        {{ $t('youtube') }}
       </v-btn>
       <v-btn color="black" target="_blank" href="https://www.tiktok.com/@olcar2021" variant="text">
-        Tiktok
+        {{ $t('tiktok') }}
       </v-btn>
     </div>
   </v-navigation-drawer>

@@ -155,12 +155,13 @@ const MILEAGES: KeyLabel[] = [
  */
 const YEAR: KeyLabel[] = [
   { label: '指定なし' },
-  { key: 2023, label: '令和5年（2023年）' },
   { key: 2024, label: '令和6年（2024年）' },
   { key: 2025, label: '令和7年（2025年）' },
   { key: 2026, label: '令和8年（2026年）' },
   { key: 2027, label: '令和9年（2027年）' },
   { key: 2028, label: '令和10年（2028年）' },
+  { key: 2029, label: '令和11年（2029年）' },
+  { key: 2030, label: '令和12年（2030年）' },
 ]
 
 /**
@@ -268,20 +269,20 @@ const LOCALSTORAGE = {
 }
 
 /**
- * infoのタイトル
+ * infoのタイトルキー
  */
 const INFO_TITLES = {
-  tos: '利用規約',
-  privacy: 'プライバシーポリシー',
-  caution: '個人売買における詐欺について',
-  browser: '推奨環境',
-  exhibit: '掲載する',
-  'transaction-law': '特定商取引法に基づく表示',
-  'purchase-process': '車を個人売買するために必要な手続き',
-  'needs-help': '作者のolcarに掛ける想いとみなさまへのお願い',
-  'omakase-agent': 'おまかせ代行サービス',
-  about: 'olcar（オルカー）について',
-  line: 'LINE公式アカウントを始めました',
+  tos: 'info_title_tos',
+  privacy: 'info_title_privacy',
+  caution: 'info_title_caution',
+  browser: 'info_title_browser',
+  exhibit: 'info_title_exhibit',
+  'transaction-law': 'info_title_transaction_law',
+  'purchase-process': 'info_title_purchase_process',
+  'needs-help': 'info_title_needs_help',
+  'omakase-agent': 'info_title_omakase_agent',
+  about: 'info_title_about',
+  line: 'info_title_line',
 }
 
 const PREFECTURES: Map<string, string> = new Map([

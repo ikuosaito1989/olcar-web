@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type ListDialog from '~/components/list-dialog.vue'
-
+const { t } = useI18n()
 const route = useRoute()
 const refCarNames = ref<InstanceType<typeof ListDialog> | null>(null)
 
@@ -43,7 +43,7 @@ const setCarNames = async (id?: number | string) => {
     }))
 }
 
-useHead(headUtil.seo('検索'))
+useHead(useSeo(t('searchLabel')))
 setCarNames()
 </script>
 
@@ -51,14 +51,14 @@ setCarNames()
   <v-form class="tw-m-2">
     <div class="tw-my-4 tw-border-b tw-pb-3 tw-text-center tw-text-xl tw-font-bold">
       <v-icon color="primary">mdi-magnify</v-icon>
-      検索
+      {{ $t('searchLabel') }}
     </div>
     <ListDialog
       :current-items="queryObject.makers"
-      title="メーカー選択"
-      label="メーカー・車名"
-      button-name="メーカー・車名"
-      hint="メーカー名を入力してください（ひらがなでも検索できます）"
+      :title="$t('selectManufacturer')"
+      :label="$t('manufacturerOrCarName')"
+      :button-name="$t('manufacturerOrCarName')"
+      :hint="$t('manufacturerHint')"
       :is-two-way-binding-enabled="false"
       :items="makerItems"
       multiple
@@ -67,22 +67,22 @@ setCarNames()
     ></ListDialog>
     <ListDialog
       ref="refCarNames"
-      title="車名選択"
-      label="車名"
-      button-name="車名"
+      :title="$t('selectCarName')"
+      :label="$t('carName')"
+      :button-name="$t('carName')"
       :current-items="queryObject.carNames"
       :items="carNames"
-      hint="車名を入力してください（ひらがなでも検索できます）"
+      :hint="$t('carNameHint')"
       multiple
       @click:list="setCarNames()"
       @click:close="setCarNames()"
     ></ListDialog>
     <ListDialog
       :current-items="queryObject.prefectures"
-      title="都道府県選択"
-      label="都道府県"
-      button-name="都道府県"
-      hint="都道府県を入力してください（ひらがなでも検索できます）"
+      :title="$t('selectPrefecture')"
+      :label="$t('prefecture')"
+      :button-name="$t('prefecture')"
+      :hint="$t('prefectureHint')"
       :items="prefectureItems"
       multiple
     ></ListDialog>
@@ -90,66 +90,68 @@ setCarNames()
     <FromTo
       v-model:from="queryObject.priceFrom"
       v-model:to="queryObject.priceTo"
-      label="価格"
-      :from-item="Constants.PRICES"
-      :to-item="Constants.PRICES"
+      :label="$t('price')"
+      :from-item="useTranslateKeyLabelToI18n(Constants.PRICES)"
+      :to-item="useTranslateKeyLabelToI18n(Constants.PRICES)"
     ></FromTo>
 
     <FromTo
       v-model:from="queryObject.mileageFrom"
       v-model:to="queryObject.mileageTo"
-      label="走行距離"
-      :from-item="Constants.MILEAGES"
-      :to-item="Constants.MILEAGES"
+      :label="$t('mileage')"
+      :from-item="useTranslateKeyLabelToI18n(Constants.MILEAGES)"
+      :to-item="useTranslateKeyLabelToI18n(Constants.MILEAGES)"
     ></FromTo>
 
     <div>
-      <!-- コンポーネント化するか検討 -->
       <div
         class="tw-my-3 tw-border-s-4 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
       >
-        走行距離
+        {{ $t('mileage') }}
       </div>
-      <v-checkbox v-model="queryObject.isVehicleInspection" label="車検あり"></v-checkbox>
+      <v-checkbox
+        v-model="queryObject.isVehicleInspection"
+        :label="$t('vehicleInspectionAvailable')"
+      ></v-checkbox>
     </div>
 
     <div
       class="tw-my-3 tw-border-s-4 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
     >
-      サービス
+      {{ $t('services') }}
     </div>
     <div class="tw-flex tw-flex-wrap">
       <v-checkbox
         v-model="queryObject.socialTypes"
-        label="X（旧Twitter）"
+        :label="$t('twitter')"
         :value="Constants.SOCIAL_TYPE.TWITTER"
       ></v-checkbox>
       <v-checkbox
         v-model="queryObject.socialTypes"
-        label="ジモティー"
+        :label="$t('jmty')"
         :value="Constants.SOCIAL_TYPE.JMTY"
       ></v-checkbox>
       <v-checkbox
         v-model="queryObject.socialTypes"
-        label="ヤフオク"
+        :label="$t('yahoo')"
         :value="Constants.SOCIAL_TYPE.YAHOO"
       ></v-checkbox>
       <v-checkbox
         v-model="queryObject.socialTypes"
-        label="メルカリ"
+        :label="$t('mercari')"
         :value="Constants.SOCIAL_TYPE.MERCARI"
       ></v-checkbox>
       <v-checkbox
         v-model="queryObject.socialTypes"
-        label="ラクマ"
+        :label="$t('rakuma')"
         :value="Constants.SOCIAL_TYPE.RAKUMA"
       ></v-checkbox>
     </div>
 
     <TextField
       v-model:text="queryObject.text"
-      label="キーワード検索"
-      placeholder="MT サンルーフ"
+      :label="$t('keywordSearch')"
+      :placeholder="$t('placeholder')"
       :counter="30"
       type="text"
       icon="mdi-magnify"
@@ -158,7 +160,7 @@ setCarNames()
     <div class="tw-fixed tw-bottom-0 tw-left-0 tw-w-full tw-bg-gray-100 tw-p-4 tw-opacity-90">
       <div class="tw-m-auto tw-flex tw-max-w-screen-md tw-text-center">
         <v-btn color="gray" variant="elevated" size="large" class="tw-w-4/12" @click="useReset">
-          クリア
+          {{ $t('clear') }}
         </v-btn>
 
         <v-btn
@@ -168,7 +170,7 @@ setCarNames()
           append-icon="mdi-magnify"
           @click="onClickSearch"
         >
-          検索する
+          {{ $t('search') }}
         </v-btn>
       </div>
     </div>

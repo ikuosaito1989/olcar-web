@@ -101,139 +101,148 @@ defineExpose({
 <template>
   <div>
     <div class="tw-my-4 tw-border-b tw-pb-3 tw-text-center tw-text-xl tw-font-bold">
-      掲載依頼する
+      {{ $t('submitRequest') }}
     </div>
     <div class="tw-rounded tw-bg-[#f5f5f6] tw-p-4">
       <Banner href="/info/exhibit" src="/banner/exhibit.webp"></Banner>
       <br />
-      olcar（オルカー）に掲載するための情報を入力してください。
-      掲載依頼後、1~3営業日以内に審査を行い、内容に問題がなければそのまま掲載が開始されます。
-      審査不要、複数台掲載可、宣伝効果の高い掲載オプションもご用意しておりますのでこちらもご利用ください
+      {{ $t('inputInfo') }}
+      {{ $t('reviewProcess') }}
+      {{ $t('additionalOptions') }}
     </div>
     <v-form ref="formRef" class="tw-w-full">
       <TextField
         v-model:text="formData.carName"
-        label="車種名"
-        placeholder="プリウス"
+        :label="$t('carModel')"
+        :placeholder="$t('exampleModel')"
         :counter="30"
-        :rules="[validationUtil.required]"
-        chip-label="必須"
+        :rules="[(v) => validationUtil.required(v, $t('required_field'))]"
+        :chip-label="$t('required')"
         clearable
         type="text"
-        hint="「プリウス」等の車種名を記入してください"
+        :hint="$t('hintCarModel')"
       ></TextField>
 
       <ListDialog
         :id="elementIds.makerDialog"
         ref="makerRef"
         v-model:current-items="formData.makers"
-        title="メーカー選択"
-        label="メーカー・車名"
-        button-name="メーカー・車名"
+        :title="$t('makerSelection')"
+        :label="$t('makerOrModel')"
+        :button-name="$t('manufacturerOrCarName')"
         :items="makerItems"
-        chip-label="必須"
-        :rules="[validationUtil.required]"
+        :chip-label="$t('required')"
+        :rules="[(v) => validationUtil.required(v, $t('required_field'))]"
       ></ListDialog>
 
       <FileUpload
         :id="elementIds.uploadDialog"
         ref="uploadRef"
         v-model:current-items="formData.files"
-        :rules="[validationUtil.requiredFile, validationUtil.maxFileSize]"
+        :rules="[
+          (v: File[]) => validationUtil.requiredFile(v, $t('required_field')),
+          (v: File[]) => validationUtil.maxFileSize(v, 10000000, $t('input_image_within_limit')),
+        ]"
       ></FileUpload>
 
       <TextArea
         v-model:text="formData.description"
-        label="商品説明"
-        placeholder="商品説明"
-        hint="商品の説明を入力してください"
+        :label="$t('productDescription')"
+        :placeholder="$t('productDescriptionExample')"
+        :hint="$t('hintDescription')"
         :counter="1000"
-        chip-label="必須"
+        :chip-label="$t('required')"
         clearable
-        :rules="[validationUtil.required]"
+        :rules="[(v) => validationUtil.required(v, $t('required_field'))]"
       ></TextArea>
 
       <TextField
         v-model:text="formData.price"
-        label="価格"
-        placeholder="500,000"
-        chip-label="必須"
+        :label="$t('price')"
+        :placeholder="$t('examplePrice')"
+        :chip-label="$t('required')"
         clearable
         type="tel"
         :rules="[
-          validationUtil.required,
-          (v: string | number) => validationUtil.max(+v, 10000000, '円以内にしてください'),
+          (v) => validationUtil.required(v, $t('required_field')),
+          (v: string | number) => validationUtil.max(+v, 10000000, $t('within_currency_limit')),
         ]"
       ></TextField>
 
       <TextField
         v-model:text="formData.userName"
-        label="ユーザー名"
-        placeholder="オルカー"
-        chip-label="必須"
-        hint="お名前、社名、ニックネームなど表示したいユーザー名を入力してください"
+        :label="$t('userName')"
+        :placeholder="$t('exampleUserName')"
+        :chip-label="$t('required')"
+        :hint="$t('hintUserName')"
         clearable
         type="text"
         :counter="30"
-        :rules="[validationUtil.required]"
+        :rules="[(v) => validationUtil.required(v, $t('required_field'))]"
       ></TextField>
 
       <TextField
         v-model:text="formData.link"
-        label="掲載ページのリンク"
-        placeholder="https://example.com"
-        chip-label="必須"
+        :label="$t('listingPageLink')"
+        :placeholder="$t('exampleUrl')"
+        :chip-label="$t('required')"
         clearable
         type="text"
-        hint="車を販売する会社のHPやX（旧Twitter）、ヤフオク等のURLを入力してください"
+        :hint="$t('hintUrl')"
         :counter="1000"
-        :rules="[validationUtil.required, validationUtil.url]"
+        :rules="[
+          (v) => validationUtil.required(v, $t('required_field')),
+          (v) => validationUtil.url(v, $t('enter_valid_url')),
+        ]"
       ></TextField>
 
       <TextField
         v-model:text="formData.email"
-        label="メールアドレス"
+        :label="$t('emailAddress')"
         placeholder="support@ol-car.com"
-        chip-label="必須"
+        :chip-label="$t('required')"
         clearable
         type="email"
-        hint="審査通知を受け取るためのメールアドレスを入力してください"
+        :hint="$t('hintEmail')"
         :counter="256"
-        :rules="[validationUtil.required, validationUtil.email]"
+        :rules="[
+          (v) => validationUtil.required(v, $t('required_field')),
+          (v) => validationUtil.email(v, $t('enter_valid_email')),
+        ]"
       ></TextField>
 
       <TextField
         v-model:text="formData.mileage"
-        label="走行距離"
-        placeholder="50,000"
+        :label="$t('mileage')"
+        :placeholder="$t('exampleMileage')"
         clearable
         type="tel"
-        :rules="[(v: string | number) => validationUtil.max(+v, 500000, 'km以内にしてください')]"
+        :rules="[(v: string | number) => validationUtil.max(+v, 500000, $t('within_km_limit'))]"
       ></TextField>
 
       <FromTo
         v-model:from="formData.vehicleInspection.year"
         v-model:to="formData.vehicleInspection.month"
-        label="車検満了"
+        :label="$t('vehicleInspectionExpiry')"
         :from-item="Constants.YEAR"
         :to-item="Constants.MONTH"
         is-from-label=""
-        placeholder-from="年"
-        placeholder-to="月"
+        :placeholder-from="$t('year')"
+        :placeholder-to="$t('month')"
       ></FromTo>
 
       <ListDialog
         :current-items="formData.prefectures"
-        title="都道府県選択"
-        label="都道府県"
-        button-name="都道府県"
+        :title="$t('prefectureSelection')"
+        :label="$t('prefecture')"
+        :button-name="$t('prefecture')"
         :items="prefectureItems"
       ></ListDialog>
 
       <TextField
         v-model:text="formData.locality"
-        label="市区町村"
-        placeholder="横浜市"
+        :label="$t('locality')"
+        :placeholder="$t('exampleLocality')"
         clearable
         type="text"
         :counter="30"
@@ -251,10 +260,10 @@ defineExpose({
         class="tw-mb-4 tw-w-full"
         @click="onClickPreview"
       >
-        プレビュー
+        {{ $t('preview') }}
       </v-btn>
       <v-btn variant="elevated" size="large" class="tw-w-full" @click="onConfirm">
-        この内容で掲載依頼する
+        {{ $t('submitListingRequest') }}
       </v-btn>
     </v-form>
   </div>

@@ -29,7 +29,9 @@ const useSetFromQuery = (query: any) => {
    * @returns adf
    */
   const getKeyLabel = (key: 'mileageFrom' | 'mileageTo' | 'priceFrom' | 'priceTo') => {
-    const data = key.includes('mileage') ? Constants.MILEAGES : Constants.PRICES
+    const data = key.includes('mileage')
+      ? useTranslateKeyLabelToI18n(Constants.MILEAGES)
+      : useTranslateKeyLabelToI18n(Constants.PRICES)
     return {
       key: query[key]?.toString(),
       label: data.find((v) => v.key?.toString() === query[key])?.label,
@@ -81,6 +83,7 @@ const useSearchSocialType = (query: any) => {
  * queryObjectから表示用の検索条件を取得する
  */
 const useGetSearchConditions = (): string[] => {
+  const { t } = useI18n()
   const searchConditions: string[] = []
   const obj = queryObject.value
   if (obj.keywords.length) {
@@ -124,11 +127,15 @@ const useGetSearchConditions = (): string[] => {
   }
 
   if (obj.mileageFrom?.key) {
-    arrayUtil.push(searchConditions, [`${formatUtil.toMileage(obj.mileageFrom.key, 0)}以上`])
+    arrayUtil.push(searchConditions, [
+      `${formatUtil.toMileage(obj.mileageFrom.key, 0, t('ten_thousand_km'))}以上`,
+    ])
   }
 
   if (obj.mileageTo?.key) {
-    arrayUtil.push(searchConditions, [`${formatUtil.toMileage(+obj.mileageTo.key, 0)}以下`])
+    arrayUtil.push(searchConditions, [
+      `${formatUtil.toMileage(+obj.mileageTo.key, 0, t('ten_thousand_km'))}以下`,
+    ])
   }
 
   if (obj.priceFrom?.key) {

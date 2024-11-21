@@ -49,27 +49,27 @@ defineExpose({
     <v-dialog v-model="isVisible" width="400">
       <v-card>
         <div class="tw-my-4 tw-border-b tw-pb-3 tw-text-center tw-text-xl tw-font-bold">
-          報告する
+          {{ $t('reportTitle') }}
         </div>
         <Recaptcha ref="recaptchaRef" v-model:recaptcha="response"></Recaptcha>
         <TextArea
           v-model:text="reason"
           class="tw-p-3"
-          placeholder="理由"
-          hint="報告する内容を入力してください"
+          :placeholder="$t('reasonPlaceholder')"
+          :hint="$t('reasonHint')"
           :counter="100"
           clearable
-          :rules="[validationUtil.required]"
+          :rules="[(v) => validationUtil.required(v, $t('required_field'))]"
         ></TextArea>
         <div class="tw-mb-2 [&>button]:tw-w-full">
           <v-btn variant="text" size="large" @click="onClick(Constants.REPORT.UNPOST)">
-            {{ Constants.REPORT.UNPOST }}
+            {{ $t('reportUnpost') }}
           </v-btn>
           <v-btn variant="text" size="large" @click="onClick(Constants.REPORT.STOP)">
-            {{ Constants.REPORT.STOP }}
+            {{ $t('reportStop') }}
           </v-btn>
           <v-btn variant="text" size="large" @click="onClick(Constants.REPORT.DIFF)">
-            {{ Constants.REPORT.DIFF }}
+            {{ $t('reportDiff') }}
           </v-btn>
         </div>
       </v-card>
@@ -81,13 +81,14 @@ defineExpose({
           <div class="tw-m-4">
             <v-icon size="x-large" color="success">mdi-check-outline</v-icon>
           </div>
-          <div class="tw-m-2 tw-font-bold">ご報告ありがとうございます</div>
+          <div class="tw-m-2 tw-font-bold">{{ $t('thankYouTitle') }}</div>
         </div>
         <div class="tw-text-sm">
-          いただいた情報は、olcar（オルカー）運営より対応をさせて頂きます。
-          公開停止申請の場合は、確認後、公開を停止させて頂きますのでしばらくお待ちください。
+          {{ $t('thankYouMessage') }}
         </div>
-        <div class="tw-mt-3 tw-text-center tw-text-sm" @click="isComplete = false">閉じる</div>
+        <div class="tw-mt-3 tw-text-center tw-text-sm" @click="isComplete = false">
+          {{ $t('closeButton') }}
+        </div>
       </v-card>
     </v-dialog>
   </div>

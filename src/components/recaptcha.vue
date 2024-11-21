@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { t } = useI18n()
 const recaptcha = defineModel<string>('recaptcha')
 const errorMessage = ref('')
 
@@ -13,7 +14,7 @@ watch(recaptcha, (v) => {
  */
 const validate = async () => {
   if (!recaptcha.value) {
-    errorMessage.value = 'あなたがロボットでないことを証明してください'
+    errorMessage.value = t('verify_not_robot')
   }
   return !!recaptcha.value
 }

@@ -11,5 +11,6 @@ export default defineNuxtPlugin((_nuxtApp) => {
     async onResponseError({ error }) {
       await report(error!)
     },
-  })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  }) as any
 })

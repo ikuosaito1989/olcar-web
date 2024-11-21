@@ -6,7 +6,7 @@ defineProps({
   },
   label: {
     type: String,
-    default: '無料掲載する',
+    required: true,
   },
   to: {
     type: String,

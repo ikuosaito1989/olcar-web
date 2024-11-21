@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type ReportDialog from '~/components/report-dialog.vue'
 import dayjs from '~/lib/day'
-
+const { t } = useI18n()
 const route = useRoute()
 const refReportDialog = ref<InstanceType<typeof ReportDialog> | null>(null)
 const { data: car } = await useFetchi<Detail>(`/api/v1/cars/${route.params.id}`)
@@ -57,22 +57,17 @@ const onClickReport = () => {
 const getHeader = () => {
   const title = `${car.value.makerName} ${car.value.name} ${formatUtil.toTenThousand(
     car.value.price,
-  )}万円 車検:${formatUtil.toLocaleVehicleInspection(
+  )}${t('tenThousandYen')} ${t('vehicleInspection')}:${formatUtil.toLocaleVehicleInspection(
     car.value.vehicleInspection,
     car.value.unknownVehicleInspection,
-  )} 走行距離:${formatUtil.toMileage(car.value.mileage)}`
+    t('date_format_year_month'),
+    t('valid'),
+  )} ${t('mileage')}:${formatUtil.toMileage(car.value.mileage, 1, t('ten_thousand_km'))}`
 
   // @note 10桁を超えるパラメータはシークレットキーのため、インデックスしないn
   const isNoIndex = route.params.id.length > 10
 
-  return headUtil.seo(
-    title,
-    car.value.comment,
-    car.value.images[0],
-    'article',
-    'summary',
-    isNoIndex,
-  )
+  return useSeo(title, car.value.comment, car.value.images[0], 'article', 'summary', isNoIndex)
 }
 
 useHead(getHeader())
@@ -87,7 +82,7 @@ useHead(getHeader())
         <div class="tw-mb-4 tw-flex tw-items-center">
           <v-icon color="#f67b01" class="tw-mr-2" size="40">mdi-handshake-outline</v-icon>
           <div>
-            個人売買のお取引が不安の方のために行政書士が購入から納車までサポートするおまかせ代行サービスを始めました！不安な手続きを完全サポート！
+            {{ $t('omakaseDescription') }}
           </div>
         </div>
         <Banner
@@ -102,7 +97,7 @@ useHead(getHeader())
     <div
       class="tw-mx-2 tw-my-3 tw-border-s-8 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
     >
-      {{ car.makerName }} {{ car.name }}の中古車を探す
+      {{ car.makerName }} {{ car.name }}{{ $t('findUsedCar') }}
     </div>
     <CarsList :details="sameSummary.details" />
     <Anchor
@@ -110,24 +105,24 @@ useHead(getHeader())
       :to="`/?carNames[]=${car.name}`"
       :external="true"
     >
-      {{ car.name }}の中古車をもっとみる
+      {{ car.name }}{{ $t('findMore') }}
       <v-icon color="primary">mdi-chevron-right</v-icon>
     </Anchor>
     <div
       class="tw-mx-2 tw-my-3 tw-border-s-8 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
     >
-      {{ car.makerName }}の中古車を探す
+      {{ $t('findUsedCar') }} {{ car.makerName }}
     </div>
     <CarsList :details="makerSummary.details" />
 
     <Anchor class="tw-my-6 tw-flex tw-justify-end" :to="`/${car.makerId}`" :external="true">
-      {{ car.makerName }}の中古車をもっとみる
+      {{ car.makerName }}{{ $t('findMore') }}
       <v-icon color="primary">mdi-chevron-right</v-icon>
     </Anchor>
 
     <Banner href="/info/purchase-process" src="/banner/purchase-process.webp"></Banner>
 
-    <Fav icon="mdi-magnify" label="検索する" :to="'/search' + useQueryString()"></Fav>
+    <Fav icon="mdi-magnify" :label="$t('searchNow')" :to="'/search' + useQueryString()"></Fav>
     <ReportDialog ref="refReportDialog" :car-id="car.id"></ReportDialog>
   </section>
 </template>

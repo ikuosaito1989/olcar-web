@@ -99,46 +99,53 @@ const onError = () => {
         :disabled="false"
         :model-value="isPost"
       >
-        <div class="tw-text-lg tw-font-bold tw-text-white">販売終了しました</div>
+        <div class="tw-text-lg tw-font-bold tw-text-white">{{ $t('searchFinished') }}</div>
       </v-overlay>
     </v-carousel>
 
     <Price :is-omakase="true" class="tw-my-3" :price="car.price"></Price>
     <div class="tw-text-xs">
-      おまかせ代行サービスは購入から納車までおまかせできるサービスです。詳しくは
-      <Anchor class="tw-font-bold tw-text-[#1976d2]" to="/info/omakase-agent">こちら</Anchor>
+      {{ $t('omakase_service_description') }}
+      <Anchor class="tw-font-bold tw-text-[#1976d2]" to="/info/omakase-agent">
+        {{ $t('here') }}
+      </Anchor>
     </div>
-    <Item label="走行距離">
-      <div>{{ formatUtil.toMileage(car.mileage) }}</div>
+    <Item :label="$t('mileage')">
+      <div>{{ formatUtil.toMileage(car.mileage, 0, $t('ten_thousand_km')) }}</div>
     </Item>
-    <Item label="車検">
+    <Item :label="$t('vehicleInspection')">
       <div>
         {{
-          formatUtil.toLocaleVehicleInspection(car.vehicleInspection, car.unknownVehicleInspection)
+          formatUtil.toLocaleVehicleInspection(
+            car.vehicleInspection,
+            car.unknownVehicleInspection,
+            $t('date_format_year_month'),
+            $t('valid'),
+          )
         }}
       </div>
     </Item>
 
-    <Item label="地域">
+    <Item :label="$t('region')">
       <div>{{ formatUtil.toJoinString(car.prefecture, car.locality) }}</div>
     </Item>
-    <Item label="公開日">
-      <div>{{ formatUtil.toLocaleDateString(car.createAt) }}</div>
+    <Item :label="$t('publishDate')">
+      <div>{{ formatUtil.toLocaleDateString(car.createAt, $t('date_format_full')) }}</div>
     </Item>
-    <Item label="販売元">
+    <Item :label="$t('seller')">
       <div class="tw-flex tw-items-center">
         <v-img class="tw-w-7" :src="car.userImageUrl"></v-img>
 
         <div class="tw-mx-1">{{ car.nickName }}</div>
       </div>
     </Item>
-    <Item label="説明" :is-new-line="true">
+    <Item :label="$t('description')" :is-new-line="true">
       <!--eslint-disable-next-line vue/no-v-html-->
       <div class="tw-whitespace-pre-wrap" v-html="comment"></div>
     </Item>
 
     <v-alert prominent border="top" type="warning">
-      掲載されている情報は正確でない場合や情報が更新されている可能性があります。正しい情報は掲載元ページをご確認ください
+      {{ $t('advertisingInfo') }}
     </v-alert>
 
     <v-btn
@@ -147,16 +154,16 @@ const onError = () => {
       target="_blank"
       :href="car.referenceUrls[0]"
     >
-      掲載ページへ
+      {{ $t('advertisingPage') }}
     </v-btn>
     <v-btn color="black" class="tw-mb-1 tw-mt-5 tw-w-full" @click="onClickReport">
-      公開停止、または問題を報告する
+      {{ $t('reportIssue') }}
     </v-btn>
     <div v-if="keywords.keywords.length > 0">
       <div
         class="tw-my-3 tw-border-s-8 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
       >
-        この車に含まれるキーワード
+        {{ $t('keywordsIncluded') }}
       </div>
 
       <div>
@@ -166,7 +173,7 @@ const onError = () => {
           </v-chip>
         </Anchor>
       </div>
-      <div class="tw-text-xs">※クリックすると検索できます</div>
+      <div class="tw-text-xs">{{ $t('keywordsDescription') }}</div>
     </div>
 
     <GoogleAd></GoogleAd>
