@@ -18,8 +18,7 @@ const useSeo =
     isNoIndex: boolean = false,
   ) => {
     const { t } = useI18n()
-    const title =
-      titleName ?? t('description_used_car_site').replace(/<("[^"]*"|'[^']*'|[^'">]|)*>/g, '')
+    const title = titleName ?? t('headTitle').replace(/<("[^"]*"|'[^']*'|[^'">]|)*>/g, '')
     const keywords = t('content_used_car_keywords')
 
     description = description?.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '')
