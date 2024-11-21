@@ -116,7 +116,7 @@ const getHeader = () => {
   const conditions = searchConditions.value.join(' ')
   if (makerName.value) {
     return useSeo(
-      formatUtil.replace(t('used_car_of_maker'), makerName.value),
+      makerName.value,
       formatUtil.replace(t('used_car_description_of_maker'), makerName.value),
     )
   }
