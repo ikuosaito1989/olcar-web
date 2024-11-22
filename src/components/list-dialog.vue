@@ -63,8 +63,7 @@ watch(
  *
  * @param value
  */
-const onClick = async (value: { id: unknown; value: boolean; path: unknown[] }) => {
-  const item = prop.items.find((v) => v.value === value.id)!
+const onClick = async (item: Item) => {
   open()
 
   if (!prop.multiple) {
@@ -212,7 +211,14 @@ defineExpose({
           type="text"
           @update="update"
         ></TextField>
-        <v-list :items="_items" @click:select="onClick"></v-list>
+
+        <v-virtual-scroll :items="_items">
+          <template #default="{ item }">
+            <v-list-item :key="item.id" @click="onClick(item)">
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item>
+          </template>
+        </v-virtual-scroll>
       </v-card>
     </v-dialog>
     <v-chip
