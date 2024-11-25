@@ -23,7 +23,8 @@ const useSeo =
       : t('headTitle').replace(/<("[^"]*"|'[^']*'|[^'">]|)*>/g, '')
     const keywords = t('content_used_car_keywords')
 
-    description = description?.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '')
+    description =
+      description ?? t('description_used_car_site').replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '')
 
     return {
       title: title,
