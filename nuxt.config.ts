@@ -28,6 +28,8 @@ export default defineNuxtConfig({
         { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
         { rel: 'alternate', href: 'https://ol-car.com/', hreflang: 'en' },
         { rel: 'alternate', href: 'https://ol-car.com/', hreflang: 'ja' },
+        { rel: 'alternate', href: 'https://ol-car.com/', hreflang: 'ja_JP' },
+        { rel: 'alternate', href: 'https://ol-car.com/', hreflang: 'x-default' },
       ],
     },
   },
