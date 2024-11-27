@@ -7,11 +7,35 @@ const props = defineProps({
   },
 })
 
+const { t } = useI18n()
+
 const imageLoaded = ref(false)
+const viewed = ref(false)
 
 const comment = computed(() => props.detail.comment.substring(0, 50))
 
 const isPost = computed(() => !props.detail.posted || imageLoaded.value)
+const isViewed = computed(() => viewed.value)
+
+/**
+ * オーバーレイのメッセージ
+ */
+const overlayMessage = computed(() => {
+  if (isPost.value) {
+    return t('soldOut')
+  }
+
+  if (isViewed.value) {
+    return t('viewed')
+  }
+
+  return ''
+})
+
+onMounted(async () => {
+  const histories = localStorageUtil.getItem<LocalStorage>(Constants.LOCALSTORAGE.HISTORY)
+  viewed.value = !!histories.find((v) => v.id === props.detail.id)
+})
 
 /**
  * Emitted if the image fails to load.
@@ -46,9 +70,9 @@ const onError = () => {
               contained
               persistent
               :disabled="false"
-              :model-value="isPost"
+              :model-value="isPost || isViewed"
             >
-              <div class="tw-text-lg tw-font-bold tw-text-white">{{ $t('soldOut') }}</div>
+              <div class="tw-text-lg tw-font-bold tw-text-white">{{ overlayMessage }}</div>
             </v-overlay>
           </v-img>
         </div>

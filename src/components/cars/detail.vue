@@ -99,7 +99,7 @@ const onError = () => {
         :disabled="false"
         :model-value="isPost"
       >
-        <div class="tw-text-lg tw-font-bold tw-text-white">{{ $t('searchFinished') }}</div>
+        <div class="tw-text-lg tw-font-bold tw-text-white">{{ $t('soldOut') }}</div>
       </v-overlay>
     </v-carousel>
 

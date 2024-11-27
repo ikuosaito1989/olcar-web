@@ -127,7 +127,6 @@
   "vehicleInspection": "車検",
   "region": "地域",
   "description": "説明",
-  "searchFinished": "検索終了",
   "seller": "販売元",
   "serviceDescription": "おまかせ代行サービスは、購入から納車までおまかせできるサービスです。詳しくは",
   "advertisingPage": "掲載ページへ",
@@ -179,5 +178,6 @@
   "here": "こちら",
   "date_format_year_month": "YYYY年M月",
   "date_format_full": "YYYY年MM月DD日",
-  "valid": "あり"
+  "valid": "あり",
+  "viewed": "閲覧済み"
 }

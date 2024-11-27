@@ -127,7 +127,6 @@
   "vehicleInspection": "Car Check",
   "region": "Region",
   "description": "Description",
-  "searchFinished": "Search Finished",
   "seller": "Seller",
   "serviceDescription": "Omakase service is a service where everything, from purchase to delivery, is handled for you. For more details, please visit",
   "advertisingPage": "Advertising Page",
@@ -179,5 +178,6 @@
   "here": "here",
   "date_format_year_month": "YYYY MMMM",
   "date_format_full": "MMMM DD, YYYY",
-  "valid": "Valid"
+  "valid": "Valid",
+  "viewed": "Viewed"
 }
