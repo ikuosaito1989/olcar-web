@@ -26,10 +26,6 @@ export default defineNuxtConfig({
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
-        { rel: 'alternate', href: 'https://ol-car.com/', hreflang: 'en' },
-        { rel: 'alternate', href: 'https://ol-car.com/', hreflang: 'ja' },
-        { rel: 'alternate', href: 'https://ol-car.com/', hreflang: 'ja_JP' },
-        { rel: 'alternate', href: 'https://ol-car.com/', hreflang: 'x-default' },
       ],
     },
   },
@@ -59,7 +55,7 @@ export default defineNuxtConfig({
 
   i18n: {
     lazy: true,
-    defaultLocale: 'en',
+    defaultLocale: 'ja',
     locales: [
       { files: ['ja.json'], code: 'ja', language: 'ja-JP', name: '日本語' },
       { files: ['en.json'], code: 'en', language: 'en-US', name: 'English' },

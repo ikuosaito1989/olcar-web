@@ -8,4 +8,5 @@ export default defineI18nConfig(() => ({
     ja,
     en,
   },
+  seo: true,
 }))
