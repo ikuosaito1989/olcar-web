@@ -7,21 +7,6 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.hook('vue:error', async (error) => {
     await report(error as Error)
   })
-
-  nuxtApp.vueApp.config.warnHandler = async (msg, _, trace) => {
-    const error: Error = {
-      name: '',
-      message: msg,
-      stack: trace,
-    }
-    await report(error as Error)
-  }
-
-  if (import.meta.client) {
-    window.addEventListener('error', async (event) => {
-      await report(event.error as Error)
-    })
-  }
 })
 
 /**
