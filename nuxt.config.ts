@@ -34,6 +34,10 @@ export default defineNuxtConfig({
     transpile: ['vuetify'],
   },
 
+  nitro: {
+    compressPublicAssets: true,
+  },
+
   modules: [
     'vue-recaptcha/nuxt',
     '@nuxtjs/tailwindcss',
