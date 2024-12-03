@@ -115,14 +115,11 @@ const onChangeSales = () => {
 const getHeader = () => {
   const conditions = searchConditions.value.join(' ')
   if (makerName.value) {
-    return useSeo(
-      makerName.value,
-      formatUtil.replace(t('used_car_description_of_maker'), makerName.value),
-    )
+    return useSeo(makerName.value, t('used_car_description_of_maker', [makerName.value]))
   }
 
   if (searchConditions.value.length > 0) {
-    return useSeo(`${conditions}`, formatUtil.replace(t('cheap_used_car_conditions'), conditions))
+    return useSeo(`${conditions}`, t('cheap_used_car_conditions', [conditions]))
   }
 
   return useSeo()
