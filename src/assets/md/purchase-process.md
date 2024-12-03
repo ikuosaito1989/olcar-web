@@ -1,6 +1,6 @@
 ## <i class="mdi mdi-car" style="font-size:32px;color:#f67b01;position: relative;top: 4px;"></i>個人売買の車購入ガイド
 
-<img  loading="lazy"  src="/banner/purchase-process.webp">
+<img loading="lazy" src="/banner/purchase-process.webp">
 
 車の個人売買のフローに明確なルールはありませんが、以下のようなフローをご提案しています。
 
@@ -66,5 +66,5 @@
 これらの手続きが不安な方は「**中古車個人売買のための契約書作成サービス＋車庫証明取得（¥20,000〜）**」にて行政書士がサポートいたします。ぜひお気軽にご相談ください！
 
 <a href="/info/omakase-agent">
-<img  loading="lazy"  src="https://homepage.gsss.pro/wp-content/uploads/2023/08/1a7321fd5c87b44161456ab0d5bcbbaf-1.png">
+<img loading="lazy" src="https://homepage.gsss.pro/wp-content/uploads/2023/08/1a7321fd5c87b44161456ab0d5bcbbaf-1.png">
 </a>

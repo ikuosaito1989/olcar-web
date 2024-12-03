@@ -1,13 +1,13 @@
 # <i class="mdi mdi-handshake-outline" style="font-size:32px;color:#f67b01;position: relative;top: 6px;right: 4px;"></i>中古車個人売買のための契約書作成サービス＋車庫証明取得
 
-<img  loading="lazy"  src="https://homepage.gsss.pro/wp-content/uploads/2023/08/1.png">
+<img loading="lazy" src="https://homepage.gsss.pro/wp-content/uploads/2023/08/1.png">
 
 中古車における個人売買の利用者の不安は、主に **「取引トラブル** と **「車の状態」**です。個人売買の取引についてはルールが無く、当事者の漠然としたルールによって行われている現状があります。
 
 その取引のルールをはっきりさせ不安をなくすために、**行政書士が売買契約書を作成いたします**。また、売買後の手続きについてもご案内いたします。
 
 <div class="border">
-<img  loading="lazy"  style="max-width: 300px;" src="https://homepage.gsss.pro/wp-content/uploads/2023/08/image-768x474.png">
+<img loading="lazy" style="max-width: 300px;" src="https://homepage.gsss.pro/wp-content/uploads/2023/08/image-768x474.png">
 <div>
 神奈川県横浜市で活動している行政書士の保田 多佳之（やすだ たかゆき）です。車庫証明のポータルサイトを運営していますので、お近くの行政書士をご案内できます。出張封印もお任せください！
 </div>
@@ -15,7 +15,7 @@
 
 ## 契約書作成サービス
 
-<img  loading="lazy"  src="https://homepage.gsss.pro/wp-content/uploads/2023/08/ffc3bc2166e76f08cabb15fc618f9f28.png">
+<img loading="lazy" src="https://homepage.gsss.pro/wp-content/uploads/2023/08/ffc3bc2166e76f08cabb15fc618f9f28.png">
 
 中古車の個人売買が行われた場合、**民法が適用**されます。しかし、だれもが民法を知っているわけではありません。
 
@@ -49,7 +49,7 @@
 
 ## オプション
 
-<img  loading="lazy"  src="https://homepage.gsss.pro/wp-content/uploads/2023/08/6.png">
+<img loading="lazy" src="https://homepage.gsss.pro/wp-content/uploads/2023/08/6.png">
 
 ### 車庫証明
 

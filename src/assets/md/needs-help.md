@@ -1,13 +1,13 @@
 
 ## <i class="mdi mdi-hand-heart" style="font-size:32px;color:#f67b01;position: relative;top: 2px;right: 4px;"></i>作者のolcarに掛ける想いとみなさまへのお願い
 
-<img  loading="lazy"  style="max-width: 200px;" src="https://festive-yonath-a04e1e.netlify.app/_nuxt/img/profile.a1dd2d3.png">
+<img loading="lazy" style="max-width: 200px;" src="https://festive-yonath-a04e1e.netlify.app/_nuxt/img/profile.a1dd2d3.png">
 
 はじめまして、olcar（オルカー）を1人で作っている斉藤と申します🙋プログラミングもデザインもSNS運用もサポートも企画も何から何までぜーんぶ1人でやってます💪サービス開始して1年が経ち、olcarの存在意義だったり、お金周りだったり、作者の紹介だったりとどこかでお話しないといけないなーと思いつつなかなか書けなかったのですが重い腰を上げて書いてみます。乱文+長文ですがお付き合いください。
 
 まず僕ですが30代前半の二児の父親でサラリーマンと副業で個人事業主をやっております。本業は普通のサラリーマンなのでギリギリのお小遣いでやりくりしてますし、良い家にも住んでませんし、30万で購入した中古車はもう9年目になります。少ないお小遣いでやりくりしているのでolcarもギリギリの状態で運用しています😭僕はめちゃくちゃ車好き！と言うよりは安い車が好きで世の中には安い車がありふれてます。安い車って言い方良くないですが「**車を身近に**」というコンセプトで車というのは高級品でなく当たり前のように乗れるし、なくてはならないものだよと伝えたい想いがあります。車の知識は普通の人よりはある程度で予備検行って悪いところ修理して運輸支局で車検と取れる程度の知識はあります😒
 
-<img  loading="lazy"  style="max-width: 200px;margin: 32px auto;" src="/logo.webp">
+<img loading="lazy" style="max-width: 200px;margin: 32px auto;" src="/logo.webp">
 
 別に「安い車をいろんな人に知ってもらいたいなー」みたいなお花畑な考えでolcarを作ったわけじゃないんですよ。車界隈って買う側も売る側も車に対する考えがバグってて「ちょっと冷静に考えてよ...」と考え直してもらいたくてolcarでは安い車を集めてるんですよ。**若者の車離れ**が起きているのではなくて車が高級品になりすぎてもはや普通の人が買えない現状にあるんです。車離れというのはメディアの印象操作でもあるし、売る側買う側にも問題あると思うのでolcarを見てちょっとでも認識が変わってくれると嬉しいと思ってます。ちなみにolcarは「Old Car（古い車）」の略です。
 
@@ -22,7 +22,7 @@
 そんなこと言いつつも安い車、つまり業者を介していない個人売買の車を買ったり売るのはかなり敷居が高いんです。ここまで勧めてるんだから買うのもサポートしないとなーと思い、行政書士の保田さんにお願いしてどうやったら個人売買の車を買うのか一緒に考えてもらい、おまかせ代行サービスを始めました
 
 <a href="/info/omakase-agent">
-<img  loading="lazy"  src="https://homepage.gsss.pro/wp-content/uploads/2023/08/1a7321fd5c87b44161456ab0d5bcbbaf-1.png">
+<img loading="lazy" src="https://homepage.gsss.pro/wp-content/uploads/2023/08/1a7321fd5c87b44161456ab0d5bcbbaf-1.png">
 </a>
 
 実際に利用した方の感謝の声を聞くと必ず必要なサービスだと思いますし、最終的には**あたりまえのように車を買い、あたりまえのように車に乗る、ただそこの認識をちょこっと変わる**だけで良いと思ってます。
@@ -58,7 +58,7 @@
 
 <a href="https://twitter.com/ntnt1105" target="_blank">
 <div style="display: flex;align-items: center;margin-bottom: 12px !important;height: 50px;">
-<img  loading="lazy"  style="width: 50px;border-radius: 50px;" src="https://pbs.twimg.com/profile_images/1582595739980804098/53Di-E6S_400x400.jpg" />
+<img loading="lazy" style="width: 50px;border-radius: 50px;" src="https://pbs.twimg.com/profile_images/1582595739980804098/53Di-E6S_400x400.jpg" />
 <div style="margin-left: 12px;font-size: 14px;flex: 1 1 auto;">
 <div>
 Nガレ 様
@@ -68,7 +68,7 @@ Nガレ 様
 </a>
 
 <div style="display: flex;align-items: center;margin-bottom: 12px !important;height: 50px;">
-<img  loading="lazy"  style="width: 50px;border-radius: 50px;" src="/img/user1.webp" />
+<img loading="lazy" style="width: 50px;border-radius: 50px;" src="/img/user1.webp" />
 <div style="margin-left: 12px;font-size: 14px;flex: 1 1 auto;">
 <div>
 T 様
