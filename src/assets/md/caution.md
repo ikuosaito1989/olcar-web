@@ -1,6 +1,6 @@
 ## <i class="mdi mdi-alert-outline" style="font-size:32px;color:#f67b01;position: relative;top: 4px;"></i>個人売買における詐欺について
 
-<img src="/ogp.webp">
+<img loading="lazy" src="/ogp.webp">
 
 個人売買において詐欺被害が多発しております。詐欺グループは非常に巧妙な手口で騙し、お金を奪っていきます。被害に遭わないためにも、以下の点にご注意ください。
 
@@ -19,6 +19,6 @@
 上記以外にも個人売買による手続きが不安な方は「**おまかせ代行サービス（¥3,000〜）**」にて行政書士がサポートいたします。ぜひお気軽にご相談ください！
 
 <a href="/info/omakase-agent?ref=p">
-<img src="https://homepage.gsss.pro/wp-content/uploads/2023/08/1a7321fd5c87b44161456ab0d5bcbbaf-1.png">
+<img loading="lazy" src="https://homepage.gsss.pro/wp-content/uploads/2023/08/1a7321fd5c87b44161456ab0d5bcbbaf-1.png">
 </a>
 

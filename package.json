@@ -18,6 +18,7 @@
   "dependencies": {
     "@kgierke/nuxt-basic-auth": "^1.7.0",
     "@mdi/font": "^7.4.47",
+    "@nuxt/image": "^1.8.1",
     "@nuxtjs/i18n": "^9.1.0",
     "@nuxtjs/sitemap": "^6.1.5",
     "@nuxtjs/tailwindcss": "^6.12.2",
@@ -25,14 +26,14 @@
     "dayjs": "^1.11.13",
     "marked": "^12.0.2",
     "nuxt": "^3.14.1592",
+    "nuxt-gtag": "^2.1.0",
     "query-string": "^9.1.1",
+    "vite-plugin-vuetify": "^2.0.4",
     "vue": "^3.5.13",
     "vue-recaptcha": "^3.0.0-alpha.6",
     "vue-router": "^4.4.5",
     "vuetify": "^3.7.4",
-    "vite-plugin-vuetify": "^2.0.4",
-    "wanakana": "^5.3.1",
-    "nuxt-gtag": "^2.1.0"
+    "wanakana": "^5.3.1"
   },
   "devDependencies": {
     "@nuxtjs/eslint-module": "^4.1.0",

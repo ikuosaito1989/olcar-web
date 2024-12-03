@@ -22,12 +22,7 @@ onMounted(async () => {
     <template #title>
       <Anchor to="/" :external="true">
         <div v-ripple>
-          <v-img
-            width="130"
-            min-height="33"
-            src="/logo.webp"
-            lazy-src="/datachef_unicolor16_9.webp"
-          />
+          <nuxt-img class="tw-min-h-8 tw-w-32" src="/logo.webp" />
         </div>
       </Anchor>
     </template>

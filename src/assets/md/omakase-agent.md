@@ -1,11 +1,11 @@
 ## <i class="mdi mdi-handshake-outline" style="font-size:32px;color:#f67b01;position: relative;top: 6px;right: 4px;"></i>おまかせ代行サービス
 
-<img src="https://homepage.gsss.pro/wp-content/uploads/2023/08/1a7321fd5c87b44161456ab0d5bcbbaf-1.png">
+<img loading="lazy" src="https://homepage.gsss.pro/wp-content/uploads/2023/08/1a7321fd5c87b44161456ab0d5bcbbaf-1.png">
 
 中古車の個人売買を利用する人の不安は、主に **「取引トラブル」** と **「車の手続き」** です。個人売買で車を安く購入できるメリットを生かしつつ安心に取引ができるようにサポートいたします。
 
 <div class="border">
-<img style="max-width: 300px;" src="https://homepage.gsss.pro/wp-content/uploads/2023/08/image-768x474.png">
+<img loading="lazy" style="max-width: 300px;" src="https://homepage.gsss.pro/wp-content/uploads/2023/08/image-768x474.png">
 <div>
 神奈川県横浜市で活動している行政書士の保田 多佳之（やすだ たかゆき）です。車庫証明のポータルサイトを運営していますので、お近くの行政書士をご案内できます。出張封印もお任せください！
 </div>
@@ -76,7 +76,7 @@
 ## お客様の声
 
 <div style="display: flex;align-items: center;margin-bottom: 24px;">
-<img style="width: 100px;border-radius: 50px;" src="/img/user1.webp" />
+<img loading="lazy" style="width: 100px;border-radius: 50px;" src="/img/user1.webp" />
 <div style="
     margin-left: 12px;
     font-size: 14px;
@@ -89,7 +89,7 @@
 </div>
 
 <div style="display: flex;align-items: center;margin-bottom: 24px;">
-<img style="width: 100px;border-radius: 50px;" src="/img/user2.webp" />
+<img loading="lazy" style="width: 100px;border-radius: 50px;" src="/img/user2.webp" />
 <div style="
     margin-left: 12px;
     font-size: 14px;

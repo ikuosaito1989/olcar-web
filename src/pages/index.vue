@@ -130,7 +130,7 @@ useHead(getHeader())
 
 <template>
   <section>
-    <v-img class="tw-aspect-video" lazy-src="/datachef_unicolor16_9.webp" src="/top.webp"></v-img>
+    <nuxt-img class="tw-h-auto tw-w-full" src="/top.webp" />
     <div v-if="searchConditions.length" class="tw-mx-4 tw-mt-4">
       <div class="tw-mb-2 tw-font-bold">{{ $t('searchCriteria') }}</div>
       <div class="tw-flex tw-flex-wrap">

@@ -48,7 +48,6 @@ const onClickReport = () => {
 
 /**
  * Emitted if the image fails to load.
- * {@link https://vuetifyjs.com/en/api/v-img/#events}
  */
 const onError = () => {
   imageLoaded.value = true
@@ -79,7 +78,7 @@ const onError = () => {
           @click="isVisible = !isVisible"
         ></v-btn>
         <v-carousel-item v-for="(item, i) in car.images" :key="i">
-          <v-img max-height="100vh" contain height="auto" :src="item" />
+          <nuxt-img class="tw-h-auto tw-max-h-screen tw-w-full tw-object-contain" :src="item" />
         </v-carousel-item>
       </v-carousel>
     </v-dialog>
@@ -134,8 +133,7 @@ const onError = () => {
     </Item>
     <Item :label="$t('seller')">
       <div class="tw-flex tw-items-center">
-        <v-img class="tw-w-7" :src="car.userImageUrl"></v-img>
-
+        <nuxt-img class="tw-w-7" :src="car.userImageUrl" />
         <div class="tw-mx-1">{{ car.nickName }}</div>
       </div>
     </Item>
