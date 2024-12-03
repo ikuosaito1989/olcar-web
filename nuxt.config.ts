@@ -58,6 +58,7 @@ export default defineNuxtConfig({
     'nuxt-gtag',
     '@kgierke/nuxt-basic-auth',
     '@nuxtjs/i18n',
+    '@nuxt/image',
   ],
 
   i18n: {

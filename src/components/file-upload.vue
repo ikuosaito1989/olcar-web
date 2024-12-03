@@ -133,11 +133,7 @@ defineExpose({
             <v-icon>mdi-close</v-icon>
           </v-btn>
         </div>
-        <v-img class="!tw-max-h-28" contain :src="createObjectURL(file)">
-          <template #placeholder>
-            <v-progress-circular indeterminate></v-progress-circular>
-          </template>
-        </v-img>
+        <nuxt-img class="!tw-max-h-28 tw-object-contain" :src="createObjectURL(file)" />
       </div>
     </div>
   </div>

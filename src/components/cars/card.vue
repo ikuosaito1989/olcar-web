@@ -39,7 +39,6 @@ onMounted(async () => {
 
 /**
  * Emitted if the image fails to load.
- * {@link https://vuetifyjs.com/en/api/v-img/#events}
  */
 const onError = () => {
   imageLoaded.value = true
@@ -47,7 +46,13 @@ const onError = () => {
 </script>
 
 <template>
-  <div v-ripple class="tw-p-4 tw-shadow-md">
+  <div v-ripple class="tw-relative tw-rounded-lg tw-p-4 tw-shadow-md">
+    <div
+      v-if="isPost || isViewed"
+      class="tw-pointer-events-none tw-absolute tw-inset-0 tw-z-10 tw-flex tw-items-center tw-justify-center tw-bg-black/50"
+    >
+      <div class="tw-text-lg tw-font-bold tw-text-white">{{ overlayMessage }}</div>
+    </div>
     <Anchor :is-under-line="false" :to="`/cars/${detail.id}`">
       <Titles
         :is-sponsor="detail.isSponsor"
@@ -58,23 +63,12 @@ const onError = () => {
 
       <div class="tw-flex tw-items-center">
         <div class="tw-w-2/4">
-          <v-img
-            class="tw-rounded"
-            height="220"
+          <nuxt-img
+            class="tw-h-56 tw-w-full tw-rounded tw-object-cover"
             :src="detail.images[0]"
-            lazy-src="/datachef_unicolor.webp"
+            :alt="detail.name"
             @error="onError"
-          >
-            <v-overlay
-              class="tw-items-center tw-justify-center tw-text-center"
-              contained
-              persistent
-              :disabled="false"
-              :model-value="isPost || isViewed"
-            >
-              <div class="tw-text-lg tw-font-bold tw-text-white">{{ overlayMessage }}</div>
-            </v-overlay>
-          </v-img>
+          />
         </div>
         <div class="tw-ml-2 tw-w-2/4">
           <Price :price="detail.price"></Price>
@@ -106,9 +100,3 @@ const onError = () => {
     </Anchor>
   </div>
 </template>
-
-<style scoped>
-:deep(.v-img__img--contain) {
-  object-fit: cover;
-}
-</style>

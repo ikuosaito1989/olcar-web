@@ -1,6 +1,6 @@
 ## <i class="mdi mdi-car" style="font-size:32px;color:#f67b01;position: relative;top: 4px;"></i>LINEはじめました！
 
-<img src="/banner/line.webp"/>
+<img  loading="lazy"  src="/banner/line.webp"/>
 
 olcar（オルカー）でLINE公式アカウントをはじめました！LINE公式アカウントでは個人売買に関するお悩みなど気軽にご相談できます
 
@@ -25,14 +25,14 @@ olcar（オルカー）でLINE公式アカウントをはじめました！LINE�
 スマートフォン端末から下のボタンを押してお友達登録してください！
 
 <a href="https://lin.ee/80JiY1r">
-<img src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png" alt="友だち追加" height="36" style="width: auto;display: unset;">
+<img  loading="lazy"  src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png" alt="友だち追加" height="36" style="width: auto;display: unset;">
 </a>
 
 2. QRコードで登録
 
 QRコードでの追加方法は<a href="https://guide.line.me/ja/friends-and-groups/add-qrurl.html" target="_blank">こちら</a>（LINEみんなの使い方ガイド）
 
-<img src="https://qr-official.line.me/gs/M_993dvsaw_GW.png?oat_content=qr" style="
+<img  loading="lazy"  src="https://qr-official.line.me/gs/M_993dvsaw_GW.png?oat_content=qr" style="
     width: 200px;
     display: unset;
 ">
