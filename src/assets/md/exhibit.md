@@ -1,4 +1,4 @@
-## <i class="mdi mdi-car" style="font-size:32px;color:#f67b01;position: relative;top: 4px;"></i>閲覧数が増える掲載オプション
+## 閲覧数が増える掲載オプション
 
 <img loading="lazy" src="/banner/exhibit.webp"/>
 
@@ -60,6 +60,5 @@ olcar（オルカー）では業界最安値（600円）で**ページの先頭�
 <small>・olcarはダイナミック・プライシングを導入しておりますので価格が変動する可能性があります。その際には周知致しますのでご安心ください</small>
 
 <a href="https://forms.gle/Q2hQvMqLP9Jw2bea6" rel="noreferrer" target="_blank" class="search__action__content__primary v-btn v-btn--is-elevated v-btn--has-bg theme--light elevation-1 v-size--large" style="background-color:#f67b01;border-color:#f67b01;color: white;font-weight: bold;position: sticky;bottom: 2rem;left: 0;width: 100%;padding: 8px;font-size: 16px;margin: 12px 0 20px;z-index: 100;">
-<i class="mdi mdi-email-outline" style="font-size:32px;"></i>
 まずはお試し（無料）から！
 </a>

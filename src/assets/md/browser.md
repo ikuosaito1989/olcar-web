@@ -1,5 +1,5 @@
 
-## <i class="mdi mdi-monitor" style="font-size:32px;color:#f67b01;position: relative;top: 6px;right: 4px;"></i>推奨環境
+## 推奨環境
 
 当サイトをご覧いただくため、下記環境を推奨しております。
 ※JavaScript、Cookieが使用できる状態でご利用ください。

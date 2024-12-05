@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { mdiClose } from '@mdi/js'
 const prop = defineProps({
   car: {
     type: Object as () => Detail,
@@ -71,14 +72,18 @@ const onError = () => {
     >
       <v-carousel height="auto" hide-delimiters :show-arrows="car.images.length > 1">
         <v-btn
-          icon="mdi-close"
+          :icon="mdiClose"
           size="small"
           variant="elevated"
           class="!tw-absolute tw-right-0 tw-top-0 tw-z-10 tw-m-2"
           @click="isVisible = !isVisible"
         ></v-btn>
         <v-carousel-item v-for="(item, i) in car.images" :key="i">
-          <nuxt-img class="tw-h-auto tw-max-h-screen tw-w-full tw-object-contain" :src="item" />
+          <nuxt-img
+            placeholder="/datachef_unicolor.webp"
+            class="tw-h-auto tw-max-h-screen tw-w-full tw-object-contain"
+            :src="item"
+          />
         </v-carousel-item>
       </v-carousel>
     </v-dialog>
@@ -133,7 +138,7 @@ const onError = () => {
     </Item>
     <Item :label="$t('seller')">
       <div class="tw-flex tw-items-center">
-        <nuxt-img class="tw-w-7" :src="car.userImageUrl" />
+        <nuxt-img placeholder="/datachef_unicolor.webp" class="tw-w-7" :src="car.userImageUrl" />
         <div class="tw-mx-1">{{ car.nickName }}</div>
       </div>
     </Item>

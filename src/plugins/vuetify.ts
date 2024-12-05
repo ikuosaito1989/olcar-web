@@ -1,8 +1,6 @@
-// import this after install `@mdi/font` package
-import '@mdi/font/css/materialdesignicons.css'
-
-import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
+import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
+import 'vuetify/styles'
 
 export default defineNuxtPlugin((app) => {
   const vuetify = createVuetify({
@@ -50,6 +48,13 @@ export default defineNuxtPlugin((app) => {
       VTextarea: {
         color: 'primary',
         variant: 'outlined',
+      },
+    },
+    icons: {
+      defaultSet: 'mdi',
+      aliases,
+      sets: {
+        mdi,
       },
     },
   })

@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { mdiCar } from '@mdi/js'
+
 defineProps({
   icon: {
     type: String,
-    default: 'mdi-car',
+    default: mdiCar,
   },
   label: {
     type: String,
@@ -23,7 +25,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <v-fab v-if="isRender" elevation="3" :to="to" color="primary" icon="mdi-car" size="78px" app>
+  <v-fab v-if="isRender" elevation="3" :to="to" color="primary" icon size="78px" app>
     <div class="tw-text-center">
       <v-icon size="32px">{{ icon }}</v-icon>
       <div class="tw-text-[10px] tw-font-bold tw-tracking-normal">{{ label }}</div>

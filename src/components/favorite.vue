@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import dayjs from '~/lib/day'
-
+import { mdiHeart, mdiHeartOutline } from '@mdi/js'
 const prop = defineProps({
   carId: {
     type: Number,
@@ -35,7 +35,7 @@ const variant = computed(() => (isFavorite.value ? 'elevated' : 'outlined'))
 /**
  * アイコン
  */
-const icon = computed(() => (isFavorite.value ? 'mdi-heart' : 'mdi-heart-outline'))
+const icon = computed(() => (isFavorite.value ? mdiHeart : mdiHeartOutline))
 
 /**
  * お気に入り押下

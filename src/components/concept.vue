@@ -4,7 +4,11 @@
       class="tw-m-auto tw-flex tw-max-w-screen-md tw-flex-wrap tw-items-center tw-justify-center"
     >
       <div class="!tw-flex-[0_0_200px]">
-        <nuxt-img class="tw-h-20 tw-object-contain" src="/logo.webp" />
+        <nuxt-img
+          placeholder="/datachef_unicolor16_9.webp"
+          class="tw-h-20 tw-object-contain"
+          src="/logo.webp"
+        />
       </div>
       <div class="!tw-flex-[1_1_300px]">
         <div class="tw-border-b tw-border-[#f67b01] tw-text-xl">{{ $t('aboutOlcar') }}</div>

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { mdiMagnify, mdiHeartOutline, mdiHistory, mdiHome } from '@mdi/js'
 const drawer = ref(false)
 const isRender = ref(false)
 /**
@@ -22,19 +23,24 @@ onMounted(async () => {
     <template #title>
       <Anchor to="/" :external="true">
         <div v-ripple>
-          <nuxt-img class="tw-min-h-8 tw-w-32" src="/logo.webp" />
+          <nuxt-img
+            placeholder="/datachef_unicolor16_9.webp"
+            layout="responsive"
+            class="tw-min-h-8 tw-w-32"
+            src="/logo.webp"
+          />
         </div>
       </Anchor>
     </template>
     <template #append>
       <Anchor :to="'/search' + useQueryString()">
-        <v-btn icon="mdi-magnify"></v-btn>
+        <v-btn :icon="mdiMagnify"></v-btn>
       </Anchor>
       <Anchor to="/favorite">
-        <v-btn icon="mdi-heart-outline"></v-btn>
+        <v-btn :icon="mdiHeartOutline"></v-btn>
       </Anchor>
       <Anchor to="/history">
-        <v-btn icon="mdi-history"></v-btn>
+        <v-btn :icon="mdiHistory"></v-btn>
       </Anchor>
     </template>
   </v-app-bar>
@@ -46,19 +52,19 @@ onMounted(async () => {
     touchless
   >
     <div class="tw-mb-16 [&>a]:tw-w-full [&>a]:!tw-justify-start [&>a]:tw-text-left">
-      <v-btn color="black" href="/" variant="text" prepend-icon="mdi-home">{{ $t('home') }}</v-btn>
+      <v-btn color="black" href="/" variant="text" :prepend-icon="mdiHome">{{ $t('home') }}</v-btn>
       <v-btn
         color="black"
         :href="'/search' + useQueryString()"
         variant="text"
-        prepend-icon="mdi-magnify"
+        :prepend-icon="mdiMagnify"
       >
         {{ $t('search') }}
       </v-btn>
-      <v-btn color="black" href="/favorite" variant="text" prepend-icon="mdi-heart-outline">
+      <v-btn color="black" href="/favorite" variant="text" :prepend-icon="mdiHeartOutline">
         {{ $t('favorites') }}
       </v-btn>
-      <v-btn color="black" href="/history" variant="text" prepend-icon="mdi-history">
+      <v-btn color="black" href="/history" variant="text" :prepend-icon="mdiHistory">
         {{ $t('history') }}
       </v-btn>
       <div class="tw-my-2 tw-font-bold tw-text-[#f67b01]">{{ $t('aboutOlcar') }}</div>

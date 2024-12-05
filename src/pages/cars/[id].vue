@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { mdiHandshakeOutline, mdiChevronRight, mdiMagnify } from '@mdi/js'
 import type ReportDialog from '~/components/report-dialog.vue'
 import dayjs from '~/lib/day'
 const { t } = useI18n()
@@ -80,7 +81,9 @@ useHead(getHeader())
     <div class="tw-m-2 tw-rounded-3xl tw-bg-[#f5f5f6] tw-p-4">
       <Anchor :is-under-line="false" to="/info/omakase-agent">
         <div class="tw-mb-4 tw-flex tw-items-center">
-          <v-icon color="#f67b01" class="tw-mr-2" size="40">mdi-handshake-outline</v-icon>
+          <v-icon color="#f67b01" class="tw-mr-2" size="40">
+            {{ mdiHandshakeOutline }}
+          </v-icon>
           <div>
             {{ $t('omakaseDescription') }}
           </div>
@@ -106,7 +109,7 @@ useHead(getHeader())
       :external="true"
     >
       {{ car.name }}{{ $t('findMore') }}
-      <v-icon color="primary">mdi-chevron-right</v-icon>
+      <v-icon color="primary">{{ mdiChevronRight }}</v-icon>
     </Anchor>
     <div
       class="tw-mx-2 tw-my-3 tw-border-s-8 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
@@ -117,12 +120,12 @@ useHead(getHeader())
 
     <Anchor class="tw-my-6 tw-flex tw-justify-end" :to="`/${car.makerId}`" :external="true">
       {{ car.makerName }}{{ $t('findMore') }}
-      <v-icon color="primary">mdi-chevron-right</v-icon>
+      <v-icon color="primary">{{ mdiChevronRight }}</v-icon>
     </Anchor>
 
     <Banner href="/info/purchase-process" src="/banner/purchase-process.webp"></Banner>
 
-    <Fav icon="mdi-magnify" :label="$t('searchNow')" :to="'/search' + useQueryString()"></Fav>
+    <Fav :icon="mdiMagnify" :label="$t('searchNow')" :to="'/search' + useQueryString()"></Fav>
     <ReportDialog ref="refReportDialog" :car-id="car.id"></ReportDialog>
   </section>
 </template>

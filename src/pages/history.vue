@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { mdiHistory } from '@mdi/js'
 const { t } = useI18n()
 
 onActivated(async () => {
@@ -11,7 +12,7 @@ useHead(useSeo(t('viewingHistory')))
 <template>
   <section>
     <div class="tw-my-4 tw-border-b tw-pb-3 tw-text-center tw-text-xl tw-font-bold">
-      <v-icon color="primary">mdi-history</v-icon>
+      <v-icon color="primary">{{ mdiHistory }}</v-icon>
       {{ $t('viewingHistory') }}
     </div>
     <CarsList v-if="storageDetails" :details="storageDetails" />

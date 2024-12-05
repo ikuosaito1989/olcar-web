@@ -4,6 +4,7 @@ const { prefectureItems, makerItems } = await useFetchMaster()
 import type { FileUpload, ListDialog, Recaptcha } from '#build/components'
 import { useGoTo } from 'vuetify'
 import type { VForm } from 'vuetify/components'
+import { mdiEyeOutline } from '@mdi/js'
 
 const goTo = useGoTo()
 
@@ -256,7 +257,7 @@ defineExpose({
 
       <v-btn
         size="large"
-        prepend-icon="mdi-eye-outline"
+        :prepend-icon="mdiEyeOutline"
         class="tw-mb-4 tw-w-full"
         @click="onClickPreview"
       >

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { mdiCheckOutline } from '@mdi/js'
 /**
  * Modalのメッセージ
  */
@@ -227,7 +228,7 @@ const onClickAction = async (action: boolean) => {
 
       <v-dialog v-model="isComplete" width="400">
         <v-card>
-          <v-icon>mdi-check-outline</v-icon>
+          <v-icon>{{ mdiCheckOutline }}</v-icon>
           <div>
             {{ message }}
           </div>

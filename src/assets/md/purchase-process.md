@@ -1,4 +1,4 @@
-## <i class="mdi mdi-car" style="font-size:32px;color:#f67b01;position: relative;top: 4px;"></i>個人売買の車購入ガイド
+## 個人売買の車購入ガイド
 
 <img loading="lazy" src="/banner/purchase-process.webp">
 

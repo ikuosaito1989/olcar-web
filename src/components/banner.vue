@@ -14,7 +14,11 @@ defineProps({
 <template>
   <Anchor :to="href">
     <div v-ripple>
-      <nuxt-img class="tw-m-auto tw-max-h-80 tw-object-contain" :src="src" />
+      <nuxt-img
+        placeholder="/datachef_unicolor16_9.webp"
+        class="tw-m-auto tw-max-h-80 tw-object-contain"
+        :src="src"
+      />
     </div>
   </Anchor>
 </template>

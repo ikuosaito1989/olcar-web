@@ -1,6 +1,7 @@
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script setup lang="ts">
 import type { VFileInput } from 'vuetify/components'
+import { mdiImagePlus, mdiPlus, mdiClose } from '@mdi/js'
 
 const prop = defineProps({
   rules: {
@@ -104,9 +105,9 @@ defineExpose({
       @drop.prevent="onDrag"
     >
       <div class="tw-mt-3 tw-text-center">
-        <v-icon size="48px">mdi-image-plus</v-icon>
+        <v-icon size="48px">{{ mdiImagePlus }}</v-icon>
         <div class="tw-mt-2 tw-flex tw-text-xs">
-          <v-icon size="16px">mdi-plus</v-icon>
+          <v-icon size="16px">{{ mdiPlus }}</v-icon>
           {{ $t('addImage') }}
         </div>
 
@@ -130,7 +131,7 @@ defineExpose({
             class="!tw-absolute tw-right-0.5 tw-top-0.5 tw-z-10"
             @click="onDelete(file)"
           >
-            <v-icon>mdi-close</v-icon>
+            <v-icon>{{ mdiClose }}</v-icon>
           </v-btn>
         </div>
         <nuxt-img class="!tw-max-h-28 tw-object-contain" :src="createObjectURL(file)" />

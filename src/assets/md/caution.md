@@ -1,4 +1,4 @@
-## <i class="mdi mdi-alert-outline" style="font-size:32px;color:#f67b01;position: relative;top: 4px;"></i>個人売買における詐欺について
+## 個人売買における詐欺について
 
 <img loading="lazy" src="/ogp.webp">
 

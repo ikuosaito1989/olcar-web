@@ -1,4 +1,4 @@
-# <i class="mdi mdi-handshake-outline" style="font-size:32px;color:#f67b01;position: relative;top: 6px;right: 4px;"></i>中古車個人売買のための契約書作成サービス＋車庫証明取得
+# 中古車個人売買のための契約書作成サービス＋車庫証明取得
 
 <img loading="lazy" src="https://homepage.gsss.pro/wp-content/uploads/2023/08/1.png">
 
@@ -42,7 +42,6 @@
 
 <div style="text-align: center;">
 <a href="#contact" class="search__action__content__primary v-btn v-btn--is-elevated v-btn--has-bg theme--light elevation-1 v-size--large" style="background-color:#f67b01;border-color:#f67b01;color: white;font-weight: bold;;padding: 30px;font-size: 16px;margin: 12px 0 20px;z-index: 100;">
-<i class="mdi mdi-email-outline" style="font-size:32px;"></i>
 お問い合わせ・ご依頼フォーム
 </a>
 </div>

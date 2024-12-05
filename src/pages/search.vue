@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { mdiMagnify } from '@mdi/js'
 import type ListDialog from '~/components/list-dialog.vue'
 const { t } = useI18n()
 const route = useRoute()
@@ -50,7 +51,7 @@ setCarNames()
 <template>
   <v-form class="tw-m-2">
     <div class="tw-my-4 tw-border-b tw-pb-3 tw-text-center tw-text-xl tw-font-bold">
-      <v-icon color="primary">mdi-magnify</v-icon>
+      <v-icon color="primary">{{ mdiMagnify }}</v-icon>
       {{ $t('searchLabel') }}
     </div>
     <ListDialog
@@ -154,7 +155,7 @@ setCarNames()
       :placeholder="$t('placeholder')"
       :counter="30"
       type="text"
-      icon="mdi-magnify"
+      :icon="mdiMagnify"
     ></TextField>
 
     <div class="tw-fixed tw-bottom-0 tw-left-0 tw-w-full tw-bg-gray-100 tw-p-4 tw-opacity-90">
@@ -167,7 +168,7 @@ setCarNames()
           variant="elevated"
           size="large"
           class="tw-ml-3 tw-w-8/12"
-          append-icon="mdi-magnify"
+          :append-icon="mdiMagnify"
           @click="onClickSearch"
         >
           {{ $t('search') }}

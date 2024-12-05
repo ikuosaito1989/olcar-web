@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { VTextField } from 'vuetify/components'
 import { toHiragana, toKatakana, toRomaji } from 'wanakana'
+import { mdiMagnify, mdiClose } from '@mdi/js'
 
 const prop = defineProps({
   items: {
@@ -196,14 +197,14 @@ defineExpose({
     <v-dialog v-model="dialog" transition="slide-x-reverse-transition" fullscreen>
       <v-card v-if="dialog">
         <v-toolbar color="primary">
-          <v-btn color="white" icon="mdi-close" @click="onClose"></v-btn>
+          <v-btn color="white" :icon="mdiClose" @click="onClose"></v-btn>
 
           <v-toolbar-title>{{ title }}</v-toolbar-title>
 
           <v-spacer></v-spacer>
         </v-toolbar>
         <TextField
-          icon="mdi-magnify"
+          :icon="mdiMagnify"
           :hint="hint"
           :persistent-hint="true"
           required

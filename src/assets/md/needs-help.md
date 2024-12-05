@@ -1,5 +1,5 @@
 
-## <i class="mdi mdi-hand-heart" style="font-size:32px;color:#f67b01;position: relative;top: 2px;right: 4px;"></i>作者のolcarに掛ける想いとみなさまへのお願い
+## 作者のolcarに掛ける想いとみなさまへのお願い
 
 <img loading="lazy" style="max-width: 200px;" src="https://festive-yonath-a04e1e.netlify.app/_nuxt/img/profile.a1dd2d3.png">
 
@@ -26,8 +26,6 @@
 </a>
 
 実際に利用した方の感謝の声を聞くと必ず必要なサービスだと思いますし、最終的には**あたりまえのように車を買い、あたりまえのように車に乗る、ただそこの認識をちょこっと変わる**だけで良いと思ってます。
-
-<i class="mdi mdi-hand-heart" style="font-size: 72px;color:#f67b01;top: 2px;right: 4px;margin: auto;text-align: center;display: block;"></i>
 
 そんなこんなでolcarを通していろいろやってるんですが次は**olcarは儲かってるのか**という話です。
 

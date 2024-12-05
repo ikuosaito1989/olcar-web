@@ -1,5 +1,5 @@
 
-## <i class="mdi mdi-hand-heart" style="font-size:32px;color:#f67b01;position: relative;top: 2px;right: 4px;"></i>olcar（オルカー）について
+## olcar（オルカー）について
 
 <img loading="lazy" src="/logo.webp" />
 olcarは「車を身近に」という理念をもとに自転車のように車が気軽に買える世の中になることを目指しています。

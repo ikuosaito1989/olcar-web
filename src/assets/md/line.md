@@ -1,4 +1,4 @@
-## <i class="mdi mdi-car" style="font-size:32px;color:#f67b01;position: relative;top: 4px;"></i>LINEはじめました！
+## LINEはじめました！
 
 <img loading="lazy" src="/banner/line.webp"/>
 

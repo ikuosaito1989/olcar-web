@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { mdiCheckOutline } from '@mdi/js'
 import { useGoTo } from 'vuetify'
 import type PostEdit from '~/components/post/edit.vue'
 const { t } = useI18n()
@@ -153,7 +154,7 @@ useHead(useSeo(t('submitRequest')))
       <v-card class="!tw-p-4">
         <div class="tw-text-center">
           <div class="tw-m-4">
-            <v-icon size="x-large" color="success">mdi-check-outline</v-icon>
+            <v-icon size="x-large" color="success">{{ mdiCheckOutline }}</v-icon>
           </div>
           <div class="tw-m-2 tw-font-bold">{{ $t('confirmTitle') }}</div>
         </div>
@@ -171,7 +172,7 @@ useHead(useSeo(t('submitRequest')))
       <v-card class="!tw-p-4">
         <div class="tw-text-center">
           <div class="tw-m-4">
-            <v-icon size="x-large" color="success">mdi-check-outline</v-icon>
+            <v-icon size="x-large" color="success">{{ mdiCheckOutline }}</v-icon>
           </div>
           <div class="tw-m-2 tw-font-bold">{{ $t('completeTitle') }}</div>
         </div>

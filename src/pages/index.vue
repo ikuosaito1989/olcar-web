@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { mdiMagnify, mdiHeartOutline, mdiSort, mdiCar } from '@mdi/js'
 type Variant = 'elevated' | 'outlined'
 const route = useRoute()
 useSetFromQuery(route.query)
@@ -130,7 +131,12 @@ useHead(getHeader())
 
 <template>
   <section>
-    <nuxt-img class="tw-h-auto tw-w-full" src="/top.webp" />
+    <nuxt-img
+      placeholder="/datachef_unicolor16_9.webp"
+      layout="responsive"
+      class="tw-h-auto tw-w-full"
+      src="/top.webp"
+    />
     <div v-if="searchConditions.length" class="tw-mx-4 tw-mt-4">
       <div class="tw-mb-2 tw-font-bold">{{ $t('searchCriteria') }}</div>
       <div class="tw-flex tw-flex-wrap">
@@ -147,13 +153,13 @@ useHead(getHeader())
     </div>
 
     <div v-if="makerName" class="tw-px-4 tw-pt-4 tw-text-xl tw-font-bold">
-      <v-icon class="tw-mb-1" color="primary">mdi-car</v-icon>
+      <v-icon class="tw-mb-1" color="primary">{{ mdiCar }}</v-icon>
 
       {{ makerName }}
     </div>
 
     <div v-if="summary.details.length === 0" class="tw-mx-4 tw-text-center tw-font-bold">
-      <v-icon>mdi-magnify</v-icon>
+      <v-icon>{{ mdiMagnify }}</v-icon>
       {{ $t('noCarsFound') }}
     </div>
 
@@ -172,15 +178,15 @@ useHead(getHeader())
         class="tw-flex tw-h-12 tw-w-full tw-items-center tw-border tw-text-center tw-shadow [&>div:not(:last-child)]:tw-border-r [&>div]:tw-py-3 [&>div]:tw-font-bold"
       >
         <div v-ripple class="tw-w-full tw-text-[#bc4c00]" @click="onNavigate({ path: 'search' })">
-          <v-icon color="primary" icon="mdi-magnify"></v-icon>
+          <v-icon color="primary" :icon="mdiMagnify"></v-icon>
           {{ $t('filter') }}
         </div>
         <div v-ripple class="tw-w-full tw-text-[#bc4c00]" @click="() => (isVisible = !isVisible)">
-          <v-icon color="primary" icon="mdi-sort"></v-icon>
+          <v-icon color="primary" :icon="mdiSort"></v-icon>
           {{ $t('sort') }}
         </div>
         <div v-ripple class="tw-w-full tw-text-[#bc4c00]" @click="onNavigate({ path: 'favorite' })">
-          <v-icon color="primary">mdi-heart-outline</v-icon>
+          <v-icon color="primary">{{ mdiHeartOutline }}</v-icon>
           {{ $t('favorites') }}
         </div>
       </div>

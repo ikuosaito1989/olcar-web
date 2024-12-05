@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Recaptcha } from '#build/components'
+import { mdiCheckOutline } from '@mdi/js'
 
 const prop = defineProps({
   carId: {
@@ -79,7 +80,7 @@ defineExpose({
       <v-card class="!tw-p-4">
         <div class="tw-text-center">
           <div class="tw-m-4">
-            <v-icon size="x-large" color="success">mdi-check-outline</v-icon>
+            <v-icon size="x-large" color="success">{{ mdiCheckOutline }}</v-icon>
           </div>
           <div class="tw-m-2 tw-font-bold">{{ $t('thankYouTitle') }}</div>
         </div>
