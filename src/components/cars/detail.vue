@@ -70,7 +70,7 @@ const onError = () => {
       max-width="768"
       @click:outside="isVisible = !isVisible"
     >
-      <v-carousel height="auto" hide-delimiters :show-arrows="car.images.length > 1">
+      <v-carousel height="100%" hide-delimiters :show-arrows="car.images.length > 1">
         <v-btn
           :icon="mdiClose"
           size="small"
