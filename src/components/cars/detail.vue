@@ -78,13 +78,12 @@ const onError = () => {
           class="!tw-absolute tw-right-0 tw-top-0 tw-z-10 tw-m-2"
           @click="isVisible = !isVisible"
         ></v-btn>
-        <v-carousel-item v-for="(item, i) in car.images" :key="i">
-          <nuxt-img
-            placeholder="/datachef_unicolor.webp"
-            class="tw-h-auto tw-max-h-screen tw-w-full tw-object-contain"
-            :src="item"
-          />
-        </v-carousel-item>
+        <v-carousel-item
+          v-for="(item, i) in car.images"
+          :key="i"
+          :src="item"
+          eager
+        ></v-carousel-item>
       </v-carousel>
     </v-dialog>
     <v-carousel height="300" hide-delimiters :show-arrows="car.images.length > 1 && !isPost">
@@ -93,6 +92,7 @@ const onError = () => {
         :key="i"
         class="tw-bg-slate-800"
         :src="image"
+        eager
         @click="isVisible = !isVisible"
         @error="onError"
       ></v-carousel-item>
@@ -162,6 +162,7 @@ const onError = () => {
     <v-btn color="black" class="tw-mb-1 tw-mt-5 tw-w-full" @click="onClickReport">
       {{ $t('reportIssue') }}
     </v-btn>
+
     <div v-if="keywords.keywords.length > 0">
       <div
         class="tw-my-3 tw-border-s-8 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
@@ -169,13 +170,12 @@ const onError = () => {
         {{ $t('keywordsIncluded') }}
       </div>
 
-      <div>
-        <Anchor v-for="(keyword, i) in keywords.keywords" :key="i" :to="`/?keywords[]=${keyword}`">
-          <v-chip v-ripple class="tw-mb-2 tw-mr-2" color="#f67b01" small label dark>
-            {{ keyword }}
-          </v-chip>
-        </Anchor>
-      </div>
+      <Anchor v-for="(keyword, i) in keywords.keywords" :key="i" :to="`/?keywords[]=${keyword}`">
+        <v-chip v-ripple class="tw-mb-2 tw-mr-2" color="#f67b01" small label dark>
+          {{ keyword }}
+        </v-chip>
+      </Anchor>
+
       <div class="tw-text-xs">{{ $t('keywordsDescription') }}</div>
     </div>
 

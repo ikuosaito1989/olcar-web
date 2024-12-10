@@ -88,10 +88,10 @@ useHead(getHeader())
             {{ $t('omakaseDescription') }}
           </div>
         </div>
-        <Banner
+        <nuxt-img
+          class="tw-m-auto tw-max-h-80 tw-object-contain"
           src="https://homepage.gsss.pro/wp-content/uploads/2023/08/1a7321fd5c87b44161456ab0d5bcbbaf-1.png"
-          href="/info/omakase-agent"
-        ></Banner>
+        />
       </Anchor>
     </div>
 
