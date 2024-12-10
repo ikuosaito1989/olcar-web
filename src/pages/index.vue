@@ -30,7 +30,6 @@ const { data: summary } = await useFetchi<Summary>('/api/v1/cars', {
 const isVisible = ref(false)
 const makerName = ref(Constants.MAKERS.find((v) => v.key === +route.params.makerId)?.value)
 const searchConditions = ref(useGetSearchConditions())
-queryObject.value.page = route.query.page ? +route.query.page : undefined
 
 if (route.params.makerId && !makerName.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })

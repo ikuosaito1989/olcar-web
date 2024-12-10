@@ -39,6 +39,7 @@ const useSetFromQuery = (query: any) => {
   }
 
   queryObject.value = {
+    page: query.page ? +query.page : undefined,
     keywords: queryUtil.toArrayQuery(query['keywords[]']),
     carNames: queryUtil.toArrayQuery(query['carNames[]']).map((v) => ({
       title: v,
