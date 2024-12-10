@@ -164,14 +164,22 @@ useHead(getHeader())
     </div>
 
     <div class="tw-sticky tw-top-0 tw-z-50 tw-bg-white">
-      <div class="tw-flex tw-h-12 tw-justify-end">
-        <v-checkbox
-          v-model="queryObject.isSales"
-          color="primary"
-          class="tw-mx-5"
-          :label="$t('showOnlyAvailable')"
-          @change="onChangeSales"
-        ></v-checkbox>
+      <div class="tw-flex tw-items-center tw-justify-between">
+        <div class="tw-mx-5 tw-flex tw-items-baseline">
+          <div class="tw-text-2xl tw-text-[#bc4c00]">
+            {{ summary.totalCount.toLocaleString() }}
+          </div>
+          <div class="tw-ml-1 tw-text-xs">台掲載中！</div>
+        </div>
+        <div class="tw-flex tw-h-12 tw-justify-end">
+          <v-checkbox
+            v-model="queryObject.isSales"
+            color="primary"
+            class="tw-mx-5"
+            :label="$t('showOnlyAvailable')"
+            @change="onChangeSales"
+          ></v-checkbox>
+        </div>
       </div>
 
       <div
