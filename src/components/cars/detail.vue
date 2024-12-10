@@ -170,7 +170,12 @@ const onError = () => {
         {{ $t('keywordsIncluded') }}
       </div>
 
-      <Anchor v-for="(keyword, i) in keywords.keywords" :key="i" :to="`/?keywords[]=${keyword}`">
+      <Anchor
+        v-for="(keyword, i) in keywords.keywords"
+        :key="i"
+        :to="`/?keywords[]=${keyword}`"
+        external
+      >
         <v-chip v-ripple class="tw-mb-2 tw-mr-2" color="#f67b01" small label dark>
           {{ keyword }}
         </v-chip>
