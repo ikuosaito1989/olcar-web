@@ -166,7 +166,7 @@ useHead(getHeader())
       <div class="tw-flex tw-items-center tw-justify-between">
         <div class="tw-mx-5 tw-flex tw-items-baseline">
           <div class="tw-text-2xl tw-text-[#bc4c00]">
-            {{ summary.totalCount.toLocaleString() }}
+            291,331
           </div>
           <div class="tw-ml-1 tw-text-xs">台掲載中！</div>
         </div>
