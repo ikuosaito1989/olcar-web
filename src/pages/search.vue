@@ -158,7 +158,9 @@ setCarNames()
       :icon="mdiMagnify"
     ></TextField>
 
-    <div class="tw-fixed tw-bottom-0 tw-left-0 tw-w-full tw-bg-gray-100 tw-p-4 tw-opacity-90">
+    <div
+      class="tw-fixed tw-bottom-0 tw-left-0 tw-z-10 tw-w-full tw-bg-gray-100 tw-p-4 tw-opacity-90"
+    >
       <div class="tw-m-auto tw-flex tw-max-w-screen-md tw-text-center">
         <v-btn color="gray" variant="elevated" size="large" class="tw-w-4/12" @click="useReset">
           {{ $t('clear') }}
