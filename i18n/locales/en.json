@@ -47,7 +47,7 @@
   "noViewingHistory": "No viewing history available",
   "noFavorites": "No favorites available",
   "omakaseDescription": "For those who are unsure about personal sales transactions, we have started an administrative agent service to support you from purchase to delivery! We fully support your nervous procedures!",
-  "findUsedCar": "Find used car for",
+  "findUsedCar": "Find used car for {0}",
   "findMore": "Find more",
   "publishDate": "Publish",
   "makerName": "Maker Name",

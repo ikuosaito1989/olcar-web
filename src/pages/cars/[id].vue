@@ -100,7 +100,7 @@ useHead(getHeader())
     <div
       class="tw-mx-2 tw-my-3 tw-border-s-8 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
     >
-      {{ car.makerName }} {{ car.name }}{{ $t('findUsedCar') }}
+      {{ $t('findUsedCar', [`${car.makerName} ${car.name}`]) }}
     </div>
     <CarsList :details="sameSummary.details" />
     <Anchor
@@ -114,7 +114,7 @@ useHead(getHeader())
     <div
       class="tw-mx-2 tw-my-3 tw-border-s-8 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
     >
-      {{ $t('findUsedCar') }} {{ car.makerName }}
+      {{ $t('findUsedCar', [car.makerName]) }}
     </div>
     <CarsList :details="makerSummary.details" />
 
