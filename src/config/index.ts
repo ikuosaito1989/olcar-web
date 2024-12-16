@@ -268,23 +268,6 @@ const LOCALSTORAGE = {
   HISTORY: 'history',
 }
 
-/**
- * infoのタイトルキー
- */
-const INFO_TITLES = {
-  tos: 'info_title_tos',
-  privacy: 'info_title_privacy',
-  caution: 'info_title_caution',
-  browser: 'info_title_browser',
-  exhibit: 'info_title_exhibit',
-  'transaction-law': 'info_title_transaction_law',
-  'purchase-process': 'info_title_purchase_process',
-  'needs-help': 'info_title_needs_help',
-  'omakase-agent': 'info_title_omakase_agent',
-  about: 'info_title_about',
-  line: 'info_title_line',
-}
-
 const PREFECTURES: Map<string, string> = new Map([
   ['北海道', 'ほっかいどう'],
   ['青森県', 'あおもり'],
@@ -350,6 +333,5 @@ export const Constants = {
   YEAR,
   MONTH,
   LOCALSTORAGE,
-  INFO_TITLES,
   PREFECTURES,
 }
