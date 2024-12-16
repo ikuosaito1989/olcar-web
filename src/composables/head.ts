@@ -7,6 +7,7 @@ const useSeo =
    * @param type
    * @param twitterCard
    * @param isNoIndex
+   * @param canonicalUrl
    * @returns
    */
   (
@@ -16,6 +17,7 @@ const useSeo =
     type: string = 'website',
     twitterCard: string = 'summary',
     isNoIndex: boolean = false,
+    canonicalUrl?: string,
   ) => {
     const { t } = useI18n()
     const title = titleName
@@ -26,6 +28,15 @@ const useSeo =
     description =
       description ?? t('description_used_car_site').replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '')
 
+    const links: {
+      rel: string
+      type?: string
+      href: string
+    }[] = [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+
+    if (canonicalUrl) {
+      links.push({ rel: 'canonical', href: canonicalUrl })
+    }
     return {
       title: title,
       meta: [
@@ -100,7 +111,7 @@ const useSeo =
           content: isNoIndex ? 'noindex' : 'noarchive',
         },
       ],
-      link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+      link: links,
     }
   }
 

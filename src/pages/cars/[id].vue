@@ -6,8 +6,16 @@ const { t } = useI18n()
 const route = useRoute()
 const refReportDialog = ref<InstanceType<typeof ReportDialog> | null>(null)
 const { data: car } = await useFetchi<Detail>(`/api/v1/cars/${route.params.id}`)
-const sameSummary = ref<Summary>({ isEnd: false, details: [] })
-const makerSummary = ref<Summary>({ isEnd: false, details: [] })
+const sameSummary = ref<Summary>({
+  isEnd: false,
+  details: [],
+  totalCount: 0,
+})
+const makerSummary = ref<Summary>({
+  isEnd: false,
+  details: [],
+  totalCount: 0,
+})
 
 if (!car.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })
@@ -68,7 +76,15 @@ const getHeader = () => {
   // @note 10桁を超えるパラメータはシークレットキーのため、インデックスしないn
   const isNoIndex = route.params.id.length > 10
 
-  return useSeo(title, car.value.comment, car.value.images[0], 'article', 'summary', isNoIndex)
+  return useSeo(
+    title,
+    car.value.comment,
+    car.value.images[0],
+    'article',
+    'summary',
+    isNoIndex,
+    car.value.referenceUrls[0],
+  )
 }
 
 useHead(getHeader())
