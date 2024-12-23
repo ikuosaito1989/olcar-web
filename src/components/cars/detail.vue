@@ -70,11 +70,10 @@ const onError = () => {
       max-width="768"
       @click:outside="isVisible = !isVisible"
     >
-      <v-carousel height="100%" hide-delimiters :show-arrows="car.images.length > 1">
+      <v-carousel hide-delimiters :show-arrows="car.images.length > 1">
         <v-btn
           :icon="mdiClose"
           size="small"
-          variant="elevated"
           class="!tw-absolute tw-right-0 tw-top-0 tw-z-10 tw-m-2"
           @click="isVisible = !isVisible"
         ></v-btn>
@@ -138,7 +137,11 @@ const onError = () => {
     </Item>
     <Item :label="$t('seller')">
       <div class="tw-flex tw-items-center">
-        <nuxt-img placeholder="/datachef_unicolor.webp" class="tw-w-7" :src="car.userImageUrl" />
+        <nuxt-img
+          :placeholder="Constants.PLACEHOLDER_IMAGES.IMAGE1_1"
+          class="tw-w-7"
+          :src="car.userImageUrl"
+        />
         <div class="tw-mx-1">{{ car.nickName }}</div>
       </div>
     </Item>
