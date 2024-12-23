@@ -2,65 +2,47 @@
 import { mdiFire, mdiClose, mdiLinkVariant } from '@mdi/js'
 import dayjs from '~/lib/day'
 
-type Trend = {
-  id: number
-  price: number | null
-  src: string
-  title: string
-  isViewed: boolean
-}
-
-const carouselIndex = ref(0)
-const isVisible = ref(false)
-const errorCarIds = ref<Set<number>>(new Set([]))
-const viewedCarIds = ref<Set<number>>(new Set([]))
-const progress = ref(0)
-const timer = ref<NodeJS.Timeout>()
-const trendSummary = ref<Trend[]>(
+const trends = ref<DetailBase[]>(
   Array.from(
     { length: 20 },
     () =>
       ({
-        src: Constants.PLACEHOLDER_IMAGE,
-      }) as Trend,
+        images: [Constants.PLACEHOLDER_IMAGE],
+      }) as DetailBase,
   ),
 )
 
 const trendsContainer = ref<HTMLDivElement | null>(null)
-
-const trends = computed(() =>
-  trendSummary.value
-    .filter((v) => !errorCarIds.value.has(v.id))
-    .map((v) => ({
-      ...v,
-    })),
-)
+const isVisible = ref(false)
+const carouselIndex = ref(0)
+const errorCarIds = ref<Set<number>>(new Set([]))
+const viewedCarIds = ref<Set<number>>(new Set([]))
+const progress = ref(0)
+const timer = ref<NodeJS.Timeout>()
 
 onMounted(async () => {
-  let trends: Trend[] = []
-  await $fetch<Summary>('/api/v1/cars/trend').then(
-    (summary) =>
-      (trends = summary.details.map((v) => ({
-        id: v.id,
-        price: v.price,
-        src: v.images[0],
-        title: v.name,
-        isViewed: false,
-      }))),
-  )
-
+  // @note 1週間前のデータを削除、保存されたデータを閲覧済みに設定
   localStorageUtil.removeOlderThan(Constants.LOCALSTORAGE.TREND, 7)
   const storage = localStorageUtil.getItem<LocalStorage>(Constants.LOCALSTORAGE.TREND)
   viewedCarIds.value = new Set([...viewedCarIds.value, ...storage.map((v) => v.id)])
-  trends.sort((a, b) => {
+
+  const trendSummary: Summary = await $fetch<Summary>('/api/v1/cars/trend')
+  // @note 閲覧済みを後ろにソートする
+  trendSummary.details.sort((a, b) => {
     // eslint-disable-next-line require-jsdoc
     const has = (id: number) => (viewedCarIds.value.has(id) ? 1 : 0)
     return has(a.id) - has(b.id)
   })
-  trendSummary.value = trends
+  trends.value = trendSummary.details
+
+  // @note iPhoneだと中央にスクロールされるため、先頭に戻す
   if (trendsContainer.value) {
     trendsContainer.value.scrollLeft = -9999
   }
+})
+
+onUnmounted(async () => {
+  await clearProgress(carouselIndex.value)
 })
 
 /**
@@ -68,6 +50,7 @@ onMounted(async () => {
  */
 const onError = (id: number) => {
   errorCarIds.value.add(id)
+  trends.value = trends.value.filter((v) => !errorCarIds.value.has(v.id))
 }
 
 /**
@@ -78,8 +61,6 @@ const onOpen = async (carId: number) => {
   isVisible.value = !isVisible.value
   const index = trends.value.findIndex((v) => v.id === carId)
   await resetProgress(index)
-  setProgress()
-  setViewedCarIds(carId)
 }
 
 /**
@@ -87,7 +68,7 @@ const onOpen = async (carId: number) => {
  */
 const onClose = async () => {
   isVisible.value = !isVisible.value
-  await resetProgress(carouselIndex.value)
+  await clearProgress(carouselIndex.value)
 }
 
 /**
@@ -96,6 +77,14 @@ const onClose = async () => {
  */
 const onChangeCarousel = async (index: number) => {
   await resetProgress(index)
+}
+
+/**
+ * 進捗を再設定する
+ * @param index
+ */
+const resetProgress = async (index: number) => {
+  await clearProgress(index)
   setProgress()
   setViewedCarIds(trends.value[index].id)
 }
@@ -122,7 +111,7 @@ const setProgress = () => {
  * 進捗をリセットする
  * @param index
  */
-const resetProgress = async (index: number) => {
+const clearProgress = async (index: number) => {
   clearInterval(timer.value)
   timer.value = undefined
   carouselIndex.value = index
@@ -174,14 +163,14 @@ const setViewedCarIds = (carId: number) => {
           <div class="tw-relative tw-h-full tw-w-full">
             <nuxt-img
               class="tw-block tw-h-full tw-w-full tw-object-contain tw-object-center"
-              :src="item.src"
+              :src="item.images[0]"
             />
           </div>
           <div class="!tw-absolute tw-left-0 tw-top-0 tw-z-10 tw-m-2 tw-rotate-[-10deg] tw-p-2">
             <div
               class="tw-w-fit tw-rounded-xl tw-bg-white tw-p-1 tw-text-3xl tw-font-bold tw-text-[#bc4c00] tw-opacity-80"
             >
-              {{ item.title }}
+              {{ item.name }}
             </div>
             <Price
               :is-omakase="false"
@@ -192,8 +181,9 @@ const setViewedCarIds = (carId: number) => {
 
           <Anchor :is-under-line="false" :to="`/cars/${item.id}`">
             <v-btn
+              size="large"
               variant="elevated"
-              class="!tw-absolute tw-bottom-0 tw-right-0 tw-z-10 tw-m-1 !tw-font-bold"
+              class="!tw-absolute tw-bottom-0 tw-left-1/2 tw-z-10 tw-m-1 -tw-translate-x-1/2 tw-transform !tw-font-bold"
               @click="isVisible = !isVisible"
             >
               <v-icon class="tw-mr-2" color="white">{{ mdiLinkVariant }}</v-icon>
@@ -225,10 +215,10 @@ const setViewedCarIds = (carId: number) => {
         >
           <nuxt-img
             class="tw-h-[82px] tw-w-[82px] tw-rounded-full tw-bg-white tw-object-cover"
-            :src="car.src"
+            :src="car.images[0]"
             @error="onError(car.id)"
           />
-          <div class="tw-my-2 tw-truncate tw-text-center tw-text-xs">{{ car.title }}</div>
+          <div class="tw-my-2 tw-truncate tw-text-center tw-text-xs">{{ car.name }}</div>
         </div>
       </div>
     </div>
