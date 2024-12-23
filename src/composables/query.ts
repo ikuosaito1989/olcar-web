@@ -151,6 +151,10 @@ const useGetSearchConditions = (): string[] => {
     arrayUtil.push(searchConditions, ['車検あり'])
   }
 
+  if (obj.isSponsor) {
+    arrayUtil.push(searchConditions, ['オススメ'])
+  }
+
   if (obj.priceOrder) {
     arrayUtil.push(searchConditions, [obj.priceOrder === 'asc' ? '価格が安い順' : '価格が高い順'])
   }
@@ -185,10 +189,15 @@ const useQueryString = () => {
     priceOrder: obj.priceOrder,
     mileageOrder: obj.mileageOrder,
     isSales: obj.isSales,
+    isSponsor: obj.isSponsor,
   }
 
   if (!query.isSales) {
     delete query.isSales
+  }
+
+  if (!query.isSponsor) {
+    delete query.isSponsor
   }
 
   const _queryString = queryString.stringify(query, { arrayFormat: 'bracket' })

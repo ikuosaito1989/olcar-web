@@ -80,6 +80,10 @@ const onNavigate = async ({
     useOrderReset()
   }
 
+  if (path) {
+    queryObject.value.isSponsor = undefined
+  }
+
   if (sort) {
     queryObject.value[sort.key] = sort.value
     queryObject.value.page = undefined
