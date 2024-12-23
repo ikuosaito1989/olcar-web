@@ -5,7 +5,7 @@
     >
       <div class="!tw-flex-[0_0_200px]">
         <nuxt-img
-          placeholder="/datachef_unicolor16_9.webp"
+          :placeholder="Constants.PLACEHOLDER_IMAGES.IMAGE16_9"
           class="tw-h-20 tw-object-contain"
           src="/logo.webp"
         />

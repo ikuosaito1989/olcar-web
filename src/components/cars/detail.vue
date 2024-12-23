@@ -74,7 +74,6 @@ const onError = () => {
         <v-btn
           :icon="mdiClose"
           size="small"
-          variant="elevated"
           class="!tw-absolute tw-right-0 tw-top-0 tw-z-10 tw-m-2"
           @click="isVisible = !isVisible"
         ></v-btn>
@@ -139,7 +138,7 @@ const onError = () => {
     <Item :label="$t('seller')">
       <div class="tw-flex tw-items-center">
         <nuxt-img
-          :placeholder="Constants.PLACEHOLDER_IMAGE"
+          :placeholder="Constants.PLACEHOLDER_IMAGES.IMAGE1_1"
           class="tw-w-7"
           :src="car.userImageUrl"
         />

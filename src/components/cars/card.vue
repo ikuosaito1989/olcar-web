@@ -1,5 +1,6 @@
-<!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script setup lang="ts">
+import { load } from 'cheerio'
+
 const props = defineProps({
   detail: {
     type: Object as () => DetailBase,
@@ -12,7 +13,7 @@ const { t } = useI18n()
 const imageLoaded = ref(false)
 const viewed = ref(false)
 
-const comment = computed(() => props.detail.comment.substring(0, 50))
+const comment = computed(() => load(props.detail.comment.substring(0, 50)).text())
 
 const isPost = computed(() => !props.detail.posted || imageLoaded.value)
 const isViewed = computed(() => viewed.value)
@@ -61,12 +62,12 @@ const onError = () => {
         :name="detail.name"
       ></Titles>
 
-      <div class="tw-flex tw-items-center">
+      <div class="tw-flex">
         <div class="tw-w-2/4">
           <nuxt-img
-            :placeholder="Constants.PLACEHOLDER_IMAGE"
+            :placeholder="Constants.PLACEHOLDER_IMAGES.IMAGE1_1"
             layout="responsive"
-            class="tw-h-56 tw-w-full tw-rounded tw-object-cover"
+            class="tw-h-64 tw-w-full tw-max-w-sm tw-rounded tw-object-cover"
             :src="detail.images[0]"
             :alt="detail.name"
             format="webp"
@@ -95,8 +96,9 @@ const onError = () => {
             <div>{{ formatUtil.toJoinString(detail.prefecture, detail.locality) }}</div>
           </Item>
           <Item :label="$t('description')" :is-new-line="true">
-            <!--eslint-disable-next-line vue/no-v-html-->
-            <div class="tw-line-clamp-2" v-html="comment"></div>
+            <div class="tw-line-clamp-2">
+              {{ comment }}
+            </div>
           </Item>
         </div>
       </div>

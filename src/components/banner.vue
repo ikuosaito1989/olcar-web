@@ -13,10 +13,10 @@ defineProps({
 
 <template>
   <Anchor :to="href">
-    <div v-ripple>
+    <div v-ripple class="tw-flex tw-justify-center">
       <nuxt-img
-        placeholder="/datachef_unicolor16_9.webp"
-        class="tw-m-auto tw-max-h-80 tw-object-contain"
+        :placeholder="Constants.PLACEHOLDER_IMAGES.IMAGE16_9"
+        class="tw-max-h-80 tw-min-h-56 tw-w-full tw-max-w-xl tw-object-contain"
         :src="src"
       />
     </div>

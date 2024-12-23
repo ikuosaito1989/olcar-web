@@ -7,7 +7,7 @@ const trends = ref<DetailBase[]>(
     { length: 20 },
     () =>
       ({
-        images: [Constants.PLACEHOLDER_IMAGE],
+        images: [Constants.PLACEHOLDER_IMAGES.IMAGE1_1],
       }) as DetailBase,
   ),
 )
@@ -64,19 +64,28 @@ const onOpen = async (carId: number) => {
 }
 
 /**
- * Dialogを開く
- */
-const onClose = async () => {
-  isVisible.value = !isVisible.value
-  await clearProgress(carouselIndex.value)
-}
-
-/**
  * カルーセルを変更する
  * @param index
  */
 const onChangeCarousel = async (index: number) => {
   await resetProgress(index)
+}
+
+/**
+ * 詳細画面へ遷移する
+ * @param index
+ */
+const onNavigate = async (carId: number) => {
+  onClose()
+  await navigateTo(`/cars/${carId}`)
+}
+
+/**
+ * Dialogを開く
+ */
+const onClose = async () => {
+  isVisible.value = !isVisible.value
+  await clearProgress(carouselIndex.value)
 }
 
 /**
@@ -93,7 +102,7 @@ const resetProgress = async (index: number) => {
  * 進捗を開始する
  */
 const setProgress = () => {
-  const updateInterval = 4000 / 100
+  const updateInterval = 5000 / 100
 
   timer.value = setInterval(async () => {
     // @note 100に到達したように見せるため遊びを持たせる
@@ -179,17 +188,15 @@ const setViewedCarIds = (carId: number) => {
             ></Price>
           </div>
 
-          <Anchor :is-under-line="false" :to="`/cars/${item.id}`">
-            <v-btn
-              size="large"
-              variant="elevated"
-              class="!tw-absolute tw-bottom-0 tw-left-1/2 tw-z-10 tw-m-1 -tw-translate-x-1/2 tw-transform !tw-font-bold"
-              @click="isVisible = !isVisible"
-            >
-              <v-icon class="tw-mr-2" color="white">{{ mdiLinkVariant }}</v-icon>
-              {{ $t('see_more_details') }}
-            </v-btn>
-          </Anchor>
+          <v-btn
+            size="large"
+            variant="elevated"
+            class="!tw-absolute tw-bottom-0 tw-left-1/2 tw-z-10 tw-m-1 -tw-translate-x-1/2 tw-transform !tw-font-bold"
+            @click="onNavigate(item.id)"
+          >
+            <v-icon class="tw-mr-2" color="white">{{ mdiLinkVariant }}</v-icon>
+            {{ $t('see_more_details') }}
+          </v-btn>
         </v-carousel-item>
       </v-carousel>
     </v-dialog>
