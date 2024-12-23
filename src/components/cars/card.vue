@@ -64,7 +64,7 @@ const onError = () => {
       <div class="tw-flex tw-items-center">
         <div class="tw-w-2/4">
           <nuxt-img
-            placeholder="/datachef_unicolor.webp"
+            :placeholder="Constants.PLACEHOLDER_IMAGE"
             layout="responsive"
             class="tw-h-56 tw-w-full tw-rounded tw-object-cover"
             :src="detail.images[0]"

@@ -179,5 +179,7 @@
   "date_format_year_month": "YYYY MMMM",
   "date_format_full": "MMMM DD, YYYY",
   "valid": "Valid",
-  "viewed": "Viewed"
+  "viewed": "Viewed",
+  "trending": "Trending",
+  "see_more_details": "Click here for more details"
 }

@@ -179,5 +179,7 @@
   "date_format_year_month": "YYYY年M月",
   "date_format_full": "YYYY年MM月DD日",
   "valid": "あり",
-  "viewed": "閲覧済み"
+  "viewed": "閲覧済み",
+  "trending": "急上昇",
+  "see_more_details": "詳しくはこちら"
 }

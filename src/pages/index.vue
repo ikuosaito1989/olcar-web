@@ -130,36 +130,12 @@ useHead(getHeader())
 
 <template>
   <section>
-    <nuxt-img
-      placeholder="/datachef_unicolor16_9.webp"
-      layout="responsive"
-      class="tw-h-auto tw-w-full"
-      src="/top.webp"
-    />
-    <div v-if="searchConditions.length" class="tw-mx-4 tw-mt-4">
-      <div class="tw-mb-2 tw-font-bold">{{ $t('searchCriteria') }}</div>
-      <div class="tw-flex tw-flex-wrap">
-        <div
-          v-for="(condition, i) in searchConditions"
-          :key="`maker_${i}`"
-          class="tw-pb-3 tw-pr-3 tw-font-bold"
-        >
-          <v-chip variant="elevated">
-            {{ condition }}
-          </v-chip>
-        </div>
-      </div>
-    </div>
+    <Trending></Trending>
+    <SearchConditions class="tw-mx-4 tw-mt-4" :conditions="searchConditions"></SearchConditions>
 
     <div v-if="makerName" class="tw-px-4 tw-pt-4 tw-text-xl tw-font-bold">
       <v-icon class="tw-mb-1" color="primary">{{ mdiCar }}</v-icon>
-
       {{ makerName }}
-    </div>
-
-    <div v-if="summary.details.length === 0" class="tw-mx-4 tw-text-center tw-font-bold">
-      <v-icon>{{ mdiMagnify }}</v-icon>
-      {{ $t('noCarsFound') }}
     </div>
 
     <div class="tw-sticky tw-top-0 tw-z-50 tw-bg-white">
@@ -258,6 +234,11 @@ useHead(getHeader())
     </div>
 
     <CarsList :details="summary.details" />
+
+    <div v-if="summary.details.length === 0" class="tw-m-4 tw-text-center tw-font-bold">
+      <v-icon>{{ mdiMagnify }}</v-icon>
+      {{ $t('noCarsFound') }}
+    </div>
 
     <div class="tw-my-5 tw-flex tw-justify-center">
       <v-btn

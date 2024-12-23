@@ -5,6 +5,12 @@
 const LIMIT = 30
 
 /**
+ * プレースホルダーのイメージ
+ */
+const PLACEHOLDER_IMAGE =
+  'data:image/gif;base64,R0lGODdhAQABAIEAAO/v7wAAAAAAAAAAACwAAAAAAQABAAAIBAABBAQAOw=='
+
+/**
  * X（旧Twitter）の画像なしURL
  */
 const NOT_FOUND_TWITTER_IMAGE =
@@ -266,6 +272,11 @@ const LOCALSTORAGE = {
    * 履歴
    */
   HISTORY: 'history',
+
+  /**
+   * トレンド
+   */
+  TREND: 'trend',
 }
 
 const PREFECTURES: Map<string, string> = new Map([
@@ -334,4 +345,5 @@ export const Constants = {
   MONTH,
   LOCALSTORAGE,
   PREFECTURES,
+  PLACEHOLDER_IMAGE,
 }

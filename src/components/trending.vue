@@ -1,0 +1,242 @@
+<script setup lang="ts">
+import { mdiFire, mdiClose, mdiLinkVariant } from '@mdi/js'
+import dayjs from '~/lib/day'
+
+type Trend = {
+  id: number
+  price: number | null
+  src: string
+  title: string
+  isViewed: boolean
+}
+
+const carouselIndex = ref(0)
+const isVisible = ref(false)
+const errorCarIds = ref<Set<number>>(new Set([]))
+const viewedCarIds = ref<Set<number>>(new Set([]))
+const progress = ref(0)
+const timer = ref<NodeJS.Timeout>()
+const trendSummary = ref<Trend[]>(
+  Array.from(
+    { length: 20 },
+    () =>
+      ({
+        src: Constants.PLACEHOLDER_IMAGE,
+      }) as Trend,
+  ),
+)
+
+const trendsContainer = ref<HTMLDivElement | null>(null)
+
+const trends = computed(() =>
+  trendSummary.value
+    .filter((v) => !errorCarIds.value.has(v.id))
+    .map((v) => ({
+      ...v,
+    })),
+)
+
+onMounted(async () => {
+  let trends: Trend[] = []
+  await $fetch<Summary>('/api/v1/cars/trend').then(
+    (summary) =>
+      (trends = summary.details.map((v) => ({
+        id: v.id,
+        price: v.price,
+        src: v.images[0],
+        title: v.name,
+        isViewed: false,
+      }))),
+  )
+
+  localStorageUtil.removeOlderThan(Constants.LOCALSTORAGE.TREND, 7)
+  const storage = localStorageUtil.getItem<LocalStorage>(Constants.LOCALSTORAGE.TREND)
+  viewedCarIds.value = new Set([...viewedCarIds.value, ...storage.map((v) => v.id)])
+  trends.sort((a, b) => {
+    // eslint-disable-next-line require-jsdoc
+    const has = (id: number) => (viewedCarIds.value.has(id) ? 1 : 0)
+    return has(a.id) - has(b.id)
+  })
+  trendSummary.value = trends
+  if (trendsContainer.value) {
+    trendsContainer.value.scrollLeft = -9999
+  }
+})
+
+/**
+ * Emitted if the image fails to load.
+ */
+const onError = (id: number) => {
+  errorCarIds.value.add(id)
+}
+
+/**
+ * Dialogを開く
+ * @param carId
+ */
+const onOpen = async (carId: number) => {
+  isVisible.value = !isVisible.value
+  const index = trends.value.findIndex((v) => v.id === carId)
+  await resetProgress(index)
+  setProgress()
+  setViewedCarIds(carId)
+}
+
+/**
+ * Dialogを開く
+ */
+const onClose = async () => {
+  isVisible.value = !isVisible.value
+  await resetProgress(carouselIndex.value)
+}
+
+/**
+ * カルーセルを変更する
+ * @param index
+ */
+const onChangeCarousel = async (index: number) => {
+  await resetProgress(index)
+  setProgress()
+  setViewedCarIds(trends.value[index].id)
+}
+
+/**
+ * 進捗を開始する
+ */
+const setProgress = () => {
+  const updateInterval = 4000 / 100
+
+  timer.value = setInterval(async () => {
+    // @note 100に到達したように見せるため遊びを持たせる
+    if (progress.value >= 110) {
+      carouselIndex.value =
+        carouselIndex.value + 1 > trends.value.length - 1 ? 0 : carouselIndex.value + 1
+      await onChangeCarousel(carouselIndex.value)
+      return
+    }
+    progress.value += 1
+  }, updateInterval)
+}
+
+/**
+ * 進捗をリセットする
+ * @param index
+ */
+const resetProgress = async (index: number) => {
+  clearInterval(timer.value)
+  timer.value = undefined
+  carouselIndex.value = index
+  progress.value = 0
+  // @note プログレスバーが戻り切らないためスリープする
+  await timerUtil.sleep(200)
+}
+
+/**
+ * 閲覧済みのCarIdをローカルストレージに設定する
+ */
+const setViewedCarIds = (carId: number) => {
+  if (viewedCarIds.value.has(carId)) {
+    return
+  }
+
+  localStorageUtil.push<LocalStorage>(Constants.LOCALSTORAGE.TREND, {
+    id: carId,
+    actionAt: dayjs().format(Constants.ISO8601_FORMAT),
+  })
+  viewedCarIds.value.add(carId)
+}
+</script>
+
+<!-- eslint-disable tailwindcss/no-custom-classname -->
+<template>
+  <div class="tw-my-2 tw-ml-1">
+    <v-dialog v-model="isVisible" class="tw-bg-slate-800" max-width="768" @click:outside="onClose">
+      <v-progress-linear
+        class="tw-mb-2"
+        color="#f67b01"
+        :model-value="progress"
+        :height="2"
+      ></v-progress-linear>
+      <v-btn
+        :icon="mdiClose"
+        size="small"
+        class="!tw-absolute tw-right-0 tw-top-0 tw-z-10 tw-m-2"
+        @click="onClose"
+      ></v-btn>
+      <v-carousel
+        v-model="carouselIndex"
+        class="tw-flex tw-items-center tw-justify-center"
+        hide-delimiters
+        :show-arrows="false"
+        @update:model-value="onChangeCarousel"
+      >
+        <v-carousel-item v-for="(item, i) in trends" :key="i" eager>
+          <div class="tw-relative tw-h-full tw-w-full">
+            <nuxt-img
+              class="tw-block tw-h-full tw-w-full tw-object-contain tw-object-center"
+              :src="item.src"
+            />
+          </div>
+          <div class="!tw-absolute tw-left-0 tw-top-0 tw-z-10 tw-m-2 tw-rotate-[-10deg] tw-p-2">
+            <div
+              class="tw-w-fit tw-rounded-xl tw-bg-white tw-p-1 tw-text-3xl tw-font-bold tw-text-[#bc4c00] tw-opacity-80"
+            >
+              {{ item.title }}
+            </div>
+            <Price
+              :is-omakase="false"
+              class="tw-w-fit tw-rounded-xl tw-bg-white tw-p-1 tw-opacity-80"
+              :price="item.price"
+            ></Price>
+          </div>
+
+          <Anchor :is-under-line="false" :to="`/cars/${item.id}`">
+            <v-btn
+              variant="elevated"
+              class="!tw-absolute tw-bottom-0 tw-right-0 tw-z-10 tw-m-1 !tw-font-bold"
+              @click="isVisible = !isVisible"
+            >
+              <v-icon class="tw-mr-2" color="white">{{ mdiLinkVariant }}</v-icon>
+              {{ $t('see_more_details') }}
+            </v-btn>
+          </Anchor>
+        </v-carousel-item>
+      </v-carousel>
+    </v-dialog>
+
+    <div class="tw-mx-1 tw-mb-2 tw-flex tw-items-center tw-text-base tw-font-bold">
+      <v-icon class="" color="primary">{{ mdiFire }}</v-icon>
+      <div>{{ $t('trending') }}</div>
+    </div>
+
+    <div
+      ref="trendsContainer"
+      class="content tw-flex tw-h-28 tw-justify-around tw-overflow-auto tw-whitespace-nowrap"
+    >
+      <div v-for="(car, i) in trends" :key="i">
+        <div
+          :class="[
+            'tw-mr-2 tw-h-[90px] tw-w-[90px] tw-shrink-0 tw-rounded-full tw-p-1',
+            !viewedCarIds.has(car.id)
+              ? 'tw-bg-gradient-to-br tw-from-[#f67b01] tw-to-[#eaf601]'
+              : '',
+          ]"
+          @click="onOpen(car.id)"
+        >
+          <nuxt-img
+            class="tw-h-[82px] tw-w-[82px] tw-rounded-full tw-bg-white tw-object-cover"
+            :src="car.src"
+            @error="onError(car.id)"
+          />
+          <div class="tw-my-2 tw-truncate tw-text-center tw-text-xs">{{ car.title }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.content::-webkit-scrollbar {
+  display: none;
+}
+</style>

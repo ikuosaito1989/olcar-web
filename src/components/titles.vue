@@ -2,7 +2,7 @@
 defineProps({
   carId: {
     type: Number,
-    required: true,
+    default: undefined,
   },
   makerName: {
     type: String,
@@ -29,7 +29,7 @@ defineProps({
       <div v-if="isSponsor" class="tw-mb-1">
         <v-chip variant="elevated">{{ $t('recommended') }}</v-chip>
       </div>
-      <Favorite :car-id="carId"></Favorite>
+      <Favorite v-if="carId" :car-id="carId"></Favorite>
     </div>
   </div>
 </template>

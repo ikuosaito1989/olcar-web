@@ -24,7 +24,7 @@ onMounted(async () => {
       <Anchor to="/" :external="true">
         <div v-ripple>
           <nuxt-img
-            placeholder="/datachef_unicolor16_9.webp"
+            :placeholder="Constants.PLACEHOLDER_IMAGE"
             layout="responsive"
             class="tw-min-h-8 tw-w-32"
             src="/logo.webp"
