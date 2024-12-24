@@ -39,6 +39,18 @@ export default defineNuxtConfig({
 
   nitro: {
     compressPublicAssets: true,
+    storage: {
+      cache: {
+        driver: 'lruCache',
+        max: 1,
+      },
+    },
+    devStorage: {
+      cache: {
+        driver: 'lruCache',
+        max: 1,
+      },
+    },
   },
 
   modules: [
