@@ -39,6 +39,8 @@ export default defineNuxtConfig({
 
   nitro: {
     compressPublicAssets: true,
+    minify: true,
+    sourceMap: process.env.NODE_ENV === 'development',
     storage: {
       cache: {
         driver: 'lruCache',
@@ -122,6 +124,7 @@ export default defineNuxtConfig({
 
   gtag: {
     id: process.env.GTAG,
+    loadingStrategy: 'async',
   },
 
   site: {
@@ -135,12 +138,9 @@ export default defineNuxtConfig({
     experimentalWarmUp: true,
     experimentalCompression: true,
     xsl: false,
+    debug: process.env.NODE_ENV === 'development',
     urls: async () => {
       try {
-        if (process.env.NODE_ENV === 'development') {
-          return []
-        }
-
         const apiFetch = ofetch.create({ baseURL: process.env.API_URL })
         const result = {
           cars: [],

@@ -34,11 +34,6 @@ onMounted(async () => {
     return has(a.id) - has(b.id)
   })
   trends.value = trendSummary.details
-
-  // @note iPhoneだと中央にスクロールされるため、先頭に戻す
-  if (trendsContainer.value) {
-    trendsContainer.value.scrollLeft = -9999
-  }
 })
 
 onUnmounted(async () => {
@@ -81,11 +76,14 @@ const onNavigate = async (carId: number) => {
 }
 
 /**
- * Dialogを開く
+ * Dialogを閉じる
  */
 const onClose = async () => {
   isVisible.value = !isVisible.value
   await clearProgress(carouselIndex.value)
+  if (trendsContainer.value) {
+    trendsContainer.value.scrollLeft = carouselIndex.value * 98 - 98
+  }
 }
 
 /**
@@ -163,7 +161,6 @@ const setViewedCarIds = (carId: number) => {
       ></v-btn>
       <v-carousel
         v-model="carouselIndex"
-        class="tw-flex tw-items-center tw-justify-center"
         hide-delimiters
         :show-arrows="false"
         @update:model-value="onChangeCarousel"
@@ -208,7 +205,7 @@ const setViewedCarIds = (carId: number) => {
 
     <div
       ref="trendsContainer"
-      class="content tw-flex tw-h-28 tw-justify-around tw-overflow-auto tw-whitespace-nowrap"
+      class="content tw-flex tw-h-28 tw-overflow-auto tw-whitespace-nowrap"
     >
       <div v-for="(car, i) in trends" :key="i">
         <div
@@ -235,5 +232,8 @@ const setViewedCarIds = (carId: number) => {
 <style scoped>
 .content::-webkit-scrollbar {
   display: none;
+}
+:deep(.v-overlay__content) {
+  width: 100% !important;
 }
 </style>
