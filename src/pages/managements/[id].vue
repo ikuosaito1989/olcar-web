@@ -55,9 +55,11 @@ const onClickUpdate = async () => {
     isSponsor: formData.value.isSponsor,
   }
 
-  await $fetchByApiKey<Update>(`/api/v1/cars`, {
-    method: 'PUT',
-    body: data,
+  await useWait(async () => {
+    $fetchByApiKey<Update>(`/api/v1/cars`, {
+      method: 'PUT',
+      body: data,
+    })
   })
 }
 
@@ -78,43 +80,49 @@ const onClickAction = async (action: boolean) => {
     return
   }
 
-  switch (label.value) {
-    case MODAL.pass.title: {
-      const data: Passed = { accessKey: route.params.id as string }
-      await $fetchByApiKey<Passed>(`/api/v1/cars/passed`, {
-        method: 'POST',
-        body: data,
-      })
-      message.value = MODAL.pass.message
-      break
+  await useWait(async () => {
+    switch (label.value) {
+      case MODAL.pass.title: {
+        const data: Passed = { accessKey: route.params.id as string }
+        $fetchByApiKey<Passed>(`/api/v1/cars/passed`, {
+          method: 'POST',
+          body: data,
+        })
+
+        message.value = MODAL.pass.message
+        break
+      }
+      case MODAL.reject.title: {
+        const data: Reject = { accessKey: route.params.id as string }
+        $fetchByApiKey<Reject>(`/api/v1/cars/reject`, {
+          method: 'POST',
+          body: data,
+        })
+
+        message.value = MODAL.reject.message
+        break
+      }
+      case MODAL.unPublish.title: {
+        const data: UnPublish = { carId: +route.params.id }
+        $fetchByApiKey<UnPublish>(`/api/v1/cars/unpublish`, {
+          method: 'POST',
+          body: data,
+        })
+
+        message.value = MODAL.unPublish.message
+        break
+      }
+      case MODAL.unPost.title: {
+        const data: UnPost = { carId: +route.params.id }
+        $fetchByApiKey<UnPost>(`/api/v1/cars/unpost`, {
+          method: 'POST',
+          body: data,
+        })
+
+        message.value = MODAL.unPost.message
+      }
     }
-    case MODAL.reject.title: {
-      const data: Reject = { accessKey: route.params.id as string }
-      await $fetchByApiKey<Reject>(`/api/v1/cars/reject`, {
-        method: 'POST',
-        body: data,
-      })
-      message.value = MODAL.reject.message
-      break
-    }
-    case MODAL.unPublish.title: {
-      const data: UnPublish = { carId: +route.params.id }
-      await $fetchByApiKey<UnPublish>(`/api/v1/cars/unpublish`, {
-        method: 'POST',
-        body: data,
-      })
-      message.value = MODAL.unPublish.message
-      break
-    }
-    case MODAL.unPost.title: {
-      const data: UnPost = { carId: +route.params.id }
-      await $fetchByApiKey<UnPost>(`/api/v1/cars/unpost`, {
-        method: 'POST',
-        body: data,
-      })
-      message.value = MODAL.unPost.message
-    }
-  }
+  })
 
   isComplete.value = true
 }
@@ -130,7 +138,7 @@ const onClickAction = async (action: boolean) => {
         label="車種名"
         placeholder="プリウス"
         :counter="30"
-        :rules="[(v) => validationUtil.required(v, $t('required_field'))]"
+        :rules="[(v: string) => validationUtil.required(v, $t('required_field'))]"
         required
         clearable
         type="text"
@@ -144,7 +152,7 @@ const onClickAction = async (action: boolean) => {
         button-name="メーカー・車名"
         :items="makerItems"
         chip-label="必須"
-        :rules="[(v) => validationUtil.required(v, $t('required_field'))]"
+        :rules="[(v: string) => validationUtil.required(v, $t('required_field'))]"
       ></ListDialog>
 
       <TextArea
@@ -155,7 +163,7 @@ const onClickAction = async (action: boolean) => {
         :counter="1000"
         required
         clearable
-        :rules="[(v) => validationUtil.required(v, $t('required_field'))]"
+        :rules="[(v: string) => validationUtil.required(v, $t('required_field'))]"
       ></TextArea>
 
       <TextField
@@ -174,7 +182,7 @@ const onClickAction = async (action: boolean) => {
         clearable
         type="number"
         :rules="[
-          (v) => validationUtil.required(v, $t('required_field')),
+          (v: string) => validationUtil.required(v, $t('required_field')),
           (v: string | number) => validationUtil.max(+v, 10000000, '円以内にしてください'),
         ]"
       ></TextField>
