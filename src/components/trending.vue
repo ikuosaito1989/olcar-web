@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { mdiFire, mdiClose, mdiLinkVariant } from '@mdi/js'
+import { mdiFire, mdiClose, mdiLinkVariant, mdiChevronRight, mdiChevronLeft } from '@mdi/js'
 import dayjs from '~/lib/day'
 
 const trends = ref<DetailBase[]>(
@@ -12,13 +12,19 @@ const trends = ref<DetailBase[]>(
   ),
 )
 
-const trendsContainer = ref<HTMLDivElement | null>(null)
+const trendsContainer = ref<HTMLDivElement>({} as HTMLDivElement)
 const isVisible = ref(false)
 const carouselIndex = ref(0)
 const errorCarIds = ref<Set<number>>(new Set([]))
 const viewedCarIds = ref<Set<number>>(new Set([]))
 const progress = ref(0)
 const timer = ref<NodeJS.Timeout>()
+const isTouchDevice = ref<boolean>(true)
+const isVisibleChevron = ref({
+  prev: false,
+  next: false,
+})
+const itemWidth = 98
 
 onMounted(async () => {
   // @note 1週間前のデータを削除、保存されたデータを閲覧済みに設定
@@ -34,10 +40,17 @@ onMounted(async () => {
     return has(a.id) - has(b.id)
   })
   trends.value = trendSummary.details
+
+  isTouchDevice.value = 'ontouchstart' in window
+  if (!isTouchDevice.value) {
+    trendsContainer.value.addEventListener('scroll', handleScroll)
+    handleScroll()
+  }
 })
 
 onUnmounted(async () => {
   await clearProgress(carouselIndex.value)
+  trendsContainer.value.removeEventListener('scroll', handleScroll)
 })
 
 /**
@@ -81,8 +94,30 @@ const onNavigate = async (carId: number) => {
 const onClose = async () => {
   isVisible.value = !isVisible.value
   await clearProgress(carouselIndex.value)
-  if (trendsContainer.value) {
-    trendsContainer.value.scrollLeft = carouselIndex.value * 98 - 98
+  trendsContainer.value.scrollLeft = carouselIndex.value * itemWidth - itemWidth
+}
+
+/**
+ * スクロールする
+ * @param isNext 次ヘか
+ */
+const onScroll = async (isNext: boolean) => {
+  const scrollDistance = itemWidth * 3
+  const startLeft = trendsContainer.value.scrollLeft || 1
+  trendsContainer.value.scrollTo({
+    left: isNext ? startLeft + scrollDistance : startLeft - scrollDistance,
+    behavior: 'smooth',
+  })
+}
+
+/**
+ * scrollイベントで発火
+ */
+const handleScroll = () => {
+  const maxScrollLeft = trendsContainer.value.scrollWidth - trendsContainer.value.clientWidth
+  isVisibleChevron.value = {
+    prev: trendsContainer.value.scrollLeft > 20,
+    next: maxScrollLeft - 20 >= trendsContainer.value.scrollLeft,
   }
 }
 
@@ -162,7 +197,7 @@ const setViewedCarIds = (carId: number) => {
       <v-carousel
         v-model="carouselIndex"
         hide-delimiters
-        :show-arrows="false"
+        :show-arrows="!isTouchDevice"
         @update:model-value="onChangeCarousel"
       >
         <v-carousel-item v-for="(item, i) in trends" :key="i" eager>
@@ -207,6 +242,14 @@ const setViewedCarIds = (carId: number) => {
       ref="trendsContainer"
       class="content tw-flex tw-h-28 tw-overflow-auto tw-whitespace-nowrap"
     >
+      <v-btn
+        v-if="!isTouchDevice && isVisibleChevron.prev"
+        style="position: sticky; left: 10px; top: 25px"
+        :icon="mdiChevronLeft"
+        size="small"
+        variant="elevated"
+        @click="onScroll(false)"
+      ></v-btn>
       <div v-for="(car, i) in trends" :key="i">
         <div
           :class="[
@@ -225,6 +268,14 @@ const setViewedCarIds = (carId: number) => {
           <div class="tw-my-2 tw-truncate tw-text-center tw-text-xs">{{ car.name }}</div>
         </div>
       </div>
+      <v-btn
+        v-if="!isTouchDevice && isVisibleChevron.next"
+        style="position: sticky; right: 0; top: 25px; /* margin-top: 26px; */"
+        :icon="mdiChevronRight"
+        size="small"
+        variant="elevated"
+        @click="onScroll(true)"
+      ></v-btn>
     </div>
   </div>
 </template>
