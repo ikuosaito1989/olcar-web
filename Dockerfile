@@ -1,4 +1,4 @@
-FROM oven/bun:latest
+FROM oven/bun:1.1.42
 
 # コンテナ内のwork dirを設定
 WORKDIR /src
