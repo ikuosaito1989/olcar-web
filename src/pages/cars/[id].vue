@@ -18,7 +18,7 @@ const makerSummary = ref<Summary>({
 })
 
 if (!car.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })
+  throw createError({ statusCode: 404, statusMessage: 'Page Not Found', fatal: false })
 }
 
 onMounted(async () => {
