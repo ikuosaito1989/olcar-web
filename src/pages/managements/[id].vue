@@ -16,10 +16,7 @@ const MODAL = {
 const { makerItems } = await useFetchMaster()
 const route = useRoute()
 const { data: car } = await useFetchi<Detail>(`/api/v1/cars/${route.params.id}`, {
-  query: {
-    withUser: true,
-    isAll: true,
-  },
+  query: { withUser: true, isAll: true },
 })
 
 const formData = ref<ManagementsEdit>({
@@ -55,12 +52,7 @@ const onClickUpdate = async () => {
     isSponsor: formData.value.isSponsor,
   }
 
-  await useWait(async () => {
-    $fetchByApiKey<Update>(`/api/v1/cars`, {
-      method: 'PUT',
-      body: data,
-    })
-  })
+  $fetchByApiKey<Update>(`/api/v1/cars`, { method: 'PUT', body: data })
 }
 
 /**
@@ -80,49 +72,35 @@ const onClickAction = async (action: boolean) => {
     return
   }
 
-  await useWait(async () => {
-    switch (label.value) {
-      case MODAL.pass.title: {
-        const data: Passed = { accessKey: route.params.id as string }
-        $fetchByApiKey<Passed>(`/api/v1/cars/passed`, {
-          method: 'POST',
-          body: data,
-        })
+  switch (label.value) {
+    case MODAL.pass.title: {
+      const data: Passed = { accessKey: route.params.id as string }
+      $fetchByApiKey<Passed>('/api/v1/cars/passed', { method: 'POST', body: data })
 
-        message.value = MODAL.pass.message
-        break
-      }
-      case MODAL.reject.title: {
-        const data: Reject = { accessKey: route.params.id as string }
-        $fetchByApiKey<Reject>(`/api/v1/cars/reject`, {
-          method: 'POST',
-          body: data,
-        })
-
-        message.value = MODAL.reject.message
-        break
-      }
-      case MODAL.unPublish.title: {
-        const data: UnPublish = { carId: +route.params.id }
-        $fetchByApiKey<UnPublish>(`/api/v1/cars/unpublish`, {
-          method: 'POST',
-          body: data,
-        })
-
-        message.value = MODAL.unPublish.message
-        break
-      }
-      case MODAL.unPost.title: {
-        const data: UnPost = { carId: +route.params.id }
-        $fetchByApiKey<UnPost>(`/api/v1/cars/unpost`, {
-          method: 'POST',
-          body: data,
-        })
-
-        message.value = MODAL.unPost.message
-      }
+      message.value = MODAL.pass.message
+      break
     }
-  })
+    case MODAL.reject.title: {
+      const data: Reject = { accessKey: route.params.id as string }
+      $fetchByApiKey<Reject>(`/api/v1/cars/reject`, { method: 'POST', body: data })
+
+      message.value = MODAL.reject.message
+      break
+    }
+    case MODAL.unPublish.title: {
+      const data: UnPublish = { carId: +route.params.id }
+      $fetchByApiKey<UnPublish>(`/api/v1/cars/unpublish`, { method: 'POST', body: data })
+
+      message.value = MODAL.unPublish.message
+      break
+    }
+    case MODAL.unPost.title: {
+      const data: UnPost = { carId: +route.params.id }
+      $fetchByApiKey<UnPost>(`/api/v1/cars/unpost`, { method: 'POST', body: data })
+
+      message.value = MODAL.unPost.message
+    }
+  }
 
   isComplete.value = true
 }
@@ -196,8 +174,8 @@ const onClickAction = async (action: boolean) => {
         type="text"
         :counter="1000"
         :rules="[
-          (v) => validationUtil.required(v, $t('required_field')),
-          (v) => validationUtil.url(v, $t('enter_valid_url')),
+          (v: string) => validationUtil.required(v, $t('required_field')),
+          (v: string) => validationUtil.url(v, $t('enter_valid_url')),
         ]"
       ></TextField>
 
