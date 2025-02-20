@@ -5,10 +5,7 @@ import dayjs from '~/lib/day'
 const trends = ref<DetailBase[]>(
   Array.from(
     { length: 20 },
-    () =>
-      ({
-        images: [Constants.PLACEHOLDER_IMAGES.IMAGE1_1],
-      }) as DetailBase,
+    () => ({ images: [Constants.PLACEHOLDER_IMAGES.IMAGE1_1] }) as DetailBase,
   ),
 )
 
@@ -20,10 +17,7 @@ const viewedCarIds = ref<Set<number>>(new Set([]))
 const progress = ref(0)
 const timer = ref<NodeJS.Timeout>()
 const isTouchDevice = ref<boolean>(true)
-const isVisibleChevron = ref({
-  prev: false,
-  next: false,
-})
+const isVisibleChevron = ref({ prev: false, next: false })
 const itemWidth = 98
 
 onMounted(async () => {
@@ -286,5 +280,16 @@ const setViewedCarIds = (carId: number) => {
 }
 :deep(.v-overlay__content) {
   width: 100% !important;
+}
+
+/* アドセンス対策 */
+.google-auto-placed {
+  display: flex !important;
+  height: 7rem !important;
+  overflow: auto !important;
+  white-space: nowrap !important;
+}
+.google-auto-placed::-webkit-scrollbar {
+  display: none;
 }
 </style>
