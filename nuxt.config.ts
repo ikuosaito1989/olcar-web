@@ -149,11 +149,11 @@ export default defineNuxtConfig({
 
         const func: Promise<globalThis.Sitemap>[] = []
 
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < 40; i++) {
           const fetch = apiFetch<Sitemap>('/v1/sitemap', {
             query: {
-              offset: i * 40000 + 1,
-              limit: i * 40000 + 1 + 40000,
+              offset: i * 10000 + 1,
+              limit: i * 10000 + 1 + 10000,
             },
           })
           func.push(fetch)
