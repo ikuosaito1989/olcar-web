@@ -195,9 +195,9 @@ const setViewedCarIds = (carId: number) => {
         @update:model-value="onChangeCarousel"
       >
         <v-carousel-item v-for="(item, i) in trends" :key="i" eager>
-          <div class="tw-relative tw-h-full tw-w-full">
+          <div class="tw-relative tw-size-full">
             <nuxt-img
-              class="tw-block tw-h-full tw-w-full tw-object-contain tw-object-center"
+              class="tw-block tw-size-full tw-object-contain tw-object-center"
               :src="item.images[0]"
             />
           </div>
@@ -247,7 +247,7 @@ const setViewedCarIds = (carId: number) => {
       <div v-for="(car, i) in trends" :key="i">
         <div
           :class="[
-            'tw-mr-2 tw-h-[90px] tw-w-[90px] tw-shrink-0 tw-rounded-full tw-p-1',
+            'tw-mr-2 tw-size-[90px] tw-shrink-0 tw-rounded-full tw-p-1',
             !viewedCarIds.has(car.id)
               ? 'tw-bg-gradient-to-br tw-from-[#f67b01] tw-to-[#eaf601]'
               : '',
@@ -255,7 +255,7 @@ const setViewedCarIds = (carId: number) => {
           @click="onOpen(car.id)"
         >
           <nuxt-img
-            class="tw-h-[82px] tw-w-[82px] tw-rounded-full tw-bg-white tw-object-cover"
+            class="tw-size-[82px] tw-rounded-full tw-bg-white tw-object-cover"
             :src="car.images[0]"
             @error="onError(car.id)"
           />
