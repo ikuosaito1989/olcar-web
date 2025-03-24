@@ -64,6 +64,7 @@ onMounted(async () => {
       </v-btn>
       <div class="tw-my-2 tw-font-bold tw-text-[#f67b01]">{{ $t('aboutOlcar') }}</div>
       <v-btn color="black" href="/info/about" variant="text">{{ $t('aboutOlcarLink') }}</v-btn>
+      <v-btn color="black" href="/info/faq" variant="text">{{ $t('faq') }}</v-btn>
       <v-btn color="black" href="/info/purchase-process" variant="text">
         {{ $t('purchaseGuide') }}
       </v-btn>

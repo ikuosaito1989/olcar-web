@@ -204,6 +204,7 @@ export default defineNuxtConfig({
           '/info/line',
           '/info/needs-help',
           '/info/about',
+          '/info/faq',
         ]
 
         // 掲載

@@ -18,6 +18,9 @@
           <Anchor to="/info/caution">{{ $t('fraudWarning') }}</Anchor>
         </li>
         <li>
+          <Anchor to="/info/faq">{{ $t('faq') }}</Anchor>
+        </li>
+        <li>
           <Anchor to="/info/browser">{{ $t('browserRecommendation') }}</Anchor>
         </li>
         <li>
