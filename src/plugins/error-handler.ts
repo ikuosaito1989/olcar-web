@@ -1,10 +1,13 @@
+/* eslint-disable no-console */
 import type { NuxtError } from '#app'
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.config.errorHandler = async (error) => {
+    console.error(error)
     await report(error as Error)
   }
   nuxtApp.hook('vue:error', async (error) => {
+    console.error(error)
     await report(error as Error)
   })
 })
