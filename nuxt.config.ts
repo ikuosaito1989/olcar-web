@@ -38,6 +38,7 @@ export default defineNuxtConfig({
   },
 
   nitro: {
+    preset: 'node',
     compressPublicAssets: true,
     minify: true,
     sourceMap: process.env.NODE_ENV === 'development',
@@ -132,7 +133,7 @@ export default defineNuxtConfig({
   },
 
   sitemap: {
-    cacheMaxAgeSeconds: 1000 * 60 * 1440, // @note 1日一回
+    cacheMaxAgeSeconds: 1000 * 60 * 1440 * 7, // 1週間に1回
     autoLastmod: true,
     exclude: ['/managements', '/maintenance'],
     experimentalWarmUp: true,
