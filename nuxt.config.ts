@@ -38,7 +38,6 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'node',
     compressPublicAssets: true,
     minify: true,
     sourceMap: process.env.NODE_ENV === 'development',
