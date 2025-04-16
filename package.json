@@ -21,7 +21,6 @@
     "@mdi/js": "^7.4.47",
     "@nuxt/image": "^1.10.0",
     "@nuxtjs/i18n": "^9.3.4",
-    "@nuxtjs/sitemap": "^7.2.9",
     "@nuxtjs/tailwindcss": "^6.13.2",
     "@types/cheerio": "^0.22.35",
     "autolinker": "^4.1.0",

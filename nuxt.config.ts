@@ -68,7 +68,6 @@ export default defineNuxtConfig({
         )
       })
     },
-    '@nuxtjs/sitemap',
     'nuxt-gtag',
     '@kgierke/nuxt-basic-auth',
     '@nuxtjs/i18n',
@@ -129,106 +128,6 @@ export default defineNuxtConfig({
 
   site: {
     url: process.env.SITE_URL,
-  },
-
-  sitemap: {
-    cacheMaxAgeSeconds: 1000 * 60 * 1440 * 7, // 1週間に1回
-    autoLastmod: true,
-    exclude: ['/managements', '/maintenance'],
-    experimentalWarmUp: true,
-    experimentalCompression: true,
-    xsl: false,
-    debug: process.env.NODE_ENV === 'development',
-    urls: async () => {
-      try {
-        const apiFetch = ofetch.create({ baseURL: process.env.API_URL })
-        const result = {
-          cars: [],
-          makers: [],
-        } as Sitemap
-
-        const func: Promise<globalThis.Sitemap>[] = []
-
-        for (let i = 0; i < 40; i++) {
-          const fetch = apiFetch<Sitemap>('/v1/sitemap', {
-            query: {
-              offset: i * 10000 + 1,
-              limit: i * 10000 + 1 + 10000,
-            },
-          })
-          func.push(fetch)
-        }
-
-        const _sitemaps = Promise.all(func.map((v) => v))
-
-        const makerIds = [...Array(50).keys()].map((i) => ++i)
-
-        // @note 都道府県の車名
-        // @note メーカー毎の車名
-        const [_prefectures, _names] = await Promise.all([
-          apiFetch<Prefecture[]>('/v1/prefecture'),
-          apiFetch<CarName[]>('/v1/cars/names', {
-            query: {
-              'makerIds[]': makerIds,
-            },
-          }),
-        ])
-
-        const sitemaps = await _sitemaps
-        sitemaps.forEach((v) => {
-          result.cars.push(...v.cars)
-          result.makers.push(...v.makers)
-        })
-
-        const names = [..._names.map((v) => `/?makerIds[]=${v.makerId}&carNames[]=${v.name}`)]
-        const prefectures = [..._prefectures.map((v) => `/?prefectures[]=${v.name}`)]
-
-        // @note メーカー
-        const makers = result.makers.map((v) => `/${v}`)
-
-        // @note 登録済みの車
-        const cars = result.cars.map((v) => `/cars/${v}`)
-
-        // @note 利用規約
-        const terms = ['/terms/tos', '/terms/privacy', '/terms/transaction-law']
-
-        // @note 記事
-        const info = [
-          '/info/caution',
-          '/info/browser',
-          '/info/exhibit',
-          '/info/exhibit-free',
-          '/info/purchase-process',
-          '/info/contract-drafting',
-          '/info/omakase-agent',
-          '/info/line',
-          '/info/needs-help',
-          '/info/about',
-          '/info/faq',
-        ]
-
-        // 掲載
-        const post = ['/post']
-
-        // 掲載
-        const features = ['/history', '/favorite']
-
-        return [
-          ...makers,
-          ...terms,
-          ...names,
-          ...prefectures,
-          ...cars,
-          ...info,
-          ...features,
-          ...post,
-        ]
-      } catch {
-        return []
-      }
-    },
-    sitemaps: true,
-    defaultSitemapsChunkSize: 10000,
   },
 
   devtools: { enabled: true },
