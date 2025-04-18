@@ -1,3 +1,4 @@
 User-agent: *
 Disallow: 
 Disallow: /managements
+Sitemap: https://ol-car.com/sitemaps/sitemap_index.xml.gz
