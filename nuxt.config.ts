@@ -1,6 +1,5 @@
 /* eslint-disable max-lines */
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
-import { ofetch } from 'ofetch'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -99,6 +98,9 @@ export default defineNuxtConfig({
   routeRules: {
     '/api/**': {
       proxy: `${process.env.PROXY_URL}/**`,
+    },
+    '/sitemaps/**': {
+      proxy: 'https://storage.googleapis.com/olcar_images/sitemap-index.xml.gz',
     },
   },
 
