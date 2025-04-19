@@ -100,7 +100,7 @@ export default defineNuxtConfig({
       proxy: `${process.env.PROXY_URL}/**`,
     },
     '/sitemaps/**': {
-      proxy: 'https://storage.googleapis.com/olcar_images/sitemap-index.xml.gz',
+      proxy: 'https://storage.googleapis.com/olcar_images/**',
     },
   },
 
