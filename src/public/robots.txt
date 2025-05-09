@@ -1,4 +1,8 @@
-User-agent: *
-Disallow: 
+User-agent: Googlebot
+Disallow: /api/
 Disallow: /managements
+
+User-agent: *
+Disallow: /managements
+
 Sitemap: https://ol-car.com/sitemaps/sitemap-index.xml.gz
