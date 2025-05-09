@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   srcDir: 'src/',
 
   app: {
-    keepalive: true,
+    keepalive: false,
     head: {
       script:
         process.env.NODE_ENV === 'development'
