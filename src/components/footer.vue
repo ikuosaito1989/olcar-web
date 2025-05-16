@@ -42,6 +42,11 @@
             {{ $t('aboutUs') }}
           </Anchor>
         </li>
+        <li>
+          <Anchor to="/info/ir">
+            {{ $t('info_title_ir') }}
+          </Anchor>
+        </li>
       </ul>
     </div>
     <div>
