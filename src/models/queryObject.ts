@@ -18,4 +18,6 @@ export interface QueryObject {
   isSales?: boolean
   priceOrder?: Sort
   mileageOrder?: Sort
+  lastCarId?: number
+  isNext?: boolean
 }

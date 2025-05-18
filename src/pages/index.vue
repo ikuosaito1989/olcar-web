@@ -24,6 +24,8 @@ const { data: summary } = await useFetchi<Summary>('/api/v1/cars', {
     isVehicleInspection: route.query.isVehicleInspection === 'true',
     priceOrder: route.query.priceOrder,
     mileageOrder: route.query.mileageOrder,
+    lastCarId: route.query.lastCarId,
+    isNext: route.query.isNext,
   },
 })
 
@@ -86,19 +88,36 @@ const onNavigate = async ({
 
   if (sort) {
     queryObject.value[sort.key] = sort.value
-    queryObject.value.page = undefined
+    usePageReset()
   }
 
   await navigateTo(`/${path}${useQueryString()}`, { external: !path })
 }
 
 /**
- * ページを変更する
- *
- * @param value ページ数
+ * 前ページへ遷移する
+ * @param page
  */
-const onChangePage = (value?: number) => {
-  queryObject.value.page = value
+const onChangePrevPage = (page: number) => {
+  if (page === 1) {
+    usePageReset()
+  } else {
+    queryObject.value.page = page
+    queryObject.value.lastCarId = Math.max(...summary.value.details.map((d) => d.id))
+    queryObject.value.isNext = false
+  }
+
+  onNavigate({ isOrderReset: false })
+}
+
+/**
+ * 次ページへ遷移する
+ * @param page
+ */
+const onChangeNextPage = (page: number) => {
+  queryObject.value.page = page
+  queryObject.value.lastCarId = Math.min(...summary.value.details.map((d) => d.id))
+  queryObject.value.isNext = true
   onNavigate({ isOrderReset: false })
 }
 
@@ -249,14 +268,14 @@ useHead(getHeader())
         class="tw-mr-5"
         width="120"
         :disabled="!queryObject.page || queryObject.page == 1 || summary.details.length === 0"
-        @click="onChangePage(queryObject.page ? queryObject.page - 1 : 1)"
+        @click="onChangePrevPage(queryObject.page ? queryObject.page - 1 : 1)"
       >
         {{ $t('previousPage') }}
       </v-btn>
       <v-btn
         width="120"
         :disabled="summary.isEnd || summary.details.length === 0"
-        @click="onChangePage(queryObject.page ? queryObject.page + 1 : 2)"
+        @click="onChangeNextPage(queryObject.page ? queryObject.page + 1 : 2)"
       >
         {{ $t('nextPage') }}
       </v-btn>
