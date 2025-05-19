@@ -129,6 +129,8 @@ const onChangeSales = () => {
     useIsSalesReset()
   }
 
+  usePageReset()
+
   onNavigate({ isOrderReset: false })
 }
 
