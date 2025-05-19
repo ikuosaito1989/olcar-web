@@ -232,11 +232,7 @@ const setViewedCarIds = (carId: number) => {
       <div>{{ $t('trending') }}</div>
     </div>
 
-    <div
-      ref="trendsContainer"
-      class="trends !tw-flex !tw-h-28 !tw-overflow-auto !tw-whitespace-nowrap"
-      data-nosnippet
-    >
+    <div ref="trendsContainer" class="trends google-auto-placed" data-nosnippet>
       <v-btn
         v-if="!isTouchDevice && isVisibleChevron.prev"
         style="position: sticky; left: 10px; top: 25px"
