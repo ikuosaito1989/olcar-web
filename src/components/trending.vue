@@ -234,7 +234,7 @@ const setViewedCarIds = (carId: number) => {
 
     <div
       ref="trendsContainer"
-      class="content tw-flex tw-h-28 tw-overflow-auto tw-whitespace-nowrap"
+      class="trends !tw-flex !tw-h-28 !tw-overflow-auto !tw-whitespace-nowrap"
     >
       <v-btn
         v-if="!isTouchDevice && isVisibleChevron.prev"
@@ -275,7 +275,7 @@ const setViewedCarIds = (carId: number) => {
 </template>
 
 <style scoped>
-.content::-webkit-scrollbar {
+.trends::-webkit-scrollbar {
   display: none;
 }
 :deep(.v-overlay__content) {
