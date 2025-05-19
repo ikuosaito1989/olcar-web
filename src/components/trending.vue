@@ -235,6 +235,7 @@ const setViewedCarIds = (carId: number) => {
     <div
       ref="trendsContainer"
       class="trends !tw-flex !tw-h-28 !tw-overflow-auto !tw-whitespace-nowrap"
+      data-nosnippet
     >
       <v-btn
         v-if="!isTouchDevice && isVisibleChevron.prev"
