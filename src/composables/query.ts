@@ -67,6 +67,8 @@ const useSetFromQuery = (query: any) => {
     priceOrder: query.priceOrder,
     mileageOrder: query.mileageOrder,
     text: queryUtil.toArrayQuery(query['keywords[]']).join(' '),
+    lastCarId: query.lastCarId ? +query.lastCarId : undefined,
+    isNext: query.isNext,
   }
 }
 
@@ -190,6 +192,8 @@ const useQueryString = () => {
     mileageOrder: obj.mileageOrder,
     isSales: obj.isSales,
     isSponsor: obj.isSponsor,
+    lastCarId: obj.lastCarId,
+    isNext: obj.isNext,
   }
 
   if (!query.isSales) {
@@ -210,6 +214,16 @@ const useQueryString = () => {
 const useOrderReset = () => {
   queryObject.value.priceOrder = undefined
   queryObject.value.mileageOrder = undefined
+  usePageReset()
+}
+
+/**
+ * ページ関連のデータをリセットする
+ */
+const usePageReset = () => {
+  queryObject.value.page = undefined
+  queryObject.value.lastCarId = undefined
+  queryObject.value.isNext = undefined
 }
 
 /**
@@ -238,6 +252,8 @@ const useReset = () => {
     isVehicleInspection: undefined,
     priceOrder: undefined,
     mileageOrder: undefined,
+    lastCarId: undefined,
+    isNext: undefined,
   }
 }
 
@@ -247,6 +263,7 @@ export {
   useReset,
   useOrderReset,
   useIsSalesReset,
+  usePageReset,
   useSetFromQuery,
   useGetSearchConditions,
   useSearchSocialType,

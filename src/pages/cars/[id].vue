@@ -23,7 +23,6 @@ if (!car.value) {
 
 onMounted(async () => {
   const query = {
-    offset: 0,
     limit: 3,
     isSales: true,
     isCount: false,

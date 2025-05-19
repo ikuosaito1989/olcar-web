@@ -17,4 +17,6 @@ export interface QueryString {
   priceOrder?: Sort
   mileageOrder?: Sort
   isSales?: boolean
+  lastCarId?: number
+  isNext?: boolean
 }
