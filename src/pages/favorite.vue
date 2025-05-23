@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { mdiHeartOutline } from '@mdi/js'
 const { t } = useI18n()
-onActivated(async () => {
+onMounted(async () => {
   await useSetStorageInCars(Constants.LOCALSTORAGE.FAVORITE)
 })
 

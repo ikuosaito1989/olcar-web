@@ -2,7 +2,7 @@
 import { mdiHistory } from '@mdi/js'
 const { t } = useI18n()
 
-onActivated(async () => {
+onMounted(async () => {
   await useSetStorageInCars(Constants.LOCALSTORAGE.HISTORY)
 })
 
