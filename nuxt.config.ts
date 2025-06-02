@@ -20,8 +20,8 @@ export default defineNuxtConfig({
               },
             ],
       meta: [
-        { hid: 'charset', charset: 'utf-8' },
-        { hid: 'viewport', name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'theme-color', content: '#ffac42' },
         { name: 'apple-mobile-web-app-status-bar-style', content: '#ffac42' },
       ],
@@ -129,10 +129,6 @@ export default defineNuxtConfig({
   gtag: {
     id: process.env.GTAG,
     loadingStrategy: 'async',
-  },
-
-  site: {
-    url: process.env.SITE_URL,
   },
 
   devtools: { enabled: true },
