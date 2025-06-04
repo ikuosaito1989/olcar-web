@@ -18,9 +18,6 @@ definePageMeta({
           ご不便をおかけしますが、しばらくお待ちください。
         </div>
       </div>
-      <div class="tw-text-center">
-        <v-btn color="primary" to="/">{{ $t('top') }}</v-btn>
-      </div>
     </div>
   </div>
 </template>
