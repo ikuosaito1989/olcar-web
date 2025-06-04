@@ -28,21 +28,21 @@
     "compression": "^1.8.0",
     "dayjs": "^1.11.13",
     "marked": "^15.0.12",
-    "nuxt": "^3.17.4",
+    "nuxt": "^3.17.5",
     "nuxt-gtag": "^3.0.2",
     "query-string": "^9.2.0",
     "vite-plugin-vuetify": "^2.1.1",
     "vue": "^3.5.16",
     "vue-recaptcha": "^3.0.0-alpha.6",
     "vue-router": "^4.5.1",
-    "vuetify": "^3.8.7",
+    "vuetify": "^3.8.8",
     "wanakana": "^5.3.1"
   },
   "devDependencies": {
     "@nuxtjs/eslint-module": "^4.1.0",
     "@types/bun": "latest",
-    "@typescript-eslint/eslint-plugin": "^8.33.0",
-    "@typescript-eslint/parser": "^8.33.0",
+    "@typescript-eslint/eslint-plugin": "^8.33.1",
+    "@typescript-eslint/parser": "^8.33.1",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.4.1",
@@ -54,7 +54,7 @@
     "vue-eslint-parser": "^9.4.3"
   },
   "peerDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.8.3"
   },
   "volta": {
     "node": "22.11.0"

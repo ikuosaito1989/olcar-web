@@ -243,6 +243,7 @@ const setViewedCarIds = (carId: number) => {
       ></v-btn>
       <div v-for="(car, i) in trends" :key="i">
         <div
+          v-ripple
           :class="[
             'tw-mr-2 tw-size-[90px] tw-shrink-0 tw-rounded-full tw-p-1',
             !viewedCarIds.has(car.id)
