@@ -51,6 +51,7 @@ const errors = ref({ error: false, message: '' })
 const dialog = ref(false)
 const key = ref(crypto.randomUUID())
 const _items = ref(prop.items)
+const textRef = ref<InstanceType<typeof VTextField> | null>(null)
 
 watch(
   () => prop.items,
@@ -102,9 +103,12 @@ const onClickChipClose = async (item: Item) => {
 /**
  * ダイアログをopenする
  */
-const open = () => {
+const open = async () => {
   resetItems()
   dialog.value = !dialog.value
+  await nextTick()
+  const el = textRef.value?.$el?.querySelector('input')
+  el?.focus()
 }
 
 /**
@@ -204,12 +208,14 @@ defineExpose({
           <v-spacer></v-spacer>
         </v-toolbar>
         <TextField
+          ref="textRef"
           :icon="mdiMagnify"
           :hint="hint"
           :persistent-hint="true"
           required
           clearable
           type="text"
+          :input-attrs="{ enterkeyhint: 'search' }"
           @update="update"
         ></TextField>
 

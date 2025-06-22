@@ -54,6 +54,15 @@ setCarNames()
       <v-icon color="primary">{{ mdiMagnify }}</v-icon>
       {{ $t('searchLabel') }}
     </div>
+
+    <TextField
+      v-model:text="queryObject.text"
+      :label="$t('keywordSearch')"
+      :placeholder="$t('placeholder')"
+      :counter="200"
+      type="text"
+    ></TextField>
+
     <ListDialog
       :current-items="queryObject.makers"
       :title="$t('selectManufacturer')"
@@ -148,15 +157,6 @@ setCarNames()
         :value="Constants.SOCIAL_TYPE.RAKUMA"
       ></v-checkbox>
     </div>
-
-    <TextField
-      v-model:text="queryObject.text"
-      :label="$t('keywordSearch')"
-      :placeholder="$t('placeholder')"
-      :counter="30"
-      type="text"
-      :icon="mdiMagnify"
-    ></TextField>
 
     <div
       class="tw-fixed tw-bottom-0 tw-left-0 tw-z-10 tw-w-full tw-bg-gray-100 tw-p-4 tw-opacity-90"
