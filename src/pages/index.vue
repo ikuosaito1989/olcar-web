@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { mdiMagnify, mdiHeartOutline, mdiSort, mdiCar } from '@mdi/js'
+import { mdiMagnify, mdiSort, mdiCar } from '@mdi/js'
 type Variant = 'elevated' | 'outlined'
 const route = useRoute()
 useSetFromQuery(route.query)
@@ -157,7 +157,6 @@ useHead(getHeader())
   <section>
     <Trending></Trending>
     <SearchConditions class="tw-mx-4 tw-mt-4" :conditions="searchConditions"></SearchConditions>
-
     <div v-if="makerName" class="tw-px-4 tw-pt-4 tw-text-xl tw-font-bold">
       <v-icon class="tw-mb-1" color="primary">{{ mdiCar }}</v-icon>
       {{ makerName }}
