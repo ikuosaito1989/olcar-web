@@ -184,7 +184,7 @@ useHead(getHeader())
       <div
         class="tw-flex tw-h-12 tw-w-full tw-items-center tw-border tw-text-center tw-shadow [&>div:not(:last-child)]:tw-border-r [&>div]:tw-py-3 [&>div]:tw-font-bold"
       >
-        <div v-ripple class="tw-w-full tw-text-[#bc4c00]" @click="onNavigate({ path: 'favorite' })">
+        <div v-ripple class="tw-w-full tw-text-[#bc4c00]">
           <div class="tw-flex tw-items-center tw-justify-center">
             <div class="tw-text-lg">{{ summary.totalCount?.toLocaleString() }}</div>
             <div class="tw-ml-1">台</div>

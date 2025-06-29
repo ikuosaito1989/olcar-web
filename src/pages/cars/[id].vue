@@ -10,11 +10,13 @@ const sameSummary = ref<Summary>({
   isEnd: false,
   details: [],
   totalCount: 0,
+  allCount: 0,
 })
 const makerSummary = ref<Summary>({
   isEnd: false,
   details: [],
   totalCount: 0,
+  allCount: 0,
 })
 
 if (!car.value) {

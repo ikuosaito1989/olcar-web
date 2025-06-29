@@ -18,6 +18,7 @@ const props = defineProps({
   },
 })
 
+const emit = defineEmits(['select'])
 const from = defineModel<KeyLabel | null>('from')
 const to = defineModel<KeyLabel | null>('to')
 const fromValue = ref<string | number | undefined>(from.value?.label)
@@ -41,6 +42,7 @@ const onSelect = (type: 'from' | 'to', label: string | number | null) => {
   } else {
     to.value = item
   }
+  emit('select')
 }
 </script>
 
