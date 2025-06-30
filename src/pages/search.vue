@@ -221,7 +221,7 @@ setCarNames()
       ></v-checkbox>
     </div>
 
-    <div class="tw-fixed tw-bottom-0 tw-left-0 tw-z-50 tw-w-full tw-bg-gray-100 tw-p-4">
+    <div class="tw-sticky tw-bottom-0 tw-left-0 tw-z-[9999] tw-w-full tw-p-4">
       <div class="tw-m-auto tw-flex tw-max-w-screen-md tw-text-center">
         <v-btn color="gray" variant="elevated" size="large" class="tw-w-4/12" @click="onReset">
           {{ $t('clear') }}
@@ -238,7 +238,5 @@ setCarNames()
         </v-btn>
       </div>
     </div>
-
-    <GoogleAd></GoogleAd>
   </v-form>
 </template>
