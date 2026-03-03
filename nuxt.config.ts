@@ -3,7 +3,6 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  srcDir: 'src/',
 
   app: {
     keepalive: false,
@@ -55,7 +54,6 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    'vue-recaptcha/nuxt',
     '@nuxtjs/tailwindcss',
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
@@ -67,10 +65,12 @@ export default defineNuxtConfig({
         )
       })
     },
+    '@nuxt/scripts',
     'nuxt-gtag',
     '@kgierke/nuxt-basic-auth',
     '@nuxtjs/i18n',
     '@nuxt/image',
+    '@nuxtjs/turnstile',
   ],
 
   i18n: {
@@ -90,10 +90,13 @@ export default defineNuxtConfig({
   runtimeConfig: {
     siteUrl: process.env.SITE_URL,
     slackHookUrl: process.env.SLACK_HOOK_URL,
+    turnstile: {
+      secretKey: process.env.TURNSTILE_SECRET_KEY,
+    },
     public: {
       apiKey: process.env.API_KEY,
-      recaptcha: {
-        v2SiteKey: process.env.RECAPTCHA_SITE_KEY,
+      turnstile: {
+        siteKey: process.env.TURNSTILE_SITE_KEY ?? process.env.RECAPTCHA_SITE_KEY,
       },
     },
   },
@@ -129,6 +132,10 @@ export default defineNuxtConfig({
   gtag: {
     id: process.env.GTAG,
     loadingStrategy: 'async',
+  },
+
+  turnstile: {
+    siteKey: process.env.TURNSTILE_SITE_KEY ?? process.env.RECAPTCHA_SITE_KEY,
   },
 
   devtools: { enabled: true },
