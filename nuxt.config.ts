@@ -39,6 +39,9 @@ export default defineNuxtConfig({
     compressPublicAssets: true,
     minify: true,
     sourceMap: process.env.NODE_ENV === 'development',
+    externals: {
+      inline: ['vue', 'vue-router', '@vue/*'],
+    },
     storage: {
       cache: {
         driver: 'lruCache',
