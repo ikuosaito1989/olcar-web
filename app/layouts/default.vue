@@ -1,7 +1,4 @@
-<script setup lang="ts">
-import { useRecaptchaProvider } from 'vue-recaptcha'
-useRecaptchaProvider()
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <v-app
