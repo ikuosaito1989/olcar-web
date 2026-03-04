@@ -1,19 +1,22 @@
 import { defineEventHandler } from 'h3'
 import * as path from 'node:path'
-import * as fs from 'node:fs'
+import { promises as fs } from 'node:fs'
 
 export default defineEventHandler(async (event) => {
-  const filePath = path.join(
-    process.cwd(),
-    'src',
-    'assets',
-    'md',
-    `${event.context.params.name}.md`,
-  )
-
-  if (!(await fs.existsSync(filePath))) {
+  const name = event.context.params.name
+  // path traversal防止: ファイル名として許可する文字のみ受け付ける
+  if (!/^[a-zA-Z0-9-_]+$/.test(name)) {
     return null
   }
 
-  return await fs.readFileSync(filePath, { encoding: 'utf8' })
+  const filePath = path.join(process.cwd(), 'app', 'assets', 'md', `${name}.md`)
+
+  try {
+    await fs.access(filePath)
+  }
+  catch {
+    return null
+  }
+
+  return await fs.readFile(filePath, { encoding: 'utf8' })
 })

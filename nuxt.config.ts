@@ -98,7 +98,7 @@ export default defineNuxtConfig({
     public: {
       apiKey: process.env.API_KEY,
       turnstile: {
-        siteKey: process.env.TURNSTILE_SITE_KEY ?? process.env.RECAPTCHA_SITE_KEY,
+        siteKey: process.env.TURNSTILE_SITE_KEY,
       },
     },
   },
@@ -137,7 +137,7 @@ export default defineNuxtConfig({
   },
 
   turnstile: {
-    siteKey: process.env.TURNSTILE_SITE_KEY ?? process.env.RECAPTCHA_SITE_KEY,
+    siteKey: process.env.TURNSTILE_SITE_KEY,
   },
 
   devtools: { enabled: true },
