@@ -2,12 +2,12 @@
 
 <template>
   <v-app
-    class="tw-m-auto tw-box-border tw-break-all tw-font-sans tw-text-sm tw-leading-normal tw-tracking-tight tw-antialiased"
+    class="tw:m-auto tw:box-border tw:font-sans tw:text-sm tw:leading-normal tw:tracking-tight tw:break-all tw:antialiased"
   >
     <Header></Header>
 
     <v-container>
-      <div class="tw-m-auto tw-max-w-screen-md">
+      <div class="tw:m-auto tw:max-w-3xl">
         <slot />
       </div>
     </v-container>

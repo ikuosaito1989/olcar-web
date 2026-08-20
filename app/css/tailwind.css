@@ -1,3 +1,30 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/**
+ * Vuetify v4 / Tailwind CSS v4 はどちらも CSS カスケードレイヤーを使うため、
+ * 優先順位（後ろほど強い）を明示する。
+ * Tailwind より Vuetify を後ろに置くことで、
+ * 旧構成（Tailwind CSS を読み込んだあとに Vuetify を読み込む）と同じ優先度になる。
+ * Tailwind 側で上書きしたい箇所は `tw:xxx!` を使う。
+ */
+@layer properties, theme, base, components, utilities, vuetify-core, vuetify-components,
+  vuetify-overrides, vuetify-utilities, app-overrides;
+
+@import 'tailwindcss' prefix(tw);
+
+/**
+ * Tailwind CSS v4 のデフォルト変更を v3 相当に戻す互換レイヤー
+ * ref. https://tailwindcss.com/docs/upgrade-guide
+ */
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: #e5e7eb;
+  }
+
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+}

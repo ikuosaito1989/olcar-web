@@ -1,0 +1,96 @@
+/**
+ * Vuetify v4 は Material Design 3 に追従してコンテナ幅・エレベーション・
+ * タイポグラフィの既定値が変わっている。
+ * 本番（https://ol-car.com/）の見た目を維持するため v3 相当の値に戻す。
+ */
+@layer app-overrides {
+  /* v4 でコンテナの最大幅とブレークポイントが縮小されたため v3 の値に戻す */
+  .v-container {
+    max-width: 100%;
+  }
+
+  @media (min-width: 960px) {
+    .v-container {
+      max-width: 900px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .v-container {
+      max-width: 1200px;
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .v-container {
+      max-width: 1800px;
+    }
+  }
+
+  @media (min-width: 2560px) {
+    .v-container {
+      max-width: 2400px;
+    }
+  }
+
+  /* v4 でボタンの字間が MD3 の値になったため v3 の値に戻す */
+  .v-btn {
+    letter-spacing: 0.0892857em;
+    text-indent: 0.0892857em;
+  }
+
+  /* v4 で v-expansion-panels に rounded-0 が付き角丸が消えたため v3 の値に戻す */
+  .v-expansion-panels > .v-expansion-panel:first-child {
+    border-start-start-radius: 4px;
+    border-start-end-radius: 4px;
+  }
+
+  .v-expansion-panels > .v-expansion-panel:last-child {
+    border-end-start-radius: 4px;
+    border-end-end-radius: 4px;
+  }
+
+  /* v4 でエレベーションが MD3 の 6 段階になったため v3(MD2) の影に戻す */
+  .v-expansion-panel__shadow {
+    box-shadow:
+      0 3px 1px -2px rgb(0 0 0 / 20%),
+      0 2px 2px 0 rgb(0 0 0 / 14%),
+      0 1px 5px 0 rgb(0 0 0 / 12%);
+  }
+
+  .v-btn--variant-elevated {
+    box-shadow:
+      0 3px 1px -2px rgb(0 0 0 / 20%),
+      0 2px 2px 0 rgb(0 0 0 / 14%),
+      0 1px 5px 0 rgb(0 0 0 / 12%);
+  }
+
+  .v-btn--variant-elevated:hover,
+  .v-btn--variant-elevated:focus {
+    box-shadow:
+      0 2px 4px -1px rgb(0 0 0 / 20%),
+      0 4px 5px 0 rgb(0 0 0 / 14%),
+      0 1px 10px 0 rgb(0 0 0 / 12%);
+  }
+
+  .v-btn--variant-elevated:active {
+    box-shadow:
+      0 5px 5px -3px rgb(0 0 0 / 20%),
+      0 8px 10px 1px rgb(0 0 0 / 14%),
+      0 3px 14px 2px rgb(0 0 0 / 12%);
+  }
+
+  .v-fab .v-btn--variant-elevated {
+    box-shadow:
+      0 3px 3px -2px rgb(0 0 0 / 20%),
+      0 3px 4px 0 rgb(0 0 0 / 14%),
+      0 1px 8px 0 rgb(0 0 0 / 12%);
+  }
+
+  .v-app-bar.v-toolbar:not(.v-toolbar--flat) {
+    box-shadow:
+      0 2px 1px -1px rgb(0 0 0 / 20%),
+      0 1px 1px 0 rgb(0 0 0 / 14%),
+      0 1px 3px 0 rgb(0 0 0 / 12%);
+  }
+}

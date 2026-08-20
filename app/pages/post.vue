@@ -134,7 +134,7 @@ useHead(useSeo(t('submitRequest')))
 </script>
 
 <template>
-  <section class="tw-m-2">
+  <section class="tw:m-2">
     <div v-if="mode === 'edit'">
       <PostEdit
         ref="editRef"
@@ -144,8 +144,8 @@ useHead(useSeo(t('submitRequest')))
       ></PostEdit>
     </div>
     <div v-if="mode === 'preview'">
-      <div class="tw-sticky tw-top-4 tw-z-50">
-        <v-btn size="large" class="tw-w-full !tw-bg-white" @click="onExitPreview">
+      <div class="tw:sticky tw:top-4 tw:z-50">
+        <v-btn size="large" class="tw:w-full tw:bg-white!" @click="onExitPreview">
           {{ $t('exitPreview') }}
         </v-btn>
       </div>
@@ -153,35 +153,35 @@ useHead(useSeo(t('submitRequest')))
     </div>
 
     <v-dialog v-model="isConfirm" width="400">
-      <v-card class="!tw-p-4">
-        <div class="tw-text-center">
-          <div class="tw-m-4">
+      <v-card class="tw:p-4!">
+        <div class="tw:text-center">
+          <div class="tw:m-4">
             <v-icon size="x-large" color="success">{{ mdiCheckOutline }}</v-icon>
           </div>
-          <div class="tw-m-2 tw-font-bold">{{ $t('confirmTitle') }}</div>
+          <div class="tw:m-2 tw:font-bold">{{ $t('confirmTitle') }}</div>
         </div>
-        <div class="tw-my-2 tw-text-sm">
+        <div class="tw:my-2 tw:text-sm">
           {{ $t('confirmMessage') }}
         </div>
-        <div class="tw-mt-2 tw-text-center">
-          <v-btn class="tw-mr-2" @click="isConfirm = false">{{ $t('cancel') }}</v-btn>
+        <div class="tw:mt-2 tw:text-center">
+          <v-btn class="tw:mr-2" @click="isConfirm = false">{{ $t('cancel') }}</v-btn>
           <v-btn variant="elevated" @click="onConfirm">{{ $t('confirm') }}</v-btn>
         </div>
       </v-card>
     </v-dialog>
 
     <v-dialog v-model="isComplete" width="400">
-      <v-card class="!tw-p-4">
-        <div class="tw-text-center">
-          <div class="tw-m-4">
+      <v-card class="tw:p-4!">
+        <div class="tw:text-center">
+          <div class="tw:m-4">
             <v-icon size="x-large" color="success">{{ mdiCheckOutline }}</v-icon>
           </div>
-          <div class="tw-m-2 tw-font-bold">{{ $t('completeTitle') }}</div>
+          <div class="tw:m-2 tw:font-bold">{{ $t('completeTitle') }}</div>
         </div>
-        <div class="tw-text-sm">
+        <div class="tw:text-sm">
           {{ $t('completeMessage') }}
         </div>
-        <div class="tw-mt-3 tw-text-center tw-text-sm" @click="onComplete">{{ $t('close') }}</div>
+        <div class="tw:mt-3 tw:text-center tw:text-sm" @click="onComplete">{{ $t('close') }}</div>
       </v-card>
     </v-dialog>
   </section>

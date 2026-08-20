@@ -13,8 +13,7 @@ export default defineEventHandler(async (event) => {
 
   try {
     await fs.access(filePath)
-  }
-  catch {
+  } catch {
     return null
   }
 

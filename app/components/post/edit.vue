@@ -101,17 +101,17 @@ defineExpose({
 
 <template>
   <div>
-    <div class="tw-my-4 tw-border-b tw-pb-3 tw-text-center tw-text-xl tw-font-bold">
+    <div class="tw:my-4 tw:border-b tw:pb-3 tw:text-center tw:text-xl tw:font-bold">
       {{ $t('submitRequest') }}
     </div>
-    <div class="tw-rounded tw-bg-[#f5f5f6] tw-p-4">
+    <div class="tw:rounded-sm tw:bg-[#f5f5f6] tw:p-4">
       <Banner href="/info/exhibit" src="/banner/exhibit.webp"></Banner>
       <br />
       {{ $t('inputInfo') }}
       {{ $t('reviewProcess') }}
       {{ $t('additionalOptions') }}
     </div>
-    <v-form ref="formRef" class="tw-w-full">
+    <v-form ref="formRef" class="tw:w-full">
       <TextField
         v-model:text="formData.carName"
         :label="$t('carModel')"
@@ -258,12 +258,12 @@ defineExpose({
       <v-btn
         size="large"
         :prepend-icon="mdiEyeOutline"
-        class="tw-mb-4 tw-w-full"
+        class="tw:mb-4 tw:w-full"
         @click="onClickPreview"
       >
         {{ $t('preview') }}
       </v-btn>
-      <v-btn variant="elevated" size="large" class="tw-w-full" @click="onConfirm">
+      <v-btn variant="elevated" size="large" class="tw:w-full" @click="onConfirm">
         {{ $t('submitListingRequest') }}
       </v-btn>
     </v-form>

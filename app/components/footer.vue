@@ -1,10 +1,8 @@
 <template>
-  <div
-    class="tw-m-auto tw-mb-8 tw-flex tw-max-w-screen-md tw-flex-wrap [&>div]:tw-w-64 [&>div]:tw-p-3"
-  >
+  <div class="tw:m-auto tw:mb-8 tw:flex tw:max-w-3xl tw:flex-wrap tw:[&>div]:w-64 tw:[&>div]:p-3">
     <div>
-      <div class="tw-border-b tw-pb-3 tw-text-base tw-font-bold">{{ $t('aboutOlcar') }}</div>
-      <ul class="[&>li]:tw-mt-3">
+      <div class="tw:border-b tw:pb-3 tw:text-base tw:font-bold">{{ $t('aboutOlcar') }}</div>
+      <ul class="tw:[&>li]:mt-3">
         <li>
           <Anchor to="/info/about">{{ $t('aboutOlcarLink') }}</Anchor>
         </li>
@@ -50,8 +48,8 @@
       </ul>
     </div>
     <div>
-      <div class="tw-border-b-2 tw-pb-3 tw-text-base tw-font-bold">{{ $t('services') }}</div>
-      <ul class="[&>li]:tw-mt-3">
+      <div class="tw:border-b-2 tw:pb-3 tw:text-base tw:font-bold">{{ $t('services') }}</div>
+      <ul class="tw:[&>li]:mt-3">
         <li>
           <Anchor to="/info/omakase-agent">{{ $t('omakaseService') }}</Anchor>
         </li>
@@ -64,20 +62,20 @@
       </ul>
     </div>
     <div>
-      <div class="tw-border-b-2 tw-pb-3 tw-text-base tw-font-bold">{{ $t('makers') }}</div>
-      <ul class="tw-flex tw-flex-wrap">
+      <div class="tw:border-b-2 tw:pb-3 tw:text-base tw:font-bold">{{ $t('makers') }}</div>
+      <ul class="tw:flex tw:flex-wrap">
         <li
           v-for="(maker, i) in Constants.MAKERS"
           :key="i"
-          class="tw-mr-2 tw-mt-3 tw-border-r tw-border-[#f67b01] tw-pr-2"
+          class="tw:mt-3 tw:mr-2 tw:border-r tw:border-[#f67b01] tw:pr-2"
         >
           <Anchor :to="`/${maker.key}`">{{ maker.value }}</Anchor>
         </li>
       </ul>
     </div>
     <div>
-      <div class="tw-border-b-2 tw-pb-3 tw-text-base tw-font-bold">{{ $t('features') }}</div>
-      <ul class="[&>li]:tw-mt-3">
+      <div class="tw:border-b-2 tw:pb-3 tw:text-base tw:font-bold">{{ $t('features') }}</div>
+      <ul class="tw:[&>li]:mt-3">
         <li>
           <Anchor to="/?priceTo=100000">{{ $t('under100K') }}</Anchor>
         </li>
@@ -94,8 +92,8 @@
       </ul>
     </div>
     <div>
-      <div class="tw-border-b-2 tw-pb-3 tw-text-base tw-font-bold">{{ $t('socialMedia') }}</div>
-      <ul class="[&>li]:tw-mt-3">
+      <div class="tw:border-b-2 tw:pb-3 tw:text-base tw:font-bold">{{ $t('socialMedia') }}</div>
+      <ul class="tw:[&>li]:mt-3">
         <li>
           <Anchor target="_blank" to="https://lin.ee/80JiY1r">{{ $t('line') }}</Anchor>
         </li>
@@ -113,8 +111,8 @@
       </ul>
     </div>
   </div>
-  <div class="tw-bg-[#ffac42]">
-    <div class="tw-p-5 tw-text-center">
+  <div class="tw:bg-[#ffac42]">
+    <div class="tw:p-5 tw:text-center">
       <div>Copyright © 2024 olcar All Rights Reserved.</div>
     </div>
   </div>

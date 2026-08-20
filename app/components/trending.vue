@@ -29,7 +29,7 @@ onMounted(async () => {
   const trendSummary: Summary = await $fetch<Summary>('/api/v1/cars/trend')
   // @note 閲覧済みを後ろにソートする
   trendSummary.details.sort((a, b) => {
-    // eslint-disable-next-line require-jsdoc
+    // eslint-disable-next-line jsdoc/require-jsdoc
     const has = (id: number) => (viewedCarIds.value.has(id) ? 1 : 0)
     return has(a.id) - has(b.id)
   })
@@ -174,10 +174,10 @@ const setViewedCarIds = (carId: number) => {
 
 <!-- eslint-disable tailwindcss/no-custom-classname -->
 <template>
-  <div class="tw-my-2 tw-ml-1">
-    <v-dialog v-model="isVisible" class="tw-bg-slate-800" max-width="768" @click:outside="onClose">
+  <div class="tw:my-2 tw:ml-1">
+    <v-dialog v-model="isVisible" class="tw:bg-slate-800" max-width="768" @click:outside="onClose">
       <v-progress-linear
-        class="tw-mb-2"
+        class="tw:mb-2"
         color="#f67b01"
         :model-value="progress"
         :height="2"
@@ -185,7 +185,7 @@ const setViewedCarIds = (carId: number) => {
       <v-btn
         :icon="mdiClose"
         size="small"
-        class="!tw-absolute tw-right-0 tw-top-0 tw-z-10 tw-m-2"
+        class="tw:absolute! tw:top-0 tw:right-0 tw:z-10 tw:m-2"
         @click="onClose"
       ></v-btn>
       <v-carousel
@@ -195,21 +195,21 @@ const setViewedCarIds = (carId: number) => {
         @update:model-value="onChangeCarousel"
       >
         <v-carousel-item v-for="(item, i) in trends" :key="i" eager>
-          <div class="tw-relative tw-size-full">
+          <div class="tw:relative tw:size-full">
             <nuxt-img
-              class="tw-block tw-size-full tw-object-contain tw-object-center"
+              class="tw:block tw:size-full tw:object-contain tw:object-center"
               :src="item.images[0]"
             />
           </div>
-          <div class="!tw-absolute tw-left-0 tw-top-0 tw-z-10 tw-m-2 tw-rotate-[-10deg] tw-p-2">
+          <div class="tw:absolute! tw:top-0 tw:left-0 tw:z-10 tw:m-2 tw:rotate-[-10deg] tw:p-2">
             <div
-              class="tw-w-fit tw-rounded-xl tw-bg-white tw-p-1 tw-text-3xl tw-font-bold tw-text-[#bc4c00] tw-opacity-80"
+              class="tw:w-fit tw:rounded-xl tw:bg-white tw:p-1 tw:text-3xl tw:font-bold tw:text-[#bc4c00] tw:opacity-80"
             >
               {{ item.name }}
             </div>
             <Price
               :is-omakase="false"
-              class="tw-w-fit tw-rounded-xl tw-bg-white tw-p-1 tw-opacity-80"
+              class="tw:w-fit tw:rounded-xl tw:bg-white tw:p-1 tw:opacity-80"
               :price="item.price"
             ></Price>
           </div>
@@ -217,17 +217,17 @@ const setViewedCarIds = (carId: number) => {
           <v-btn
             size="large"
             variant="elevated"
-            class="!tw-absolute tw-bottom-0 tw-left-1/2 tw-z-10 tw-m-1 -tw-translate-x-1/2 tw-transform !tw-font-bold"
+            class="tw:absolute! tw:bottom-0 tw:left-1/2 tw:z-10 tw:m-1 tw:-translate-x-1/2 tw:transform tw:font-bold!"
             @click="onNavigate(item.id)"
           >
-            <v-icon class="tw-mr-2" color="white">{{ mdiLinkVariant }}</v-icon>
+            <v-icon class="tw:mr-2" color="white">{{ mdiLinkVariant }}</v-icon>
             {{ $t('see_more_details') }}
           </v-btn>
         </v-carousel-item>
       </v-carousel>
     </v-dialog>
 
-    <div class="tw-mx-1 tw-mb-2 tw-flex tw-items-center tw-text-base tw-font-bold">
+    <div class="tw:mx-1 tw:mb-2 tw:flex tw:items-center tw:text-base tw:font-bold">
       <v-icon class="" color="primary">{{ mdiFire }}</v-icon>
       <div>{{ $t('trending') }}</div>
     </div>
@@ -245,19 +245,17 @@ const setViewedCarIds = (carId: number) => {
         <div
           v-ripple
           :class="[
-            'tw-mr-2 tw-size-[90px] tw-shrink-0 tw-rounded-full tw-p-1',
-            !viewedCarIds.has(car.id)
-              ? 'tw-bg-gradient-to-br tw-from-[#f67b01] tw-to-[#eaf601]'
-              : '',
+            'tw:mr-2 tw:size-[90px] tw:shrink-0 tw:rounded-full tw:p-1',
+            !viewedCarIds.has(car.id) ? 'tw:bg-linear-to-br tw:from-[#f67b01] tw:to-[#eaf601]' : '',
           ]"
           @click="onOpen(car.id)"
         >
           <nuxt-img
-            class="tw-size-[82px] tw-rounded-full tw-bg-white tw-object-cover"
+            class="tw:size-[82px] tw:rounded-full tw:bg-white tw:object-cover"
             :src="car.images[0]"
             @error="onError(car.id)"
           />
-          <div class="tw-my-2 tw-truncate tw-text-center tw-text-xs">{{ car.name }}</div>
+          <div class="tw:my-2 tw:truncate tw:text-center tw:text-xs">{{ car.name }}</div>
         </div>
       </div>
       <v-btn

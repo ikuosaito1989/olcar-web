@@ -8,13 +8,13 @@ defineProps({
 </script>
 
 <template>
-  <div v-if="conditions.length" class="tw-mx-4 tw-mt-4">
-    <div class="tw-mb-2 tw-font-bold">{{ $t('searchCriteria') }}</div>
-    <div class="tw-flex tw-flex-wrap">
+  <div v-if="conditions.length" class="tw:mx-4 tw:mt-4">
+    <div class="tw:mb-2 tw:font-bold">{{ $t('searchCriteria') }}</div>
+    <div class="tw:flex tw:flex-wrap">
       <div
         v-for="(condition, i) in conditions"
         :key="`maker_${i}`"
-        class="tw-pb-3 tw-pr-3 tw-font-bold"
+        class="tw:pr-3 tw:pb-3 tw:font-bold"
       >
         <v-chip variant="elevated">
           {{ condition }}

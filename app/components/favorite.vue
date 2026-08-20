@@ -40,7 +40,7 @@ const icon = computed(() => (isFavorite.value ? mdiHeart : mdiHeartOutline))
 /**
  * お気に入り押下
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any, require-jsdoc
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const onFavorite = (e: any) => {
   e.preventDefault()
 

@@ -95,10 +95,10 @@ useHead(getHeader())
   <section>
     <CarsDetail :car="car" @click:report="onClickReport"></CarsDetail>
 
-    <div class="tw-m-2 tw-rounded-3xl tw-bg-[#f5f5f6] tw-p-4">
+    <div class="tw:m-2 tw:rounded-3xl tw:bg-[#f5f5f6] tw:p-4">
       <Anchor :is-under-line="false" to="/info/omakase-agent">
-        <div class="tw-mb-4 tw-flex tw-items-center">
-          <v-icon color="#f67b01" class="tw-mr-2" size="40">
+        <div class="tw:mb-4 tw:flex tw:items-center">
+          <v-icon color="#f67b01" class="tw:mr-2" size="40">
             {{ mdiHandshakeOutline }}
           </v-icon>
           <div>
@@ -106,7 +106,7 @@ useHead(getHeader())
           </div>
         </div>
         <nuxt-img
-          class="tw-m-auto tw-max-h-80 tw-object-contain"
+          class="tw:m-auto tw:max-h-80 tw:object-contain"
           src="https://homepage.gsss.pro/wp-content/uploads/2023/08/1a7321fd5c87b44161456ab0d5bcbbaf-1.png"
         />
       </Anchor>
@@ -115,13 +115,13 @@ useHead(getHeader())
     <Banner href="/info/exhibit" src="/banner/exhibit.webp"></Banner>
 
     <div
-      class="tw-mx-2 tw-my-3 tw-border-s-8 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
+      class="tw:mx-2 tw:my-3 tw:border-s-8 tw:border-solid tw:border-[#f67b01] tw:pl-1.5 tw:text-base tw:font-bold"
     >
       {{ $t('findUsedCar', [`${car.makerName} ${car.name}`]) }}
     </div>
     <CarsList :details="sameSummary.details" />
     <Anchor
-      class="tw-my-6 tw-flex tw-justify-end"
+      class="tw:my-6 tw:flex tw:justify-end"
       :to="`/?carNames[]=${car.name}`"
       :external="true"
     >
@@ -129,13 +129,13 @@ useHead(getHeader())
       <v-icon color="primary">{{ mdiChevronRight }}</v-icon>
     </Anchor>
     <div
-      class="tw-mx-2 tw-my-3 tw-border-s-8 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
+      class="tw:mx-2 tw:my-3 tw:border-s-8 tw:border-solid tw:border-[#f67b01] tw:pl-1.5 tw:text-base tw:font-bold"
     >
       {{ $t('findUsedCar', [car.makerName]) }}
     </div>
     <CarsList :details="makerSummary.details" />
 
-    <Anchor class="tw-my-6 tw-flex tw-justify-end" :to="`/${car.makerId}`" :external="true">
+    <Anchor class="tw:my-6 tw:flex tw:justify-end" :to="`/${car.makerId}`" :external="true">
       {{ car.makerName }}{{ $t('findMore') }}
       <v-icon color="primary">{{ mdiChevronRight }}</v-icon>
     </Anchor>

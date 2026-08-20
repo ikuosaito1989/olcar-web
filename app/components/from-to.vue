@@ -49,17 +49,17 @@ const onSelect = (type: 'from' | 'to', label: string | number | null) => {
 <template>
   <div>
     <div
-      class="tw-my-3 tw-border-s-4 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
+      class="tw:my-3 tw:border-s-4 tw:border-solid tw:border-[#f67b01] tw:pl-1.5 tw:text-base tw:font-bold"
     >
       {{ label }}
     </div>
-    <div class="tw-flex">
+    <div class="tw:flex">
       <v-select
         v-model="fromValue"
         :items="fromItem.map((v: KeyLabel) => v.label)"
         @update:model-value="onSelect('from', $event)"
       ></v-select>
-      <div class="tw-mx-5 tw-mb-5 tw-flex tw-items-center">{{ isFromLabel }}</div>
+      <div class="tw:mx-5 tw:mb-5 tw:flex tw:items-center">{{ isFromLabel }}</div>
       <v-select
         v-model="toValue"
         :items="toItem.map((v: KeyLabel) => v.label)"
