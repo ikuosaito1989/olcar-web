@@ -15,7 +15,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <v-app-bar class="!tw-static" theme="light" :elevation="1">
+  <v-app-bar class="tw:static!" theme="light" :elevation="1">
     <template #prepend>
       <v-app-bar-nav-icon color="primary" @click="open"></v-app-bar-nav-icon>
     </template>
@@ -26,7 +26,7 @@ onMounted(async () => {
           <nuxt-img
             :placeholder="Constants.PLACEHOLDER_IMAGES.IMAGE1_1"
             layout="responsive"
-            class="tw-min-h-8 tw-w-32"
+            class="tw:min-h-8 tw:w-32"
             src="/logo.webp"
           />
         </div>
@@ -47,11 +47,11 @@ onMounted(async () => {
   <v-navigation-drawer
     v-if="isRender"
     v-model="drawer"
-    class="!tw-top-0 !tw-z-[9999] !tw-h-screen tw-p-2"
+    class="tw:top-0! tw:z-9999! tw:h-screen! tw:p-2"
     temporary
     touchless
   >
-    <div class="tw-mb-16 [&>a]:tw-w-full [&>a]:!tw-justify-start [&>a]:tw-text-left">
+    <div class="tw:mb-16 tw:[&>a]:w-full tw:[&>a]:justify-start! tw:[&>a]:text-left">
       <v-btn color="black" href="/" variant="text" :prepend-icon="mdiHome">{{ $t('home') }}</v-btn>
       <v-btn color="black" href="/search" variant="text" :prepend-icon="mdiMagnify">
         {{ $t('search') }}
@@ -62,7 +62,7 @@ onMounted(async () => {
       <v-btn color="black" href="/history" variant="text" :prepend-icon="mdiHistory">
         {{ $t('history') }}
       </v-btn>
-      <div class="tw-my-2 tw-font-bold tw-text-[#f67b01]">{{ $t('aboutOlcar') }}</div>
+      <div class="tw:my-2 tw:font-bold tw:text-[#f67b01]">{{ $t('aboutOlcar') }}</div>
       <v-btn color="black" href="/info/about" variant="text">{{ $t('aboutOlcarLink') }}</v-btn>
       <v-btn color="black" href="/info/faq" variant="text">{{ $t('faq') }}</v-btn>
       <v-btn color="black" href="/info/purchase-process" variant="text">
@@ -85,13 +85,13 @@ onMounted(async () => {
       >
         {{ $t('aboutUs') }}
       </v-btn>
-      <div class="tw-my-2 tw-font-bold tw-text-[#f67b01]">{{ $t('olcarServices') }}</div>
+      <div class="tw:my-2 tw:font-bold tw:text-[#f67b01]">{{ $t('olcarServices') }}</div>
       <v-btn color="black" href="/info/exhibit" variant="text">{{ $t('exhibitOption') }}</v-btn>
       <v-btn color="black" href="/post" variant="text">{{ $t('freeListing') }}</v-btn>
       <v-btn color="black" href="/info/omakase-agent" variant="text">
         {{ $t('omakaseService') }}
       </v-btn>
-      <div class="tw-my-2 tw-font-bold tw-text-[#f67b01]">{{ $t('socialMedia') }}</div>
+      <div class="tw:my-2 tw:font-bold tw:text-[#f67b01]">{{ $t('socialMedia') }}</div>
       <v-btn color="black" target="_blank" href="https://lin.ee/80JiY1r" variant="text">
         {{ $t('line') }}
       </v-btn>

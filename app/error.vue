@@ -19,10 +19,10 @@ const errorPage = computed(() => {
 </script>
 
 <template>
-  <div class="tw-m-2 tw-flex tw-min-h-screen tw-items-center tw-justify-center">
-    <div class="tw-max-w-screen-md">
+  <div class="tw:m-2 tw:flex tw:min-h-screen tw:items-center tw:justify-center">
+    <div class="tw:max-w-3xl">
       <component :is="errorPage" />
-      <div class="tw-text-center">
+      <div class="tw:text-center">
         <v-btn color="primary" to="/">{{ $t('top') }}</v-btn>
       </div>
     </div>

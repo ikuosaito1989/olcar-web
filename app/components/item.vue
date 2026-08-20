@@ -13,14 +13,14 @@ const props = defineProps({
 
 <template>
   <div
-    class="tw-my-2 tw-flex tw-flex-wrap tw-items-center"
-    :class="{ 'tw-flex-col tw-items-baseline': isNewLine }"
+    class="tw:my-2 tw:flex tw:flex-wrap"
+    :class="isNewLine ? 'tw:flex-col tw:items-baseline' : 'tw:items-center'"
   >
     <div>
-      <v-chip size="default" class="tw-mr-1 tw-w-20 tw-justify-center tw-font-bold">
+      <v-chip size="default" class="tw:mr-1 tw:w-20 tw:justify-center tw:font-bold">
         {{ props.label }}
       </v-chip>
     </div>
-    <div :class="{ 'tw-my-2': isNewLine }"><slot></slot></div>
+    <div :class="{ 'tw:my-2': isNewLine }"><slot></slot></div>
   </div>
 </template>

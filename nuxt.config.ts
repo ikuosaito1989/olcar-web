@@ -1,4 +1,5 @@
-/* eslint-disable max-lines */
+import { fileURLToPath } from 'node:url'
+import tailwindcss from '@tailwindcss/vite'
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
@@ -17,6 +18,18 @@ export default defineNuxtConfig({
                 tagPosition: 'bodyClose',
               },
             ],
+      style: [
+        {
+          /**
+           * Vuetify v4 / Tailwind CSS v4 はどちらも CSS カスケードレイヤーを使う。
+           * Nuxt がインライン展開するコンポーネントスタイルが先に vuetify-components を
+           * 宣言すると読み込み順で優先度が変わってしまうため、最優先で順序を固定する。
+           */
+          children:
+            '@layer properties, theme, base, components, utilities, vuetify-core, vuetify-components, vuetify-overrides, vuetify-utilities, app-overrides;',
+          tagPriority: -100,
+        },
+      ],
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -55,8 +68,9 @@ export default defineNuxtConfig({
     },
   },
 
+  css: ['~/css/tailwind.css', '~/css/vuetify-compat.css'],
+
   modules: [
-    '@nuxtjs/tailwindcss',
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
         // @ts-expect-error
@@ -76,7 +90,6 @@ export default defineNuxtConfig({
   ],
 
   i18n: {
-    lazy: true,
     defaultLocale: 'ja',
     locales: [
       { files: ['ja.json'], code: 'ja', language: 'ja-JP', name: '日本語' },
@@ -84,9 +97,6 @@ export default defineNuxtConfig({
     ],
     vueI18n: './i18n.config.ts',
     strategy: 'no_prefix',
-    bundle: {
-      optimizeTranslationDirective: false,
-    },
   },
 
   runtimeConfig: {
@@ -120,13 +130,13 @@ export default defineNuxtConfig({
       pages.push({
         name: 'index-makerId',
         path: '/:makerId',
-        file: '~/pages/index.vue',
+        file: fileURLToPath(new URL('./app/pages/index.vue', import.meta.url)),
       })
 
       pages.push({
         name: 'terms-id',
         path: '/terms/:id',
-        file: '~/pages/info/[id].vue',
+        file: fileURLToPath(new URL('./app/pages/info/[id].vue', import.meta.url)),
       })
     },
   },
@@ -143,6 +153,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   vite: {
+    plugins: [tailwindcss()],
     vue: {
       template: {
         transformAssetUrls,
@@ -169,10 +180,6 @@ export default defineNuxtConfig({
       pathPrefix: true,
     },
   ],
-
-  tailwindcss: {
-    // Options
-  },
 
   compatibilityDate: '2024-07-10',
   basicAuth: {

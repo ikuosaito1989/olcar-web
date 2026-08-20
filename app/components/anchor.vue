@@ -29,7 +29,7 @@ const external = computed(() => props.external || route.path === hrefObj.url)
 
 <template>
   <NuxtLink
-    :class="{ 'hover:tw-underline': isUnderLine }"
+    :class="{ 'tw:hover:underline': isUnderLine }"
     :to="to"
     :external="external"
     :target="target"

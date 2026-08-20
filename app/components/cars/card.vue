@@ -47,12 +47,12 @@ const onError = () => {
 </script>
 
 <template>
-  <div v-ripple class="tw-relative tw-rounded-lg tw-p-4 tw-shadow-md">
+  <div v-ripple class="tw:relative tw:rounded-lg tw:p-4 tw:shadow-md">
     <div
       v-if="isPost || isViewed"
-      class="tw-pointer-events-none tw-absolute tw-inset-0 tw-z-10 tw-flex tw-items-center tw-justify-center tw-bg-black/50"
+      class="tw:pointer-events-none tw:absolute tw:inset-0 tw:z-10 tw:flex tw:items-center tw:justify-center tw:bg-black/50"
     >
-      <div class="tw-text-lg tw-font-bold tw-text-white">{{ overlayMessage }}</div>
+      <div class="tw:text-lg tw:font-bold tw:text-white">{{ overlayMessage }}</div>
     </div>
     <Anchor :is-under-line="false" :to="`/cars/${detail.id}`">
       <Titles
@@ -62,19 +62,19 @@ const onError = () => {
         :name="detail.name"
       ></Titles>
 
-      <div class="tw-flex">
-        <div class="tw-w-2/4">
+      <div class="tw:flex">
+        <div class="tw:w-2/4">
           <nuxt-img
             :placeholder="Constants.PLACEHOLDER_IMAGES.IMAGE1_1"
             layout="responsive"
-            class="tw-h-64 tw-w-full tw-max-w-sm tw-rounded tw-object-cover"
+            class="tw:h-64 tw:w-full tw:max-w-sm tw:rounded-sm tw:object-cover"
             :src="detail.images[0]"
             :alt="detail.name"
             format="webp"
             @error="onError"
           />
         </div>
-        <div class="tw-ml-2 tw-w-2/4">
+        <div class="tw:ml-2 tw:w-2/4">
           <Price :price="detail.price"></Price>
 
           <Item :label="$t('mileage')">
@@ -96,7 +96,7 @@ const onError = () => {
             <div>{{ formatUtil.toJoinString(detail.prefecture, detail.locality) }}</div>
           </Item>
           <Item :label="$t('description')" :is-new-line="true">
-            <div class="tw-line-clamp-2">
+            <div class="tw:line-clamp-2">
               {{ comment }}
             </div>
           </Item>

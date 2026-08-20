@@ -103,8 +103,8 @@ setCarNames()
 </script>
 
 <template>
-  <v-form class="tw-m-2">
-    <div class="tw-my-4 tw-border-b tw-pb-3 tw-text-center tw-text-xl tw-font-bold">
+  <v-form class="tw:m-2">
+    <div class="tw:my-4 tw:border-b tw:pb-3 tw:text-center tw:text-xl tw:font-bold">
       <v-icon color="primary">{{ mdiMagnify }}</v-icon>
       {{ $t('searchLabel') }}
     </div>
@@ -169,7 +169,7 @@ setCarNames()
 
     <div>
       <div
-        class="tw-my-3 tw-border-s-4 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
+        class="tw:my-3 tw:border-s-4 tw:border-solid tw:border-[#f67b01] tw:pl-1.5 tw:text-base tw:font-bold"
       >
         {{ $t('mileage') }}
       </div>
@@ -181,7 +181,7 @@ setCarNames()
 
     <div>
       <div
-        class="tw-my-3 tw-border-s-4 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
+        class="tw:my-3 tw:border-s-4 tw:border-solid tw:border-[#f67b01] tw:pl-1.5 tw:text-base tw:font-bold"
       >
         {{ $t('salesStatus') }}
       </div>
@@ -189,11 +189,11 @@ setCarNames()
     </div>
 
     <div
-      class="tw-my-3 tw-border-s-4 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
+      class="tw:my-3 tw:border-s-4 tw:border-solid tw:border-[#f67b01] tw:pl-1.5 tw:text-base tw:font-bold"
     >
       {{ $t('services') }}
     </div>
-    <div class="tw-flex tw-flex-wrap">
+    <div class="tw:flex tw:flex-wrap">
       <v-checkbox
         v-model="queryObject.socialTypes"
         :label="$t('twitter')"
@@ -221,9 +221,9 @@ setCarNames()
       ></v-checkbox>
     </div>
 
-    <div class="tw-sticky tw-bottom-0 tw-left-0 tw-z-[9999] tw-w-full tw-p-4">
-      <div class="tw-m-auto tw-flex tw-max-w-screen-md tw-text-center">
-        <v-btn color="gray" variant="elevated" size="large" class="tw-w-4/12" @click="onReset">
+    <div class="tw:sticky tw:bottom-0 tw:left-0 tw:z-9999 tw:w-full tw:p-4">
+      <div class="tw:m-auto tw:flex tw:max-w-3xl tw:text-center">
+        <v-btn color="gray" variant="elevated" size="large" class="tw:w-4/12" @click="onReset">
           {{ $t('clear') }}
         </v-btn>
 
@@ -231,10 +231,10 @@ setCarNames()
           :loading="count === undefined"
           variant="elevated"
           size="large"
-          class="tw-ml-3 tw-w-8/12"
+          class="tw:ml-3 tw:w-8/12"
           @click="onClickSearch"
         >
-          <div class="!tw-font-bold">{{ count?.toLocaleString() }}{{ $t('search') }}</div>
+          <div class="tw:font-bold!">{{ count?.toLocaleString() }}{{ $t('search') }}</div>
         </v-btn>
       </div>
     </div>

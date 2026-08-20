@@ -56,7 +56,7 @@ const onError = () => {
 </script>
 
 <template>
-  <div class="tw-m-2">
+  <div class="tw:m-2">
     <Titles
       :car-id="car.id"
       :name="car.name"
@@ -66,7 +66,7 @@ const onError = () => {
 
     <v-dialog
       v-model="isVisible"
-      class="tw-bg-slate-800"
+      class="tw:bg-slate-800"
       max-width="768"
       @click:outside="isVisible = !isVisible"
     >
@@ -74,7 +74,7 @@ const onError = () => {
         <v-btn
           :icon="mdiClose"
           size="small"
-          class="!tw-absolute tw-right-0 tw-top-0 tw-z-10 tw-m-2"
+          class="tw:absolute! tw:top-0 tw:right-0 tw:z-10 tw:m-2"
           @click="isVisible = !isVisible"
         ></v-btn>
         <v-carousel-item
@@ -89,27 +89,27 @@ const onError = () => {
       <v-carousel-item
         v-for="(image, i) in car.images"
         :key="i"
-        class="tw-bg-slate-800"
+        class="tw:bg-slate-800"
         :src="image"
         eager
         @click="isVisible = !isVisible"
         @error="onError"
       ></v-carousel-item>
       <v-overlay
-        class="tw-items-center tw-justify-center tw-text-center"
+        class="tw:items-center tw:justify-center tw:text-center"
         contained
         persistent
         :disabled="false"
         :model-value="isPost"
       >
-        <div class="tw-text-lg tw-font-bold tw-text-white">{{ $t('soldOut') }}</div>
+        <div class="tw:text-lg tw:font-bold tw:text-white">{{ $t('soldOut') }}</div>
       </v-overlay>
     </v-carousel>
 
-    <Price :is-omakase="true" class="tw-my-3" :price="car.price"></Price>
-    <div class="tw-text-xs">
+    <Price :is-omakase="true" class="tw:my-3" :price="car.price"></Price>
+    <div class="tw:text-xs">
       {{ $t('omakase_service_description') }}
-      <Anchor class="tw-font-bold tw-text-[#1976d2]" to="/info/omakase-agent">
+      <Anchor class="tw:font-bold tw:text-[#1976d2]" to="/info/omakase-agent">
         {{ $t('here') }}
       </Anchor>
     </div>
@@ -136,18 +136,18 @@ const onError = () => {
       <div>{{ formatUtil.toLocaleDateString(car.createAt, $t('date_format_full')) }}</div>
     </Item>
     <Item :label="$t('seller')">
-      <div class="tw-flex tw-items-center">
+      <div class="tw:flex tw:items-center">
         <nuxt-img
           :placeholder="Constants.PLACEHOLDER_IMAGES.IMAGE1_1"
-          class="tw-w-7"
+          class="tw:w-7"
           :src="car.userImageUrl"
         />
-        <div class="tw-mx-1">{{ car.nickName }}</div>
+        <div class="tw:mx-1">{{ car.nickName }}</div>
       </div>
     </Item>
     <Item :label="$t('description')" :is-new-line="true">
       <!--eslint-disable-next-line vue/no-v-html-->
-      <div class="tw-whitespace-pre-wrap" v-html="comment"></div>
+      <div class="tw:whitespace-pre-wrap" v-html="comment"></div>
     </Item>
 
     <v-alert prominent border="top" type="warning">
@@ -155,20 +155,20 @@ const onError = () => {
     </v-alert>
 
     <v-btn
-      class="tw-mt-5 tw-w-full"
+      class="tw:mt-5 tw:w-full"
       variant="elevated"
       target="_blank"
       :href="car.referenceUrls[0]"
     >
       {{ $t('advertisingPage') }}
     </v-btn>
-    <v-btn color="black" class="tw-mb-1 tw-mt-5 tw-w-full" @click="onClickReport">
+    <v-btn color="black" class="tw:mt-5 tw:mb-1 tw:w-full" @click="onClickReport">
       {{ $t('reportIssue') }}
     </v-btn>
 
     <div v-if="keywords.keywords.length > 0">
       <div
-        class="tw-my-3 tw-border-s-8 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
+        class="tw:my-3 tw:border-s-8 tw:border-solid tw:border-[#f67b01] tw:pl-1.5 tw:text-base tw:font-bold"
       >
         {{ $t('keywordsIncluded') }}
       </div>
@@ -179,12 +179,12 @@ const onError = () => {
         :to="`/?keywords[]=${keyword}`"
         external
       >
-        <v-chip v-ripple class="tw-mb-2 tw-mr-2" color="#f67b01" small label dark>
+        <v-chip v-ripple class="tw:mr-2 tw:mb-2" color="#f67b01" small label dark>
           {{ keyword }}
         </v-chip>
       </Anchor>
 
-      <div class="tw-text-xs">{{ $t('keywordsDescription') }}</div>
+      <div class="tw:text-xs">{{ $t('keywordsDescription') }}</div>
     </div>
 
     <GoogleAd></GoogleAd>

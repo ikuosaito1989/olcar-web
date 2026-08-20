@@ -13,7 +13,7 @@ useHead(useSeo(t(`info_title_${route.params.id}`)))
 </script>
 
 <template>
-  <section class="tw-my-4 tw-w-full tw-rounded-2xl tw-bg-[#f5f5f6] tw-p-4 tw-text-base">
+  <section class="tw:my-4 tw:w-full tw:rounded-2xl tw:bg-[#f5f5f6] tw:p-4 tw:text-base">
     <!-- eslint-disable-next-line vue/no-v-html -->
     <div v-html="markDown"></div>
   </section>

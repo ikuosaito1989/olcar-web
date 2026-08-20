@@ -35,10 +35,10 @@ const text = defineModel<string>('text')
 
 <template>
   <div>
-    <div class="tw-flex tw-items-center">
+    <div class="tw:flex tw:items-center">
       <div
         v-if="!!label"
-        class="tw-my-3 tw-mr-2 tw-border-s-4 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
+        class="tw:my-3 tw:mr-2 tw:border-s-4 tw:border-solid tw:border-[#f67b01] tw:pl-1.5 tw:text-base tw:font-bold"
       >
         {{ label }}
       </div>

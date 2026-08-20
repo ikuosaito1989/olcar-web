@@ -156,19 +156,19 @@ useHead(getHeader())
 <template>
   <section>
     <Trending></Trending>
-    <SearchConditions class="tw-mx-4 tw-mt-4" :conditions="searchConditions"></SearchConditions>
-    <div v-if="makerName" class="tw-px-4 tw-pt-4 tw-text-xl tw-font-bold">
-      <v-icon class="tw-mb-1" color="primary">{{ mdiCar }}</v-icon>
+    <SearchConditions class="tw:mx-4 tw:mt-4" :conditions="searchConditions"></SearchConditions>
+    <div v-if="makerName" class="tw:px-4 tw:pt-4 tw:text-xl tw:font-bold">
+      <v-icon class="tw:mb-1" color="primary">{{ mdiCar }}</v-icon>
       {{ makerName }}
     </div>
 
-    <div class="tw-sticky tw-top-0 tw-z-50 tw-bg-white">
-      <div class="tw-flex tw-items-center tw-justify-end">
-        <div class="tw-flex tw-h-12 tw-justify-end">
+    <div class="tw:sticky tw:top-0 tw:z-50 tw:bg-white">
+      <div class="tw:flex tw:items-center tw:justify-end">
+        <div class="tw:flex tw:h-12 tw:justify-end">
           <v-checkbox
             v-model="queryObject.isSales"
             color="primary"
-            class="tw-mx-5"
+            class="tw:mx-5"
             :label="$t('showOnlyAvailable')"
             @change="onChangeSales"
           ></v-checkbox>
@@ -176,19 +176,19 @@ useHead(getHeader())
       </div>
 
       <div
-        class="tw-flex tw-h-12 tw-w-full tw-items-center tw-border tw-text-center tw-shadow [&>div:not(:last-child)]:tw-border-r [&>div]:tw-py-3 [&>div]:tw-font-bold"
+        class="tw:flex tw:h-12 tw:w-full tw:items-center tw:border tw:text-center tw:shadow-sm tw:[&>div]:py-3 tw:[&>div]:font-bold tw:[&>div:not(:last-child)]:border-r"
       >
-        <div class="tw-w-full tw-text-[#bc4c00]">
-          <div class="tw-flex tw-items-center tw-justify-center">
+        <div class="tw:w-full tw:text-[#bc4c00]">
+          <div class="tw:flex tw:items-center tw:justify-center">
             <div>{{ summary.totalCount?.toLocaleString() }}</div>
-            <div class="tw-ml-1">台</div>
+            <div class="tw:ml-1">台</div>
           </div>
         </div>
-        <div v-ripple class="tw-w-full tw-text-[#bc4c00]" @click="onNavigate({ path: 'search' })">
+        <div v-ripple class="tw:w-full tw:text-[#bc4c00]" @click="onNavigate({ path: 'search' })">
           <v-icon color="primary" :icon="mdiMagnify"></v-icon>
           {{ $t('filter') }}
         </div>
-        <div v-ripple class="tw-w-full tw-text-[#bc4c00]" @click="() => (isVisible = !isVisible)">
+        <div v-ripple class="tw:w-full tw:text-[#bc4c00]" @click="() => (isVisible = !isVisible)">
           <v-icon color="primary" :icon="mdiSort"></v-icon>
           {{ $t('sort') }}
         </div>
@@ -196,15 +196,15 @@ useHead(getHeader())
 
       <v-expansion-panels v-model="isVisible">
         <v-expansion-panel :value="true">
-          <v-expansion-panel-text class="tw-font-bold">
-            <div class="tw-mb-4 tw-flex tw-items-center tw-justify-between">
-              <div class="tw-basis-1/3 tw-font-bold">
+          <v-expansion-panel-text class="tw:font-bold">
+            <div class="tw:mb-4 tw:flex tw:items-center tw:justify-between">
+              <div class="tw:basis-1/3 tw:font-bold">
                 {{ $t('price') }}
               </div>
               <v-btn
                 :variant="sortButtonType.priceAsc"
                 size="small"
-                class="tw-mr-1 tw-basis-1/3 tw-font-bold"
+                class="tw:mr-1 tw:basis-1/3 tw:font-bold"
                 @click="onNavigate({ sort: { key: 'priceOrder', value: 'asc' } })"
               >
                 {{ $t('priceLowToHigh') }}
@@ -212,18 +212,18 @@ useHead(getHeader())
               <v-btn
                 :variant="sortButtonType.priceDesc"
                 size="small"
-                class="tw-basis-1/3 tw-font-bold"
+                class="tw:basis-1/3 tw:font-bold"
                 @click="onNavigate({ sort: { key: 'priceOrder', value: 'desc' } })"
               >
                 {{ $t('priceHighToLow') }}
               </v-btn>
             </div>
-            <div class="tw-mb-4 tw-flex tw-items-center tw-justify-between">
-              <div class="tw-basis-1/3 tw-font-bold">{{ $t('mileage') }}</div>
+            <div class="tw:mb-4 tw:flex tw:items-center tw:justify-between">
+              <div class="tw:basis-1/3 tw:font-bold">{{ $t('mileage') }}</div>
               <v-btn
                 :variant="sortButtonType.mileageAsc"
                 size="small"
-                class="tw-mr-1 tw-basis-1/3 tw-font-bold"
+                class="tw:mr-1 tw:basis-1/3 tw:font-bold"
                 @click="onNavigate({ sort: { key: 'mileageOrder', value: 'asc' } })"
               >
                 {{ $t('mileageLowToHigh') }}
@@ -231,18 +231,18 @@ useHead(getHeader())
               <v-btn
                 :variant="sortButtonType.mileageDesc"
                 size="small"
-                class="tw-basis-1/3 tw-font-bold"
+                class="tw:basis-1/3 tw:font-bold"
                 @click="onNavigate({ sort: { key: 'mileageOrder', value: 'desc' } })"
               >
                 {{ $t('mileageHighToLow') }}
               </v-btn>
             </div>
-            <div class="tw-mb-4 tw-flex tw-items-center tw-justify-between">
-              <div class="tw-basis-1/3 tw-font-bold">{{ $t('publishDate') }}</div>
+            <div class="tw:mb-4 tw:flex tw:items-center tw:justify-between">
+              <div class="tw:basis-1/3 tw:font-bold">{{ $t('publishDate') }}</div>
               <v-btn
                 :variant="sortButtonType.createAtAsc"
                 size="small"
-                class="tw-basis-[67.3%] tw-font-bold"
+                class="tw:basis-[67.3%] tw:font-bold"
                 @click="onNavigate"
               >
                 {{ $t('newestFirst') }}
@@ -255,14 +255,14 @@ useHead(getHeader())
 
     <CarsList :details="summary.details" />
 
-    <div v-if="summary.details.length === 0" class="tw-m-4 tw-text-center tw-font-bold">
+    <div v-if="summary.details.length === 0" class="tw:m-4 tw:text-center tw:font-bold">
       <v-icon>{{ mdiMagnify }}</v-icon>
       {{ $t('noCarsFound') }}
     </div>
 
-    <div class="tw-my-5 tw-flex tw-justify-center">
+    <div class="tw:my-5 tw:flex tw:justify-center">
       <v-btn
-        class="tw-mr-5"
+        class="tw:mr-5"
         width="120"
         :disabled="!queryObject.page || queryObject.page == 1 || summary.details.length === 0"
         @click="onChangePrevPage(queryObject.page ? queryObject.page - 1 : 1)"

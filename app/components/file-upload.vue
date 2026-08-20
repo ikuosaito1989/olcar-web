@@ -89,24 +89,24 @@ defineExpose({
 </script>
 
 <template>
-  <div v-ripple class="tw-mb-2">
-    <div class="tw-flex tw-items-center">
+  <div v-ripple class="tw:mb-2">
+    <div class="tw:flex tw:items-center">
       <div
-        class="tw-my-3 tw-mr-2 tw-border-s-4 tw-border-solid tw-border-[#f67b01] tw-pl-1.5 tw-text-base tw-font-bold"
+        class="tw:my-3 tw:mr-2 tw:border-s-4 tw:border-solid tw:border-[#f67b01] tw:pl-1.5 tw:text-base tw:font-bold"
       >
         {{ $t('image') }}
       </div>
       <v-chip>{{ $t('required') }}</v-chip>
     </div>
     <label
-      class="tw-flex tw-min-h-28 tw-w-full tw-items-center tw-justify-center tw-border tw-border-dotted tw-border-gray-400 tw-bg-gray-100 hover:tw-bg-gray-200"
-      :class="{ 'tw-border-2 tw-border-[#ff5252]': errors.error }"
+      class="tw:flex tw:min-h-28 tw:w-full tw:items-center tw:justify-center tw:border tw:border-dotted tw:border-gray-400 tw:bg-gray-100 tw:hover:bg-gray-200"
+      :class="{ 'tw:border-2 tw:border-[#ff5252]': errors.error }"
       @dragover.prevent
       @drop.prevent="onDrag"
     >
-      <div class="tw-mt-3 tw-text-center">
+      <div class="tw:mt-3 tw:text-center">
         <v-icon size="48px">{{ mdiImagePlus }}</v-icon>
-        <div class="tw-mt-2 tw-flex tw-text-xs">
+        <div class="tw:mt-2 tw:flex tw:text-xs">
           <v-icon size="16px">{{ mdiPlus }}</v-icon>
           {{ $t('addImage') }}
         </div>
@@ -121,20 +121,20 @@ defineExpose({
         ></v-file-input>
       </div>
     </label>
-    <div class="tw-mt-2 tw-text-[10px]">{{ $t('dragAndDrop') }}</div>
-    <div class="tw-mt-3 tw-flex tw-flex-wrap">
-      <div v-for="file in currentItems" :key="file.name" class="tw-w-1/3 !tw-max-w-[33.333333%]">
-        <div class="tw-relative">
+    <div class="tw:mt-2 tw:text-[10px]">{{ $t('dragAndDrop') }}</div>
+    <div class="tw:mt-3 tw:flex tw:flex-wrap">
+      <div v-for="file in currentItems" :key="file.name" class="tw:w-1/3 tw:max-w-[33.333333%]!">
+        <div class="tw:relative">
           <v-btn
             icon
             size="x-small"
-            class="!tw-absolute tw-right-0.5 tw-top-0.5 tw-z-10"
+            class="tw:absolute! tw:top-0.5 tw:right-0.5 tw:z-10"
             @click="onDelete(file)"
           >
             <v-icon>{{ mdiClose }}</v-icon>
           </v-btn>
         </div>
-        <nuxt-img class="!tw-max-h-28 tw-object-contain" :src="createObjectURL(file)" />
+        <nuxt-img class="tw:max-h-28! tw:object-contain" :src="createObjectURL(file)" />
       </div>
     </div>
   </div>

@@ -49,20 +49,20 @@ defineExpose({
   <div>
     <v-dialog v-model="isVisible" width="400">
       <v-card>
-        <div class="tw-my-4 tw-border-b tw-pb-3 tw-text-center tw-text-xl tw-font-bold">
+        <div class="tw:my-4 tw:border-b tw:pb-3 tw:text-center tw:text-xl tw:font-bold">
           {{ $t('reportTitle') }}
         </div>
         <Recaptcha ref="recaptchaRef" v-model:recaptcha="response"></Recaptcha>
         <TextArea
           v-model:text="reason"
-          class="tw-p-3"
+          class="tw:p-3"
           :placeholder="$t('reasonPlaceholder')"
           :hint="$t('reasonHint')"
           :counter="100"
           clearable
           :rules="[(v) => validationUtil.required(v, $t('required_field'))]"
         ></TextArea>
-        <div class="tw-mb-2 [&>button]:tw-w-full">
+        <div class="tw:mb-2 tw:[&>button]:w-full">
           <v-btn variant="text" size="large" @click="onClick(Constants.REPORT.UNPOST)">
             {{ $t('reportUnpost') }}
           </v-btn>
@@ -77,17 +77,17 @@ defineExpose({
     </v-dialog>
 
     <v-dialog v-model="isComplete" width="400">
-      <v-card class="!tw-p-4">
-        <div class="tw-text-center">
-          <div class="tw-m-4">
+      <v-card class="tw:p-4!">
+        <div class="tw:text-center">
+          <div class="tw:m-4">
             <v-icon size="x-large" color="success">{{ mdiCheckOutline }}</v-icon>
           </div>
-          <div class="tw-m-2 tw-font-bold">{{ $t('thankYouTitle') }}</div>
+          <div class="tw:m-2 tw:font-bold">{{ $t('thankYouTitle') }}</div>
         </div>
-        <div class="tw-text-sm">
+        <div class="tw:text-sm">
           {{ $t('thankYouMessage') }}
         </div>
-        <div class="tw-mt-3 tw-text-center tw-text-sm" @click="isComplete = false">
+        <div class="tw:mt-3 tw:text-center tw:text-sm" @click="isComplete = false">
           {{ $t('closeButton') }}
         </div>
       </v-card>

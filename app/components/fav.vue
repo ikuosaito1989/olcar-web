@@ -26,9 +26,9 @@ onMounted(async () => {
 
 <template>
   <v-fab v-if="isRender" elevation="3" :to="to" color="primary" icon size="78px" app>
-    <div class="tw-text-center">
+    <div class="tw:text-center">
       <v-icon size="32px">{{ icon }}</v-icon>
-      <div class="tw-text-[10px] tw-font-bold tw-tracking-normal">{{ label }}</div>
+      <div class="tw:text-[10px] tw:font-bold tw:tracking-normal">{{ label }}</div>
     </div>
   </v-fab>
 </template>
