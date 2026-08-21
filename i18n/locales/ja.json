@@ -19,6 +19,8 @@
   "manufacturerOrCarName": "メーカー・車名",
   "manufacturerHint": "メーカー名を入力してください（ひらがなでも検索できます）",
   "manufacturerOrCarNameHint": "メーカー名または車名を入力してください（ひらがなでも検索できます）",
+  "manufacturerCarNameOrModelCode": "メーカー・車名・型式",
+  "manufacturerCarNameOrModelCodeHint": "メーカー名、車名または型式を入力してください（例: GE6）",
   "selectCarName": "車名選択",
   "carName": "車名",
   "carNameHint": "車名を入力してください（ひらがなでも検索できます）",
