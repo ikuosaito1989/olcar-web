@@ -7,7 +7,6 @@ const useVehicleModelCodeSelection = () => {
   const refVehicleModelCodes = ref<InstanceType<typeof ListDialog> | null>(null)
   const vehicleModelCodes = ref<Item[]>([])
   const selectedVehicleModelCodes = ref<Item[]>([])
-  const searchedVehicleModelCodes = ref<VehicleModelCode[]>([])
   let searchTimer: ReturnType<typeof setTimeout> | undefined
   let searchSequence = 0
 
@@ -37,11 +36,14 @@ const useVehicleModelCodeSelection = () => {
   const addVehicleModelCodeToKeywords = (item: Item) => {
     const currentText = queryObject.value.text.trim()
     const currentKeywords = currentText.split(/\s+/).filter((keyword) => keyword)
-    if (currentKeywords.some((keyword) => keyword.toUpperCase() === item.title.toUpperCase())) {
-      return
+    const isAlreadyAdded = currentKeywords.some(
+      (keyword) => keyword.toUpperCase() === item.title.toUpperCase(),
+    )
+    if (!isAlreadyAdded) {
+      queryObject.value.text = [currentText, item.title].filter((keyword) => keyword).join(' ')
     }
 
-    queryObject.value.text = [currentText, item.title].filter((keyword) => keyword).join(' ')
+    clearVehicleModelCodeSearch()
   }
 
   /**
@@ -53,7 +55,7 @@ const useVehicleModelCodeSelection = () => {
     const sequence = ++searchSequence
 
     if (normalizedValue.length < 2 || !/^[A-Z0-9-]+$/.test(normalizedValue)) {
-      searchedVehicleModelCodes.value = []
+      vehicleModelCodes.value = []
       return
     }
 
@@ -63,11 +65,14 @@ const useVehicleModelCodeSelection = () => {
           query: { query: normalizedValue },
         })
         if (sequence === searchSequence) {
-          searchedVehicleModelCodes.value = modelCodes
+          vehicleModelCodes.value = modelCodes.map((modelCode) => ({
+            value: modelCode.id,
+            title: modelCode.code,
+          }))
         }
       } catch {
         if (sequence === searchSequence) {
-          searchedVehicleModelCodes.value = []
+          vehicleModelCodes.value = []
         }
       }
     }, 250)
@@ -79,7 +84,7 @@ const useVehicleModelCodeSelection = () => {
   const clearVehicleModelCodeSearch = () => {
     clearTimeout(searchTimer)
     searchSequence++
-    searchedVehicleModelCodes.value = []
+    vehicleModelCodes.value = []
   }
 
   /**
@@ -95,7 +100,6 @@ const useVehicleModelCodeSelection = () => {
     refVehicleModelCodes,
     vehicleModelCodes,
     selectedVehicleModelCodes,
-    searchedVehicleModelCodes,
     openVehicleModelCodes,
     addVehicleModelCodeToKeywords,
     searchVehicleModelCodes,

@@ -10,11 +10,9 @@ const {
   refVehicleModelCodes,
   vehicleModelCodes,
   selectedVehicleModelCodes,
-  searchedVehicleModelCodes,
   openVehicleModelCodes,
   addVehicleModelCodeToKeywords,
   searchVehicleModelCodes,
-  clearVehicleModelCodeSearch,
   resetVehicleModelCodes,
 } = useVehicleModelCodeSelection()
 
@@ -26,18 +24,13 @@ const { data: _carNames } = await useFetchi<CarName[]>(`/api/v1/cars/names`, {
   query: { 'makerIds[]': [] },
 })
 const carNameItemPrefix = 'car-name:'
-const vehicleModelCodeItemPrefix = 'vehicle-model-code:'
-const makerCarNameAndModelCodeItems = computed<Item[]>(() => [
+const makerAndCarNameItems: Item[] = [
   ...makerItems,
   ..._carNames.value.map((carName) => ({
     value: `${carNameItemPrefix}${carName.id}`,
     title: `${carName.name}（${carName.makerName}）`,
   })),
-  ...searchedVehicleModelCodes.value.map((modelCode) => ({
-    value: `${vehicleModelCodeItemPrefix}${modelCode.id}`,
-    title: modelCode.code,
-  })),
-])
+]
 const carNames = ref<Item[]>([])
 const count = ref<number>()
 
@@ -91,15 +84,6 @@ const onSearch = async () => {
 /** Listコンポーネントから取得した情報をqueryObjectに設定する */
 const onClickMaker = async (item: Item) => {
   const value = item.value.toString()
-  clearVehicleModelCodeSearch()
-  if (value.startsWith(vehicleModelCodeItemPrefix)) {
-    addVehicleModelCodeToKeywords({
-      value: Number(value.slice(vehicleModelCodeItemPrefix.length)),
-      title: item.title,
-    })
-    return
-  }
-
   if (value.startsWith(carNameItemPrefix)) {
     const carNameId = Number(value.slice(carNameItemPrefix.length))
     const carName = _carNames.value.find((candidate) => candidate.id === carNameId)
@@ -161,16 +145,15 @@ setCarNames()
 
     <ListDialog
       :current-items="queryObject.makers"
-      :title="$t('manufacturerCarNameOrModelCode')"
-      :label="$t('manufacturerCarNameOrModelCode')"
-      :button-name="$t('manufacturerCarNameOrModelCode')"
-      :hint="$t('manufacturerCarNameOrModelCodeHint')"
+      :title="$t('manufacturerOrCarName')"
+      :label="$t('manufacturerOrCarName')"
+      :button-name="$t('manufacturerOrCarName')"
+      :hint="$t('manufacturerOrCarNameHint')"
       :is-two-way-binding-enabled="false"
-      :items="makerCarNameAndModelCodeItems"
+      :items="makerAndCarNameItems"
       multiple
       @click:list="onClickMaker"
-      @click:close="(setCarNames(), clearVehicleModelCodeSearch())"
-      @update:search="searchVehicleModelCodes"
+      @click:close="setCarNames()"
     ></ListDialog>
     <ListDialog
       ref="refCarNames"
@@ -185,7 +168,6 @@ setCarNames()
       @click:close="setCarNames()"
     ></ListDialog>
     <ListDialog
-      v-if="vehicleModelCodes.length"
       ref="refVehicleModelCodes"
       :title="$t('selectVehicleModelCode')"
       :label="$t('vehicleModelCode')"
@@ -195,6 +177,7 @@ setCarNames()
       :hint="$t('vehicleModelCodeHint')"
       :is-two-way-binding-enabled="false"
       @click:list="addVehicleModelCodeToKeywords"
+      @update:search="searchVehicleModelCodes"
     ></ListDialog>
     <ListDialog
       :current-items="queryObject.prefectures"

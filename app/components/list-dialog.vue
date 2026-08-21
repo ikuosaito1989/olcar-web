@@ -107,6 +107,9 @@ const onClickChipClose = async (item: Item) => {
  * ダイアログをopenする
  */
 const open = async () => {
+  if (!dialog.value) {
+    searchText.value = ''
+  }
   resetItems()
   dialog.value = !dialog.value
   await nextTick()
