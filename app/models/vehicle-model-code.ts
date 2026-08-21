@@ -11,4 +11,9 @@ export interface VehicleModelCode {
    * 車両型式
    */
   code: string
+
+  /**
+   * 関連する車名
+   */
+  carNames?: string[]
 }

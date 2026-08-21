@@ -13,6 +13,7 @@ const {
   openVehicleModelCodes,
   addVehicleModelCodeToKeywords,
   searchVehicleModelCodes,
+  loadDefaultVehicleModelCodes,
   resetVehicleModelCodes,
 } = useVehicleModelCodeSelection()
 
@@ -176,6 +177,7 @@ setCarNames()
       :items="vehicleModelCodes"
       :hint="$t('vehicleModelCodeHint')"
       :is-two-way-binding-enabled="false"
+      @click:open="loadDefaultVehicleModelCodes"
       @click:list="addVehicleModelCodeToKeywords"
       @update:search="searchVehicleModelCodes"
     ></ListDialog>

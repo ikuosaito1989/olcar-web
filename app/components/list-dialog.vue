@@ -42,7 +42,7 @@ const prop = defineProps({
   },
 })
 
-const emit = defineEmits(['click:list', 'click:close', 'update:search'])
+const emit = defineEmits(['click:list', 'click:close', 'click:open', 'update:search'])
 
 const { t } = useI18n()
 
@@ -109,6 +109,9 @@ const onClickChipClose = async (item: Item) => {
 const open = async () => {
   if (!dialog.value) {
     searchText.value = ''
+    if (!prop.items.length) {
+      emit('click:open')
+    }
   }
   resetItems()
   dialog.value = !dialog.value
