@@ -10,8 +10,11 @@ const {
   refVehicleModelCodes,
   vehicleModelCodes,
   selectedVehicleModelCodes,
+  searchedVehicleModelCodes,
   openVehicleModelCodes,
   addVehicleModelCodeToKeywords,
+  searchVehicleModelCodes,
+  clearVehicleModelCodeSearch,
   resetVehicleModelCodes,
 } = useVehicleModelCodeSelection()
 
@@ -23,13 +26,18 @@ const { data: _carNames } = await useFetchi<CarName[]>(`/api/v1/cars/names`, {
   query: { 'makerIds[]': [] },
 })
 const carNameItemPrefix = 'car-name:'
-const makerAndCarNameItems: Item[] = [
+const vehicleModelCodeItemPrefix = 'vehicle-model-code:'
+const makerCarNameAndModelCodeItems = computed<Item[]>(() => [
   ...makerItems,
   ..._carNames.value.map((carName) => ({
     value: `${carNameItemPrefix}${carName.id}`,
     title: `${carName.name}（${carName.makerName}）`,
   })),
-]
+  ...searchedVehicleModelCodes.value.map((modelCode) => ({
+    value: `${vehicleModelCodeItemPrefix}${modelCode.id}`,
+    title: modelCode.code,
+  })),
+])
 const carNames = ref<Item[]>([])
 const count = ref<number>()
 
@@ -45,9 +53,7 @@ onMounted(async () => {
   await onSearch()
 })
 
-/**
- * リセット
- */
+/** リセット */
 const onReset = async () => {
   useReset()
   resetVehicleModelCodes()
@@ -55,10 +61,7 @@ const onReset = async () => {
   await onSearch()
 }
 
-/**
- * 検索
- * @param item
- */
+/** 検索 */
 const onSearch = async () => {
   count.value = undefined
   const params = queryObject.value
@@ -85,14 +88,18 @@ const onSearch = async () => {
   count.value = _count.totalCount
 }
 
-/**
- * Listコンポーネントから取得した情報をqueryObjectに設定する
- *
- * @param key
- * @param item
- */
+/** Listコンポーネントから取得した情報をqueryObjectに設定する */
 const onClickMaker = async (item: Item) => {
   const value = item.value.toString()
+  clearVehicleModelCodeSearch()
+  if (value.startsWith(vehicleModelCodeItemPrefix)) {
+    addVehicleModelCodeToKeywords({
+      value: Number(value.slice(vehicleModelCodeItemPrefix.length)),
+      title: item.title,
+    })
+    return
+  }
+
   if (value.startsWith(carNameItemPrefix)) {
     const carNameId = Number(value.slice(carNameItemPrefix.length))
     const carName = _carNames.value.find((candidate) => candidate.id === carNameId)
@@ -112,24 +119,18 @@ const onClickMaker = async (item: Item) => {
   refCarNames.value?.open()
 }
 
-/**
- * 車名リストをリセットして型式選択へ進む
- */
+/** 車名リストをリセットして型式選択へ進む */
 const onClickCarName = async (item: Item) => {
   setCarNames()
   await openVehicleModelCodes(item)
 }
 
-/**
- * queryObjectからqueryStringを生成してリダイレクトする
- */
+/** queryObjectからqueryStringを生成してリダイレクトする */
 const onClickSearch = async () => {
   await navigateTo(`/${useQueryString()}`, { external: true })
 }
 
-/**
- * CarNamesをセットする
- */
+/** CarNamesをセットする */
 const setCarNames = async (id?: number | string) => {
   carNames.value = _carNames.value
     .filter((v) => !id || v.makerId === id)
@@ -160,15 +161,16 @@ setCarNames()
 
     <ListDialog
       :current-items="queryObject.makers"
-      :title="$t('manufacturerOrCarName')"
-      :label="$t('manufacturerOrCarName')"
-      :button-name="$t('manufacturerOrCarName')"
-      :hint="$t('manufacturerOrCarNameHint')"
+      :title="$t('manufacturerCarNameOrModelCode')"
+      :label="$t('manufacturerCarNameOrModelCode')"
+      :button-name="$t('manufacturerCarNameOrModelCode')"
+      :hint="$t('manufacturerCarNameOrModelCodeHint')"
       :is-two-way-binding-enabled="false"
-      :items="makerAndCarNameItems"
+      :items="makerCarNameAndModelCodeItems"
       multiple
       @click:list="onClickMaker"
-      @click:close="setCarNames()"
+      @click:close="(setCarNames(), clearVehicleModelCodeSearch())"
+      @update:search="searchVehicleModelCodes"
     ></ListDialog>
     <ListDialog
       ref="refCarNames"

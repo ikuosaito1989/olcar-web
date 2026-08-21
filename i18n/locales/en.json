@@ -19,6 +19,8 @@
   "manufacturerOrCarName": "Manufacturer/Car Name",
   "manufacturerHint": "Please enter the manufacturer name (you can search in hiragana)",
   "manufacturerOrCarNameHint": "Please enter a manufacturer or car name",
+  "manufacturerCarNameOrModelCode": "Manufacturer/Car Name/Model Code",
+  "manufacturerCarNameOrModelCodeHint": "Please enter a manufacturer, car name, or model code (for example, GE6)",
   "selectCarName": "Select Car Name",
   "carName": "Car Name",
   "carNameHint": "Please enter the car name (you can search in hiragana)",

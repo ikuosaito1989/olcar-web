@@ -42,7 +42,7 @@ const prop = defineProps({
   },
 })
 
-const emit = defineEmits(['click:list', 'click:close'])
+const emit = defineEmits(['click:list', 'click:close', 'update:search'])
 
 const { t } = useI18n()
 
@@ -51,12 +51,13 @@ const errors = ref({ error: false, message: '' })
 const dialog = ref(false)
 const key = ref(crypto.randomUUID())
 const _items = ref(prop.items)
+const searchText = ref('')
 const textRef = ref<InstanceType<typeof VTextField> | null>(null)
 
 watch(
   () => prop.items,
   () => {
-    resetItems()
+    filterItems(searchText.value)
   },
 )
 
@@ -86,8 +87,10 @@ const onClick = async (item: Item) => {
  */
 const onClose = async () => {
   dialog.value = false
+  searchText.value = ''
   resetItems()
   validate()
+  emit('update:search', '')
   emit('click:close')
 }
 
@@ -115,6 +118,15 @@ const open = async () => {
  * 検索テキストを更新する
  */
 const update = (value: string) => {
+  searchText.value = value
+  emit('update:search', value)
+  filterItems(value)
+}
+
+/**
+ * 入力された文字列で表示項目を絞り込む
+ */
+const filterItems = (value: string) => {
   if (!value) {
     resetItems()
     return

@@ -7,6 +7,11 @@ const useVehicleModelCodeSelection = () => {
   const refVehicleModelCodes = ref<InstanceType<typeof ListDialog> | null>(null)
   const vehicleModelCodes = ref<Item[]>([])
   const selectedVehicleModelCodes = ref<Item[]>([])
+  const searchedVehicleModelCodes = ref<VehicleModelCode[]>([])
+  let searchTimer: ReturnType<typeof setTimeout> | undefined
+  let searchSequence = 0
+
+  onScopeDispose(() => clearTimeout(searchTimer))
 
   /**
    * 車名に紐づく型式を取得して、型式選択モーダルを開く
@@ -40,19 +45,61 @@ const useVehicleModelCodeSelection = () => {
   }
 
   /**
+   * 入力された型式を前方一致で検索する
+   */
+  const searchVehicleModelCodes = (value: string) => {
+    clearTimeout(searchTimer)
+    const normalizedValue = value.normalize('NFKC').trim().toUpperCase()
+    const sequence = ++searchSequence
+
+    if (normalizedValue.length < 2 || !/^[A-Z0-9-]+$/.test(normalizedValue)) {
+      searchedVehicleModelCodes.value = []
+      return
+    }
+
+    searchTimer = setTimeout(async () => {
+      try {
+        const modelCodes = await $fetch<VehicleModelCode[]>('/api/v1/vehicle-model-codes', {
+          query: { query: normalizedValue },
+        })
+        if (sequence === searchSequence) {
+          searchedVehicleModelCodes.value = modelCodes
+        }
+      } catch {
+        if (sequence === searchSequence) {
+          searchedVehicleModelCodes.value = []
+        }
+      }
+    }, 250)
+  }
+
+  /**
+   * 型式の検索結果をクリアする
+   */
+  const clearVehicleModelCodeSearch = () => {
+    clearTimeout(searchTimer)
+    searchSequence++
+    searchedVehicleModelCodes.value = []
+  }
+
+  /**
    * 型式選択状態をリセットする
    */
   const resetVehicleModelCodes = () => {
     vehicleModelCodes.value = []
     selectedVehicleModelCodes.value = []
+    clearVehicleModelCodeSearch()
   }
 
   return {
     refVehicleModelCodes,
     vehicleModelCodes,
     selectedVehicleModelCodes,
+    searchedVehicleModelCodes,
     openVehicleModelCodes,
     addVehicleModelCodeToKeywords,
+    searchVehicleModelCodes,
+    clearVehicleModelCodeSearch,
     resetVehicleModelCodes,
   }
 }
