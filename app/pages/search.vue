@@ -6,6 +6,14 @@ const { t } = useI18n()
 const route = useRoute()
 const goTo = useGoTo()
 const refCarNames = ref<InstanceType<typeof ListDialog> | null>(null)
+const {
+  refVehicleModelCodes,
+  vehicleModelCodes,
+  selectedVehicleModelCodes,
+  openVehicleModelCodes,
+  addVehicleModelCodeToKeywords,
+  resetVehicleModelCodes,
+} = useVehicleModelCodeSelection()
 
 useSetFromQuery(route.query)
 useSearchSocialType(route.query)
@@ -14,6 +22,14 @@ const { prefectureItems, makerItems } = await useFetchMaster()
 const { data: _carNames } = await useFetchi<CarName[]>(`/api/v1/cars/names`, {
   query: { 'makerIds[]': [] },
 })
+const carNameItemPrefix = 'car-name:'
+const makerAndCarNameItems: Item[] = [
+  ...makerItems,
+  ..._carNames.value.map((carName) => ({
+    value: `${carNameItemPrefix}${carName.id}`,
+    title: `${carName.name}（${carName.makerName}）`,
+  })),
+]
 const carNames = ref<Item[]>([])
 const count = ref<number>()
 
@@ -34,6 +50,7 @@ onMounted(async () => {
  */
 const onReset = async () => {
   useReset()
+  resetVehicleModelCodes()
   goTo(0)
   await onSearch()
 }
@@ -75,8 +92,32 @@ const onSearch = async () => {
  * @param item
  */
 const onClickMaker = async (item: Item) => {
+  const value = item.value.toString()
+  if (value.startsWith(carNameItemPrefix)) {
+    const carNameId = Number(value.slice(carNameItemPrefix.length))
+    const carName = _carNames.value.find((candidate) => candidate.id === carNameId)
+    if (!carName) {
+      return
+    }
+
+    const carNameItem = { value: carName.id, title: carName.name }
+    if (!queryObject.value.carNames.some((currentItem) => currentItem.title === carName.name)) {
+      queryObject.value.carNames.push(carNameItem)
+    }
+    await onClickCarName(carNameItem)
+    return
+  }
+
   setCarNames(item.value)
   refCarNames.value?.open()
+}
+
+/**
+ * 車名リストをリセットして型式選択へ進む
+ */
+const onClickCarName = async (item: Item) => {
+  setCarNames()
+  await openVehicleModelCodes(item)
 }
 
 /**
@@ -119,12 +160,12 @@ setCarNames()
 
     <ListDialog
       :current-items="queryObject.makers"
-      :title="$t('selectManufacturer')"
+      :title="$t('manufacturerOrCarName')"
       :label="$t('manufacturerOrCarName')"
       :button-name="$t('manufacturerOrCarName')"
-      :hint="$t('manufacturerHint')"
+      :hint="$t('manufacturerOrCarNameHint')"
       :is-two-way-binding-enabled="false"
-      :items="makerItems"
+      :items="makerAndCarNameItems"
       multiple
       @click:list="onClickMaker"
       @click:close="setCarNames()"
@@ -138,8 +179,20 @@ setCarNames()
       :items="carNames"
       :hint="$t('carNameHint')"
       multiple
-      @click:list="setCarNames()"
+      @click:list="onClickCarName"
       @click:close="setCarNames()"
+    ></ListDialog>
+    <ListDialog
+      v-if="vehicleModelCodes.length"
+      ref="refVehicleModelCodes"
+      :title="$t('selectVehicleModelCode')"
+      :label="$t('vehicleModelCode')"
+      :button-name="$t('vehicleModelCode')"
+      :current-items="selectedVehicleModelCodes"
+      :items="vehicleModelCodes"
+      :hint="$t('vehicleModelCodeHint')"
+      :is-two-way-binding-enabled="false"
+      @click:list="addVehicleModelCodeToKeywords"
     ></ListDialog>
     <ListDialog
       :current-items="queryObject.prefectures"
