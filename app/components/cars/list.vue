@@ -6,12 +6,20 @@ defineProps({
     type: Array as () => Array<DetailBase>,
     required: true,
   },
+  /**
+   * 先頭から何件をファーストビュー扱いにするか。
+   * 対象のカードは画像を preload する（LCP 対策）。
+   */
+  priorityCount: {
+    type: Number,
+    default: 0,
+  },
 })
 </script>
 
 <template>
   <div v-for="(detail, index) in details" :key="detail.id">
-    <CarsCard :detail="detail"></CarsCard>
+    <CarsCard :detail="detail" :is-priority="index < priorityCount"></CarsCard>
 
     <div v-if="(index + 1) % 5 === 0">
       <GoogleAd></GoogleAd>

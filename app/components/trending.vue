@@ -199,6 +199,8 @@ const setViewedCarIds = (carId: number) => {
             <nuxt-img
               class="tw:block tw:size-full tw:object-contain tw:object-center"
               :src="item.images[0]"
+              sizes="sm:100vw md:768px"
+              format="webp"
             />
           </div>
           <div class="tw:absolute! tw:top-0 tw:left-0 tw:z-10 tw:m-2 tw:rotate-[-10deg] tw:p-2">
@@ -253,6 +255,11 @@ const setViewedCarIds = (carId: number) => {
           <nuxt-img
             class="tw:size-[82px] tw:rounded-full tw:bg-white tw:object-cover"
             :src="car.images[0]"
+            width="82"
+            height="82"
+            densities="x1 x2"
+            format="webp"
+            loading="lazy"
             @error="onError(car.id)"
           />
           <div class="tw:my-2 tw:truncate tw:text-center tw:text-xs">{{ car.name }}</div>

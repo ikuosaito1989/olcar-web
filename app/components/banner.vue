@@ -15,9 +15,12 @@ defineProps({
   <Anchor :to="href">
     <div v-ripple class="tw:flex tw:justify-center">
       <nuxt-img
-        :placeholder="Constants.PLACEHOLDER_IMAGES.IMAGE16_9"
         class="tw:max-h-80 tw:min-h-56 tw:w-full tw:max-w-xl tw:object-contain"
         :src="src"
+        sizes="sm:100vw md:576px"
+        format="webp"
+        loading="lazy"
+        decoding="async"
       />
     </div>
   </Anchor>
