@@ -6,6 +6,14 @@ const props = defineProps({
     type: Object as () => DetailBase,
     required: true,
   },
+  /**
+   * ファーストビューに表示されるカードかどうか。
+   * true の場合は画像を preload し、優先的に読み込む（LCP 対策）。
+   */
+  isPriority: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 const { t } = useI18n()
@@ -64,13 +72,23 @@ const onError = () => {
 
       <div class="tw:flex">
         <div class="tw:w-2/4">
+          <!--
+            @note placeholder を指定すると SSR 時に srcset が出力されず、
+            ハイドレーション後にしか画像の取得が始まらないため指定しない。
+          -->
           <nuxt-img
-            :placeholder="Constants.PLACEHOLDER_IMAGES.IMAGE1_1"
-            layout="responsive"
             class="tw:h-64 tw:w-full tw:max-w-sm tw:rounded-sm tw:object-cover"
             :src="detail.images[0]"
             :alt="detail.name"
+            width="384"
+            height="512"
+            sizes="sm:50vw md:384px"
+            fit="cover"
             format="webp"
+            :loading="isPriority ? 'eager' : 'lazy'"
+            :fetchpriority="isPriority ? 'high' : 'auto'"
+            :preload="isPriority ? { fetchPriority: 'high' } : undefined"
+            decoding="async"
             @error="onError"
           />
         </div>

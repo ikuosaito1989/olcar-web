@@ -24,10 +24,16 @@ onMounted(async () => {
       <Anchor to="/" :external="true">
         <div v-ripple>
           <nuxt-img
-            :placeholder="Constants.PLACEHOLDER_IMAGES.IMAGE1_1"
-            layout="responsive"
             class="tw:min-h-8 tw:w-32"
             src="/logo.webp"
+            alt="olcar"
+            width="128"
+            height="33"
+            densities="x1 x2"
+            format="webp"
+            loading="eager"
+            fetchpriority="high"
+            :preload="true"
           />
         </div>
       </Anchor>

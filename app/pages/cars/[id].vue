@@ -108,6 +108,10 @@ useHead(getHeader())
         <nuxt-img
           class="tw:m-auto tw:max-h-80 tw:object-contain"
           src="https://homepage.gsss.pro/wp-content/uploads/2023/08/1a7321fd5c87b44161456ab0d5bcbbaf-1.png"
+          sizes="sm:100vw md:576px"
+          format="webp"
+          loading="lazy"
+          decoding="async"
         />
       </Anchor>
     </div>

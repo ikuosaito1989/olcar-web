@@ -3,9 +3,15 @@
     <div class="tw:m-auto tw:flex tw:max-w-3xl tw:flex-wrap tw:items-center tw:justify-center">
       <div class="tw:flex-[0_0_200px]!">
         <nuxt-img
-          :placeholder="Constants.PLACEHOLDER_IMAGES.IMAGE16_9"
           class="tw:h-20 tw:object-contain"
           src="/logo.webp"
+          alt="olcar"
+          width="200"
+          height="52"
+          densities="x1 x2"
+          format="webp"
+          loading="lazy"
+          decoding="async"
         />
       </div>
       <div class="tw:flex-[1_1_300px]!">

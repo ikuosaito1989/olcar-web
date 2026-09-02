@@ -68,6 +68,33 @@ export default defineNuxtConfig({
     },
   },
 
+  image: {
+    /**
+     * 外部ホストの画像は許可リストに登録しないと ipx を経由せず、
+     * 元サイズ・元フォーマットのまま配信されてしまう。
+     */
+    domains: [
+      'cdn.jmty.jp',
+      'static.mercdn.net',
+      'auctions.c.yimg.jp',
+      'img.fril.jp',
+      'storage.googleapis.com',
+      'homepage.gsss.pro',
+    ],
+    format: ['webp'],
+    quality: 70,
+    /**
+     * ipx は既定で cache-control: max-age=60 を返す。
+     * 変換内容は URL に含まれるため、長期キャッシュして CDN に任せる。
+     */
+    ipx: {
+      maxAge: 60 * 60 * 24 * 365,
+      http: {
+        maxAge: 60 * 60 * 24 * 365,
+      },
+    },
+  },
+
   css: ['~/css/tailwind.css', '~/css/vuetify-compat.css'],
 
   modules: [
