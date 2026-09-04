@@ -13,16 +13,24 @@ const useVehicleModelCodeSelection = () => {
   onScopeDispose(() => clearTimeout(searchTimer))
 
   /**
+   * APIレスポンスを型式選択項目へ変換する
+   */
+  const toItems = (modelCodes: VehicleModelCode[]) =>
+    modelCodes.map((modelCode) => ({
+      value: modelCode.code,
+      title: modelCode.carNames?.length
+        ? `${modelCode.code}（${modelCode.carNames.join('・')}）`
+        : modelCode.code,
+    }))
+
+  /**
    * 車名に紐づく型式を取得して、型式選択モーダルを開く
    */
   const openVehicleModelCodes = async (item: Item) => {
     const modelCodes = await $fetch<VehicleModelCode[]>('/api/v1/vehicle-model-codes', {
       query: { carNameId: item.value },
     })
-    vehicleModelCodes.value = modelCodes.map((modelCode) => ({
-      value: modelCode.id,
-      title: modelCode.code,
-    }))
+    vehicleModelCodes.value = toItems(modelCodes)
 
     if (vehicleModelCodes.value.length) {
       await nextTick()
@@ -34,13 +42,14 @@ const useVehicleModelCodeSelection = () => {
    * 選択した型式をキーワード入力欄へ追加する
    */
   const addVehicleModelCodeToKeywords = (item: Item) => {
+    const modelCode = item.value.toString()
     const currentText = queryObject.value.text.trim()
     const currentKeywords = currentText.split(/\s+/).filter((keyword) => keyword)
     const isAlreadyAdded = currentKeywords.some(
-      (keyword) => keyword.toUpperCase() === item.title.toUpperCase(),
+      (keyword) => keyword.toUpperCase() === modelCode.toUpperCase(),
     )
     if (!isAlreadyAdded) {
-      queryObject.value.text = [currentText, item.title].filter((keyword) => keyword).join(' ')
+      queryObject.value.text = [currentText, modelCode].filter((keyword) => keyword).join(' ')
     }
 
     clearVehicleModelCodeSearch()
@@ -54,7 +63,7 @@ const useVehicleModelCodeSelection = () => {
     const normalizedValue = value.normalize('NFKC').trim().toUpperCase()
     const sequence = ++searchSequence
 
-    if (normalizedValue.length < 2 || !/^[A-Z0-9-]+$/.test(normalizedValue)) {
+    if (!normalizedValue || !/^[A-Z0-9-]+$/.test(normalizedValue)) {
       vehicleModelCodes.value = []
       return
     }
@@ -65,10 +74,7 @@ const useVehicleModelCodeSelection = () => {
           query: { query: normalizedValue },
         })
         if (sequence === searchSequence) {
-          vehicleModelCodes.value = modelCodes.map((modelCode) => ({
-            value: modelCode.id,
-            title: modelCode.code,
-          }))
+          vehicleModelCodes.value = toItems(modelCodes)
         }
       } catch {
         if (sequence === searchSequence) {
@@ -76,6 +82,23 @@ const useVehicleModelCodeSelection = () => {
         }
       }
     }, 250)
+  }
+
+  /**
+   * 型式の先頭50件を取得する
+   */
+  const loadDefaultVehicleModelCodes = async () => {
+    const sequence = ++searchSequence
+    try {
+      const modelCodes = await $fetch<VehicleModelCode[]>('/api/v1/vehicle-model-codes')
+      if (sequence === searchSequence) {
+        vehicleModelCodes.value = toItems(modelCodes)
+      }
+    } catch {
+      if (sequence === searchSequence) {
+        vehicleModelCodes.value = []
+      }
+    }
   }
 
   /**
@@ -103,6 +126,7 @@ const useVehicleModelCodeSelection = () => {
     openVehicleModelCodes,
     addVehicleModelCodeToKeywords,
     searchVehicleModelCodes,
+    loadDefaultVehicleModelCodes,
     clearVehicleModelCodeSearch,
     resetVehicleModelCodes,
   }
