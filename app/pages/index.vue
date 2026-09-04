@@ -253,7 +253,7 @@ useHead(getHeader())
       </v-expansion-panels>
     </div>
 
-    <CarsList :details="summary.details" :priority-count="2" />
+    <CarsList :details="summary.details" />
 
     <div v-if="summary.details.length === 0" class="tw:m-4 tw:text-center tw:font-bold">
       <v-icon>{{ mdiMagnify }}</v-icon>
