@@ -89,6 +89,7 @@ const getHeader = () => {
 }
 
 useHead(getHeader())
+useCarJsonLd(car.value, route.params.id)
 </script>
 
 <template>
