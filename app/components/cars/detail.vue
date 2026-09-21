@@ -138,15 +138,9 @@ const onError = () => {
     <Item :label="$t('seller')">
       <div class="tw:flex tw:items-center">
         <nuxt-img
+          :placeholder="Constants.PLACEHOLDER_IMAGES.IMAGE1_1"
           class="tw:w-7"
           :src="car.userImageUrl"
-          width="28"
-          height="28"
-          densities="x1 x2"
-          fit="cover"
-          format="webp"
-          loading="lazy"
-          decoding="async"
         />
         <div class="tw:mx-1">{{ car.nickName }}</div>
       </div>
