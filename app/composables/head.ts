@@ -105,11 +105,15 @@ const useSeo =
           name: 'twitter:url',
           content: 'https://ol-car.com',
         },
-        {
-          hid: 'robots',
-          name: 'robots',
-          content: isNoIndex ? 'noindex' : 'noarchive',
-        },
+        ...(isNoIndex
+          ? [
+              {
+                hid: 'robots',
+                name: 'robots',
+                content: 'noindex',
+              },
+            ]
+          : []),
       ],
       link: links,
     }

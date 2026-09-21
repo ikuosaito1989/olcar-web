@@ -151,6 +151,9 @@ const getHeader = () => {
 }
 
 useHead(getHeader())
+if (!route.params.makerId) {
+  useSiteJsonLd()
+}
 </script>
 
 <template>
